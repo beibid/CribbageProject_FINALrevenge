@@ -11,37 +11,34 @@
 
     <Grid Background="{StaticResource DarkBackgroundBrush}">
 
-        <!-- Settings panel -->
         <Border Width="460" Padding="44,32" CornerRadius="12" BorderThickness="1.5"
                 Background="{StaticResource PanelBrush}"
                 BorderBrush="{StaticResource GoldBrush}"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid>
-                <!-- Close button (top right corner) -->
                 <Button x:Name="CloseButton" Content="✕" Style="{StaticResource CloseButton}"
                         HorizontalAlignment="Right" VerticalAlignment="Top"
                         Margin="0,-16,-28,0" Click="CloseButton_Click"/>
 
                 <StackPanel>
-                    <!-- Title -->
                     <TextBlock Text="{x:Static lang:Lang.Settings_Title}"
                                Foreground="{StaticResource GoldBrush}"
                                FontFamily="Inter, Segoe UI" FontSize="22" FontWeight="Bold"
                                HorizontalAlignment="Center" Margin="0,0,0,24"/>
 
-                    <!-- Music volume -->
+                    <!--Volumen de la musica-->
                     <TextBlock Text="{x:Static lang:Lang.Settings_MusicVolume}"
                                Style="{StaticResource SettingsLabel}"/>
                     <Slider x:Name="MusicVolumeSlider" Minimum="0" Maximum="100"
                             Value="70" Margin="0,0,0,20"/>
 
-                    <!-- Effects volume -->
+                    <!--Volumen de los efectos-->
                     <TextBlock Text="{x:Static lang:Lang.Settings_EffectsVolume}"
                                Style="{StaticResource SettingsLabel}"/>
                     <Slider x:Name="EffectsVolumeSlider" Minimum="0" Maximum="100"
                             Value="80" Margin="0,0,0,20"/>
 
-                    <!-- Language (the selected item is set from code) -->
+                    <!--Seleccion de idioma-->
                     <TextBlock Text="{x:Static lang:Lang.Settings_Language}"
                                Style="{StaticResource SettingsLabel}"/>
                     <ComboBox x:Name="LanguageComboBox" Style="{StaticResource DarkComboBox}"
@@ -50,7 +47,7 @@
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_LanguageEnglish}" Tag="en-US"/>
                     </ComboBox>
 
-                    <!-- Color blind mode -->
+                    <!--Modo daltonismo-->
                     <TextBlock Text="{x:Static lang:Lang.Settings_ColorBlindMode}"
                                Style="{StaticResource SettingsLabel}"/>
                     <ComboBox x:Name="ColorBlindModeComboBox" Style="{StaticResource DarkComboBox}"
@@ -61,7 +58,7 @@
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_Tritanopia}" Tag="TRITANOPIA"/>
                     </ComboBox>
 
-                    <!-- Show animations -->
+                    <!--Mostrar animaciones-->
                     <Grid Margin="0,0,0,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -73,8 +70,6 @@
                         <CheckBox x:Name="AnimationsToggle" Grid.Column="1"
                                   Style="{StaticResource SwitchToggle}" IsChecked="True"/>
                     </Grid>
-
-                    <!-- Friend request notifications -->
                     <Grid Margin="0,0,0,32">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -86,8 +81,6 @@
                         <CheckBox x:Name="FriendRequestNotificationsToggle" Grid.Column="1"
                                   Style="{StaticResource SwitchToggle}" IsChecked="True"/>
                     </Grid>
-
-                    <!-- Reset / Save -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -98,11 +91,9 @@
                                 Style="{StaticResource NeutralButton}"/>
                         <Button x:Name="SaveButton" Grid.Column="2"
                                 Content="{x:Static lang:Lang.Settings_SaveButton}"
-                                Style="{StaticResource MenuButton}" MinWidth="0"
-                                MouseEnter="Button_MouseEnter" Click="SaveButton_Click"/>
+                                Style="{StaticResource SecondaryButton}" MinWidth="0"
+                                Click="SaveButton_Click"/>
                     </Grid>
-
-                    <!-- Log out (hidden until there is an active session) -->
                     <Button x:Name="LogoutButton" Content="{x:Static lang:Lang.Settings_LogoutButton}"
                             Style="{StaticResource DangerOutlineButton}"
                             Visibility="Collapsed"/>

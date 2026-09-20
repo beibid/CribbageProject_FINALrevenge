@@ -19,7 +19,7 @@
         <SolidColorBrush x:Key="SuccessBrush" Color="#3FA95C"/>
         <SolidColorBrush x:Key="ErrorBrush" Color="#E03E3E"/>
 
-        <!-- ===== BUTTON MEASURES (edit here) ===== -->
+        <!--Editar las medidas de los botones-->
         <sys:Double x:Key="ButtonMinWidth">340</sys:Double>
         <sys:Double x:Key="ButtonHeight">48</sys:Double>
         <sys:Double x:Key="ButtonFontSize">15</sys:Double>
@@ -27,7 +27,7 @@
         <Thickness x:Key="ButtonMargin">0,6</Thickness>
         <CornerRadius x:Key="ButtonCornerRadius">8</CornerRadius>
 
-        <!-- ===== PRIMARY BUTTON (filled gold) ===== -->
+        <!--Boton Principal, colores dorados-->
         <Style x:Key="PrimaryButton" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource GoldBrush}"/>
             <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
@@ -65,39 +65,28 @@
             </Setter>
         </Style>
 
-        <!-- ===== SECONDARY BUTTON (gold border, transparent background) ===== -->
+        <!--Boton secundario, borde dorado y fondo transparente-->
         <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{StaticResource GoldBrush}"/>
             <Setter Property="BorderThickness" Value="1.5"/>
         </Style>
 
-        <!-- ===== MENU BUTTON (fills with gold when selected) ===== -->
-        <Style x:Key="MenuButton" TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Style.Triggers>
-                <Trigger Property="IsKeyboardFocused" Value="True">
-                    <Setter Property="Background" Value="{StaticResource GoldBrush}"/>
-                    <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- ===== NEUTRAL BUTTON (gray border) ===== -->
+        <!--Boton gris, para acciones que no son la principal-->
         <Style x:Key="NeutralButton" TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
             <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}"/>
             <Setter Property="BorderBrush" Value="{StaticResource MutedTextBrush}"/>
             <Setter Property="MinWidth" Value="0"/>
         </Style>
 
-        <!-- ===== DANGER OUTLINE BUTTON (coral border, for destructive actions) ===== -->
+        <!--Boton rojo, para acciones peligrosas (cerrar sesion, eliminar)-->
         <Style x:Key="DangerOutlineButton" TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
             <Setter Property="Foreground" Value="{StaticResource CoralBrush}"/>
             <Setter Property="BorderBrush" Value="{StaticResource CoralBrush}"/>
             <Setter Property="MinWidth" Value="0"/>
         </Style>
 
-        <!-- ===== CLOSE BUTTON (the X in the corner) ===== -->
+        <!--La X para cerrar, en la esquina-->
         <Style x:Key="CloseButton" TargetType="Button">
             <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}"/>
             <Setter Property="FontSize" Value="18"/>
@@ -120,7 +109,7 @@
             </Setter>
         </Style>
 
-        <!-- ===== SETTINGS LABEL ===== -->
+        <!--Texto de las etiquetas de ajustes-->
         <Style x:Key="SettingsLabel" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
             <Setter Property="FontFamily" Value="Inter, Segoe UI"/>
@@ -129,7 +118,7 @@
             <Setter Property="Margin" Value="0,0,0,8"/>
         </Style>
 
-        <!-- ===== SWITCH (CheckBox drawn as a toggle) ===== -->
+        <!--Interruptor de prendido y apagado (es un CheckBox dibujado distinto)-->
         <Style x:Key="SwitchToggle" TargetType="CheckBox">
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -155,7 +144,7 @@
             </Setter>
         </Style>
 
-        <!-- ===== DARK COMBOBOX ===== -->
+        <!--Cada opcion de la lista desplegable-->
         <Style x:Key="DarkComboBoxItem" TargetType="ComboBoxItem">
             <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
             <Setter Property="Padding" Value="12,8"/>
@@ -177,6 +166,7 @@
             </Setter>
         </Style>
 
+        <!--Lista desplegable oscura (idioma, modo daltonismo)-->
         <Style x:Key="DarkComboBox" TargetType="ComboBox">
             <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
             <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
@@ -234,7 +224,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <!-- ===== TUTORIAL TEXT ===== -->
+
+        <!--Textos del tutorial: titulo y parrafos-->
         <Style x:Key="TutorialHeading" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource GoldBrush}"/>
             <Setter Property="FontSize" Value="24"/>
@@ -249,7 +240,8 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
-        <!-- ===== FORM FIELDS ===== -->
+
+        <!--Campos de los formularios (login y registro)-->
         <Style x:Key="FormLabel" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
             <Setter Property="FontSize" Value="13"/>
@@ -266,6 +258,7 @@
             <Setter Property="Margin" Value="0,0,0,14"/>
         </Style>
 
+        <!--Caja de contraseña, oculta lo que se escribe-->
         <Style x:Key="FormPasswordBox" TargetType="PasswordBox">
             <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
             <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
