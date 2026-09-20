@@ -1,0 +1,53 @@
+﻿<Page x:Class="cribbage_Royale_PROYECTO.Views.Tutorial"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
+      mc:Ignorable="d"
+      d:DesignHeight="800" d:DesignWidth="1280"
+      Title="Tutorial">
+
+    <Grid Background="{StaticResource BackgroundBrush}" Margin="40,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_Title}"
+           Grid.ColumnSpan="2"
+           Foreground="{StaticResource GoldBrush}"
+           FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <Button x:Name="CloseButton" Grid.Column="1"
+                Content="{x:Static lang:Lang.Tutorial_CloseButton}"
+                Width="100" Height="30"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Click="CloseButton_Click"/>
+
+        <!-- Side menu -->
+        <StackPanel Grid.Row="1">
+            <Button x:Name="ObjectiveButton" Content="{x:Static lang:Lang.Tutorial_ObjectiveTab}"
+                    Height="36" Margin="0,0,0,6" Click="ObjectiveButton_Click"/>
+            <Button x:Name="DealAndCribButton" Content="{x:Static lang:Lang.Tutorial_DealAndCribTab}"
+                    Height="36" Margin="0,0,0,6" Click="DealAndCribButton_Click"/>
+            <Button x:Name="PlayPhaseButton" Content="{x:Static lang:Lang.Tutorial_PlayPhaseTab}"
+                    Height="36" Margin="0,0,0,6" Click="PlayPhaseButton_Click"/>
+            <Button x:Name="HandCountingButton" Content="{x:Static lang:Lang.Tutorial_HandCountingTab}"
+                    Height="36" Margin="0,0,0,6" Click="HandCountingButton_Click"/>
+            <Button x:Name="BoardButton" Content="{x:Static lang:Lang.Tutorial_BoardTab}"
+                    Height="36" Click="BoardButton_Click"/>
+        </StackPanel>
+
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="20,0,0,0"
+                      VerticalScrollBarVisibility="Auto">
+            <ContentControl x:Name="SectionContent" MaxWidth="700" HorizontalAlignment="Left"/>
+        </ScrollViewer>
+    </Grid>
+</Page>

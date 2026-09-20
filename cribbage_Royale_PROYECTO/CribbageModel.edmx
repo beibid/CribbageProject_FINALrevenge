@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CribbageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ajustes_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="volumen_musica" Type="tinyint" Nullable="false" />
+          <Property Name="volumen_efectos" Type="tinyint" Nullable="false" />
+          <Property Name="idioma" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="modo_daltonismo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="mostrar_animaciones" Type="bit" Nullable="false" />
+          <Property Name="notificaciones_solicitudes" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="codigo_verificacion">
+          <Key>
+            <PropertyRef Name="id_codigo" />
+          </Key>
+          <Property Name="id_codigo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="valor_codigo" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="correo_destino" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_expiracion" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_uso" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="perfil_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="nombre_mostrado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="biografia" Type="varchar" MaxLength="255" />
+          <Property Name="avatar" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tutorial_completado" Type="bit" Nullable="false" />
+          <Property Name="nivel_habilidad" Type="smallint" Nullable="false" />
+          <Property Name="partidas_jugadas" Type="int" Nullable="false" />
+          <Property Name="victorias" Type="int" Nullable="false" />
+          <Property Name="derrotas" Type="int" Nullable="false" />
+          <Property Name="racha_actual" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="254" />
+          <Property Name="correo_pendiente" Type="varchar" MaxLength="254" />
+          <Property Name="hash_contrasena" Type="varbinary" MaxLength="255" />
+          <Property Name="salt_contrasena" Type="varbinary" MaxLength="64" />
+          <Property Name="estado_cuenta" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="fecha_registro" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="intentos_fallidos" Type="tinyint" Nullable="false" />
+          <Property Name="fecha_fin_bloqueo_acceso" Type="datetime2" Precision="7" />
+        </EntityType>
+        <Association Name="fk_ajustes_jugador_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="ajustes_jugador" Type="Self.ajustes_jugador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="ajustes_jugador">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_codigo_verificacion_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="codigo_verificacion" Type="Self.codigo_verificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="codigo_verificacion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_perfil_jugador_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="perfil_jugador" Type="Self.perfil_jugador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="perfil_jugador">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CribbageModelStoreContainer">
+          <EntitySet Name="ajustes_jugador" EntityType="Self.ajustes_jugador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="codigo_verificacion" EntityType="Self.codigo_verificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perfil_jugador" EntityType="Self.perfil_jugador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_ajustes_jugador_usuario" Association="Self.fk_ajustes_jugador_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ajustes_jugador" EntitySet="ajustes_jugador" />
+          </AssociationSet>
+          <AssociationSet Name="fk_codigo_verificacion_usuario" Association="Self.fk_codigo_verificacion_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="codigo_verificacion" EntitySet="codigo_verificacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_perfil_jugador_usuario" Association="Self.fk_perfil_jugador_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="perfil_jugador" EntitySet="perfil_jugador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CribbageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ajustes_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="volumen_musica" Type="Byte" Nullable="false" />
+          <Property Name="volumen_efectos" Type="Byte" Nullable="false" />
+          <Property Name="idioma" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modo_daltonismo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mostrar_animaciones" Type="Boolean" Nullable="false" />
+          <Property Name="notificaciones_solicitudes" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_ajustes_jugador_usuario" FromRole="ajustes_jugador" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="codigo_verificacion">
+          <Key>
+            <PropertyRef Name="id_codigo" />
+          </Key>
+          <Property Name="id_codigo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valor_codigo" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="correo_destino" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_expiracion" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_uso" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_codigo_verificacion_usuario" FromRole="codigo_verificacion" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="perfil_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nombre_mostrado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="biografia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="avatar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tutorial_completado" Type="Boolean" Nullable="false" />
+          <Property Name="nivel_habilidad" Type="Int16" Nullable="false" />
+          <Property Name="partidas_jugadas" Type="Int32" Nullable="false" />
+          <Property Name="victorias" Type="Int32" Nullable="false" />
+          <Property Name="derrotas" Type="Int32" Nullable="false" />
+          <Property Name="racha_actual" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_perfil_jugador_usuario" FromRole="perfil_jugador" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="correo_pendiente" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="hash_contrasena" Type="Binary" MaxLength="255" FixedLength="false" />
+          <Property Name="salt_contrasena" Type="Binary" MaxLength="64" FixedLength="false" />
+          <Property Name="estado_cuenta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="intentos_fallidos" Type="Byte" Nullable="false" />
+          <Property Name="fecha_fin_bloqueo_acceso" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="ajustes_jugador" Relationship="Self.fk_ajustes_jugador_usuario" FromRole="usuario" ToRole="ajustes_jugador" />
+          <NavigationProperty Name="codigo_verificacion" Relationship="Self.fk_codigo_verificacion_usuario" FromRole="usuario" ToRole="codigo_verificacion" />
+          <NavigationProperty Name="perfil_jugador" Relationship="Self.fk_perfil_jugador_usuario" FromRole="usuario" ToRole="perfil_jugador" />
+        </EntityType>
+        <Association Name="fk_ajustes_jugador_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="ajustes_jugador" Type="Self.ajustes_jugador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="ajustes_jugador">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_codigo_verificacion_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="codigo_verificacion" Type="Self.codigo_verificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="codigo_verificacion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_perfil_jugador_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="perfil_jugador" Type="Self.perfil_jugador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="perfil_jugador">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CribbageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ajustes_jugador" EntityType="Self.ajustes_jugador" />
+          <EntitySet Name="codigo_verificacion" EntityType="Self.codigo_verificacion" />
+          <EntitySet Name="perfil_jugador" EntityType="Self.perfil_jugador" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="fk_ajustes_jugador_usuario" Association="Self.fk_ajustes_jugador_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ajustes_jugador" EntitySet="ajustes_jugador" />
+          </AssociationSet>
+          <AssociationSet Name="fk_codigo_verificacion_usuario" Association="Self.fk_codigo_verificacion_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="codigo_verificacion" EntitySet="codigo_verificacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_perfil_jugador_usuario" Association="Self.fk_perfil_jugador_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="perfil_jugador" EntitySet="perfil_jugador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CribbageModelStoreContainer" CdmEntityContainer="CribbageEntities">
+          <EntitySetMapping Name="ajustes_jugador">
+            <EntityTypeMapping TypeName="CribbageModel.ajustes_jugador">
+              <MappingFragment StoreEntitySet="ajustes_jugador">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="volumen_musica" ColumnName="volumen_musica" />
+                <ScalarProperty Name="volumen_efectos" ColumnName="volumen_efectos" />
+                <ScalarProperty Name="idioma" ColumnName="idioma" />
+                <ScalarProperty Name="modo_daltonismo" ColumnName="modo_daltonismo" />
+                <ScalarProperty Name="mostrar_animaciones" ColumnName="mostrar_animaciones" />
+                <ScalarProperty Name="notificaciones_solicitudes" ColumnName="notificaciones_solicitudes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="codigo_verificacion">
+            <EntityTypeMapping TypeName="CribbageModel.codigo_verificacion">
+              <MappingFragment StoreEntitySet="codigo_verificacion">
+                <ScalarProperty Name="id_codigo" ColumnName="id_codigo" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="valor_codigo" ColumnName="valor_codigo" />
+                <ScalarProperty Name="correo_destino" ColumnName="correo_destino" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_expiracion" ColumnName="fecha_expiracion" />
+                <ScalarProperty Name="fecha_uso" ColumnName="fecha_uso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perfil_jugador">
+            <EntityTypeMapping TypeName="CribbageModel.perfil_jugador">
+              <MappingFragment StoreEntitySet="perfil_jugador">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre_mostrado" ColumnName="nombre_mostrado" />
+                <ScalarProperty Name="biografia" ColumnName="biografia" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="tutorial_completado" ColumnName="tutorial_completado" />
+                <ScalarProperty Name="nivel_habilidad" ColumnName="nivel_habilidad" />
+                <ScalarProperty Name="partidas_jugadas" ColumnName="partidas_jugadas" />
+                <ScalarProperty Name="victorias" ColumnName="victorias" />
+                <ScalarProperty Name="derrotas" ColumnName="derrotas" />
+                <ScalarProperty Name="racha_actual" ColumnName="racha_actual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="CribbageModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="correo_pendiente" ColumnName="correo_pendiente" />
+                <ScalarProperty Name="hash_contrasena" ColumnName="hash_contrasena" />
+                <ScalarProperty Name="salt_contrasena" ColumnName="salt_contrasena" />
+                <ScalarProperty Name="estado_cuenta" ColumnName="estado_cuenta" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="intentos_fallidos" ColumnName="intentos_fallidos" />
+                <ScalarProperty Name="fecha_fin_bloqueo_acceso" ColumnName="fecha_fin_bloqueo_acceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
