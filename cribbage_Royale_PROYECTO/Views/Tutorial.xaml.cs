@@ -10,7 +10,7 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             InitializeComponent();
 
-            // The first section is shown when the tutorial opens
+        
             SectionContent.Content = new GameObjectiveSection();
         }
 

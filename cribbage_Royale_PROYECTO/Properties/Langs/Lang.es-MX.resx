@@ -303,4 +303,85 @@
 	<data name="Login_SuccessMessage" xml:space="preserve">
     <value>Inicio de sesión exitoso.</value>
   </data>
+	<data name="Tutorial_Board_GoToLobbyButton" xml:space="preserve">
+    <value>Ir al lobby para jugar</value>
+  </data>
+	<data name="Tutorial_Board_GoalFormat" xml:space="preserve">
+    <value>{0} — Meta</value>
+  </data>
+	<data name="Tutorial_Board_OpponentShort" xml:space="preserve">
+    <value>Riv</value>
+  </data>
+	<data name="Tutorial_Board_Paragraph1" xml:space="preserve">
+    <value>El tablero tiene 61 casillas y se recorre una sola vez. Cada jugador avanza por su propio carril conforme gana puntos.</value>
+  </data>
+	<data name="Tutorial_Board_Paragraph2" xml:space="preserve">
+    <value>Cada jugador usa dos clavijas. La clavija delantera marca tu puntaje actual y la trasera marca el puntaje que tenías antes. Al ganar puntos, la clavija de atrás salta adelante de la otra, de modo que la distancia entre ambas siempre muestra cuántos puntos acabas de ganar.</value>
+  </data>
+	<data name="Tutorial_Board_Paragraph3" xml:space="preserve">
+    <value>Los puntos se marcan en el mismo orden en que se obtienen, primero durante la fase de juego y después durante el conteo de las manos y del crib.</value>
+  </data>
+	<data name="Tutorial_Board_Paragraph4" xml:space="preserve">
+    <value>Gana la partida el primer jugador que alcance la casilla 61. La partida termina en ese instante, aunque queden combinaciones por contar en esa mano.</value>
+  </data>
+	<data name="Tutorial_Board_PlayerShort" xml:space="preserve">
+    <value>Tú</value>
+  </data>
+	<data name="Tutorial_Board_PointsGainedFormat" xml:space="preserve">
+    <value>+{0} puntos</value>
+  </data>
+	<data name="Tutorial_Board_ScoreFormat" xml:space="preserve">
+    <value>Tú {0} — Rival {1} / {2}</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_CribLabel" xml:space="preserve">
+    <value>CRIB</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph1" xml:space="preserve">
+    <value>Al inicio de cada mano, el repartidor entrega seis cartas a cada jugador. El repartidor de la primera mano se decide por sorteo y a partir de ahí el rol alterna en cada mano.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph2" xml:space="preserve">
+    <value>Cada jugador elige dos de sus seis cartas y las descarta al crib, sin ver lo que descarta su rival. Ambos quedan con cuatro cartas y el crib se forma con cuatro.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph3" xml:space="preserve">
+    <value>El crib pertenece siempre al repartidor de esa mano. Sus puntos se cuentan al final y se acreditan solo a él, así que conviene descartar pensando en si el crib es tuyo o de tu rival.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph4" xml:space="preserve">
+    <value>Cuando ambos han descartado se descubre la carta de corte, tomada del resto del mazo. Es común para los dos jugadores y para el crib, y se usa más adelante en el conteo. Si la carta de corte es una jota, el repartidor gana dos puntos de inmediato.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph5" xml:space="preserve">
+    <value>El contenido del crib permanece oculto hasta la fase de conteo.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_YourHand" xml:space="preserve">
+    <value>Tu mano</value>
+  </data>
+	<data name="Tutorial_HandCounting_CombinationsTitle" xml:space="preserve">
+    <value>Se otorgan puntos por las siguientes combinaciones:</value>
+  </data>
+	<data name="Tutorial_HandCounting_CutCard" xml:space="preserve">
+    <value>Corte</value>
+  </data>
+	<data name="Tutorial_HandCounting_ExampleTitle" xml:space="preserve">
+    <value>Ejemplo de una mano:</value>
+  </data>
+	<data name="Tutorial_HandCounting_Fifteen" xml:space="preserve">
+    <value>• Quince (15): cualquier combinación de cartas que sume exactamente 15 vale 2 puntos.</value>
+  </data>
+	<data name="Tutorial_HandCounting_Flush" xml:space="preserve">
+    <value>• Color: si las 4 cartas de la mano son del mismo palo valen 4 puntos (5 si incluye el corte).</value>
+  </data>
+	<data name="Tutorial_HandCounting_Nobs" xml:space="preserve">
+    <value>• Jota (nobs): si tienes la jota del mismo palo que la carta de corte, suma 1 punto.</value>
+  </data>
+	<data name="Tutorial_HandCounting_Pairs" xml:space="preserve">
+    <value>• Pares: dos cartas del mismo rango valen 2 puntos.</value>
+  </data>
+	<data name="Tutorial_HandCounting_Paragraph1" xml:space="preserve">
+    <value>Al concluir la fase de juego, se cuentan los puntos de las cartas de cada jugador combinándolas con la carta de corte descubierta. Primero se cuenta la mano del jugador que no repartió, luego la del repartidor y finalmente el crib, que pertenece al repartidor.</value>
+  </data>
+	<data name="Tutorial_HandCounting_PracticeButton" xml:space="preserve">
+    <value>Practicar conteo</value>
+  </data>
+	<data name="Tutorial_HandCounting_Runs" xml:space="preserve">
+    <value>• Escaleras: una secuencia de 3 o más cartas consecutivas vale 1 punto por carta.</value>
+  </data>
 </root>

@@ -303,4 +303,85 @@
 	<data name="Login_SuccessMessage" xml:space="preserve">
     <value>Signed in successfully.</value>
   </data>
+	<data name="Tutorial_Board_GoToLobbyButton" xml:space="preserve">
+    <value>Go to the lobby to play</value>
+  </data>
+	<data name="Tutorial_Board_GoalFormat" xml:space="preserve">
+    <value>{0} — Goal</value>
+  </data>
+	<data name="Tutorial_Board_OpponentShort" xml:space="preserve">
+    <value>Opp</value>
+  </data>
+	<data name="Tutorial_Board_Paragraph1" xml:space="preserve">
+    <value>The board has 61 holes and is played in a single lap. Each player moves along their own track as they score points.</value>
+  </data>
+	<data name="Tutorial_Board_Paragraph2" xml:space="preserve">
+    <value>Each player uses two pegs. The front peg marks your current score and the back peg marks your previous score. When you score, the back peg jumps ahead of the other one, so the gap between them always shows how many points you just earned.</value>
+  </data>
+	<data name="Tutorial_Board_Paragraph3" xml:space="preserve">
+    <value>Points are pegged in the order they are earned: first during the play phase, then during the counting of the hands and the crib.</value>
+  </data>
+	<data name="Tutorial_Board_Paragraph4" xml:space="preserve">
+    <value>The first player to reach hole 61 wins the game. The game ends at that moment, even if there are combinations left to count in that hand.</value>
+  </data>
+	<data name="Tutorial_Board_PlayerShort" xml:space="preserve">
+    <value>You</value>
+  </data>
+	<data name="Tutorial_Board_PointsGainedFormat" xml:space="preserve">
+    <value>+{0} points</value>
+  </data>
+	<data name="Tutorial_Board_ScoreFormat" xml:space="preserve">
+    <value>You {0} — Opponent {1} / {2}</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_CribLabel" xml:space="preserve">
+    <value>CRIB</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph1" xml:space="preserve">
+    <value>At the start of each hand, the dealer gives six cards to each player. The dealer of the first hand is chosen by a draw, and from then on the role alternates every hand.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph2" xml:space="preserve">
+    <value>Each player chooses two of their six cards and discards them to the crib, without seeing what their opponent discards. Both players keep four cards, and the crib is made up of four.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph3" xml:space="preserve">
+    <value>The crib always belongs to the dealer of that hand. Its points are counted at the end and go only to the dealer, so discard with that in mind: is the crib yours or your opponent's?</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph4" xml:space="preserve">
+    <value>Once both players have discarded, the cut card is turned over from the rest of the deck. It is shared by both players and the crib, and it is used later in the count. If the cut card is a jack, the dealer scores two points right away.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_Paragraph5" xml:space="preserve">
+    <value>The crib stays hidden until the counting phase.</value>
+  </data>
+	<data name="Tutorial_DealAndCrib_YourHand" xml:space="preserve">
+    <value>Your hand</value>
+  </data>
+	<data name="Tutorial_HandCounting_CombinationsTitle" xml:space="preserve">
+    <value>Points are scored for the following combinations:</value>
+  </data>
+	<data name="Tutorial_HandCounting_CutCard" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+	<data name="Tutorial_HandCounting_ExampleTitle" xml:space="preserve">
+    <value>Example hand:</value>
+  </data>
+	<data name="Tutorial_HandCounting_Fifteen" xml:space="preserve">
+    <value>• Fifteen (15): any combination of cards that adds up to exactly 15 scores 2 points.</value>
+  </data>
+	<data name="Tutorial_HandCounting_Flush" xml:space="preserve">
+    <value>• Flush: if all 4 cards in the hand are the same suit, they score 4 points (5 if the cut card matches too).</value>
+  </data>
+	<data name="Tutorial_HandCounting_Nobs" xml:space="preserve">
+    <value>• Nobs: holding the jack of the same suit as the cut card scores 1 point.</value>
+  </data>
+	<data name="Tutorial_HandCounting_Pairs" xml:space="preserve">
+    <value>• Pairs: two cards of the same rank score 2 points.</value>
+  </data>
+	<data name="Tutorial_HandCounting_Paragraph1" xml:space="preserve">
+    <value>When the play phase ends, each player's cards are scored together with the face-up cut card. The non-dealer's hand is counted first, then the dealer's hand, and finally the crib, which belongs to the dealer.</value>
+  </data>
+	<data name="Tutorial_HandCounting_PracticeButton" xml:space="preserve">
+    <value>Practice counting</value>
+  </data>
+	<data name="Tutorial_HandCounting_Runs" xml:space="preserve">
+    <value>• Runs: a sequence of 3 or more consecutive cards scores 1 point per card.</value>
+  </data>
 </root>

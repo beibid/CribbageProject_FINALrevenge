@@ -9,5 +9,66 @@
     <StackPanel>
         <TextBlock Text="{x:Static lang:Lang.Tutorial_DealAndCribTab}"
                    Style="{StaticResource TutorialHeading}"/>
+
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_DealAndCrib_Paragraph1}"
+                   Style="{StaticResource TutorialText}"/>
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_DealAndCrib_Paragraph2}"
+                   Style="{StaticResource TutorialText}"/>
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_DealAndCrib_Paragraph3}"
+                   Style="{StaticResource TutorialText}"/>
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_DealAndCrib_Paragraph4}"
+                   Style="{StaticResource TutorialText}" FontWeight="Bold"/>
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_DealAndCrib_Paragraph5}"
+                   Style="{StaticResource TutorialText}"/>
+
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_DealAndCrib_YourHand}"
+                   Style="{StaticResource TutorialText}"
+                   Foreground="{StaticResource GoldBrush}"
+                   FontSize="12" FontWeight="Bold" Margin="0,14,0,6"/>
+
+        <StackPanel Orientation="Horizontal">
+            <Border Background="White" Width="60" Height="85" CornerRadius="4" Margin="0,14,10,0">
+                <TextBlock Text="5 ♠" Foreground="Black" FontSize="16" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <Border Background="White" Width="60" Height="85" CornerRadius="4" Margin="0,14,10,0">
+                <TextBlock Text="8 ♥" Foreground="Red" FontSize="16" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <Border Background="White" Width="60" Height="85" CornerRadius="4" Margin="0,0,10,14"
+                    BorderBrush="{StaticResource GoldBrush}" BorderThickness="3">
+                <TextBlock Text="K ♦" Foreground="Red" FontSize="16" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <Border Background="White" Width="60" Height="85" CornerRadius="4" Margin="0,14,10,0">
+                <TextBlock Text="2 ♣" Foreground="Black" FontSize="16" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <Border Background="White" Width="60" Height="85" CornerRadius="4" Margin="0,0,10,14"
+                    BorderBrush="{StaticResource GoldBrush}" BorderThickness="3">
+                <TextBlock Text="7 ♠" Foreground="Black" FontSize="16" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <Border Background="White" Width="60" Height="85" CornerRadius="4" Margin="0,14,0,0">
+                <TextBlock Text="Q ♥" Foreground="Red" FontSize="16" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <TextBlock Text="→" Foreground="{StaticResource GoldBrush}" FontSize="28"
+                       VerticalAlignment="Center" Margin="24,14,24,0"/>
+
+            <Grid Width="70" Height="85" Margin="0,14,0,0">
+                <Rectangle Stroke="{StaticResource GoldBrush}" StrokeThickness="1.5"
+                           StrokeDashArray="4 3" RadiusX="4" RadiusY="4"/>
+                <TextBlock Text="{x:Static lang:Lang.Tutorial_DealAndCrib_CribLabel}"
+                           Foreground="{StaticResource GoldBrush}" FontSize="12" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
     </StackPanel>
 </UserControl>

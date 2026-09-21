@@ -493,6 +493,96 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a {0} — Goal.
+        /// </summary>
+        public static string Tutorial_Board_GoalFormat {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_GoalFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Go to the lobby to play.
+        /// </summary>
+        public static string Tutorial_Board_GoToLobbyButton {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_GoToLobbyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opp.
+        /// </summary>
+        public static string Tutorial_Board_OpponentShort {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_OpponentShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The board has 61 holes and is played in a single lap. Each player moves along their own track as they score points..
+        /// </summary>
+        public static string Tutorial_Board_Paragraph1 {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_Paragraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Each player uses two pegs. The front peg marks your current score and the back peg marks your previous score. When you score, the back peg jumps ahead of the other one, so the gap between them always shows how many points you just earned..
+        /// </summary>
+        public static string Tutorial_Board_Paragraph2 {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_Paragraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Points are pegged in the order they are earned: first during the play phase, then during the counting of the hands and the crib..
+        /// </summary>
+        public static string Tutorial_Board_Paragraph3 {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_Paragraph3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The first player to reach hole 61 wins the game. The game ends at that moment, even if there are combinations left to count in that hand..
+        /// </summary>
+        public static string Tutorial_Board_Paragraph4 {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_Paragraph4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You.
+        /// </summary>
+        public static string Tutorial_Board_PlayerShort {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_PlayerShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a +{0} points.
+        /// </summary>
+        public static string Tutorial_Board_PointsGainedFormat {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_PointsGainedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You {0} — Opponent {1} / {2}.
+        /// </summary>
+        public static string Tutorial_Board_ScoreFormat {
+            get {
+                return ResourceManager.GetString("Tutorial_Board_ScoreFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The board.
         /// </summary>
         public static string Tutorial_BoardTab {
@@ -511,11 +601,164 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a CRIB.
+        /// </summary>
+        public static string Tutorial_DealAndCrib_CribLabel {
+            get {
+                return ResourceManager.GetString("Tutorial_DealAndCrib_CribLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a At the start of each hand, the dealer gives six cards to each player. The dealer of the first hand is chosen by a draw, and from then on the role alternates every hand..
+        /// </summary>
+        public static string Tutorial_DealAndCrib_Paragraph1 {
+            get {
+                return ResourceManager.GetString("Tutorial_DealAndCrib_Paragraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Each player chooses two of their six cards and discards them to the crib, without seeing what their opponent discards. Both players keep four cards, and the crib is made up of four..
+        /// </summary>
+        public static string Tutorial_DealAndCrib_Paragraph2 {
+            get {
+                return ResourceManager.GetString("Tutorial_DealAndCrib_Paragraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The crib always belongs to the dealer of that hand. Its points are counted at the end and go only to the dealer, so discard with that in mind: is the crib yours or your opponent&apos;s?.
+        /// </summary>
+        public static string Tutorial_DealAndCrib_Paragraph3 {
+            get {
+                return ResourceManager.GetString("Tutorial_DealAndCrib_Paragraph3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Once both players have discarded, the cut card is turned over from the rest of the deck. It is shared by both players and the crib, and it is used later in the count. If the cut card is a jack, the dealer scores two points right away..
+        /// </summary>
+        public static string Tutorial_DealAndCrib_Paragraph4 {
+            get {
+                return ResourceManager.GetString("Tutorial_DealAndCrib_Paragraph4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The crib stays hidden until the counting phase..
+        /// </summary>
+        public static string Tutorial_DealAndCrib_Paragraph5 {
+            get {
+                return ResourceManager.GetString("Tutorial_DealAndCrib_Paragraph5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your hand.
+        /// </summary>
+        public static string Tutorial_DealAndCrib_YourHand {
+            get {
+                return ResourceManager.GetString("Tutorial_DealAndCrib_YourHand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Deal and crib.
         /// </summary>
         public static string Tutorial_DealAndCribTab {
             get {
                 return ResourceManager.GetString("Tutorial_DealAndCribTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Points are scored for the following combinations:.
+        /// </summary>
+        public static string Tutorial_HandCounting_CombinationsTitle {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_CombinationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cut.
+        /// </summary>
+        public static string Tutorial_HandCounting_CutCard {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_CutCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Example hand:.
+        /// </summary>
+        public static string Tutorial_HandCounting_ExampleTitle {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_ExampleTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a • Fifteen (15): any combination of cards that adds up to exactly 15 scores 2 points..
+        /// </summary>
+        public static string Tutorial_HandCounting_Fifteen {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_Fifteen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a • Flush: if all 4 cards in the hand are the same suit, they score 4 points (5 if the cut card matches too)..
+        /// </summary>
+        public static string Tutorial_HandCounting_Flush {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_Flush", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a • Nobs: holding the jack of the same suit as the cut card scores 1 point..
+        /// </summary>
+        public static string Tutorial_HandCounting_Nobs {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_Nobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a • Pairs: two cards of the same rank score 2 points..
+        /// </summary>
+        public static string Tutorial_HandCounting_Pairs {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_Pairs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a When the play phase ends, each player&apos;s cards are scored together with the face-up cut card. The non-dealer&apos;s hand is counted first, then the dealer&apos;s hand, and finally the crib, which belongs to the dealer..
+        /// </summary>
+        public static string Tutorial_HandCounting_Paragraph1 {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_Paragraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Practice counting.
+        /// </summary>
+        public static string Tutorial_HandCounting_PracticeButton {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_PracticeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a • Runs: a sequence of 3 or more consecutive cards scores 1 point per card..
+        /// </summary>
+        public static string Tutorial_HandCounting_Runs {
+            get {
+                return ResourceManager.GetString("Tutorial_HandCounting_Runs", resourceCulture);
             }
         }
         

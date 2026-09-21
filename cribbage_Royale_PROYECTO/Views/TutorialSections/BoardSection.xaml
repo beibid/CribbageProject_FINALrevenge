@@ -6,8 +6,172 @@
              xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="700">
+    <UserControl.Resources>
+        <Style x:Key="HoleDot" TargetType="Ellipse">
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Height" Value="8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Fill" Value="{StaticResource TrackBrush}"/>
+        </Style>
+        <Style x:Key="PlayerPeg" TargetType="Ellipse">
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Fill" Value="{StaticResource GoldBrush}"/>
+        </Style>
+        <Style x:Key="OpponentPeg" TargetType="Rectangle">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Fill" Value="{StaticResource CoralBrush}"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="45"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <StackPanel>
         <TextBlock Text="{x:Static lang:Lang.Tutorial_BoardTab}"
                    Style="{StaticResource TutorialHeading}"/>
+
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_Board_Paragraph1}"
+                   Style="{StaticResource TutorialText}"/>
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_Board_Paragraph2}"
+                   Style="{StaticResource TutorialText}"/>
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_Board_Paragraph3}"
+                   Style="{StaticResource TutorialText}"/>
+        <TextBlock Text="{x:Static lang:Lang.Tutorial_Board_Paragraph4}"
+                   Style="{StaticResource TutorialText}" FontWeight="Bold"/>
+
+        <Border Background="{StaticResource PanelBrush}"
+                BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="1"
+                CornerRadius="8" Padding="20" Margin="0,14,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Text="{x:Static lang:Lang.Tutorial_Board_OpponentShort}"
+                           Foreground="{StaticResource CoralBrush}"
+                           FontSize="12" FontWeight="Bold"
+                           VerticalAlignment="Center" Margin="0,0,12,6"/>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,6">
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Rectangle Style="{StaticResource OpponentPeg}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Border Width="14"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Rectangle Style="{StaticResource OpponentPeg}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Border Width="14"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                </StackPanel>
+
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="{x:Static lang:Lang.Tutorial_Board_PlayerShort}"
+                           Foreground="{StaticResource GoldBrush}"
+                           FontSize="12" FontWeight="Bold"
+                           VerticalAlignment="Center" Margin="0,0,12,0"/>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource PlayerPeg}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Border Width="14"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Border Width="14"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource PlayerPeg}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                    <Ellipse Style="{StaticResource HoleDot}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,2,0,0">
+                    <TextBlock Text="35" Width="90" TextAlignment="Right"
+                               Foreground="{StaticResource MutedTextBrush}" FontSize="11"/>
+                    <Border Width="14"/>
+                    <TextBlock Text="40" Width="90" TextAlignment="Right"
+                               Foreground="{StaticResource MutedTextBrush}" FontSize="11"/>
+                    <Border Width="14"/>
+                    <TextBlock Text="45" Width="90" TextAlignment="Right"
+                               Foreground="{StaticResource MutedTextBrush}" FontSize="11"/>
+                </StackPanel>
+
+                <Border Grid.Row="3" Grid.Column="1"
+                        HorizontalAlignment="Left" Width="172" Height="6" Margin="63,6,0,0"
+                        BorderBrush="{StaticResource GoldBrush}" BorderThickness="1,0,1,1"/>
+
+                <TextBlock x:Name="pointsGainedTextBlock" Grid.Row="4" Grid.Column="1"
+                           HorizontalAlignment="Left" Width="172" Margin="63,2,0,0"
+                           TextAlignment="Center" Foreground="{StaticResource GoldBrush}"
+                           FontSize="12" FontWeight="Bold"/>
+
+                <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse Width="4" Height="4" Margin="3" Fill="{StaticResource MutedTextBrush}"/>
+                    <Ellipse Width="4" Height="4" Margin="3" Fill="{StaticResource MutedTextBrush}"/>
+                    <Ellipse Width="4" Height="4" Margin="3" Fill="{StaticResource MutedTextBrush}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.RowSpan="5" Grid.Column="3"
+                            VerticalAlignment="Center">
+                    <TextBlock x:Name="goalTextBlock"
+                               Foreground="{StaticResource GoldBrush}"
+                               FontSize="11" FontWeight="Bold"
+                               HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                    <Border Width="50" Height="50" CornerRadius="4"
+                            BorderBrush="{StaticResource GoldBrush}" BorderThickness="1">
+                        <Ellipse Width="14" Height="14"
+                                 Stroke="{StaticResource GoldBrush}" StrokeThickness="2"/>
+                    </Border>
+                </StackPanel>
+
+                <Border Grid.Row="5" Grid.ColumnSpan="4"
+                        HorizontalAlignment="Center" Margin="0,14,0,0"
+                        Background="{StaticResource DarkBackgroundBrush}"
+                        CornerRadius="12" Padding="16,6">
+                    <TextBlock x:Name="scoreTextBlock"
+                               Foreground="{StaticResource TextBrush}"
+                               FontSize="13" FontWeight="Bold"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Button x:Name="goToLobbyButton"
+                Content="{x:Static lang:Lang.Tutorial_Board_GoToLobbyButton}"
+                Style="{StaticResource PrimaryButton}"
+                HorizontalAlignment="Left" Height="40" Padding="24,0" Margin="0,20,0,0"/>
     </StackPanel>
 </UserControl>

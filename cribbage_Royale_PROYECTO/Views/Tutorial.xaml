@@ -14,37 +14,45 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Header -->
         <TextBlock Text="{x:Static lang:Lang.Tutorial_Title}"
-           Grid.ColumnSpan="2"
-           Foreground="{StaticResource GoldBrush}"
-           FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+                   Grid.ColumnSpan="2"
+                   Foreground="{StaticResource GoldBrush}"
+                   FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
 
         <Button x:Name="CloseButton" Grid.Column="1"
                 Content="{x:Static lang:Lang.Tutorial_CloseButton}"
+                Style="{StaticResource SecondaryButton}"
                 Width="100" Height="30"
                 HorizontalAlignment="Right" VerticalAlignment="Top"
                 Click="CloseButton_Click"/>
 
-        <!-- Side menu -->
         <StackPanel Grid.Row="1">
             <Button x:Name="ObjectiveButton" Content="{x:Static lang:Lang.Tutorial_ObjectiveTab}"
+                    Style="{StaticResource SecondaryButton}"
+                    Width="Auto" MinWidth="0" HorizontalAlignment="Stretch"
                     Height="36" Margin="0,0,0,6" Click="ObjectiveButton_Click"/>
             <Button x:Name="DealAndCribButton" Content="{x:Static lang:Lang.Tutorial_DealAndCribTab}"
+                    Style="{StaticResource SecondaryButton}"
+                    Width="Auto" MinWidth="0" HorizontalAlignment="Stretch"
                     Height="36" Margin="0,0,0,6" Click="DealAndCribButton_Click"/>
             <Button x:Name="PlayPhaseButton" Content="{x:Static lang:Lang.Tutorial_PlayPhaseTab}"
+                    Style="{StaticResource SecondaryButton}"
+                    Width="Auto" MinWidth="0" HorizontalAlignment="Stretch"
                     Height="36" Margin="0,0,0,6" Click="PlayPhaseButton_Click"/>
             <Button x:Name="HandCountingButton" Content="{x:Static lang:Lang.Tutorial_HandCountingTab}"
+                    Style="{StaticResource SecondaryButton}"
+                    Width="Auto" MinWidth="0" HorizontalAlignment="Stretch"
                     Height="36" Margin="0,0,0,6" Click="HandCountingButton_Click"/>
             <Button x:Name="BoardButton" Content="{x:Static lang:Lang.Tutorial_BoardTab}"
+                    Style="{StaticResource SecondaryButton}"
+                    Width="Auto" MinWidth="0" HorizontalAlignment="Stretch"
                     Height="36" Click="BoardButton_Click"/>
         </StackPanel>
 
-        <!-- Content -->
         <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="20,0,0,0"
                       VerticalScrollBarVisibility="Auto">
             <ContentControl x:Name="SectionContent" MaxWidth="700" HorizontalAlignment="Left"/>

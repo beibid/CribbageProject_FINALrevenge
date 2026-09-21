@@ -1,28 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Globalization;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using cribbage_Royale_PROYECTO.Properties.Langs;
 
 namespace cribbage_Royale_PROYECTO.Views.TutorialSections
 {
-    /// <summary>
-    /// Lógica de interacción para BoardSection.xaml
-    /// </summary>
     public partial class BoardSection : UserControl
     {
+        private const int WinningScore = 61;
+        private const int ExamplePlayerScore = 42;
+        private const int ExampleOpponentScore = 38;
+        private const int ExamplePointsGained = 8;
+
         public BoardSection()
         {
             InitializeComponent();
+            ShowExampleScores();
+        }
+
+        private void ShowExampleScores()
+        {
+            goalTextBlock.Text = string.Format(CultureInfo.CurrentCulture,
+                Lang.Tutorial_Board_GoalFormat, WinningScore);
+
+            pointsGainedTextBlock.Text = string.Format(CultureInfo.CurrentCulture,
+                Lang.Tutorial_Board_PointsGainedFormat, ExamplePointsGained);
+
+            scoreTextBlock.Text = string.Format(CultureInfo.CurrentCulture,
+                Lang.Tutorial_Board_ScoreFormat, ExamplePlayerScore, ExampleOpponentScore, WinningScore);
         }
     }
 }
