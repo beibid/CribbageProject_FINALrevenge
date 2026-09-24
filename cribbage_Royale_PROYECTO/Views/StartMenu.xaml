@@ -7,36 +7,34 @@
       xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
       mc:Ignorable="d"
       d:DesignHeight="800" d:DesignWidth="1280"
-      Title="StartMenuPage">
+      Title="StartMenu">
 
     <Grid Background="{StaticResource BackgroundBrush}">
 
-
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <!--Titulo-->
             <TextBlock Text="{x:Static lang:Lang.StartMenu_Title}"
-               Foreground="{StaticResource GoldBrush}"
-               FontFamily="Georgia" FontSize="64"
-               HorizontalAlignment="Center" Margin="0,0,0,32"/>
+                       Foreground="{StaticResource GoldBrush}"
+                       FontFamily="Georgia" FontSize="64"
+                       HorizontalAlignment="Center" Margin="0,0,0,32"/>
 
-            <!--Imagenes de las cartas-->
             <Image Source="/Cards/ImagesCards/card-fan.png"
-           Height="130" Margin="0,0,0,48"
-           RenderOptions.BitmapScalingMode="HighQuality"/>
+                   Height="130" Margin="0,0,0,48"
+                   RenderOptions.BitmapScalingMode="HighQuality"/>
 
-            <!--Los botones-->
             <Button x:Name="PlayButton" Content="{x:Static lang:Lang.StartMenu_PlayButton}"
-            Style="{StaticResource SecondaryButton}" Click="PlayButton_Click"/>
+                    Style="{StaticResource SecondaryButton}" Click="PlayButton_Click"/>
+
             <Button x:Name="GuestButton" Content="{x:Static lang:Lang.StartMenu_GuestButton}"
-            Style="{StaticResource SecondaryButton}"/>
+                    Style="{StaticResource SecondaryButton}" Click="GuestButton_Click"/>
+
             <Button x:Name="TutorialButton" Content="{x:Static lang:Lang.StartMenu_TutorialButton}"
-            Style="{StaticResource SecondaryButton}" Click="TutorialButton_Click"/>
+                    Style="{StaticResource SecondaryButton}" Click="TutorialButton_Click"/>
+
             <Button x:Name="SettingsButton" Content="{x:Static lang:Lang.StartMenu_SettingsButton}"
-            Style="{StaticResource SecondaryButton}" Click="SettingsButton_Click"/>
+                    Style="{StaticResource SecondaryButton}" Click="SettingsButton_Click"/>
         </StackPanel>
 
-        <!--Version del juego -->
         <TextBlock Text="{x:Static lang:Lang.StartMenu_Version}"
                    Foreground="{StaticResource TextBrush}" Opacity="0.5"
                    FontSize="12"

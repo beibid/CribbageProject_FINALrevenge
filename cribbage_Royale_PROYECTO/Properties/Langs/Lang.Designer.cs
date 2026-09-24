@@ -61,6 +61,330 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a That player is already on your friends list..
+        /// </summary>
+        public static string AddFriend_AlreadyFriendsMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_AlreadyFriendsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You cannot send a friend request to yourself..
+        /// </summary>
+        public static string AddFriend_CannotAddYourselfMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_CannotAddYourselfMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No players found with that name..
+        /// </summary>
+        public static string AddFriend_NoResultsMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_NoResultsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Add friend.
+        /// </summary>
+        public static string AddFriend_PageTitle {
+            get {
+                return ResourceManager.GetString("AddFriend_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You already sent a request to that player..
+        /// </summary>
+        public static string AddFriend_RequestAlreadySentMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_RequestAlreadySentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The friend request could not be sent. Try again later..
+        /// </summary>
+        public static string AddFriend_RequestErrorMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_RequestErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request not sent.
+        /// </summary>
+        public static string AddFriend_RequestErrorTitle {
+            get {
+                return ResourceManager.GetString("AddFriend_RequestErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We sent a friend request to {0}..
+        /// </summary>
+        public static string AddFriend_RequestSentMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_RequestSentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request sent.
+        /// </summary>
+        public static string AddFriend_RequestSentTitle {
+            get {
+                return ResourceManager.GetString("AddFriend_RequestSentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search player by username.
+        /// </summary>
+        public static string AddFriend_SearchHint {
+            get {
+                return ResourceManager.GetString("AddFriend_SearchHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter a username to search..
+        /// </summary>
+        public static string AddFriend_SearchRequiredMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_SearchRequiredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send friend request.
+        /// </summary>
+        public static string AddFriend_SendRequestButton {
+            get {
+                return ResourceManager.GetString("AddFriend_SendRequestButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change password.
+        /// </summary>
+        public static string ChangePassword_ConfirmButton {
+            get {
+                return ResourceManager.GetString("ChangePassword_ConfirmButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirm new password.
+        /// </summary>
+        public static string ChangePassword_ConfirmNewPasswordLabel {
+            get {
+                return ResourceManager.GetString("ChangePassword_ConfirmNewPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Current password.
+        /// </summary>
+        public static string ChangePassword_CurrentPasswordLabel {
+            get {
+                return ResourceManager.GetString("ChangePassword_CurrentPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your password could not be changed. Try again later..
+        /// </summary>
+        public static string ChangePassword_ErrorMessage {
+            get {
+                return ResourceManager.GetString("ChangePassword_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password not changed.
+        /// </summary>
+        public static string ChangePassword_ErrorTitle {
+            get {
+                return ResourceManager.GetString("ChangePassword_ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The current password is incorrect..
+        /// </summary>
+        public static string ChangePassword_IncorrectCurrentPasswordMessage {
+            get {
+                return ResourceManager.GetString("ChangePassword_IncorrectCurrentPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The new passwords do not match..
+        /// </summary>
+        public static string ChangePassword_MismatchMessage {
+            get {
+                return ResourceManager.GetString("ChangePassword_MismatchMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New password.
+        /// </summary>
+        public static string ChangePassword_NewPasswordLabel {
+            get {
+                return ResourceManager.GetString("ChangePassword_NewPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a At least 8 characters, one uppercase letter and one number.
+        /// </summary>
+        public static string ChangePassword_RulesText {
+            get {
+                return ResourceManager.GetString("ChangePassword_RulesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The new password must be different from the current one..
+        /// </summary>
+        public static string ChangePassword_SamePasswordMessage {
+            get {
+                return ResourceManager.GetString("ChangePassword_SamePasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your password was changed. Use it the next time you sign in..
+        /// </summary>
+        public static string ChangePassword_SuccessMessage {
+            get {
+                return ResourceManager.GetString("ChangePassword_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password changed.
+        /// </summary>
+        public static string ChangePassword_SuccessTitle {
+            get {
+                return ResourceManager.GetString("ChangePassword_SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The new password does not meet the security requirements..
+        /// </summary>
+        public static string ChangePassword_WeakPasswordMessage {
+            get {
+                return ResourceManager.GetString("ChangePassword_WeakPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change password.
+        /// </summary>
+        public static string ChangePassword_WindowTitle {
+            get {
+                return ResourceManager.GetString("ChangePassword_WindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Back.
+        /// </summary>
+        public static string Common_BackButton {
+            get {
+                return ResourceManager.GetString("Common_BackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string Common_CancelButton {
+            get {
+                return ResourceManager.GetString("Common_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Close.
+        /// </summary>
+        public static string Common_CloseButton {
+            get {
+                return ResourceManager.GetString("Common_CloseButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email.
+        /// </summary>
+        public static string Common_EmailLabel {
+            get {
+                return ResourceManager.GetString("Common_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fill in all the required fields before continuing..
+        /// </summary>
+        public static string Common_EmptyFieldsMessage {
+            get {
+                return ResourceManager.GetString("Common_EmptyFieldsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a In a match.
+        /// </summary>
+        public static string Common_InMatchStatus {
+            get {
+                return ResourceManager.GetString("Common_InMatchStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Offline.
+        /// </summary>
+        public static string Common_OfflineStatus {
+            get {
+                return ResourceManager.GetString("Common_OfflineStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Online.
+        /// </summary>
+        public static string Common_OnlineStatus {
+            get {
+                return ResourceManager.GetString("Common_OnlineStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search.
+        /// </summary>
+        public static string Common_SearchButton {
+            get {
+                return ResourceManager.GetString("Common_SearchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username.
+        /// </summary>
+        public static string Common_UsernameLabel {
+            get {
+                return ResourceManager.GetString("Common_UsernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a OK.
         /// </summary>
         public static string Dialog_AcceptButton {
@@ -129,6 +453,672 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Dialog_YesButton {
             get {
                 return ResourceManager.GetString("Dialog_YesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Discard changes.
+        /// </summary>
+        public static string EditProfile_DiscardChangesButton {
+            get {
+                return ResourceManager.GetString("EditProfile_DiscardChangesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have unsaved changes. Do you want to discard them?.
+        /// </summary>
+        public static string EditProfile_DiscardConfirmationMessage {
+            get {
+                return ResourceManager.GetString("EditProfile_DiscardConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Discard changes.
+        /// </summary>
+        public static string EditProfile_DiscardConfirmationTitle {
+            get {
+                return ResourceManager.GetString("EditProfile_DiscardConfirmationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Changing your email requires a new verification..
+        /// </summary>
+        public static string EditProfile_EmailChangeWarning {
+            get {
+                return ResourceManager.GetString("EditProfile_EmailChangeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New email address.
+        /// </summary>
+        public static string EditProfile_EmailHint {
+            get {
+                return ResourceManager.GetString("EditProfile_EmailHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There are no changes to save..
+        /// </summary>
+        public static string EditProfile_NoChangesMessage {
+            get {
+                return ResourceManager.GetString("EditProfile_NoChangesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Edit profile.
+        /// </summary>
+        public static string EditProfile_PageTitle {
+            get {
+                return ResourceManager.GetString("EditProfile_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Save changes.
+        /// </summary>
+        public static string EditProfile_SaveChangesButton {
+            get {
+                return ResourceManager.GetString("EditProfile_SaveChangesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your changes could not be saved. Try again later..
+        /// </summary>
+        public static string EditProfile_SaveErrorMessage {
+            get {
+                return ResourceManager.GetString("EditProfile_SaveErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Changes not saved.
+        /// </summary>
+        public static string EditProfile_SaveErrorTitle {
+            get {
+                return ResourceManager.GetString("EditProfile_SaveErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your profile information was updated..
+        /// </summary>
+        public static string EditProfile_SaveSuccessMessage {
+            get {
+                return ResourceManager.GetString("EditProfile_SaveSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Profile updated.
+        /// </summary>
+        public static string EditProfile_SaveSuccessTitle {
+            get {
+                return ResourceManager.GetString("EditProfile_SaveSuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New username.
+        /// </summary>
+        public static string EditProfile_UsernameHint {
+            get {
+                return ResourceManager.GetString("EditProfile_UsernameHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Accept.
+        /// </summary>
+        public static string FriendRequests_AcceptButton {
+            get {
+                return ResourceManager.GetString("FriendRequests_AcceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} was added to your friends list..
+        /// </summary>
+        public static string FriendRequests_AcceptedMessage {
+            get {
+                return ResourceManager.GetString("FriendRequests_AcceptedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request accepted.
+        /// </summary>
+        public static string FriendRequests_AcceptedTitle {
+            get {
+                return ResourceManager.GetString("FriendRequests_AcceptedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Decline.
+        /// </summary>
+        public static string FriendRequests_DeclineButton {
+            get {
+                return ResourceManager.GetString("FriendRequests_DeclineButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The request from {0} was declined..
+        /// </summary>
+        public static string FriendRequests_DeclinedMessage {
+            get {
+                return ResourceManager.GetString("FriendRequests_DeclinedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request declined.
+        /// </summary>
+        public static string FriendRequests_DeclinedTitle {
+            get {
+                return ResourceManager.GetString("FriendRequests_DeclinedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have no pending friend requests..
+        /// </summary>
+        public static string FriendRequests_EmptyListMessage {
+            get {
+                return ResourceManager.GetString("FriendRequests_EmptyListMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend requests.
+        /// </summary>
+        public static string FriendRequests_PageTitle {
+            get {
+                return ResourceManager.GetString("FriendRequests_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The request could not be processed. Try again later..
+        /// </summary>
+        public static string FriendRequests_ProcessingErrorMessage {
+            get {
+                return ResourceManager.GetString("FriendRequests_ProcessingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request not processed.
+        /// </summary>
+        public static string FriendRequests_ProcessingErrorTitle {
+            get {
+                return ResourceManager.GetString("FriendRequests_ProcessingErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} wants to be your friend.
+        /// </summary>
+        public static string FriendRequests_ReceivedFormat {
+            get {
+                return ResourceManager.GetString("FriendRequests_ReceivedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Add friend.
+        /// </summary>
+        public static string Friends_AddFriendButton {
+            get {
+                return ResourceManager.GetString("Friends_AddFriendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have not added any friends yet..
+        /// </summary>
+        public static string Friends_EmptyListMessage {
+            get {
+                return ResourceManager.GetString("Friends_EmptyListMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} is no longer on your friends list..
+        /// </summary>
+        public static string Friends_FriendRemovedMessage {
+            get {
+                return ResourceManager.GetString("Friends_FriendRemovedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend removed.
+        /// </summary>
+        public static string Friends_FriendRemovedTitle {
+            get {
+                return ResourceManager.GetString("Friends_FriendRemovedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a My friends.
+        /// </summary>
+        public static string Friends_FriendsTabHeader {
+            get {
+                return ResourceManager.GetString("Friends_FriendsTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We sent a match invitation to {0}..
+        /// </summary>
+        public static string Friends_InviteSentMessage {
+            get {
+                return ResourceManager.GetString("Friends_InviteSentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitation sent.
+        /// </summary>
+        public static string Friends_InviteSentTitle {
+            get {
+                return ResourceManager.GetString("Friends_InviteSentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invite to match.
+        /// </summary>
+        public static string Friends_InviteToMatchButton {
+            get {
+                return ResourceManager.GetString("Friends_InviteToMatchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} is offline or already in a match..
+        /// </summary>
+        public static string Friends_InviteUnavailableMessage {
+            get {
+                return ResourceManager.GetString("Friends_InviteUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player unavailable.
+        /// </summary>
+        public static string Friends_InviteUnavailableTitle {
+            get {
+                return ResourceManager.GetString("Friends_InviteUnavailableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Last seen: {0}.
+        /// </summary>
+        public static string Friends_LastConnectionFormat {
+            get {
+                return ResourceManager.GetString("Friends_LastConnectionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your friends list could not be loaded. Try again later..
+        /// </summary>
+        public static string Friends_LoadingErrorMessage {
+            get {
+                return ResourceManager.GetString("Friends_LoadingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friends list unavailable.
+        /// </summary>
+        public static string Friends_LoadingErrorTitle {
+            get {
+                return ResourceManager.GetString("Friends_LoadingErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friends.
+        /// </summary>
+        public static string Friends_PageTitle {
+            get {
+                return ResourceManager.GetString("Friends_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player.
+        /// </summary>
+        public static string Friends_PlayerColumnHeader {
+            get {
+                return ResourceManager.GetString("Friends_PlayerColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to remove {0} from your friends?.
+        /// </summary>
+        public static string Friends_RemoveConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Friends_RemoveConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Remove friend.
+        /// </summary>
+        public static string Friends_RemoveConfirmationTitle {
+            get {
+                return ResourceManager.GetString("Friends_RemoveConfirmationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Remove friend.
+        /// </summary>
+        public static string Friends_RemoveFriendButton {
+            get {
+                return ResourceManager.GetString("Friends_RemoveFriendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Requests ({0}).
+        /// </summary>
+        public static string Friends_RequestsTabHeaderFormat {
+            get {
+                return ResourceManager.GetString("Friends_RequestsTabHeaderFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search in your friends list.
+        /// </summary>
+        public static string Friends_SearchHint {
+            get {
+                return ResourceManager.GetString("Friends_SearchHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Status.
+        /// </summary>
+        public static string Friends_StatusColumnHeader {
+            get {
+                return ResourceManager.GetString("Friends_StatusColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a View profile.
+        /// </summary>
+        public static string Friends_ViewProfileButton {
+            get {
+                return ResourceManager.GetString("Friends_ViewProfileButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a MMMM d, yyyy.
+        /// </summary>
+        public static string Global_LongDateFormat {
+            get {
+                return ResourceManager.GetString("Global_LongDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0:P1}.
+        /// </summary>
+        public static string Global_PercentageFormat {
+            get {
+                return ResourceManager.GetString("Global_PercentageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Continue.
+        /// </summary>
+        public static string GuestAccess_ContinueButton {
+            get {
+                return ResourceManager.GetString("GuestAccess_ContinueButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Guest-{0}.
+        /// </summary>
+        public static string GuestAccess_DisplayNameFormat {
+            get {
+                return ResourceManager.GetString("GuestAccess_DisplayNameFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Create an account to use this feature..
+        /// </summary>
+        public static string GuestAccess_FeatureBlockedMessage {
+            get {
+                return ResourceManager.GetString("GuestAccess_FeatureBlockedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Feature unavailable.
+        /// </summary>
+        public static string GuestAccess_FeatureBlockedTitle {
+            get {
+                return ResourceManager.GetString("GuestAccess_FeatureBlockedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Play without an account.
+        /// </summary>
+        public static string GuestAccess_HeaderText {
+            get {
+                return ResourceManager.GetString("GuestAccess_HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a As a guest you cannot add friends or save your statistics..
+        /// </summary>
+        public static string GuestAccess_LimitationsText {
+            get {
+                return ResourceManager.GetString("GuestAccess_LimitationsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a That display name is being used in this match..
+        /// </summary>
+        public static string GuestAccess_NameAlreadyInUseMessage {
+            get {
+                return ResourceManager.GetString("GuestAccess_NameAlreadyInUseMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Choose a display name.
+        /// </summary>
+        public static string GuestAccess_NameHint {
+            get {
+                return ResourceManager.GetString("GuestAccess_NameHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter a display name to continue..
+        /// </summary>
+        public static string GuestAccess_NameRequiredMessage {
+            get {
+                return ResourceManager.GetString("GuestAccess_NameRequiredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Play as guest.
+        /// </summary>
+        public static string GuestAccess_PageTitle {
+            get {
+                return ResourceManager.GetString("GuestAccess_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a TUTORIAL AND RULES.
+        /// </summary>
+        public static string Lobby_LearnCardButton {
+            get {
+                return ResourceManager.GetString("Lobby_LearnCardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Review the rules of Cribbage and practice counting points on the board..
+        /// </summary>
+        public static string Lobby_LearnCardText {
+            get {
+                return ResourceManager.GetString("Lobby_LearnCardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Learn.
+        /// </summary>
+        public static string Lobby_LearnCardTitle {
+            get {
+                return ResourceManager.GetString("Lobby_LearnCardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Level.
+        /// </summary>
+        public static string Lobby_LevelPrefix {
+            get {
+                return ResourceManager.GetString("Lobby_LevelPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have a pending game invitation.
+        /// </summary>
+        public static string Lobby_PendingInvitation {
+            get {
+                return ResourceManager.GetString("Lobby_PendingInvitation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PLAY.
+        /// </summary>
+        public static string Lobby_PlayButton {
+            get {
+                return ResourceManager.GetString("Lobby_PlayButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a VIEW PROFILE.
+        /// </summary>
+        public static string Lobby_ProfileCardButton {
+            get {
+                return ResourceManager.GetString("Lobby_ProfileCardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Check your statistics, your current streak and manage your account data..
+        /// </summary>
+        public static string Lobby_ProfileCardText {
+            get {
+                return ResourceManager.GetString("Lobby_ProfileCardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a My profile.
+        /// </summary>
+        public static string Lobby_ProfileCardTitle {
+            get {
+                return ResourceManager.GetString("Lobby_ProfileCardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SETTINGS.
+        /// </summary>
+        public static string Lobby_SettingsButton {
+            get {
+                return ResourceManager.GetString("Lobby_SettingsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a VIEW FRIENDS.
+        /// </summary>
+        public static string Lobby_SocialCardButton {
+            get {
+                return ResourceManager.GetString("Lobby_SocialCardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Manage your friends, look for new players and send invitations..
+        /// </summary>
+        public static string Lobby_SocialCardText {
+            get {
+                return ResourceManager.GetString("Lobby_SocialCardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Social.
+        /// </summary>
+        public static string Lobby_SocialCardTitle {
+            get {
+                return ResourceManager.GetString("Lobby_SocialCardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Start a game and look for a rival.
+        /// </summary>
+        public static string Lobby_Subtitle {
+            get {
+                return ResourceManager.GetString("Lobby_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CRIBBAGE ROYALE.
+        /// </summary>
+        public static string Lobby_Title {
+            get {
+                return ResourceManager.GetString("Lobby_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a VIEW.
+        /// </summary>
+        public static string Lobby_ViewButton {
+            get {
+                return ResourceManager.GetString("Lobby_ViewButton", resourceCulture);
             }
         }
         
@@ -210,6 +1200,168 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Login_UsernameLabel {
             get {
                 return ResourceManager.GetString("Login_UsernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} points.
+        /// </summary>
+        public static string Profile_BestHandFormat {
+            get {
+                return ResourceManager.GetString("Profile_BestHandFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Best hand.
+        /// </summary>
+        public static string Profile_BestHandLabel {
+            get {
+                return ResourceManager.GetString("Profile_BestHandLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change password.
+        /// </summary>
+        public static string Profile_ChangePasswordButton {
+            get {
+                return ResourceManager.GetString("Profile_ChangePasswordButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change picture.
+        /// </summary>
+        public static string Profile_ChangePictureButton {
+            get {
+                return ResourceManager.GetString("Profile_ChangePictureButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Edit profile.
+        /// </summary>
+        public static string Profile_EditProfileButton {
+            get {
+                return ResourceManager.GetString("Profile_EditProfileButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email: {0}.
+        /// </summary>
+        public static string Profile_EmailFormat {
+            get {
+                return ResourceManager.GetString("Profile_EmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your profile information could not be loaded..
+        /// </summary>
+        public static string Profile_LoadingErrorMessage {
+            get {
+                return ResourceManager.GetString("Profile_LoadingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Profile unavailable.
+        /// </summary>
+        public static string Profile_LoadingErrorTitle {
+            get {
+                return ResourceManager.GetString("Profile_LoadingErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Matches lost.
+        /// </summary>
+        public static string Profile_MatchesLostLabel {
+            get {
+                return ResourceManager.GetString("Profile_MatchesLostLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Matches played.
+        /// </summary>
+        public static string Profile_MatchesPlayedLabel {
+            get {
+                return ResourceManager.GetString("Profile_MatchesPlayedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Matches won.
+        /// </summary>
+        public static string Profile_MatchesWonLabel {
+            get {
+                return ResourceManager.GetString("Profile_MatchesWonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match history.
+        /// </summary>
+        public static string Profile_MatchHistoryButton {
+            get {
+                return ResourceManager.GetString("Profile_MatchHistoryButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Member since {0}.
+        /// </summary>
+        public static string Profile_MemberSinceFormat {
+            get {
+                return ResourceManager.GetString("Profile_MemberSinceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have not played any matches yet..
+        /// </summary>
+        public static string Profile_NoStatisticsMessage {
+            get {
+                return ResourceManager.GetString("Profile_NoStatisticsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a My profile.
+        /// </summary>
+        public static string Profile_PageTitle {
+            get {
+                return ResourceManager.GetString("Profile_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Statistics.
+        /// </summary>
+        public static string Profile_StatisticsTitle {
+            get {
+                return ResourceManager.GetString("Profile_StatisticsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username: {0}.
+        /// </summary>
+        public static string Profile_UsernameFormat {
+            get {
+                return ResourceManager.GetString("Profile_UsernameFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Win rate.
+        /// </summary>
+        public static string Profile_WinRateLabel {
+            get {
+                return ResourceManager.GetString("Profile_WinRateLabel", resourceCulture);
             }
         }
         

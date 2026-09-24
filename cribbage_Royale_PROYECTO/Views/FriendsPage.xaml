@@ -1,0 +1,82 @@
+﻿<Page x:Class="cribbage_Royale_PROYECTO.Views.FriendsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
+      mc:Ignorable="d"
+      d:DesignHeight="800" d:DesignWidth="1280"
+      Title="FriendsPage">
+
+    <Grid Background="{StaticResource BackgroundBrush}" Margin="40,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,0,0,16">
+            <TextBlock Text="{x:Static lang:Lang.Friends_PageTitle}"
+                       Foreground="{StaticResource GoldBrush}"
+                       FontSize="26" FontWeight="Bold" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="addFriendButton" Content="{x:Static lang:Lang.Friends_AddFriendButton}"
+                        Style="{StaticResource SecondaryButton}" MinWidth="0"
+                        Width="140" Height="32" FontSize="12" Margin="0,0,8,0"
+                        Click="AddFriendButton_Click"/>
+                <Button x:Name="closeButton" Content="{x:Static lang:Lang.Common_CloseButton}"
+                        Style="{StaticResource SecondaryButton}" MinWidth="0"
+                        Width="110" Height="32" FontSize="12"
+                        Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,12">
+            <TextBlock Text="{x:Static lang:Lang.Friends_FriendsTabHeader}"
+                       Foreground="{StaticResource GoldBrush}"
+                       FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button x:Name="friendRequestsButton" Style="{StaticResource SecondaryButton}"
+                    MinWidth="0" Height="28" FontSize="11" Margin="16,0,0,0"
+                    Click="FriendRequestsButton_Click"/>
+        </StackPanel>
+
+        <Border Grid.Row="2" Background="{StaticResource PanelBrush}" CornerRadius="8" Padding="12">
+            <Grid>
+                <TextBlock x:Name="emptyListTextBlock"
+                           Text="{x:Static lang:Lang.Friends_EmptyListMessage}"
+                           Foreground="{StaticResource MutedTextBrush}" FontSize="13"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Visibility="Collapsed"/>
+
+                <ListBox x:Name="friendsListBox" Background="Transparent" BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="4,8" Width="1000">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding UserName}"
+                                               Foreground="{StaticResource TextBrush}"
+                                               FontSize="14" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Status}"
+                                               Foreground="{StaticResource MutedTextBrush}"
+                                               FontSize="12"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="{x:Static lang:Lang.Friends_InviteToMatchButton}"
+                                            Style="{StaticResource SecondaryButton}" MinWidth="0"
+                                            Width="140" Height="28" FontSize="11" Margin="0,0,8,0"/>
+                                    <Button Content="{x:Static lang:Lang.Friends_ViewProfileButton}"
+                                            Style="{StaticResource SecondaryButton}" MinWidth="0"
+                                            Width="110" Height="28" FontSize="11" Margin="0,0,8,0"/>
+                                    <Button Content="{x:Static lang:Lang.Friends_RemoveFriendButton}"
+                                            Style="{StaticResource DangerOutlineButton}"
+                                            Width="130" Height="28" FontSize="11"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
