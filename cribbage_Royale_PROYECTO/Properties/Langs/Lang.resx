@@ -384,4 +384,388 @@
 	<data name="Tutorial_HandCounting_Runs" xml:space="preserve">
     <value>• Runs: a sequence of 3 or more consecutive cards scores 1 point per card.</value>
   </data>
+	 <data name="Lobby_LevelPrefix" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Lobby_SettingsButton" xml:space="preserve">
+    <value>SETTINGS</value>
+  </data>
+  <data name="Lobby_PendingInvitation" xml:space="preserve">
+    <value>You have a pending game invitation</value>
+  </data>
+  <data name="Lobby_ViewButton" xml:space="preserve">
+    <value>VIEW</value>
+  </data>
+  <data name="Lobby_Title" xml:space="preserve">
+    <value>CRIBBAGE ROYALE</value>
+  </data>
+  <data name="Lobby_Subtitle" xml:space="preserve">
+    <value>Start a game and look for a rival</value>
+  </data>
+  <data name="Lobby_PlayButton" xml:space="preserve">
+    <value>PLAY</value>
+  </data>
+  <data name="Lobby_ProfileCardTitle" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="Lobby_ProfileCardText" xml:space="preserve">
+    <value>Check your statistics, your current streak and manage your account data.</value>
+  </data>
+  <data name="Lobby_ProfileCardButton" xml:space="preserve">
+    <value>VIEW PROFILE</value>
+  </data>
+  <data name="Lobby_SocialCardTitle" xml:space="preserve">
+    <value>Social</value>
+  </data>
+  <data name="Lobby_SocialCardText" xml:space="preserve">
+    <value>Manage your friends, look for new players and send invitations.</value>
+  </data>
+  <data name="Lobby_SocialCardButton" xml:space="preserve">
+    <value>VIEW FRIENDS</value>
+  </data>
+  <data name="Lobby_LearnCardTitle" xml:space="preserve">
+    <value>Learn</value>
+  </data>
+  <data name="Lobby_LearnCardText" xml:space="preserve">
+    <value>Review the rules of Cribbage and practice counting points on the board.</value>
+  </data>
+  <data name="Lobby_LearnCardButton" xml:space="preserve">
+    <value>TUTORIAL AND RULES</value>
+  </data>
+  <data name="GuestAccess_ContinueButton" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="GuestAccess_FeatureBlockedMessage" xml:space="preserve">
+    <value>Create an account to use this feature.</value>
+  </data>
+  <data name="GuestAccess_FeatureBlockedTitle" xml:space="preserve">
+    <value>Feature unavailable</value>
+  </data>
+  <data name="GuestAccess_HeaderText" xml:space="preserve">
+    <value>Play without an account</value>
+  </data>
+  <data name="GuestAccess_LimitationsText" xml:space="preserve">
+    <value>As a guest you cannot add friends or save your statistics.</value>
+  </data>
+  <data name="GuestAccess_NameAlreadyInUseMessage" xml:space="preserve">
+    <value>That display name is being used in this match.</value>
+  </data>
+  <data name="GuestAccess_NameHint" xml:space="preserve">
+    <value>Choose a display name</value>
+  </data>
+  <data name="GuestAccess_NameRequiredMessage" xml:space="preserve">
+    <value>Enter a display name to continue.</value>
+  </data>
+  <data name="GuestAccess_PageTitle" xml:space="preserve">
+    <value>Play as guest</value>
+  </data>
+  <data name="Friends_AddFriendButton" xml:space="preserve">
+    <value>Add friend</value>
+  </data>
+  <data name="Friends_EmptyListMessage" xml:space="preserve">
+    <value>You have not added any friends yet.</value>
+  </data>
+  <data name="Friends_FriendRemovedMessage" xml:space="preserve">
+    <value>{0} is no longer on your friends list.</value>
+  </data>
+  <data name="Friends_FriendRemovedTitle" xml:space="preserve">
+    <value>Friend removed</value>
+  </data>
+  <data name="Friends_FriendsTabHeader" xml:space="preserve">
+    <value>My friends</value>
+  </data>
+  <data name="Friends_InviteSentMessage" xml:space="preserve">
+    <value>We sent a match invitation to {0}.</value>
+  </data>
+  <data name="Friends_InviteSentTitle" xml:space="preserve">
+    <value>Invitation sent</value>
+  </data>
+  <data name="Friends_InviteToMatchButton" xml:space="preserve">
+    <value>Invite to match</value>
+  </data>
+  <data name="Friends_InviteUnavailableMessage" xml:space="preserve">
+    <value>{0} is offline or already in a match.</value>
+  </data>
+  <data name="Friends_InviteUnavailableTitle" xml:space="preserve">
+    <value>Player unavailable</value>
+  </data>
+  <data name="Friends_LastConnectionFormat" xml:space="preserve">
+    <value>Last seen: {0}</value>
+  </data>
+  <data name="Friends_LoadingErrorMessage" xml:space="preserve">
+    <value>Your friends list could not be loaded. Try again later.</value>
+  </data>
+  <data name="Friends_LoadingErrorTitle" xml:space="preserve">
+    <value>Friends list unavailable</value>
+  </data>
+  <data name="Friends_PageTitle" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="Friends_PlayerColumnHeader" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="Friends_RemoveConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to remove {0} from your friends?</value>
+  </data>
+  <data name="Friends_RemoveConfirmationTitle" xml:space="preserve">
+    <value>Remove friend</value>
+  </data>
+  <data name="Friends_RemoveFriendButton" xml:space="preserve">
+    <value>Remove friend</value>
+  </data>
+  <data name="Friends_RequestsTabHeaderFormat" xml:space="preserve">
+    <value>Requests ({0})</value>
+  </data>
+  <data name="Friends_SearchHint" xml:space="preserve">
+    <value>Search in your friends list</value>
+  </data>
+  <data name="Friends_StatusColumnHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Friends_ViewProfileButton" xml:space="preserve">
+    <value>View profile</value>
+  </data>
+  <data name="AddFriend_AlreadyFriendsMessage" xml:space="preserve">
+    <value>That player is already on your friends list.</value>
+  </data>
+  <data name="AddFriend_CannotAddYourselfMessage" xml:space="preserve">
+    <value>You cannot send a friend request to yourself.</value>
+  </data>
+  <data name="AddFriend_NoResultsMessage" xml:space="preserve">
+    <value>No players found with that name.</value>
+  </data>
+  <data name="AddFriend_PageTitle" xml:space="preserve">
+    <value>Add friend</value>
+  </data>
+  <data name="AddFriend_RequestAlreadySentMessage" xml:space="preserve">
+    <value>You already sent a request to that player.</value>
+  </data>
+  <data name="AddFriend_RequestErrorMessage" xml:space="preserve">
+    <value>The friend request could not be sent. Try again later.</value>
+  </data>
+  <data name="AddFriend_RequestErrorTitle" xml:space="preserve">
+    <value>Request not sent</value>
+  </data>
+  <data name="AddFriend_RequestSentMessage" xml:space="preserve">
+    <value>We sent a friend request to {0}.</value>
+  </data>
+  <data name="AddFriend_RequestSentTitle" xml:space="preserve">
+    <value>Request sent</value>
+  </data>
+  <data name="AddFriend_SearchHint" xml:space="preserve">
+    <value>Search player by username</value>
+  </data>
+  <data name="AddFriend_SearchRequiredMessage" xml:space="preserve">
+    <value>Enter a username to search.</value>
+  </data>
+  <data name="AddFriend_SendRequestButton" xml:space="preserve">
+    <value>Send friend request</value>
+  </data>
+  <data name="FriendRequests_AcceptButton" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="FriendRequests_AcceptedMessage" xml:space="preserve">
+    <value>{0} was added to your friends list.</value>
+  </data>
+  <data name="FriendRequests_AcceptedTitle" xml:space="preserve">
+    <value>Request accepted</value>
+  </data>
+  <data name="FriendRequests_DeclineButton" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="FriendRequests_DeclinedMessage" xml:space="preserve">
+    <value>The request from {0} was declined.</value>
+  </data>
+  <data name="FriendRequests_DeclinedTitle" xml:space="preserve">
+    <value>Request declined</value>
+  </data>
+  <data name="FriendRequests_EmptyListMessage" xml:space="preserve">
+    <value>You have no pending friend requests.</value>
+  </data>
+  <data name="FriendRequests_PageTitle" xml:space="preserve">
+    <value>Friend requests</value>
+  </data>
+  <data name="FriendRequests_ProcessingErrorMessage" xml:space="preserve">
+    <value>The request could not be processed. Try again later.</value>
+  </data>
+  <data name="FriendRequests_ProcessingErrorTitle" xml:space="preserve">
+    <value>Request not processed</value>
+  </data>
+  <data name="FriendRequests_ReceivedFormat" xml:space="preserve">
+    <value>{0} wants to be your friend</value>
+  </data>
+  <data name="Profile_BestHandFormat" xml:space="preserve">
+    <value>{0} points</value>
+  </data>
+  <data name="Profile_BestHandLabel" xml:space="preserve">
+    <value>Best hand</value>
+  </data>
+  <data name="Profile_ChangePasswordButton" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="Profile_ChangePictureButton" xml:space="preserve">
+    <value>Change picture</value>
+  </data>
+  <data name="Profile_EditProfileButton" xml:space="preserve">
+    <value>Edit profile</value>
+  </data>
+  <data name="Profile_EmailFormat" xml:space="preserve">
+    <value>Email: {0}</value>
+  </data>
+  <data name="Profile_LoadingErrorMessage" xml:space="preserve">
+    <value>Your profile information could not be loaded.</value>
+  </data>
+  <data name="Profile_LoadingErrorTitle" xml:space="preserve">
+    <value>Profile unavailable</value>
+  </data>
+  <data name="Profile_MatchHistoryButton" xml:space="preserve">
+    <value>Match history</value>
+  </data>
+  <data name="Profile_MatchesLostLabel" xml:space="preserve">
+    <value>Matches lost</value>
+  </data>
+  <data name="Profile_MatchesPlayedLabel" xml:space="preserve">
+    <value>Matches played</value>
+  </data>
+  <data name="Profile_MatchesWonLabel" xml:space="preserve">
+    <value>Matches won</value>
+  </data>
+  <data name="Profile_MemberSinceFormat" xml:space="preserve">
+    <value>Member since {0}</value>
+  </data>
+  <data name="Profile_NoStatisticsMessage" xml:space="preserve">
+    <value>You have not played any matches yet.</value>
+  </data>
+  <data name="Profile_PageTitle" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="Profile_StatisticsTitle" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Profile_UsernameFormat" xml:space="preserve">
+    <value>Username: {0}</value>
+  </data>
+  <data name="Profile_WinRateLabel" xml:space="preserve">
+    <value>Win rate</value>
+  </data>
+  <data name="EditProfile_DiscardChangesButton" xml:space="preserve">
+    <value>Discard changes</value>
+  </data>
+  <data name="EditProfile_DiscardConfirmationMessage" xml:space="preserve">
+    <value>You have unsaved changes. Do you want to discard them?</value>
+  </data>
+  <data name="EditProfile_DiscardConfirmationTitle" xml:space="preserve">
+    <value>Discard changes</value>
+  </data>
+  <data name="EditProfile_EmailChangeWarning" xml:space="preserve">
+    <value>Changing your email requires a new verification.</value>
+  </data>
+  <data name="EditProfile_EmailHint" xml:space="preserve">
+    <value>New email address</value>
+  </data>
+  <data name="EditProfile_NoChangesMessage" xml:space="preserve">
+    <value>There are no changes to save.</value>
+  </data>
+  <data name="EditProfile_PageTitle" xml:space="preserve">
+    <value>Edit profile</value>
+  </data>
+  <data name="EditProfile_SaveChangesButton" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="EditProfile_SaveErrorMessage" xml:space="preserve">
+    <value>Your changes could not be saved. Try again later.</value>
+  </data>
+  <data name="EditProfile_SaveErrorTitle" xml:space="preserve">
+    <value>Changes not saved</value>
+  </data>
+  <data name="EditProfile_SaveSuccessMessage" xml:space="preserve">
+    <value>Your profile information was updated.</value>
+  </data>
+  <data name="EditProfile_SaveSuccessTitle" xml:space="preserve">
+    <value>Profile updated</value>
+  </data>
+  <data name="EditProfile_UsernameHint" xml:space="preserve">
+    <value>New username</value>
+  </data>
+  <data name="ChangePassword_ConfirmButton" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChangePassword_ConfirmNewPasswordLabel" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="ChangePassword_CurrentPasswordLabel" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="ChangePassword_ErrorMessage" xml:space="preserve">
+    <value>Your password could not be changed. Try again later.</value>
+  </data>
+  <data name="ChangePassword_ErrorTitle" xml:space="preserve">
+    <value>Password not changed</value>
+  </data>
+  <data name="ChangePassword_IncorrectCurrentPasswordMessage" xml:space="preserve">
+    <value>The current password is incorrect.</value>
+  </data>
+  <data name="ChangePassword_MismatchMessage" xml:space="preserve">
+    <value>The new passwords do not match.</value>
+  </data>
+  <data name="ChangePassword_NewPasswordLabel" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="ChangePassword_RulesText" xml:space="preserve">
+    <value>At least 8 characters, one uppercase letter and one number</value>
+  </data>
+  <data name="ChangePassword_SamePasswordMessage" xml:space="preserve">
+    <value>The new password must be different from the current one.</value>
+  </data>
+  <data name="ChangePassword_SuccessMessage" xml:space="preserve">
+    <value>Your password was changed. Use it the next time you sign in.</value>
+  </data>
+  <data name="ChangePassword_SuccessTitle" xml:space="preserve">
+    <value>Password changed</value>
+  </data>
+  <data name="ChangePassword_WeakPasswordMessage" xml:space="preserve">
+    <value>The new password does not meet the security requirements.</value>
+  </data>
+  <data name="ChangePassword_WindowTitle" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="Common_BackButton" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Common_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common_CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Common_EmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Common_EmptyFieldsMessage" xml:space="preserve">
+    <value>Fill in all the required fields before continuing.</value>
+  </data>
+  <data name="Common_UsernameLabel" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="GuestAccess_DisplayNameFormat" xml:space="preserve">
+    <value>Guest-{0}</value>
+  </data>
+  <data name="Global_LongDateFormat" xml:space="preserve">
+    <value>MMMM d, yyyy</value>
+  </data>
+  <data name="Global_PercentageFormat" xml:space="preserve">
+    <value>{0:P1}</value>
+  </data>
+  <data name="Common_SearchButton" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Common_OnlineStatus" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Common_OfflineStatus" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Common_InMatchStatus" xml:space="preserve">
+    <value>In a match</value>
+  </data>
 </root>

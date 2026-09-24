@@ -42,6 +42,7 @@ namespace cribbage_Royale_PROYECTO.Views
                 using (CribbageEntities context = new CribbageEntities())
                 {
                     MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.Login_SuccessMessage);
+                    NavigationService.Navigate(new Lobby());
                 }
             }
             catch (Exception exeptionLogin)

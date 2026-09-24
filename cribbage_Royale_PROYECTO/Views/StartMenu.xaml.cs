@@ -26,5 +26,10 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             NavigationService.Navigate(new Settings());
         }
+
+        private void GuestButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new GuestAccessPage());
+        }
     }
 }
