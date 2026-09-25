@@ -48,7 +48,8 @@
                         Style="{StaticResource SecondaryButton}" MinWidth="0" Height="34" FontSize="12"
                         Click="ChangePasswordButton_Click"/>
                 <Button x:Name="matchHistoryButton" Content="{x:Static lang:Lang.Profile_MatchHistoryButton}"
-                        Style="{StaticResource SecondaryButton}" MinWidth="0" Height="34" FontSize="12"/>
+                        Click="MatchHistoryButton_Click" Style="{StaticResource SecondaryButton}" 
+                        MinWidth="0" Height="34" FontSize="12"/>
             </StackPanel>
         </Border>
 

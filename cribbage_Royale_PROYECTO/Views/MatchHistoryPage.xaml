@@ -1,0 +1,142 @@
+﻿<Page x:Class="cribbage_Royale_PROYECTO.Views.MatchHistoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
+      mc:Ignorable="d"
+      d:DesignHeight="800" d:DesignWidth="1280"
+      Title="MatchHistoryPage">
+
+    <Page.Resources>
+        <Style x:Key="MatchListItem" TargetType="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource BackgroundBrush}" Margin="40,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,0,0,16">
+            <TextBlock Text="{x:Static lang:Lang.MatchHistory_PageTitle}"
+                       Foreground="{StaticResource GoldBrush}"
+                       FontSize="26" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button x:Name="closeButton" Content="{x:Static lang:Lang.Common_CloseButton}"
+                    Style="{StaticResource SecondaryButton}" MinWidth="0"
+                    Width="110" Height="32" FontSize="12"
+                    HorizontalAlignment="Right" Click="CloseButton_Click"/>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16">
+            <RadioButton x:Name="allFilterRadioButton"
+                         Content="{x:Static lang:Lang.MatchHistory_AllFilter}"
+                         Style="{StaticResource TabRadioButton}"
+                         GroupName="matchHistoryFilter"
+                         IsChecked="True"/>
+            <RadioButton x:Name="wonFilterRadioButton"
+                         Content="{x:Static lang:Lang.MatchHistory_WonFilter}"
+                         Style="{StaticResource TabRadioButton}"
+                         GroupName="matchHistoryFilter"/>
+            <RadioButton x:Name="lostFilterRadioButton"
+                         Content="{x:Static lang:Lang.MatchHistory_LostFilter}"
+                         Style="{StaticResource TabRadioButton}"
+                         GroupName="matchHistoryFilter"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <TextBlock x:Name="emptyListTextBlock"
+                       Text="{x:Static lang:Lang.MatchHistory_EmptyMessage}"
+                       Foreground="{StaticResource MutedTextBrush}"
+                       FontSize="13" TextWrapping="Wrap"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <ListBox x:Name="matchesListBox"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     ItemContainerStyle="{StaticResource MatchListItem}"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource PanelBrush}"
+                                BorderBrush="{StaticResource InputBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border x:Name="resultBarBorder"
+                                        Grid.Column="0"
+                                        Width="4"
+                                        Background="{StaticResource SuccessBrush}"
+                                        CornerRadius="8,0,0,8"/>
+
+                                <StackPanel Grid.Column="1" Margin="16,14" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding OpponentText}"
+                                               Foreground="{StaticResource TextBrush}"
+                                               FontSize="15" FontWeight="Bold" Margin="0,0,0,4"/>
+                                    <TextBlock Text="{Binding DetailsText}"
+                                               Foreground="{StaticResource MutedTextBrush}"
+                                               FontSize="12" TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" Margin="0,0,24,0" VerticalAlignment="Center">
+                                    <TextBlock x:Name="resultTextBlock"
+                                               Text="{Binding ResultText}"
+                                               Foreground="{StaticResource SuccessBrush}"
+                                               FontSize="12" FontWeight="Bold"
+                                               HorizontalAlignment="Right"/>
+                                    <TextBlock Text="{Binding ScoreText}"
+                                               Foreground="{StaticResource GoldBrush}"
+                                               FontSize="22" FontWeight="Bold"
+                                               HorizontalAlignment="Right"/>
+                                </StackPanel>
+
+                                <Button Grid.Column="3"
+                                        Content="{x:Static lang:Lang.MatchHistory_DetailsButton}"
+                                        Style="{StaticResource SecondaryButton}"
+                                        MinWidth="0" Width="130" Height="30" FontSize="11"
+                                        Margin="0,0,16,0" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsVictory}" Value="False">
+                                <Setter TargetName="resultBarBorder"
+                                        Property="Background"
+                                        Value="{StaticResource CoralBrush}"/>
+                                <Setter TargetName="resultTextBlock"
+                                        Property="Foreground"
+                                        Value="{StaticResource CoralBrush}"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <Button x:Name="loadMoreButton" Grid.Row="3"
+                Content="{x:Static lang:Lang.MatchHistory_LoadMoreButton}"
+                Style="{StaticResource NeutralButton}"
+                Width="200" Height="36" FontSize="12"
+                Margin="0,16,0,0" HorizontalAlignment="Center"/>
+    </Grid>
+</Page>

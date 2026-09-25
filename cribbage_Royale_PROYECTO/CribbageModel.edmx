@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CribbageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CribbageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ajustes_jugador">
           <Key>
             <PropertyRef Name="id_usuario" />
@@ -60,6 +60,29 @@
           <Property Name="intentos_fallidos" Type="tinyint" Nullable="false" />
           <Property Name="fecha_fin_bloqueo_acceso" Type="datetime2" Precision="7" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'cribbage_royale.dbo.vista_estadisticas_jugador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vista_estadisticas_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="nombre_usuario" />
+            <PropertyRef Name="nombre_mostrado" />
+            <PropertyRef Name="nivel_habilidad" />
+            <PropertyRef Name="partidas_jugadas" />
+            <PropertyRef Name="victorias" />
+            <PropertyRef Name="derrotas" />
+            <PropertyRef Name="racha_actual" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="nombre_mostrado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nivel_habilidad" Type="smallint" Nullable="false" />
+          <Property Name="partidas_jugadas" Type="int" Nullable="false" />
+          <Property Name="victorias" Type="int" Nullable="false" />
+          <Property Name="derrotas" Type="int" Nullable="false" />
+          <Property Name="racha_actual" Type="smallint" Nullable="false" />
+          <Property Name="porcentaje_victorias" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
         <Association Name="fk_ajustes_jugador_usuario">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="ajustes_jugador" Type="Self.ajustes_jugador" Multiplicity="0..1" />
@@ -101,6 +124,19 @@
           <EntitySet Name="codigo_verificacion" EntityType="Self.codigo_verificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="perfil_jugador" EntityType="Self.perfil_jugador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vista_estadisticas_jugador" EntityType="Self.vista_estadisticas_jugador" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vista_estadisticas_jugador].[id_usuario] AS [id_usuario], 
+    [vista_estadisticas_jugador].[nombre_usuario] AS [nombre_usuario], 
+    [vista_estadisticas_jugador].[nombre_mostrado] AS [nombre_mostrado], 
+    [vista_estadisticas_jugador].[nivel_habilidad] AS [nivel_habilidad], 
+    [vista_estadisticas_jugador].[partidas_jugadas] AS [partidas_jugadas], 
+    [vista_estadisticas_jugador].[victorias] AS [victorias], 
+    [vista_estadisticas_jugador].[derrotas] AS [derrotas], 
+    [vista_estadisticas_jugador].[racha_actual] AS [racha_actual], 
+    [vista_estadisticas_jugador].[porcentaje_victorias] AS [porcentaje_victorias]
+    FROM [dbo].[vista_estadisticas_jugador] AS [vista_estadisticas_jugador]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="fk_ajustes_jugador_usuario" Association="Self.fk_ajustes_jugador_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="ajustes_jugador" EntitySet="ajustes_jugador" />
@@ -114,8 +150,7 @@
             <End Role="perfil_jugador" EntitySet="perfil_jugador" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CribbageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -233,7 +268,29 @@
             <End Role="usuario" EntitySet="usuario" />
             <End Role="perfil_jugador" EntitySet="perfil_jugador" />
           </AssociationSet>
+          <EntitySet Name="vista_estadisticas_jugador" EntityType="CribbageModel.vista_estadisticas_jugador" />
         </EntityContainer>
+        <EntityType Name="vista_estadisticas_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="nombre_usuario" />
+            <PropertyRef Name="nombre_mostrado" />
+            <PropertyRef Name="nivel_habilidad" />
+            <PropertyRef Name="partidas_jugadas" />
+            <PropertyRef Name="victorias" />
+            <PropertyRef Name="derrotas" />
+            <PropertyRef Name="racha_actual" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nombre_usuario" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_mostrado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nivel_habilidad" Type="Int16" Nullable="false" />
+          <Property Name="partidas_jugadas" Type="Int32" Nullable="false" />
+          <Property Name="victorias" Type="Int32" Nullable="false" />
+          <Property Name="derrotas" Type="Int32" Nullable="false" />
+          <Property Name="racha_actual" Type="Int16" Nullable="false" />
+          <Property Name="porcentaje_victorias" Type="Decimal" Precision="5" Scale="2" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -296,6 +353,21 @@
                 <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
                 <ScalarProperty Name="intentos_fallidos" ColumnName="intentos_fallidos" />
                 <ScalarProperty Name="fecha_fin_bloqueo_acceso" ColumnName="fecha_fin_bloqueo_acceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vista_estadisticas_jugador">
+            <EntityTypeMapping TypeName="CribbageModel.vista_estadisticas_jugador">
+              <MappingFragment StoreEntitySet="vista_estadisticas_jugador">
+                <ScalarProperty Name="porcentaje_victorias" ColumnName="porcentaje_victorias" />
+                <ScalarProperty Name="racha_actual" ColumnName="racha_actual" />
+                <ScalarProperty Name="derrotas" ColumnName="derrotas" />
+                <ScalarProperty Name="victorias" ColumnName="victorias" />
+                <ScalarProperty Name="partidas_jugadas" ColumnName="partidas_jugadas" />
+                <ScalarProperty Name="nivel_habilidad" ColumnName="nivel_habilidad" />
+                <ScalarProperty Name="nombre_mostrado" ColumnName="nombre_mostrado" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

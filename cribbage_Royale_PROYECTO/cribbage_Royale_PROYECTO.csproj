@@ -88,8 +88,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CribbageModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\ScoreboardRepository.cs" />
     <Compile Include="Localization\LanguageManager.cs" />
+    <Compile Include="Models\MatchItem.cs" />
     <Compile Include="Models\PlayerItem.cs" />
+    <Compile Include="Models\ScoreboardItem.cs" />
     <Compile Include="perfil_jugador.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
@@ -128,11 +131,17 @@
     <Compile Include="Views\Lobby.xaml.cs">
       <DependentUpon>Lobby.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MatchHistoryPage.xaml.cs">
+      <DependentUpon>MatchHistoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScoreboardPage.xaml.cs">
+      <DependentUpon>ScoreboardPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -157,6 +166,9 @@
     </Compile>
     <Compile Include="Views\TutorialSections\PlayPhaseSection.xaml.cs">
       <DependentUpon>PlayPhaseSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="vista_estadisticas_jugador.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -206,11 +218,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MatchHistoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScoreboardPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

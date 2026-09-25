@@ -1060,6 +1060,33 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a VIEW SCOREBOARD.
+        /// </summary>
+        public static string Lobby_ScoreboardCardButton {
+            get {
+                return ResourceManager.GetString("Lobby_ScoreboardCardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a See who leads the ranking and where you stand among all players..
+        /// </summary>
+        public static string Lobby_ScoreboardCardText {
+            get {
+                return ResourceManager.GetString("Lobby_ScoreboardCardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ranking.
+        /// </summary>
+        public static string Lobby_ScoreboardCardTitle {
+            get {
+                return ResourceManager.GetString("Lobby_ScoreboardCardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a SETTINGS.
         /// </summary>
         public static string Lobby_SettingsButton {
@@ -1200,6 +1227,150 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Login_UsernameLabel {
             get {
                 return ResourceManager.GetString("Login_UsernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a All.
+        /// </summary>
+        public static string MatchHistory_AllFilter {
+            get {
+                return ResourceManager.GetString("MatchHistory_AllFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Defeat.
+        /// </summary>
+        public static string MatchHistory_DefeatLabel {
+            get {
+                return ResourceManager.GetString("MatchHistory_DefeatLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a View details.
+        /// </summary>
+        public static string MatchHistory_DetailsButton {
+            get {
+                return ResourceManager.GetString("MatchHistory_DetailsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} min.
+        /// </summary>
+        public static string MatchHistory_DurationFormat {
+            get {
+                return ResourceManager.GetString("MatchHistory_DurationFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have not played any matches yet..
+        /// </summary>
+        public static string MatchHistory_EmptyMessage {
+            get {
+                return ResourceManager.GetString("MatchHistory_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your match history could not be loaded. Try again later..
+        /// </summary>
+        public static string MatchHistory_LoadingErrorMessage {
+            get {
+                return ResourceManager.GetString("MatchHistory_LoadingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a History unavailable.
+        /// </summary>
+        public static string MatchHistory_LoadingErrorTitle {
+            get {
+                return ResourceManager.GetString("MatchHistory_LoadingErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Load more.
+        /// </summary>
+        public static string MatchHistory_LoadMoreButton {
+            get {
+                return ResourceManager.GetString("MatchHistory_LoadMoreButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lost.
+        /// </summary>
+        public static string MatchHistory_LostFilter {
+            get {
+                return ResourceManager.GetString("MatchHistory_LostFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Normal finish.
+        /// </summary>
+        public static string MatchHistory_NormalEnding {
+            get {
+                return ResourceManager.GetString("MatchHistory_NormalEnding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a vs {0}.
+        /// </summary>
+        public static string MatchHistory_OpponentFormat {
+            get {
+                return ResourceManager.GetString("MatchHistory_OpponentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent quit.
+        /// </summary>
+        public static string MatchHistory_OpponentQuitEnding {
+            get {
+                return ResourceManager.GetString("MatchHistory_OpponentQuitEnding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match history.
+        /// </summary>
+        public static string MatchHistory_PageTitle {
+            get {
+                return ResourceManager.GetString("MatchHistory_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} - {1}.
+        /// </summary>
+        public static string MatchHistory_ScoreFormat {
+            get {
+                return ResourceManager.GetString("MatchHistory_ScoreFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Victory.
+        /// </summary>
+        public static string MatchHistory_VictoryLabel {
+            get {
+                return ResourceManager.GetString("MatchHistory_VictoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Won.
+        /// </summary>
+        public static string MatchHistory_WonFilter {
+            get {
+                return ResourceManager.GetString("MatchHistory_WonFilter", resourceCulture);
             }
         }
         
@@ -1443,6 +1614,132 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Register_UsernameLabel {
             get {
                 return ResourceManager.GetString("Register_UsernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There are no registered players yet..
+        /// </summary>
+        public static string Scoreboard_EmptyMessage {
+            get {
+                return ResourceManager.GetString("Scoreboard_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Level.
+        /// </summary>
+        public static string Scoreboard_LevelColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_LevelColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The scoreboard could not be loaded. Check your connection and try again..
+        /// </summary>
+        public static string Scoreboard_LoadingErrorMessage {
+            get {
+                return ResourceManager.GetString("Scoreboard_LoadingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Scoreboard unavailable.
+        /// </summary>
+        public static string Scoreboard_LoadingErrorTitle {
+            get {
+                return ResourceManager.GetString("Scoreboard_LoadingErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lost.
+        /// </summary>
+        public static string Scoreboard_LostColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_LostColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Scoreboard.
+        /// </summary>
+        public static string Scoreboard_PageTitle {
+            get {
+                return ResourceManager.GetString("Scoreboard_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Played.
+        /// </summary>
+        public static string Scoreboard_PlayedColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_PlayedColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player.
+        /// </summary>
+        public static string Scoreboard_PlayerColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_PlayerColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a #.
+        /// </summary>
+        public static string Scoreboard_PositionColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_PositionColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Refresh.
+        /// </summary>
+        public static string Scoreboard_RefreshButton {
+            get {
+                return ResourceManager.GetString("Scoreboard_RefreshButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Players ranked by skill level.
+        /// </summary>
+        public static string Scoreboard_SubtitleText {
+            get {
+                return ResourceManager.GetString("Scoreboard_SubtitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Win rate.
+        /// </summary>
+        public static string Scoreboard_WinRateColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_WinRateColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0:N1} %.
+        /// </summary>
+        public static string Scoreboard_WinRateFormat {
+            get {
+                return ResourceManager.GetString("Scoreboard_WinRateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Won.
+        /// </summary>
+        public static string Scoreboard_WonColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_WonColumn", resourceCulture);
             }
         }
         

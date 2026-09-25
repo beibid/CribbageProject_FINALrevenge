@@ -768,4 +768,103 @@
   <data name="Common_InMatchStatus" xml:space="preserve">
     <value>In a match</value>
   </data>
+	<data name="MatchHistory_AllFilter" xml:space="preserve">
+    <value>All</value>
+  </data>
+	<data name="MatchHistory_DefeatLabel" xml:space="preserve">
+    <value>Defeat</value>
+  </data>
+	<data name="MatchHistory_DetailsButton" xml:space="preserve">
+    <value>View details</value>
+  </data>
+	<data name="MatchHistory_DurationFormat" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+	<data name="MatchHistory_EmptyMessage" xml:space="preserve">
+    <value>You have not played any matches yet.</value>
+  </data>
+	<data name="MatchHistory_LoadMoreButton" xml:space="preserve">
+    <value>Load more</value>
+  </data>
+	<data name="MatchHistory_LoadingErrorMessage" xml:space="preserve">
+    <value>Your match history could not be loaded. Try again later.</value>
+  </data>
+	<data name="MatchHistory_LoadingErrorTitle" xml:space="preserve">
+    <value>History unavailable</value>
+  </data>
+	<data name="MatchHistory_LostFilter" xml:space="preserve">
+    <value>Lost</value>
+  </data>
+	<data name="MatchHistory_NormalEnding" xml:space="preserve">
+    <value>Normal finish</value>
+  </data>
+	<data name="MatchHistory_OpponentFormat" xml:space="preserve">
+    <value>vs {0}</value>
+  </data>
+	<data name="MatchHistory_OpponentQuitEnding" xml:space="preserve">
+    <value>Opponent quit</value>
+  </data>
+	<data name="MatchHistory_PageTitle" xml:space="preserve">
+    <value>Match history</value>
+  </data>
+	<data name="MatchHistory_ScoreFormat" xml:space="preserve">
+    <value>{0} - {1}</value>
+  </data>
+	<data name="MatchHistory_VictoryLabel" xml:space="preserve">
+    <value>Victory</value>
+  </data>
+	<data name="MatchHistory_WonFilter" xml:space="preserve">
+    <value>Won</value>
+  </data>
+	<data name="Scoreboard_EmptyMessage" xml:space="preserve">
+    <value>There are no registered players yet.</value>
+  </data>
+	<data name="Scoreboard_LevelColumn" xml:space="preserve">
+    <value>Level</value>
+  </data>
+	<data name="Scoreboard_LoadingErrorMessage" xml:space="preserve">
+    <value>The scoreboard could not be loaded. Check your connection and try again.</value>
+  </data>
+	<data name="Scoreboard_LoadingErrorTitle" xml:space="preserve">
+    <value>Scoreboard unavailable</value>
+  </data>
+	<data name="Scoreboard_LostColumn" xml:space="preserve">
+    <value>Lost</value>
+  </data>
+	<data name="Scoreboard_PageTitle" xml:space="preserve">
+    <value>Scoreboard</value>
+  </data>
+	<data name="Scoreboard_PlayedColumn" xml:space="preserve">
+    <value>Played</value>
+  </data>
+	<data name="Scoreboard_PlayerColumn" xml:space="preserve">
+    <value>Player</value>
+  </data>
+	<data name="Scoreboard_PositionColumn" xml:space="preserve">
+    <value>#</value>
+  </data>
+	<data name="Scoreboard_RefreshButton" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+	<data name="Scoreboard_SubtitleText" xml:space="preserve">
+    <value>Players ranked by skill level</value>
+  </data>
+	<data name="Scoreboard_WinRateColumn" xml:space="preserve">
+    <value>Win rate</value>
+  </data>
+	<data name="Scoreboard_WinRateFormat" xml:space="preserve">
+    <value>{0:N1} %</value>
+  </data>
+	<data name="Scoreboard_WonColumn" xml:space="preserve">
+    <value>Won</value>
+  </data>
+	<data name="Lobby_ScoreboardCardButton" xml:space="preserve">
+    <value>VIEW SCOREBOARD</value>
+  </data>
+	<data name="Lobby_ScoreboardCardText" xml:space="preserve">
+    <value>See who leads the ranking and where you stand among all players.</value>
+  </data>
+	<data name="Lobby_ScoreboardCardTitle" xml:space="preserve">
+    <value>Ranking</value>
+  </data>
 </root>

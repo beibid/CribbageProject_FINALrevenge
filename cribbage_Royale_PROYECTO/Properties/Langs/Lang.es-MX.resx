@@ -768,4 +768,103 @@
 	<data name="Common_InMatchStatus" xml:space="preserve">
     <value>En partida</value>
   </data>
+	<data name="MatchHistory_AllFilter" xml:space="preserve">
+    <value>Todas</value>
+  </data>
+	<data name="MatchHistory_DefeatLabel" xml:space="preserve">
+    <value>Derrota</value>
+  </data>
+	<data name="MatchHistory_DetailsButton" xml:space="preserve">
+    <value>Ver detalle</value>
+  </data>
+	<data name="MatchHistory_DurationFormat" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+	<data name="MatchHistory_EmptyMessage" xml:space="preserve">
+    <value>Aún no has jugado ninguna partida.</value>
+  </data>
+	<data name="MatchHistory_LoadMoreButton" xml:space="preserve">
+    <value>Cargar más</value>
+  </data>
+	<data name="MatchHistory_LoadingErrorMessage" xml:space="preserve">
+    <value>No se pudo cargar tu historial de partidas. Intenta de nuevo más tarde.</value>
+  </data>
+	<data name="MatchHistory_LoadingErrorTitle" xml:space="preserve">
+    <value>Historial no disponible</value>
+  </data>
+	<data name="MatchHistory_LostFilter" xml:space="preserve">
+    <value>Perdidas</value>
+  </data>
+	<data name="MatchHistory_NormalEnding" xml:space="preserve">
+    <value>Conclusión normal</value>
+  </data>
+	<data name="MatchHistory_OpponentFormat" xml:space="preserve">
+    <value>vs {0}</value>
+  </data>
+	<data name="MatchHistory_OpponentQuitEnding" xml:space="preserve">
+    <value>Abandono del rival</value>
+  </data>
+	<data name="MatchHistory_PageTitle" xml:space="preserve">
+    <value>Historial de partidas</value>
+  </data>
+	<data name="MatchHistory_ScoreFormat" xml:space="preserve">
+    <value>{0} - {1}</value>
+  </data>
+	<data name="MatchHistory_VictoryLabel" xml:space="preserve">
+    <value>Victoria</value>
+  </data>
+	<data name="MatchHistory_WonFilter" xml:space="preserve">
+    <value>Ganadas</value>
+  </data>
+	<data name="Scoreboard_EmptyMessage" xml:space="preserve">
+    <value>Aún no hay jugadores registrados.</value>
+  </data>
+	<data name="Scoreboard_LevelColumn" xml:space="preserve">
+    <value>Nivel</value>
+  </data>
+	<data name="Scoreboard_LoadingErrorMessage" xml:space="preserve">
+    <value>No se pudo cargar la tabla de puntuaciones. Revisa tu conexión e intenta de nuevo.</value>
+  </data>
+	<data name="Scoreboard_LoadingErrorTitle" xml:space="preserve">
+    <value>Tabla de puntuaciones no disponible</value>
+  </data>
+	<data name="Scoreboard_LostColumn" xml:space="preserve">
+    <value>Perdidas</value>
+  </data>
+	<data name="Scoreboard_PageTitle" xml:space="preserve">
+    <value>Tabla de puntuaciones</value>
+  </data>
+	<data name="Scoreboard_PlayedColumn" xml:space="preserve">
+    <value>Jugadas</value>
+  </data>
+	<data name="Scoreboard_PlayerColumn" xml:space="preserve">
+    <value>Jugador</value>
+  </data>
+	<data name="Scoreboard_PositionColumn" xml:space="preserve">
+    <value>#</value>
+  </data>
+	<data name="Scoreboard_RefreshButton" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+	<data name="Scoreboard_SubtitleText" xml:space="preserve">
+    <value>Jugadores ordenados por nivel de habilidad</value>
+  </data>
+	<data name="Scoreboard_WinRateColumn" xml:space="preserve">
+    <value>% victorias</value>
+  </data>
+	<data name="Scoreboard_WinRateFormat" xml:space="preserve">
+    <value>{0:N1} %</value>
+  </data>
+	<data name="Scoreboard_WonColumn" xml:space="preserve">
+    <value>Ganadas</value>
+  </data>
+	<data name="Lobby_ScoreboardCardButton" xml:space="preserve">
+    <value>VER CLASIFICACIÓN</value>
+  </data>
+	<data name="Lobby_ScoreboardCardText" xml:space="preserve">
+    <value>Mira quién encabeza la clasificación y en qué lugar vas entre todos los jugadores.</value>
+  </data>
+	<data name="Lobby_ScoreboardCardTitle" xml:space="preserve">
+    <value>Clasificación</value>
+  </data>
 </root>

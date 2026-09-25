@@ -29,5 +29,9 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             NavigationService.Navigate(new FriendsPage());
         }
+        private void ScoreboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ScoreboardPage());
+        }
     }
 }

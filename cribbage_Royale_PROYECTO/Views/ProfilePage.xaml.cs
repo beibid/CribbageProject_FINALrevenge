@@ -43,5 +43,9 @@ namespace cribbage_Royale_PROYECTO.Views
             dialog.Owner = Window.GetWindow(this);
             dialog.ShowDialog();
         }
+        private void MatchHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MatchHistoryPage());
+        }
     }
 }
