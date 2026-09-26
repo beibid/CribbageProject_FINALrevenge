@@ -871,6 +871,321 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Opponent.
+        /// </summary>
+        public static string Game_BoardOpponentRow {
+            get {
+                return ResourceManager.GetString("Game_BoardOpponentRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You.
+        /// </summary>
+        public static string Game_BoardPlayerRow {
+            get {
+                return ResourceManager.GetString("Game_BoardPlayerRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ROYAL BOARD.
+        /// </summary>
+        public static string Game_BoardTitle {
+            get {
+                return ResourceManager.GetString("Game_BoardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a That card cannot be played right now.
+        /// </summary>
+        public static string Game_CardNotPlayableMessage {
+            get {
+                return ResourceManager.GetString("Game_CardNotPlayableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select 2 cards to send them to the crib.
+        /// </summary>
+        public static string Game_CribInstruction {
+            get {
+                return ResourceManager.GetString("Game_CribInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CRIB.
+        /// </summary>
+        public static string Game_CribLabel {
+            get {
+                return ResourceManager.GetString("Game_CribLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The crib is your opponent&apos;s.
+        /// </summary>
+        public static string Game_CribOwnerOpponent {
+            get {
+                return ResourceManager.GetString("Game_CribOwnerOpponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The crib is yours.
+        /// </summary>
+        public static string Game_CribOwnerYou {
+            get {
+                return ResourceManager.GetString("Game_CribOwnerYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a DISCARD.
+        /// </summary>
+        public static string Game_DiscardButton {
+            get {
+                return ResourceManager.GetString("Game_DiscardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your discard could not be saved. Please try again.
+        /// </summary>
+        public static string Game_DiscardNotSavedMessage {
+            get {
+                return ResourceManager.GetString("Game_DiscardNotSavedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} — Goal.
+        /// </summary>
+        public static string Game_GoalFormat {
+            get {
+                return ResourceManager.GetString("Game_GoalFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Host.
+        /// </summary>
+        public static string Game_HostBadge {
+            get {
+                return ResourceManager.GetString("Game_HostBadge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a +{0} points.
+        /// </summary>
+        public static string Game_LastGainFormat {
+            get {
+                return ResourceManager.GetString("Game_LastGainFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Showing the last known state of the match.
+        /// </summary>
+        public static string Game_LastKnownStateMessage {
+            get {
+                return ResourceManager.GetString("Game_LastKnownStateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Leave.
+        /// </summary>
+        public static string Game_LeaveButton {
+            get {
+                return ResourceManager.GetString("Game_LeaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If you leave, the match will be recorded as a loss. Do you want to continue?.
+        /// </summary>
+        public static string Game_LeaveConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Game_LeaveConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This match has already ended.
+        /// </summary>
+        public static string Game_MatchAlreadyEndedMessage {
+            get {
+                return ResourceManager.GetString("Game_MatchAlreadyEndedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match information.
+        /// </summary>
+        public static string Game_MatchInfoButton {
+            get {
+                return ResourceManager.GetString("Game_MatchInfoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your move could not be saved. Please try again.
+        /// </summary>
+        public static string Game_MoveNotSavedMessage {
+            get {
+                return ResourceManager.GetString("Game_MoveNotSavedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent: {0}.
+        /// </summary>
+        public static string Game_OpponentFormat {
+            get {
+                return ResourceManager.GetString("Game_OpponentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent.
+        /// </summary>
+        public static string Game_OpponentUnknown {
+            get {
+                return ResourceManager.GetString("Game_OpponentUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Look at your starting hand of 6 cards..
+        /// </summary>
+        public static string Game_PhaseDiscardText1 {
+            get {
+                return ResourceManager.GetString("Game_PhaseDiscardText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You must give up 2 cards that will form the dealer&apos;s crib..
+        /// </summary>
+        public static string Game_PhaseDiscardText2 {
+            get {
+                return ResourceManager.GetString("Game_PhaseDiscardText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a DISCARD PHASE.
+        /// </summary>
+        public static string Game_PhaseDiscardTitle {
+            get {
+                return ResourceManager.GetString("Game_PhaseDiscardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Play one card per turn without going over 31..
+        /// </summary>
+        public static string Game_PhasePlayText1 {
+            get {
+                return ResourceManager.GetString("Game_PhasePlayText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You score when the count reaches 15 or 31 and when you form pairs and runs..
+        /// </summary>
+        public static string Game_PhasePlayText2 {
+            get {
+                return ResourceManager.GetString("Game_PhasePlayText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PLAY PHASE.
+        /// </summary>
+        public static string Game_PhasePlayTitle {
+            get {
+                return ResourceManager.GetString("Game_PhasePlayTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cards played.
+        /// </summary>
+        public static string Game_PlayedCardsLabel {
+            get {
+                return ResourceManager.GetString("Game_PlayedCardsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rules.
+        /// </summary>
+        public static string Game_RulesButton {
+            get {
+                return ResourceManager.GetString("Game_RulesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Count: {0}.
+        /// </summary>
+        public static string Game_RunningCountFormat {
+            get {
+                return ResourceManager.GetString("Game_RunningCountFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You {0} — Opponent {1} / {2}.
+        /// </summary>
+        public static string Game_ScoreFormat {
+            get {
+                return ResourceManager.GetString("Game_ScoreFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You must select exactly two cards for the crib.
+        /// </summary>
+        public static string Game_SelectTwoCardsMessage {
+            get {
+                return ResourceManager.GetString("Game_SelectTwoCardsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Starter card.
+        /// </summary>
+        public static string Game_StarterCardLabel {
+            get {
+                return ResourceManager.GetString("Game_StarterCardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Time remaining: {0}s.
+        /// </summary>
+        public static string Game_TimeRemainingFormat {
+            get {
+                return ResourceManager.GetString("Game_TimeRemainingFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You.
+        /// </summary>
+        public static string Game_YouLabel {
+            get {
+                return ResourceManager.GetString("Game_YouLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a MMMM d, yyyy.
         /// </summary>
         public static string Global_LongDateFormat {
@@ -1371,6 +1686,195 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string MatchHistory_WonFilter {
             get {
                 return ResourceManager.GetString("MatchHistory_WonFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Back to lobby.
+        /// </summary>
+        public static string MatchResult_BackToLobbyButton {
+            get {
+                return ResourceManager.GetString("MatchResult_BackToLobbyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a DEFEAT.
+        /// </summary>
+        public static string MatchResult_DefeatTitle {
+            get {
+                return ResourceManager.GetString("MatchResult_DefeatTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a View details.
+        /// </summary>
+        public static string MatchResult_DetailButton {
+            get {
+                return ResourceManager.GetString("MatchResult_DetailButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} min {1} s.
+        /// </summary>
+        public static string MatchResult_DurationFormat {
+            get {
+                return ResourceManager.GetString("MatchResult_DurationFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Duration.
+        /// </summary>
+        public static string MatchResult_DurationLabel {
+            get {
+                return ResourceManager.GetString("MatchResult_DurationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match against {0}.
+        /// </summary>
+        public static string MatchResult_OpponentFormat {
+            get {
+                return ResourceManager.GetString("MatchResult_OpponentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent.
+        /// </summary>
+        public static string MatchResult_OpponentUnknown {
+            get {
+                return ResourceManager.GetString("MatchResult_OpponentUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Surrender by disconnection.
+        /// </summary>
+        public static string MatchResult_ReasonDisconnection {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonDisconnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reason: {0}.
+        /// </summary>
+        public static string MatchResult_ReasonFormat {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Inactivity.
+        /// </summary>
+        public static string MatchResult_ReasonInactivity {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonInactivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Victory by score.
+        /// </summary>
+        public static string MatchResult_ReasonPointsVictory {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonPointsVictory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Surrender.
+        /// </summary>
+        public static string MatchResult_ReasonSurrender {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonSurrender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rematch.
+        /// </summary>
+        public static string MatchResult_RematchButton {
+            get {
+                return ResourceManager.GetString("MatchResult_RematchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Report player.
+        /// </summary>
+        public static string MatchResult_ReportButton {
+            get {
+                return ResourceManager.GetString("MatchResult_ReportButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You {0} — Opponent {1}.
+        /// </summary>
+        public static string MatchResult_ScoreFormat {
+            get {
+                return ResourceManager.GetString("MatchResult_ScoreFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Skill level.
+        /// </summary>
+        public static string MatchResult_SkillLevelLabel {
+            get {
+                return ResourceManager.GetString("MatchResult_SkillLevelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a VICTORY.
+        /// </summary>
+        public static string MatchResult_VictoryTitle {
+            get {
+                return ResourceManager.GetString("MatchResult_VictoryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Close.
+        /// </summary>
+        public static string MessagePanel_DismissButton {
+            get {
+                return ResourceManager.GetString("MessagePanel_DismissButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error.
+        /// </summary>
+        public static string MessagePanel_ErrorLabel {
+            get {
+                return ResourceManager.GetString("MessagePanel_ErrorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Notice.
+        /// </summary>
+        public static string MessagePanel_InformationLabel {
+            get {
+                return ResourceManager.GetString("MessagePanel_InformationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Warning.
+        /// </summary>
+        public static string MessagePanel_WarningLabel {
+            get {
+                return ResourceManager.GetString("MessagePanel_WarningLabel", resourceCulture);
             }
         }
         
@@ -2280,6 +2784,78 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Tutorial_ObjectiveTab {
             get {
                 return ResourceManager.GetString("Tutorial_ObjectiveTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a the play continues.
+        /// </summary>
+        public static string Tutorial_PlayPhase_Continues {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Continues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Count: {0}.
+        /// </summary>
+        public static string Tutorial_PlayPhase_CountFormat {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_CountFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Example of one play.
+        /// </summary>
+        public static string Tutorial_PlayPhase_ExampleLabel {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_ExampleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fifteen! +2 points.
+        /// </summary>
+        public static string Tutorial_PlayPhase_FifteenBadge {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_FifteenBadge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The player who did not deal starts by placing a card face up in front of them. From there, players alternate turns playing one card at a time, keeping their cards separate from the opponent&apos;s..
+        /// </summary>
+        public static string Tutorial_PlayPhase_Paragraph1 {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Paragraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a When you play a card you add its value to the running count on the table. Face cards are worth 10 and aces are worth 1. The most important rule is that the running count can never go above 31..
+        /// </summary>
+        public static string Tutorial_PlayPhase_Paragraph2 {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Paragraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You score immediately when the count reaches exactly 15 (2 points) or exactly 31 (2 points), and also when you form pairs (2 points) or runs of three or more consecutive cards (1 point per card)..
+        /// </summary>
+        public static string Tutorial_PlayPhase_Paragraph3 {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Paragraph3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If you cannot play any card without going over 31, you must say GO. Your opponent keeps playing to get as close to 31 as possible. Whoever played the last card scores 1 point, or 2 if the count reached exactly 31, and then the count resets to 0..
+        /// </summary>
+        public static string Tutorial_PlayPhase_Paragraph4 {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Paragraph4", resourceCulture);
             }
         }
         

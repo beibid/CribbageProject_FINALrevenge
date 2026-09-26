@@ -1,0 +1,109 @@
+﻿<Page x:Class="cribbage_Royale_PROYECTO.Views.MatchResultPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
+      mc:Ignorable="d"
+      d:DesignHeight="800" d:DesignWidth="1280"
+      Title="MatchResultPage">
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <StackPanel Width="430"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Grid HorizontalAlignment="Center">
+                <TextBlock x:Name="victoryTitleTextBlock"
+                           Text="{x:Static lang:Lang.MatchResult_VictoryTitle}"
+                           Foreground="{StaticResource GoldBrush}"
+                           FontSize="44" FontWeight="Bold"/>
+                <TextBlock x:Name="defeatTitleTextBlock"
+                           Text="{x:Static lang:Lang.MatchResult_DefeatTitle}"
+                           Foreground="{StaticResource CoralBrush}"
+                           FontSize="44" FontWeight="Bold"
+                           Visibility="Collapsed"/>
+            </Grid>
+
+            <TextBlock x:Name="opponentTextBlock"
+                       Foreground="{StaticResource MutedTextBrush}"
+                       FontSize="13" HorizontalAlignment="Center"
+                       Margin="0,8,0,0"/>
+
+            <Border Style="{StaticResource CardPanel}" Margin="0,24,0,0">
+                <StackPanel>
+                    <TextBlock x:Name="scoreTextBlock"
+                               Foreground="{StaticResource TextBrush}"
+                               FontSize="20" FontWeight="Bold"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock x:Name="endReasonTextBlock"
+                               Foreground="{StaticResource MutedTextBrush}"
+                               FontSize="13" TextWrapping="Wrap"
+                               TextAlignment="Center" Margin="0,10,0,0"/>
+
+                    <Border BorderBrush="{StaticResource InputBorderBrush}"
+                            BorderThickness="0,1,0,0" Margin="0,16"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <TextBlock Text="{x:Static lang:Lang.MatchResult_DurationLabel}"
+                                       Foreground="{StaticResource MutedTextBrush}"
+                                       FontSize="11"/>
+                            <TextBlock x:Name="durationTextBlock"
+                                       Foreground="{StaticResource TextBrush}"
+                                       FontSize="15" FontWeight="Bold"
+                                       Margin="0,4,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="{x:Static lang:Lang.MatchResult_SkillLevelLabel}"
+                                       Foreground="{StaticResource MutedTextBrush}"
+                                       FontSize="11"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                <TextBlock x:Name="skillLevelTextBlock"
+                                           Foreground="{StaticResource TextBrush}"
+                                           FontSize="15" FontWeight="Bold"/>
+                                <TextBlock x:Name="skillLevelGainTextBlock"
+                                           Foreground="{StaticResource GoldBrush}"
+                                           FontSize="13" FontWeight="Bold"
+                                           VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                <TextBlock x:Name="skillLevelLossTextBlock"
+                                           Foreground="{StaticResource CoralBrush}"
+                                           FontSize="13" FontWeight="Bold"
+                                           VerticalAlignment="Center" Margin="8,0,0,0"
+                                           Visibility="Collapsed"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Button x:Name="rematchButton"
+                    Content="{x:Static lang:Lang.MatchResult_RematchButton}"
+                    Style="{StaticResource PrimaryButton}"
+                    MinWidth="0" HorizontalAlignment="Stretch"
+                    Margin="0,24,0,6"/>
+
+            <Button x:Name="detailButton"
+                    Content="{x:Static lang:Lang.MatchResult_DetailButton}"
+                    Style="{StaticResource SecondaryButton}"
+                    MinWidth="0" HorizontalAlignment="Stretch"/>
+
+            <Button x:Name="reportButton"
+                    Content="{x:Static lang:Lang.MatchResult_ReportButton}"
+                    Style="{StaticResource NeutralButton}"
+                    HorizontalAlignment="Stretch"/>
+
+            <Button x:Name="backToLobbyButton"
+                    Content="{x:Static lang:Lang.MatchResult_BackToLobbyButton}"
+                    Style="{StaticResource NeutralButton}"
+                    HorizontalAlignment="Stretch"
+                    Click="BackToLobbyButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

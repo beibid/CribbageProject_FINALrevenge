@@ -33,5 +33,9 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             NavigationService.Navigate(new ScoreboardPage());
         }
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new GamePage());
+        }
     }
 }

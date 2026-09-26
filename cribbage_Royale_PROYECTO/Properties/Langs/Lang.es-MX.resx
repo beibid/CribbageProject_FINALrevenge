@@ -867,4 +867,196 @@
 	<data name="Lobby_ScoreboardCardTitle" xml:space="preserve">
     <value>Clasificación</value>
   </data>
+	<data name="Tutorial_PlayPhase_Paragraph1" xml:space="preserve">
+    <value>El jugador que no repartió comienza colocando una carta boca arriba frente a él. A partir de ahí, los jugadores alternan turnos jugando una carta a la vez, manteniéndolas separadas de las del rival.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph2" xml:space="preserve">
+    <value>Al jugar una carta debes sumar su valor a la cuenta acumulada en la mesa. Las figuras valen 10 y los ases 1. La regla más importante es que la suma acumulada nunca puede exceder de 31.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph3" xml:space="preserve">
+    <value>Se ganan puntos inmediatos al hacer que la cuenta llegue exactamente a 15 (2 puntos) o a 31 (2 puntos), y también al formar pares (2 puntos) o escaleras de tres o más cartas consecutivas (1 punto por carta).</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph4" xml:space="preserve">
+    <value>Si no puedes jugar ninguna carta sin pasarte de 31, debes decir GO. Tu oponente sigue jugando hasta acercarse lo más posible a 31. El último jugador en poner una carta se lleva 1 punto, o 2 si llegó a 31 exactos, y la cuenta se reinicia a 0.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_ExampleLabel" xml:space="preserve">
+    <value>Ejemplo de una jugada</value>
+  </data>
+	<data name="Tutorial_PlayPhase_CountFormat" xml:space="preserve">
+    <value>Cuenta: {0}</value>
+  </data>
+	<data name="Tutorial_PlayPhase_FifteenBadge" xml:space="preserve">
+    <value>¡Quince! +2 puntos</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Continues" xml:space="preserve">
+    <value>la jugada continúa</value>
+  </data>
+	<data name="Game_OpponentFormat" xml:space="preserve">
+    <value>Rival: {0}</value>
+  </data>
+	<data name="Game_OpponentUnknown" xml:space="preserve">
+    <value>Oponente</value>
+  </data>
+	<data name="Game_HostBadge" xml:space="preserve">
+    <value>Anfitrión</value>
+  </data>
+	<data name="Game_YouLabel" xml:space="preserve">
+    <value>Tú</value>
+  </data>
+	<data name="Game_BoardTitle" xml:space="preserve">
+    <value>TABLERO ROYAL</value>
+  </data>
+	<data name="Game_BoardOpponentRow" xml:space="preserve">
+    <value>Rival</value>
+  </data>
+	<data name="Game_BoardPlayerRow" xml:space="preserve">
+    <value>Tú</value>
+  </data>
+	<data name="Game_GoalFormat" xml:space="preserve">
+    <value>{0} — Meta</value>
+  </data>
+	<data name="Game_LastGainFormat" xml:space="preserve">
+    <value>+{0} puntos</value>
+  </data>
+	<data name="Game_ScoreFormat" xml:space="preserve">
+    <value>Tú {0} — Rival {1} / {2}</value>
+  </data>
+	<data name="Game_PhaseDiscardTitle" xml:space="preserve">
+    <value>FASE DE DESCARTE</value>
+  </data>
+	<data name="Game_PhaseDiscardText1" xml:space="preserve">
+    <value>Analiza tu mano inicial de 6 cartas.</value>
+  </data>
+	<data name="Game_PhaseDiscardText2" xml:space="preserve">
+    <value>Debes desprenderte de 2 cartas que formarán el crib del repartidor.</value>
+  </data>
+	<data name="Game_CribLabel" xml:space="preserve">
+    <value>CRIB</value>
+  </data>
+	<data name="Game_CribInstruction" xml:space="preserve">
+    <value>Selecciona 2 cartas para enviarlas al crib</value>
+  </data>
+	<data name="Game_TimeRemainingFormat" xml:space="preserve">
+    <value>Tiempo restante: {0}s</value>
+  </data>
+	<data name="Game_DiscardButton" xml:space="preserve">
+    <value>DESCARTAR</value>
+  </data>
+	<data name="Game_LeaveButton" xml:space="preserve">
+    <value>Abandonar</value>
+  </data>
+	<data name="Game_CribOwnerYou" xml:space="preserve">
+    <value>El crib es tuyo</value>
+  </data>
+	<data name="Game_CribOwnerOpponent" xml:space="preserve">
+    <value>El crib es del rival</value>
+  </data>
+	<data name="Game_StarterCardLabel" xml:space="preserve">
+    <value>Carta de corte</value>
+  </data>
+	<data name="Game_RunningCountFormat" xml:space="preserve">
+    <value>Cuenta: {0}</value>
+  </data>
+	<data name="Game_PlayedCardsLabel" xml:space="preserve">
+    <value>Cartas jugadas</value>
+  </data>
+	<data name="Game_PhasePlayTitle" xml:space="preserve">
+    <value>FASE DE JUEGO</value>
+  </data>
+	<data name="Game_PhasePlayText1" xml:space="preserve">
+    <value>Coloca una carta por turno sin que la cuenta pase de 31.</value>
+  </data>
+	<data name="Game_PhasePlayText2" xml:space="preserve">
+    <value>Ganas puntos al llegar a 15 o a 31 y al formar pares y escaleras.</value>
+  </data>
+	<data name="Game_RulesButton" xml:space="preserve">
+    <value>Reglas</value>
+  </data>
+	<data name="Game_MatchInfoButton" xml:space="preserve">
+    <value>Información de la partida</value>
+  </data>
+	<data name="Game_LeaveConfirmationMessage" xml:space="preserve">
+    <value>Si abandona, la partida se registrará como derrota. ¿Desea continuar?</value>
+  </data>
+	<data name="Game_SelectTwoCardsMessage" xml:space="preserve">
+    <value>Debe seleccionar exactamente dos cartas para el crib</value>
+  </data>
+	<data name="Game_DiscardNotSavedMessage" xml:space="preserve">
+    <value>No se pudo registrar su descarte. Intente nuevamente</value>
+  </data>
+	<data name="Game_CardNotPlayableMessage" xml:space="preserve">
+    <value>Esa carta no puede jugarse en este momento</value>
+  </data>
+	<data name="Game_MoveNotSavedMessage" xml:space="preserve">
+    <value>No se pudo registrar su jugada. Intente nuevamente</value>
+  </data>
+	<data name="Game_LastKnownStateMessage" xml:space="preserve">
+    <value>Mostrando el último estado conocido de la partida</value>
+  </data>
+	<data name="Game_MatchAlreadyEndedMessage" xml:space="preserve">
+    <value>Esta partida ya terminó</value>
+  </data>
+	<data name="MessagePanel_DismissButton" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+	<data name="MessagePanel_ErrorLabel" xml:space="preserve">
+    <value>Error</value>
+  </data>
+	<data name="MessagePanel_WarningLabel" xml:space="preserve">
+    <value>Advertencia</value>
+  </data>
+	<data name="MessagePanel_InformationLabel" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+	<data name="MatchResult_VictoryTitle" xml:space="preserve">
+    <value>VICTORIA</value>
+  </data>
+	<data name="MatchResult_DefeatTitle" xml:space="preserve">
+    <value>DERROTA</value>
+  </data>
+	<data name="MatchResult_OpponentFormat" xml:space="preserve">
+    <value>Partida contra {0}</value>
+  </data>
+	<data name="MatchResult_OpponentUnknown" xml:space="preserve">
+    <value>Oponente</value>
+  </data>
+	<data name="MatchResult_ScoreFormat" xml:space="preserve">
+    <value>Tú {0} — Rival {1}</value>
+  </data>
+	<data name="MatchResult_ReasonFormat" xml:space="preserve">
+    <value>Motivo de término: {0}</value>
+  </data>
+	<data name="MatchResult_ReasonPointsVictory" xml:space="preserve">
+    <value>Victoria por puntuación</value>
+  </data>
+	<data name="MatchResult_ReasonSurrender" xml:space="preserve">
+    <value>Abandono</value>
+  </data>
+	<data name="MatchResult_ReasonInactivity" xml:space="preserve">
+    <value>Inactividad</value>
+  </data>
+	<data name="MatchResult_ReasonDisconnection" xml:space="preserve">
+    <value>Abandono por desconexión</value>
+  </data>
+	<data name="MatchResult_DurationLabel" xml:space="preserve">
+    <value>Duración</value>
+  </data>
+	<data name="MatchResult_DurationFormat" xml:space="preserve">
+    <value>{0} min {1} s</value>
+  </data>
+	<data name="MatchResult_SkillLevelLabel" xml:space="preserve">
+    <value>Nivel de habilidad</value>
+  </data>
+	<data name="MatchResult_RematchButton" xml:space="preserve">
+    <value>Revancha</value>
+  </data>
+	<data name="MatchResult_DetailButton" xml:space="preserve">
+    <value>Ver detalle</value>
+  </data>
+	<data name="MatchResult_ReportButton" xml:space="preserve">
+    <value>Reportar jugador</value>
+  </data>
+	<data name="MatchResult_BackToLobbyButton" xml:space="preserve">
+    <value>Volver al lobby</value>
+  </data>
 </root>

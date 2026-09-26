@@ -90,8 +90,13 @@
     </Compile>
     <Compile Include="DataAccess\ScoreboardRepository.cs" />
     <Compile Include="Localization\LanguageManager.cs" />
+    <Compile Include="Models\BoardHoleItem.cs" />
+    <Compile Include="Models\MatchEndReason.cs" />
     <Compile Include="Models\MatchItem.cs" />
+    <Compile Include="Models\MatchPhase.cs" />
+    <Compile Include="Models\MatchResultItem.cs" />
     <Compile Include="Models\PlayerItem.cs" />
+    <Compile Include="Models\PlayingCardItem.cs" />
     <Compile Include="Models\ScoreboardItem.cs" />
     <Compile Include="perfil_jugador.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
@@ -122,6 +127,9 @@
     <Compile Include="Views\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GuestAccessPage.xaml.cs">
       <DependentUpon>GuestAccessPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +141,12 @@
     </Compile>
     <Compile Include="Views\MatchHistoryPage.xaml.cs">
       <DependentUpon>MatchHistoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MatchResultPage.xaml.cs">
+      <DependentUpon>MatchResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Messages\MessagePanel.xaml.cs">
+      <DependentUpon>MessagePanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
@@ -206,6 +220,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GuestAccessPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +237,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MatchHistoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MatchResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Messages\MessagePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

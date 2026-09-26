@@ -9,34 +9,32 @@ namespace cribbage_Royale_PROYECTO.Views
         public Tutorial()
         {
             InitializeComponent();
-
-        
-            SectionContent.Content = new GameObjectiveSection();
+            objectiveNavButton.IsChecked = true;
         }
 
-        private void ObjectiveButton_Click(object sender, RoutedEventArgs e)
+        private void ObjectiveNavButton_Checked(object sender, RoutedEventArgs e)
         {
-            SectionContent.Content = new GameObjectiveSection();
+            sectionContentControl.Content = new GameObjectiveSection();
         }
 
-        private void DealAndCribButton_Click(object sender, RoutedEventArgs e)
+        private void DealAndCribNavButton_Checked(object sender, RoutedEventArgs e)
         {
-            SectionContent.Content = new DealAndCribSection();
+            sectionContentControl.Content = new DealAndCribSection();
         }
 
-        private void PlayPhaseButton_Click(object sender, RoutedEventArgs e)
+        private void PlayPhaseNavButton_Checked(object sender, RoutedEventArgs e)
         {
-            SectionContent.Content = new PlayPhaseSection();
+            sectionContentControl.Content = new PlayPhaseSection();
         }
 
-        private void HandCountingButton_Click(object sender, RoutedEventArgs e)
+        private void HandCountingNavButton_Checked(object sender, RoutedEventArgs e)
         {
-            SectionContent.Content = new HandCountingSection();
+            sectionContentControl.Content = new HandCountingSection();
         }
 
-        private void BoardButton_Click(object sender, RoutedEventArgs e)
+        private void BoardNavButton_Checked(object sender, RoutedEventArgs e)
         {
-            SectionContent.Content = new BoardSection();
+            sectionContentControl.Content = new BoardSection();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

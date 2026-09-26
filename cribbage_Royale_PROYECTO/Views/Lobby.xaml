@@ -69,7 +69,8 @@
                                Foreground="{StaticResource MutedTextBrush}" FontSize="13"
                                HorizontalAlignment="Center" Margin="0,6,0,24"/>
                     <Button x:Name="PlayButton" Content="{x:Static lang:Lang.Lobby_PlayButton}"
-                            Style="{StaticResource SecondaryButton}" MinWidth="0" Width="200"/>
+                               Style="{StaticResource SecondaryButton}" MinWidth="0" Width="200"
+                               Click="PlayButton_Click"/>
                 </StackPanel>
 
                 <Border Grid.Column="2" Background="White" Width="80" Height="112" CornerRadius="6">

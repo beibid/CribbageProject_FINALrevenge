@@ -867,4 +867,196 @@
 	<data name="Lobby_ScoreboardCardTitle" xml:space="preserve">
     <value>Ranking</value>
   </data>
+	<data name="Tutorial_PlayPhase_Paragraph1" xml:space="preserve">
+    <value>The player who did not deal starts by placing a card face up in front of them. From there, players alternate turns playing one card at a time, keeping their cards separate from the opponent's.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph2" xml:space="preserve">
+    <value>When you play a card you add its value to the running count on the table. Face cards are worth 10 and aces are worth 1. The most important rule is that the running count can never go above 31.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph3" xml:space="preserve">
+    <value>You score immediately when the count reaches exactly 15 (2 points) or exactly 31 (2 points), and also when you form pairs (2 points) or runs of three or more consecutive cards (1 point per card).</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph4" xml:space="preserve">
+    <value>If you cannot play any card without going over 31, you must say GO. Your opponent keeps playing to get as close to 31 as possible. Whoever played the last card scores 1 point, or 2 if the count reached exactly 31, and then the count resets to 0.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_ExampleLabel" xml:space="preserve">
+    <value>Example of one play</value>
+  </data>
+	<data name="Tutorial_PlayPhase_CountFormat" xml:space="preserve">
+    <value>Count: {0}</value>
+  </data>
+	<data name="Tutorial_PlayPhase_FifteenBadge" xml:space="preserve">
+    <value>Fifteen! +2 points</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Continues" xml:space="preserve">
+    <value>the play continues</value>
+  </data>
+	<data name="Game_OpponentFormat" xml:space="preserve">
+    <value>Opponent: {0}</value>
+  </data>
+	<data name="Game_OpponentUnknown" xml:space="preserve">
+    <value>Opponent</value>
+  </data>
+	<data name="Game_HostBadge" xml:space="preserve">
+    <value>Host</value>
+  </data>
+	<data name="Game_YouLabel" xml:space="preserve">
+    <value>You</value>
+  </data>
+	<data name="Game_BoardTitle" xml:space="preserve">
+    <value>ROYAL BOARD</value>
+  </data>
+	<data name="Game_BoardOpponentRow" xml:space="preserve">
+    <value>Opponent</value>
+  </data>
+	<data name="Game_BoardPlayerRow" xml:space="preserve">
+    <value>You</value>
+  </data>
+	<data name="Game_GoalFormat" xml:space="preserve">
+    <value>{0} — Goal</value>
+  </data>
+	<data name="Game_LastGainFormat" xml:space="preserve">
+    <value>+{0} points</value>
+  </data>
+	<data name="Game_ScoreFormat" xml:space="preserve">
+    <value>You {0} — Opponent {1} / {2}</value>
+  </data>
+	<data name="Game_PhaseDiscardTitle" xml:space="preserve">
+    <value>DISCARD PHASE</value>
+  </data>
+	<data name="Game_PhaseDiscardText1" xml:space="preserve">
+    <value>Look at your starting hand of 6 cards.</value>
+  </data>
+	<data name="Game_PhaseDiscardText2" xml:space="preserve">
+    <value>You must give up 2 cards that will form the dealer's crib.</value>
+  </data>
+	<data name="Game_CribLabel" xml:space="preserve">
+    <value>CRIB</value>
+  </data>
+	<data name="Game_CribInstruction" xml:space="preserve">
+    <value>Select 2 cards to send them to the crib</value>
+  </data>
+	<data name="Game_TimeRemainingFormat" xml:space="preserve">
+    <value>Time remaining: {0}s</value>
+  </data>
+	<data name="Game_DiscardButton" xml:space="preserve">
+    <value>DISCARD</value>
+  </data>
+	<data name="Game_LeaveButton" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+	<data name="Game_CribOwnerYou" xml:space="preserve">
+    <value>The crib is yours</value>
+  </data>
+	<data name="Game_CribOwnerOpponent" xml:space="preserve">
+    <value>The crib is your opponent's</value>
+  </data>
+	<data name="Game_StarterCardLabel" xml:space="preserve">
+    <value>Starter card</value>
+  </data>
+	<data name="Game_RunningCountFormat" xml:space="preserve">
+    <value>Count: {0}</value>
+  </data>
+	<data name="Game_PlayedCardsLabel" xml:space="preserve">
+    <value>Cards played</value>
+  </data>
+	<data name="Game_PhasePlayTitle" xml:space="preserve">
+    <value>PLAY PHASE</value>
+  </data>
+	<data name="Game_PhasePlayText1" xml:space="preserve">
+    <value>Play one card per turn without going over 31.</value>
+  </data>
+	<data name="Game_PhasePlayText2" xml:space="preserve">
+    <value>You score when the count reaches 15 or 31 and when you form pairs and runs.</value>
+  </data>
+	<data name="Game_RulesButton" xml:space="preserve">
+    <value>Rules</value>
+  </data>
+	<data name="Game_MatchInfoButton" xml:space="preserve">
+    <value>Match information</value>
+  </data>
+	<data name="Game_LeaveConfirmationMessage" xml:space="preserve">
+    <value>If you leave, the match will be recorded as a loss. Do you want to continue?</value>
+  </data>
+	<data name="Game_SelectTwoCardsMessage" xml:space="preserve">
+    <value>You must select exactly two cards for the crib</value>
+  </data>
+	<data name="Game_DiscardNotSavedMessage" xml:space="preserve">
+    <value>Your discard could not be saved. Please try again</value>
+  </data>
+	<data name="Game_CardNotPlayableMessage" xml:space="preserve">
+    <value>That card cannot be played right now</value>
+  </data>
+	<data name="Game_MoveNotSavedMessage" xml:space="preserve">
+    <value>Your move could not be saved. Please try again</value>
+  </data>
+	<data name="Game_LastKnownStateMessage" xml:space="preserve">
+    <value>Showing the last known state of the match</value>
+  </data>
+	<data name="Game_MatchAlreadyEndedMessage" xml:space="preserve">
+    <value>This match has already ended</value>
+  </data>
+	<data name="MessagePanel_DismissButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+	<data name="MessagePanel_ErrorLabel" xml:space="preserve">
+    <value>Error</value>
+  </data>
+	<data name="MessagePanel_WarningLabel" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+	<data name="MessagePanel_InformationLabel" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+	<data name="MatchResult_VictoryTitle" xml:space="preserve">
+    <value>VICTORY</value>
+  </data>
+	<data name="MatchResult_DefeatTitle" xml:space="preserve">
+    <value>DEFEAT</value>
+  </data>
+	<data name="MatchResult_OpponentFormat" xml:space="preserve">
+    <value>Match against {0}</value>
+  </data>
+	<data name="MatchResult_OpponentUnknown" xml:space="preserve">
+    <value>Opponent</value>
+  </data>
+	<data name="MatchResult_ScoreFormat" xml:space="preserve">
+    <value>You {0} — Opponent {1}</value>
+  </data>
+	<data name="MatchResult_ReasonFormat" xml:space="preserve">
+    <value>Reason: {0}</value>
+  </data>
+	<data name="MatchResult_ReasonPointsVictory" xml:space="preserve">
+    <value>Victory by score</value>
+  </data>
+	<data name="MatchResult_ReasonSurrender" xml:space="preserve">
+    <value>Surrender</value>
+  </data>
+	<data name="MatchResult_ReasonInactivity" xml:space="preserve">
+    <value>Inactivity</value>
+  </data>
+	<data name="MatchResult_ReasonDisconnection" xml:space="preserve">
+    <value>Surrender by disconnection</value>
+  </data>
+	<data name="MatchResult_DurationLabel" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+	<data name="MatchResult_DurationFormat" xml:space="preserve">
+    <value>{0} min {1} s</value>
+  </data>
+	<data name="MatchResult_SkillLevelLabel" xml:space="preserve">
+    <value>Skill level</value>
+  </data>
+	<data name="MatchResult_RematchButton" xml:space="preserve">
+    <value>Rematch</value>
+  </data>
+	<data name="MatchResult_DetailButton" xml:space="preserve">
+    <value>View details</value>
+  </data>
+	<data name="MatchResult_ReportButton" xml:space="preserve">
+    <value>Report player</value>
+  </data>
+	<data name="MatchResult_BackToLobbyButton" xml:space="preserve">
+    <value>Back to lobby</value>
+  </data>
 </root>
