@@ -1377,4 +1377,13 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="Settings_LogoutConfirmationMessage" xml:space="preserve">
     <value>¿Seguro que desea cerrar sesión?</value>
   </data>
+	<data name="Login_UserNotFoundMessage" xml:space="preserve">
+    <value>No se encontró una cuenta con ese usuario o correo electrónico</value>
+  </data>
+	<data name="Login_IncorrectPasswordMessage" xml:space="preserve">
+    <value>La contraseña es incorrecta</value>
+  </data>
+	<data name="Register_SuccessMessage" xml:space="preserve">
+    <value>Cuenta creada exitosamente</value>
+  </data>
 </root>

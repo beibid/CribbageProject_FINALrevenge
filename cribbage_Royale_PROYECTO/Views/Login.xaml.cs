@@ -4,8 +4,8 @@ using System.Windows.Controls;
 using cribbage_Royale_PROYECTO.DataAccess;
 using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
-using cribbage_Royale_PROYECTO.Views.Dialogs;
 using cribbage_Royale_PROYECTO.Session;
+using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO.Views
 {
@@ -65,9 +65,14 @@ namespace cribbage_Royale_PROYECTO.Views
                 new AwaitingVerificationPage(email, VerificationNotice.AccountNotVerified));
         }
 
-        private void ShowInvalidCredentials()
+        private void ShowUserNotFound()
         {
-            loginMessagePanel.ShowError(Lang.Login_InvalidCredentialsMessage);
+            loginMessagePanel.ShowError(Lang.Login_UserNotFoundMessage);
+        }
+
+        private void ShowIncorrectPassword()
+        {
+            loginMessagePanel.ShowError(Lang.Login_IncorrectPasswordMessage);
             ClearPasswordField();
         }
 
@@ -91,12 +96,19 @@ namespace cribbage_Royale_PROYECTO.Views
             MessageDialog.ShowError(Window.GetWindow(this), Lang.Login_DatabaseErrorMessage);
         }
 
+        private void StartSession(AuthenticationResult result)
+        {
+            loginMessagePanel.HidePanel();
+            MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.Login_SuccessMessage);
+            CurrentSession.StartRegisteredSession(result.Username, result.Email);
+            ShowLobby();
+        }
+
         private void ProcessAuthenticationResult(AuthenticationResult result)
         {
             switch (result.Outcome)
             {
                 case AuthenticationOutcome.Success:
-                    loginMessagePanel.HidePanel();
                     StartSession(result);
                     break;
                 case AuthenticationOutcome.AccountNotVerified:
@@ -112,9 +124,12 @@ namespace cribbage_Royale_PROYECTO.Views
                 case AuthenticationOutcome.DatabaseError:
                     ShowDatabaseError();
                     break;
-                case AuthenticationOutcome.InvalidCredentials:
+                case AuthenticationOutcome.UserNotFound:
+                    ShowUserNotFound();
+                    break;
+                case AuthenticationOutcome.InvalidPassword:
                 default:
-                    ShowInvalidCredentials();
+                    ShowIncorrectPassword();
                     break;
             }
         }
@@ -154,11 +169,6 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             ClearForm();
             NavigationService.Navigate(new StartMenu());
-        }
-        private void StartSession(AuthenticationResult result)
-        {
-            CurrentSession.StartRegisteredSession(result.Username, result.Email);
-            ShowLobby();
         }
     }
 }
