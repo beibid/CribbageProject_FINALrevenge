@@ -1,33 +1,39 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using cribbage_Royale_PROYECTO.DataAccess;
+using cribbage_Royale_PROYECTO.Mail;
+using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO.Views
 {
     public partial class VerifyAccountPage : Page
     {
+        private readonly UserRepository _userRepository = new UserRepository();
+        private readonly VerificationCodeRepository _verificationCodeRepository = new VerificationCodeRepository();
+        private readonly VerificationEmailSender _emailSender = new VerificationEmailSender();
         private readonly string _email;
 
-        public VerifyAccountPage(string email = null)
+        public VerifyAccountPage(string email)
         {
             InitializeComponent();
-
-            _email = ResolveEmail(email);
-
+            _email = email;
             ShowSubtitle();
+            verificationCodeTextBox.Focus();
         }
 
-        private string ResolveEmail(string email)
+        private string GetDisplayEmail()
         {
-            string resolvedEmail = email;
+            string displayEmail = Lang.VerifyAccount_UnknownEmail;
 
-            if (string.IsNullOrWhiteSpace(email))
+            if (!string.IsNullOrWhiteSpace(_email))
             {
-                resolvedEmail = Lang.VerifyAccount_UnknownEmail;
+                displayEmail = _email;
             }
 
-            return resolvedEmail;
+            return displayEmail;
         }
 
         private void ShowSubtitle()
@@ -35,7 +41,7 @@ namespace cribbage_Royale_PROYECTO.Views
             subtitleTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.VerifyAccount_SubtitleFormat,
-                _email);
+                GetDisplayEmail());
         }
 
         private string GetVerificationCode()
@@ -48,6 +54,60 @@ namespace cribbage_Royale_PROYECTO.Views
             return string.IsNullOrWhiteSpace(GetVerificationCode());
         }
 
+        private void ShowVerificationSuccess()
+        {
+            verificationMessagePanel.HidePanel();
+            MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.VerifyAccount_SuccessMessage);
+            NavigationService.Navigate(new Login());
+        }
+
+        private void ProcessValidationOutcome(CodeValidationOutcome outcome)
+        {
+            switch (outcome)
+            {
+                case CodeValidationOutcome.Valid:
+                    ShowVerificationSuccess();
+                    break;
+                case CodeValidationOutcome.ExpiredCode:
+                    verificationMessagePanel.ShowError(Lang.VerifyAccount_ExpiredCodeMessage);
+                    break;
+                case CodeValidationOutcome.AccountAlreadyVerified:
+                    verificationMessagePanel.ShowInformation(Lang.VerifyAccount_AlreadyVerifiedMessage);
+                    break;
+                case CodeValidationOutcome.DatabaseError:
+                    MessageDialog.ShowError(Window.GetWindow(this), Lang.VerifyAccount_DatabaseErrorMessage);
+                    break;
+                case CodeValidationOutcome.InvalidCode:
+                default:
+                    verificationMessagePanel.ShowError(Lang.VerifyAccount_InvalidCodeMessage);
+                    break;
+            }
+        }
+
+        private void VerifyCode()
+        {
+            CodeValidationOutcome outcome = _verificationCodeRepository.ValidateAccountCode(
+                _email,
+                GetVerificationCode());
+
+            ProcessValidationOutcome(outcome);
+        }
+
+        private void ShowResendResult(string code)
+        {
+            if (!string.IsNullOrEmpty(code) && _emailSender.SendVerificationCode(_email, code))
+            {
+                verificationMessagePanel.ShowInformation(string.Format(
+                    CultureInfo.CurrentCulture,
+                    Lang.VerifyAccount_CodeResentFormat,
+                    GetDisplayEmail()));
+            }
+            else
+            {
+                verificationMessagePanel.ShowError(Lang.VerifyAccount_ResendFailedMessage);
+            }
+        }
+
         private void VerifyButton_Click(object sender, RoutedEventArgs e)
         {
             if (IsVerificationCodeEmpty())
@@ -56,8 +116,19 @@ namespace cribbage_Royale_PROYECTO.Views
             }
             else
             {
-                verificationMessagePanel.HidePanel();
+                VerifyCode();
             }
+        }
+
+        private void ResendButton_Click(object sender, RoutedEventArgs e)
+        {
+            int userId = _userRepository.GetUserId(_email);
+            string code = _verificationCodeRepository.CreateCode(
+                userId,
+                VerificationCodeRepository.AccountVerificationPurpose,
+                _email);
+
+            ShowResendResult(code);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

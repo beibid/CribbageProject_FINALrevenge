@@ -35,7 +35,8 @@
             <Button x:Name="resendButton"
                     Content="{x:Static lang:Lang.AwaitingVerification_ResendButton}"
                     Style="{StaticResource SecondaryButton}"
-                    MinWidth="0" HorizontalAlignment="Stretch"/>
+                    MinWidth="0" HorizontalAlignment="Stretch"
+                    Click="ResendButton_Click"/>
 
             <Button x:Name="closeButton"
                     Content="{x:Static lang:Lang.AwaitingVerification_CloseButton}"

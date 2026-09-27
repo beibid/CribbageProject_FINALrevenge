@@ -1353,4 +1353,28 @@
 	<data name="Register_DatabaseErrorMessage" xml:space="preserve">
     <value>The database could not be reached. Please try again in a few minutes</value>
   </data>
+	<data name="VerifyAccount_DatabaseErrorMessage" xml:space="preserve">
+    <value>The database could not be reached. Please try again in a few minutes</value>
+  </data>
+	<data name="Email_VerificationSubject" xml:space="preserve">
+    <value>Verification code - Cribbage Royale</value>
+  </data>
+	<data name="Email_VerificationBodyFormat" xml:space="preserve">
+    <value>Welcome to Cribbage Royale.
+
+Your verification code is: {0}
+
+Enter it in the application to activate your account. The code expires in 24 hours.
+
+If you did not create this account, ignore this message.</value>
+  </data>
+	<data name="Lobby_LevelFormat" xml:space="preserve">
+    <value>Level {0}</value>
+  </data>
+	<data name="Lobby_GuestLabel" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+	<data name="Settings_LogoutConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to sign out?</value>
+  </data>
 </root>

@@ -307,5 +307,33 @@ namespace cribbage_Royale_PROYECTO.DataAccess
                 notificaciones_solicitudes = true
             };
         }
+        public int GetUserId(string email)
+        {
+            int userId = 0;
+
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    usuario account = context.usuario.FirstOrDefault(user => user.correo == email);
+
+                    if (account != null)
+                    {
+                        userId = account.id_usuario;
+                    }
+                }
+            }
+            catch (EntityException entityException)
+            {
+                Trace.WriteLine(entityException.Message);
+            }
+            catch (SqlException sqlException)
+            {
+                Trace.WriteLine(sqlException.Message);
+            }
+
+            return userId;
+        }
+
     }
 }

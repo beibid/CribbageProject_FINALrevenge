@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using cribbage_Royale_PROYECTO.DataAccess;
+using cribbage_Royale_PROYECTO.Mail;
 using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
@@ -16,6 +18,8 @@ namespace cribbage_Royale_PROYECTO.Views
         private const int MinimumPasswordLength = 8;
 
         private readonly UserRepository _userRepository = new UserRepository();
+        private readonly VerificationCodeRepository _verificationCodeRepository = new VerificationCodeRepository();
+        private readonly VerificationEmailSender _emailSender = new VerificationEmailSender();
 
         public Register()
         {
@@ -91,7 +95,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private bool DoPasswordsMatch()
         {
-            return string.Equals(GetPassword(), GetConfirmedPassword(), System.StringComparison.Ordinal);
+            return string.Equals(GetPassword(), GetConfirmedPassword(), StringComparison.Ordinal);
         }
 
         private void ClearPasswordFields()
@@ -122,12 +126,47 @@ namespace cribbage_Royale_PROYECTO.Views
             MessageDialog.ShowError(Window.GetWindow(this), Lang.Register_DatabaseErrorMessage);
         }
 
+        private VerificationNotice SendCodeByEmail(string code)
+        {
+            VerificationNotice notice = VerificationNotice.EmailNotSent;
+
+            if (_emailSender.SendVerificationCode(GetEmail(), code))
+            {
+                notice = VerificationNotice.CodeSent;
+            }
+
+            return notice;
+        }
+
+        private VerificationNotice DeliverCode(string code)
+        {
+            VerificationNotice notice = VerificationNotice.EmailNotSent;
+
+            if (!string.IsNullOrEmpty(code))
+            {
+                notice = SendCodeByEmail(code);
+            }
+
+            return notice;
+        }
+
+        private void SendVerificationCode()
+        {
+            int userId = _userRepository.GetUserId(GetEmail());
+            string code = _verificationCodeRepository.CreateCode(
+                userId,
+                VerificationCodeRepository.AccountVerificationPurpose,
+                GetEmail());
+
+            ShowAwaitingVerificationPage(DeliverCode(code));
+        }
+
         private void ProcessRegistrationOutcome(RegistrationOutcome outcome)
         {
             switch (outcome)
             {
                 case RegistrationOutcome.Success:
-                    ShowAwaitingVerificationPage(VerificationNotice.CodeSent);
+                    SendVerificationCode();
                     break;
                 case RegistrationOutcome.EmailPendingVerification:
                     ShowAwaitingVerificationPage(VerificationNotice.AccountAlreadyPending);

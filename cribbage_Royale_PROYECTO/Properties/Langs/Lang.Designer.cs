@@ -916,6 +916,30 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Welcome to Cribbage Royale.
+        ///
+        ///Your verification code is: {0}
+        ///
+        ///Enter it in the application to activate your account. The code expires in 24 hours.
+        ///
+        ///If you did not create this account, ignore this message..
+        /// </summary>
+        public static string Email_VerificationBodyFormat {
+            get {
+                return ResourceManager.GetString("Email_VerificationBodyFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verification code - Cribbage Royale.
+        /// </summary>
+        public static string Email_VerificationSubject {
+            get {
+                return ResourceManager.GetString("Email_VerificationSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Accept.
         /// </summary>
         public static string FriendRequests_AcceptButton {
@@ -1636,6 +1660,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Guest.
+        /// </summary>
+        public static string Lobby_GuestLabel {
+            get {
+                return ResourceManager.GetString("Lobby_GuestLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a TUTORIAL AND RULES.
         /// </summary>
         public static string Lobby_LearnCardButton {
@@ -1659,6 +1692,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Lobby_LearnCardTitle {
             get {
                 return ResourceManager.GetString("Lobby_LearnCardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Level {0}.
+        /// </summary>
+        public static string Lobby_LevelFormat {
+            get {
+                return ResourceManager.GetString("Lobby_LevelFormat", resourceCulture);
             }
         }
         
@@ -3076,6 +3118,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to sign out?.
+        /// </summary>
+        public static string Settings_LogoutConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Settings_LogoutConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Music volume.
         /// </summary>
         public static string Settings_MusicVolume {
@@ -3675,6 +3726,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string VerifyAccount_CodeResentFormat {
             get {
                 return ResourceManager.GetString("VerifyAccount_CodeResentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database could not be reached. Please try again in a few minutes.
+        /// </summary>
+        public static string VerifyAccount_DatabaseErrorMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_DatabaseErrorMessage", resourceCulture);
             }
         }
         

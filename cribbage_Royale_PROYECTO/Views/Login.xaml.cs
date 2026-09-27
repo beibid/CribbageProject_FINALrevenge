@@ -5,6 +5,7 @@ using cribbage_Royale_PROYECTO.DataAccess;
 using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
+using cribbage_Royale_PROYECTO.Session;
 
 namespace cribbage_Royale_PROYECTO.Views
 {
@@ -96,7 +97,7 @@ namespace cribbage_Royale_PROYECTO.Views
             {
                 case AuthenticationOutcome.Success:
                     loginMessagePanel.HidePanel();
-                    ShowLobby();
+                    StartSession(result);
                     break;
                 case AuthenticationOutcome.AccountNotVerified:
                     loginMessagePanel.HidePanel();
@@ -153,6 +154,11 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             ClearForm();
             NavigationService.Navigate(new StartMenu());
+        }
+        private void StartSession(AuthenticationResult result)
+        {
+            CurrentSession.StartRegisteredSession(result.Username, result.Email);
+            ShowLobby();
         }
     }
 }

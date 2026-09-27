@@ -3,11 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:cribbage_Royale_PROYECTO.Views"
       xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
       mc:Ignorable="d"
       d:DesignHeight="800" d:DesignWidth="1280"
-      Title="Settings">
+      Title="{x:Static lang:Lang.Settings_Title}">
 
     <Grid Background="{StaticResource DarkBackgroundBrush}">
 
@@ -16,7 +15,7 @@
                 BorderBrush="{StaticResource GoldBrush}"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid>
-                <Button x:Name="CloseButton" Content="✕" Style="{StaticResource CloseButton}"
+                <Button x:Name="closeButton" Content="✕" Style="{StaticResource CloseButton}"
                         HorizontalAlignment="Right" VerticalAlignment="Top"
                         Margin="0,-16,-28,0" Click="CloseButton_Click"/>
 
@@ -26,31 +25,27 @@
                                FontFamily="Inter, Segoe UI" FontSize="22" FontWeight="Bold"
                                HorizontalAlignment="Center" Margin="0,0,0,24"/>
 
-                    <!--Volumen de la musica-->
                     <TextBlock Text="{x:Static lang:Lang.Settings_MusicVolume}"
                                Style="{StaticResource SettingsLabel}"/>
-                    <Slider x:Name="MusicVolumeSlider" Minimum="0" Maximum="100"
+                    <Slider x:Name="musicVolumeSlider" Minimum="0" Maximum="100"
                             Value="70" Margin="0,0,0,20"/>
 
-                    <!--Volumen de los efectos-->
                     <TextBlock Text="{x:Static lang:Lang.Settings_EffectsVolume}"
                                Style="{StaticResource SettingsLabel}"/>
-                    <Slider x:Name="EffectsVolumeSlider" Minimum="0" Maximum="100"
+                    <Slider x:Name="effectsVolumeSlider" Minimum="0" Maximum="100"
                             Value="80" Margin="0,0,0,20"/>
 
-                    <!--Seleccion de idioma-->
                     <TextBlock Text="{x:Static lang:Lang.Settings_Language}"
                                Style="{StaticResource SettingsLabel}"/>
-                    <ComboBox x:Name="LanguageComboBox" Style="{StaticResource DarkComboBox}"
+                    <ComboBox x:Name="languageComboBox" Style="{StaticResource DarkComboBox}"
                               Margin="0,0,0,20">
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_LanguageSpanish}" Tag="es-MX"/>
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_LanguageEnglish}" Tag="en-US"/>
                     </ComboBox>
 
-                    <!--Modo daltonismo-->
                     <TextBlock Text="{x:Static lang:Lang.Settings_ColorBlindMode}"
                                Style="{StaticResource SettingsLabel}"/>
-                    <ComboBox x:Name="ColorBlindModeComboBox" Style="{StaticResource DarkComboBox}"
+                    <ComboBox x:Name="colorBlindModeComboBox" Style="{StaticResource DarkComboBox}"
                               SelectedIndex="0" Margin="0,0,0,20">
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_ColorBlindOff}" Tag="DESACTIVADO"/>
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_Protanopia}" Tag="PROTANOPIA"/>
@@ -58,7 +53,6 @@
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_Tritanopia}" Tag="TRITANOPIA"/>
                     </ComboBox>
 
-                    <!--Mostrar animaciones-->
                     <Grid Margin="0,0,0,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -67,9 +61,10 @@
                         <TextBlock Text="{x:Static lang:Lang.Settings_ShowAnimations}"
                                    Style="{StaticResource SettingsLabel}"
                                    Margin="0" VerticalAlignment="Center"/>
-                        <CheckBox x:Name="AnimationsToggle" Grid.Column="1"
+                        <CheckBox x:Name="animationsToggle" Grid.Column="1"
                                   Style="{StaticResource SwitchToggle}" IsChecked="True"/>
                     </Grid>
+
                     <Grid Margin="0,0,0,32">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -78,25 +73,30 @@
                         <TextBlock Text="{x:Static lang:Lang.Settings_FriendRequestNotifications}"
                                    Style="{StaticResource SettingsLabel}"
                                    Margin="0,0,12,0" VerticalAlignment="Center"/>
-                        <CheckBox x:Name="FriendRequestNotificationsToggle" Grid.Column="1"
+                        <CheckBox x:Name="friendRequestNotificationsToggle" Grid.Column="1"
                                   Style="{StaticResource SwitchToggle}" IsChecked="True"/>
                     </Grid>
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="16"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="ResetButton" Content="{x:Static lang:Lang.Settings_ResetButton}"
-                                Style="{StaticResource NeutralButton}"/>
-                        <Button x:Name="SaveButton" Grid.Column="2"
+                        <Button x:Name="resetButton" Content="{x:Static lang:Lang.Settings_ResetButton}"
+                                Style="{StaticResource NeutralButton}"
+                                Click="ResetButton_Click"/>
+                        <Button x:Name="saveButton" Grid.Column="2"
                                 Content="{x:Static lang:Lang.Settings_SaveButton}"
-                                Style="{StaticResource SecondaryButton}" MinWidth="0"
+                                Style="{StaticResource PrimaryButton}" MinWidth="0"
                                 Click="SaveButton_Click"/>
                     </Grid>
-                    <Button x:Name="LogoutButton" Content="{x:Static lang:Lang.Settings_LogoutButton}"
+
+                    <Button x:Name="logoutButton" Content="{x:Static lang:Lang.Settings_LogoutButton}"
                             Style="{StaticResource DangerOutlineButton}"
-                            Visibility="Collapsed"/>
+                            Margin="0,18,0,0"
+                            Visibility="Collapsed"
+                            Click="LogoutButton_Click"/>
                 </StackPanel>
             </Grid>
         </Border>

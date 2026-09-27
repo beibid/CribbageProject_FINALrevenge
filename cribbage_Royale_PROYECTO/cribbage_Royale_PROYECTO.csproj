@@ -52,6 +52,7 @@
       <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
@@ -106,10 +107,13 @@
     </Compile>
     <Compile Include="DataAccess\ScoreboardRepository.cs" />
     <Compile Include="DataAccess\UserRepository.cs" />
+    <Compile Include="DataAccess\VerificationCodeRepository.cs" />
     <Compile Include="Localization\LanguageManager.cs" />
+    <Compile Include="Mail\VerificationEmailSender.cs" />
     <Compile Include="Models\AuthenticationOutcome.cs" />
     <Compile Include="Models\AuthenticationResult.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
+    <Compile Include="Models\CodeValidationOutcome.cs" />
     <Compile Include="Models\MatchEndReason.cs" />
     <Compile Include="Models\MatchItem.cs" />
     <Compile Include="Models\MatchPhase.cs" />
@@ -118,6 +122,7 @@
     <Compile Include="Models\PlayingCardItem.cs" />
     <Compile Include="Models\RegistrationOutcome.cs" />
     <Compile Include="Models\ScoreboardItem.cs" />
+    <Compile Include="Models\SessionKind.cs" />
     <Compile Include="Models\VerificationNotice.cs" />
     <Compile Include="perfil_jugador.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
@@ -127,6 +132,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
+    <Compile Include="Session\CurrentSession.cs" />
     <Compile Include="usuario.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>

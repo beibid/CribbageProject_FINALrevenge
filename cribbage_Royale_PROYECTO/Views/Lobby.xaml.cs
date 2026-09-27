@@ -1,13 +1,58 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
+using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.Session;
+using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO.Views
 {
     public partial class Lobby : Page
     {
+        private const int SamplePlayerSkillLevel = 1000;
+
         public Lobby()
         {
             InitializeComponent();
+            ShowPlayerInformation();
+        }
+
+        private string GetLevelText()
+        {
+            string levelText = Lang.Lobby_GuestLabel;
+
+            if (!CurrentSession.IsGuest())
+            {
+                levelText = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Lang.Lobby_LevelFormat,
+                    SamplePlayerSkillLevel);
+            }
+
+            return levelText;
+        }
+
+        private void ShowPlayerInformation()
+        {
+            playerNameTextBlock.Text = CurrentSession.Username;
+            playerLevelTextBlock.Text = GetLevelText();
+        }
+
+        private void ShowGuestRestriction()
+        {
+            MessageDialog.ShowWarning(
+                Window.GetWindow(this),
+                Lang.GuestAccess_FeatureBlockedMessage);
+        }
+
+        public void ShowPendingInvitation()
+        {
+            invitationBorder.Visibility = Visibility.Visible;
+        }
+
+        public void HidePendingInvitation()
+        {
+            invitationBorder.Visibility = Visibility.Collapsed;
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
@@ -20,22 +65,38 @@ namespace cribbage_Royale_PROYECTO.Views
             NavigationService.Navigate(new Tutorial());
         }
 
-        private void ProfileButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ProfilePage());
-        }
-
-        private void FriendsButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new FriendsPage());
-        }
         private void ScoreboardButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ScoreboardPage());
         }
+
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new GamePage());
+        }
+
+        private void ProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentSession.IsGuest())
+            {
+                ShowGuestRestriction();
+            }
+            else
+            {
+                NavigationService.Navigate(new ProfilePage());
+            }
+        }
+
+        private void FriendsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentSession.IsGuest())
+            {
+                ShowGuestRestriction();
+            }
+            else
+            {
+                NavigationService.Navigate(new FriendsPage());
+            }
         }
     }
 }
