@@ -1059,4 +1059,298 @@
 	<data name="MatchResult_BackToLobbyButton" xml:space="preserve">
     <value>Volver al lobby</value>
   </data>
+	<data name="AwaitingVerification_Title" xml:space="preserve">
+    <value>Verifica tu cuenta</value>
+  </data>
+	<data name="AwaitingVerification_UnknownEmail" xml:space="preserve">
+    <value>tu correo registrado</value>
+  </data>
+	<data name="AwaitingVerification_CodeSentFormat" xml:space="preserve">
+    <value>Enviamos un código de verificación a {0}. Actívalo para poder jugar en línea</value>
+  </data>
+	<data name="AwaitingVerification_AccountAlreadyPending" xml:space="preserve">
+    <value>Ya existe una cuenta pendiente de verificación con este correo electrónico</value>
+  </data>
+	<data name="AwaitingVerification_EmailNotSent" xml:space="preserve">
+    <value>La cuenta se creó, pero no pudimos enviar el correo de verificación. Intente reenviarlo en unos minutos</value>
+  </data>
+	<data name="AwaitingVerification_AccountNotVerified" xml:space="preserve">
+    <value>Su cuenta aún no ha sido verificada</value>
+  </data>
+	<data name="AwaitingVerification_VerifiedButton" xml:space="preserve">
+    <value>Ya verifiqué mi cuenta</value>
+  </data>
+	<data name="AwaitingVerification_ResendButton" xml:space="preserve">
+    <value>Reenviar correo</value>
+  </data>
+	<data name="AwaitingVerification_CloseButton" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+	<data name="VerifyAccount_Title" xml:space="preserve">
+    <value>Ingresar código</value>
+  </data>
+	<data name="VerifyAccount_SubtitleFormat" xml:space="preserve">
+    <value>Enviamos el código a {0}. Revisa tu bandeja de entrada o correo no deseado.</value>
+  </data>
+	<data name="VerifyAccount_UnknownEmail" xml:space="preserve">
+    <value>tu correo registrado</value>
+  </data>
+	<data name="VerifyAccount_CodeLabel" xml:space="preserve">
+    <value>Código de verificación</value>
+  </data>
+	<data name="VerifyAccount_VerifyButton" xml:space="preserve">
+    <value>Verificar</value>
+  </data>
+	<data name="VerifyAccount_ResendButton" xml:space="preserve">
+    <value>Reenviar correo</value>
+  </data>
+	<data name="VerifyAccount_CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+	<data name="VerifyAccount_EmptyCodeMessage" xml:space="preserve">
+    <value>Por favor ingrese el código de verificación</value>
+  </data>
+	<data name="VerifyAccount_InvalidCodeMessage" xml:space="preserve">
+    <value>El código de verificación no es válido. Verifique la información o solicite uno nuevo</value>
+  </data>
+	<data name="VerifyAccount_ExpiredCodeMessage" xml:space="preserve">
+    <value>El código de verificación expiró. Solicite uno nuevo</value>
+  </data>
+	<data name="VerifyAccount_AlreadyVerifiedMessage" xml:space="preserve">
+    <value>Esta cuenta ya se encuentra verificada. Puede iniciar sesión</value>
+  </data>
+	<data name="VerifyAccount_AttemptLimitMessage" xml:space="preserve">
+    <value>Ha alcanzado el número máximo de intentos. Espere unos minutos antes de volver a intentarlo</value>
+  </data>
+	<data name="VerifyAccount_ResendFailedMessage" xml:space="preserve">
+    <value>No pudimos enviar el correo en este momento. Intente nuevamente en unos minutos</value>
+  </data>
+	<data name="VerifyAccount_CodeResentFormat" xml:space="preserve">
+    <value>Enviamos un nuevo código a {0}. Revise también su carpeta de correo no deseado</value>
+  </data>
+	<data name="VerifyAccount_SuccessMessage" xml:space="preserve">
+    <value>Cuenta verificada exitosamente</value>
+  </data>
+	<data name="RecoverPassword_Title" xml:space="preserve">
+    <value>Recuperar Contraseña</value>
+  </data>
+	<data name="RecoverPassword_Subtitle" xml:space="preserve">
+    <value>Te enviaremos las instrucciones para recuperar tu acceso</value>
+  </data>
+	<data name="RecoverPassword_EmailLabel" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+	<data name="RecoverPassword_SendCodeButton" xml:space="preserve">
+    <value>Enviar código</value>
+  </data>
+	<data name="RecoverPassword_CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+	<data name="RecoverPassword_EmptyEmailMessage" xml:space="preserve">
+    <value>Por favor ingrese su correo electrónico</value>
+  </data>
+	<data name="RecoverPassword_InvalidEmailMessage" xml:space="preserve">
+    <value>El correo electrónico no tiene un formato válido. Verifique la información</value>
+  </data>
+	<data name="RecoverPassword_TooManyRequestsMessage" xml:space="preserve">
+    <value>Ha solicitado demasiados códigos. Espere unos minutos antes de volver a intentarlo</value>
+  </data>
+	<data name="RecoverPassword_EmailNotSentMessage" xml:space="preserve">
+    <value>No pudimos enviar el correo en este momento. Intente reenviarlo en unos minutos</value>
+  </data>
+	<data name="RecoverPassword_CancelConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que desea cancelar la recuperación?</value>
+  </data>
+	<data name="ResetPassword_Title" xml:space="preserve">
+    <value>Restablecer Contraseña</value>
+  </data>
+	<data name="ResetPassword_Subtitle" xml:space="preserve">
+    <value>Si existe una cuenta asociada a ese correo, enviamos un código para restablecer la contraseña</value>
+  </data>
+	<data name="ResetPassword_EmailFormat" xml:space="preserve">
+    <value>Correo: {0}</value>
+  </data>
+	<data name="ResetPassword_CodeLabel" xml:space="preserve">
+    <value>Código</value>
+  </data>
+	<data name="ResetPassword_NewPasswordLabel" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+	<data name="ResetPassword_ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirmar nueva contraseña</value>
+  </data>
+	<data name="ResetPassword_ResetButton" xml:space="preserve">
+    <value>Restablecer</value>
+  </data>
+	<data name="ResetPassword_ResendCodeButton" xml:space="preserve">
+    <value>Reenviar código</value>
+  </data>
+	<data name="ResetPassword_CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+	<data name="ResetPassword_EmptyFieldsMessage" xml:space="preserve">
+    <value>Por favor llene todos los campos</value>
+  </data>
+	<data name="ResetPassword_InvalidCodeMessage" xml:space="preserve">
+    <value>El código no es válido. Verifique la información o solicite uno nuevo</value>
+  </data>
+	<data name="ResetPassword_ExpiredCodeMessage" xml:space="preserve">
+    <value>El código expiró. Solicite uno nuevo</value>
+  </data>
+	<data name="ResetPassword_InvalidPasswordMessage" xml:space="preserve">
+    <value>La contraseña debe tener al menos 8 caracteres e incluir al menos una letra y un número</value>
+  </data>
+	<data name="ResetPassword_PasswordsDoNotMatchMessage" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
+	<data name="ResetPassword_SamePasswordMessage" xml:space="preserve">
+    <value>La nueva contraseña debe ser distinta de la anterior</value>
+  </data>
+	<data name="ResetPassword_CodeResentMessage" xml:space="preserve">
+    <value>Enviamos un nuevo código. Revise también su carpeta de correo no deseado</value>
+  </data>
+	<data name="ResetPassword_EmailNotSentMessage" xml:space="preserve">
+    <value>No pudimos enviar el correo en este momento. Intente reenviarlo en unos minutos</value>
+  </data>
+	<data name="ResetPassword_SuccessMessage" xml:space="preserve">
+    <value>Contraseña restablecida exitosamente</value>
+  </data>
+	<data name="ResetPassword_CancelConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que desea cancelar la recuperación?</value>
+  </data>
+	<data name="Dialog_SessionExpiredMessage" xml:space="preserve">
+    <value>Su sesión ha expirado. Inicie sesión nuevamente</value>
+  </data>
+	<data name="Login_InvalidCredentialsMessage" xml:space="preserve">
+    <value>El usuario o la contraseña son incorrectos</value>
+  </data>
+	<data name="Login_DatabaseErrorMessage" xml:space="preserve">
+    <value>No se pudo acceder a la base de datos. Por favor intente nuevamente en unos minutos</value>
+  </data>
+	<data name="Login_AccountLockedFormat" xml:space="preserve">
+    <value>Por seguridad, el acceso a esta cuenta está bloqueado temporalmente. Intente de nuevo en {0} minutos o restablezca su contraseña</value>
+  </data>
+	<data name="Login_AccountSuspendedMessage" xml:space="preserve">
+    <value>Esta cuenta se encuentra suspendida. Contacte a soporte si considera que se trata de un error</value>
+  </data>
+	<data name="ChangeEmail_Title" xml:space="preserve">
+    <value>Cambiar Correo</value>
+  </data>
+	<data name="ChangeEmail_CurrentEmailFormat" xml:space="preserve">
+    <value>Correo actual: {0}</value>
+  </data>
+	<data name="ChangeEmail_UnknownEmail" xml:space="preserve">
+    <value>no registrado</value>
+  </data>
+	<data name="ChangeEmail_NewEmailLabel" xml:space="preserve">
+    <value>Nuevo correo electrónico</value>
+  </data>
+	<data name="ChangeEmail_ConfirmEmailLabel" xml:space="preserve">
+    <value>Confirmar nuevo correo electrónico</value>
+  </data>
+	<data name="ChangeEmail_PasswordLabel" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+	<data name="ChangeEmail_ContinueButton" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+	<data name="ChangeEmail_CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+	<data name="ChangeEmail_AttemptLimitMessage" xml:space="preserve">
+    <value>Ha alcanzado el número máximo de intentos. Espere unos minutos antes de volver a intentarlo</value>
+  </data>
+	<data name="ChangeEmail_IncorrectPasswordMessage" xml:space="preserve">
+    <value>La contraseña es incorrecta</value>
+  </data>
+	<data name="ChangeEmail_EmailsDoNotMatchMessage" xml:space="preserve">
+    <value>Los correos electrónicos no coinciden</value>
+  </data>
+	<data name="ChangeEmail_InvalidEmailMessage" xml:space="preserve">
+    <value>El correo electrónico no tiene un formato válido. Verifique la información</value>
+  </data>
+	<data name="ChangeEmail_SameEmailMessage" xml:space="preserve">
+    <value>El correo nuevo debe ser distinto del actual</value>
+  </data>
+	<data name="ChangeEmail_EmailNotAvailableMessage" xml:space="preserve">
+    <value>No es posible usar este correo electrónico. Verifique la información</value>
+  </data>
+	<data name="ChangeEmail_SuccessMessage" xml:space="preserve">
+    <value>Correo electrónico actualizado exitosamente</value>
+  </data>
+	<data name="DeleteAccount_Title" xml:space="preserve">
+    <value>Eliminar Cuenta</value>
+  </data>
+	<data name="DeleteAccount_WarningMessage" xml:space="preserve">
+    <value>Al eliminar su cuenta perderá su progreso, sus estadísticas y sus amistades. Esta acción no se puede deshacer</value>
+  </data>
+	<data name="DeleteAccount_PasswordLabel" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+	<data name="DeleteAccount_ConfirmationWord" xml:space="preserve">
+    <value>ELIMINAR</value>
+  </data>
+	<data name="DeleteAccount_ConfirmationLabelFormat" xml:space="preserve">
+    <value>Escriba la palabra {0}</value>
+  </data>
+	<data name="DeleteAccount_InvalidConfirmationWordFormat" xml:space="preserve">
+    <value>Escriba la palabra {0} para confirmar</value>
+  </data>
+	<data name="DeleteAccount_DeleteButton" xml:space="preserve">
+    <value>Eliminar cuenta</value>
+  </data>
+	<data name="DeleteAccount_CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+	<data name="DeleteAccount_AttemptLimitMessage" xml:space="preserve">
+    <value>Ha alcanzado el número máximo de intentos. Espere unos minutos antes de volver a intentarlo</value>
+  </data>
+	<data name="DeleteAccount_IncorrectPasswordMessage" xml:space="preserve">
+    <value>La contraseña es incorrecta</value>
+  </data>
+	<data name="DeleteAccount_MatchInProgressMessage" xml:space="preserve">
+    <value>No puede eliminar su cuenta mientras tenga una partida en curso. Termine o abandone la partida antes de continuar</value>
+  </data>
+	<data name="DeleteAccount_ConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que desea eliminar su cuenta de forma definitiva?</value>
+  </data>
+	<data name="DeleteAccount_SuccessMessage" xml:space="preserve">
+    <value>Su cuenta fue eliminada</value>
+  </data>
+	<data name="Profile_ChangeEmailButton" xml:space="preserve">
+    <value>Cambiar correo electrónico</value>
+  </data>
+	<data name="Profile_DeleteAccountButton" xml:space="preserve">
+    <value>Eliminar cuenta</value>
+  </data>
+	<data name="Register_CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+	<data name="Register_EmptyFieldsMessage" xml:space="preserve">
+    <value>Por favor llene todos los campos y acepte los términos y condiciones</value>
+  </data>
+	<data name="Register_InvalidUsernameMessage" xml:space="preserve">
+    <value>El nombre de usuario debe tener entre 3 y 16 caracteres y solo puede contener letras, números y guion bajo</value>
+  </data>
+	<data name="Register_InvalidEmailMessage" xml:space="preserve">
+    <value>El correo electrónico no tiene un formato válido. Verifique la información</value>
+  </data>
+	<data name="Register_InvalidPasswordMessage" xml:space="preserve">
+    <value>La contraseña debe tener al menos 8 caracteres e incluir al menos una letra y un número</value>
+  </data>
+	<data name="Register_PasswordsDoNotMatchMessage" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
+	<data name="Register_UsernameAlreadyTakenMessage" xml:space="preserve">
+    <value>El nombre de usuario ya está en uso. Elija otro</value>
+  </data>
+	<data name="Register_EmailAlreadyRegisteredMessage" xml:space="preserve">
+    <value>Ya existe una cuenta asociada a este correo electrónico</value>
+  </data>
+	<data name="Register_CancelConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que desea cancelar el registro?</value>
+  </data>
+	<data name="Register_DatabaseErrorMessage" xml:space="preserve">
+    <value>No se pudo acceder a la base de datos. Por favor intente nuevamente en unos minutos</value>
+  </data>
 </root>

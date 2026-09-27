@@ -4,54 +4,59 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
+      xmlns:messages="clr-namespace:cribbage_Royale_PROYECTO.Views.Messages"
       mc:Ignorable="d"
       d:DesignHeight="800" d:DesignWidth="1280"
-      Title="Register">
+      Title="{x:Static lang:Lang.Register_Title}">
 
     <Grid Background="{StaticResource BackgroundBrush}">
-        <StackPanel Width="340" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Width="430" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <!-- Title -->
             <TextBlock Text="{x:Static lang:Lang.Register_Title}"
                        Foreground="{StaticResource GoldBrush}"
                        FontSize="34" FontWeight="Bold"
                        HorizontalAlignment="Center"/>
 
             <TextBlock Text="{x:Static lang:Lang.Register_Subtitle}"
-                       Foreground="{StaticResource TextBrush}"
+                       Foreground="{StaticResource MutedTextBrush}"
                        FontSize="13" TextWrapping="Wrap" TextAlignment="Center"
-                       Margin="0,6,0,26"/>
+                       Margin="0,6,0,20"/>
 
-            <!-- Fields -->
+            <messages:MessagePanel x:Name="registerMessagePanel" Margin="0,0,0,12"/>
+
             <TextBlock Text="{x:Static lang:Lang.Register_UsernameLabel}"
                        Style="{StaticResource FormLabel}"/>
-            <TextBox x:Name="UsernameTextBox" Style="{StaticResource FormTextBox}" MaxLength="16"/>
+            <TextBox x:Name="usernameTextBox" Style="{StaticResource FormTextBox}"
+                     MaxLength="16"/>
 
             <TextBlock Text="{x:Static lang:Lang.Register_EmailLabel}"
                        Style="{StaticResource FormLabel}"/>
-            <TextBox x:Name="EmailTextBox" Style="{StaticResource FormTextBox}" MaxLength="254"/>
+            <TextBox x:Name="emailTextBox" Style="{StaticResource FormTextBox}"
+                     MaxLength="254"/>
 
             <TextBlock Text="{x:Static lang:Lang.Register_PasswordLabel}"
                        Style="{StaticResource FormLabel}"/>
-            <PasswordBox x:Name="PasswordBox" Style="{StaticResource FormPasswordBox}"/>
+            <PasswordBox x:Name="passwordBox" Style="{StaticResource FormPasswordBox}"
+                         MaxLength="64"/>
 
             <TextBlock Text="{x:Static lang:Lang.Register_ConfirmPasswordLabel}"
                        Style="{StaticResource FormLabel}"/>
-            <PasswordBox x:Name="ConfirmPasswordBox" Style="{StaticResource FormPasswordBox}"/>
+            <PasswordBox x:Name="confirmPasswordBox" Style="{StaticResource FormPasswordBox}"
+                         MaxLength="64"/>
 
-            <!-- Terms -->
-            <CheckBox x:Name="TermsCheckBox"
+            <CheckBox x:Name="termsCheckBox"
                       Content="{x:Static lang:Lang.Register_TermsCheckBox}"
-                      Foreground="{StaticResource TextBrush}" FontSize="12"
-                      Margin="0,0,0,16"/>
+                      Foreground="{StaticResource TextBrush}"
+                      FontSize="12"
+                      Margin="0,16,0,0"/>
 
-            <!-- Buttons -->
-            <Button x:Name="RegisterButton" Content="{x:Static lang:Lang.Register_RegisterButton}"
-                    Style="{StaticResource SecondaryButton}" MinWidth="0" Margin="0,0,0,6"/>
+            <Button x:Name="registerButton" Content="{x:Static lang:Lang.Register_RegisterButton}"
+                    Style="{StaticResource PrimaryButton}" MinWidth="0" Margin="0,20,0,6"
+                    Click="RegisterButton_Click"/>
 
-            <Button x:Name="BackButton" Content="{x:Static lang:Lang.Register_BackButton}"
-                    Style="{StaticResource SecondaryButton}" MinWidth="0"
-                    Click="BackButton_Click"/>
+            <Button x:Name="cancelButton" Content="{x:Static lang:Lang.Register_CancelButton}"
+                    Style="{StaticResource NeutralButton}" MinWidth="0"
+                    Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>

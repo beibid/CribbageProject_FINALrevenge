@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt-Net-Next, Version=4.2.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.2.0\lib\net48\BCrypt-Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -45,8 +48,21 @@
       <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -89,7 +105,10 @@
       <DependentUpon>CribbageModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\ScoreboardRepository.cs" />
+    <Compile Include="DataAccess\UserRepository.cs" />
     <Compile Include="Localization\LanguageManager.cs" />
+    <Compile Include="Models\AuthenticationOutcome.cs" />
+    <Compile Include="Models\AuthenticationResult.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
     <Compile Include="Models\MatchEndReason.cs" />
     <Compile Include="Models\MatchItem.cs" />
@@ -97,7 +116,9 @@
     <Compile Include="Models\MatchResultItem.cs" />
     <Compile Include="Models\PlayerItem.cs" />
     <Compile Include="Models\PlayingCardItem.cs" />
+    <Compile Include="Models\RegistrationOutcome.cs" />
     <Compile Include="Models\ScoreboardItem.cs" />
+    <Compile Include="Models\VerificationNotice.cs" />
     <Compile Include="perfil_jugador.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
@@ -111,6 +132,15 @@
     </Compile>
     <Compile Include="Views\AddFriendPage.xaml.cs">
       <DependentUpon>AddFriendPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AwaitingVerificationPage.xaml.cs">
+      <DependentUpon>AwaitingVerificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeEmailPage.xaml.cs">
+      <DependentUpon>ChangeEmailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeleteAccountPage.xaml.cs">
+      <DependentUpon>DeleteAccountPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\ChangePasswordDialogWindow.xaml.cs">
       <DependentUpon>ChangePasswordDialogWindow.xaml</DependentUpon>
@@ -151,8 +181,14 @@
     <Compile Include="Views\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RecoverPasswordPage.xaml.cs">
+      <DependentUpon>RecoverPasswordPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResetPasswordPage.xaml.cs">
+      <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ScoreboardPage.xaml.cs">
       <DependentUpon>ScoreboardPage.xaml</DependentUpon>
@@ -181,6 +217,9 @@
     <Compile Include="Views\TutorialSections\PlayPhaseSection.xaml.cs">
       <DependentUpon>PlayPhaseSection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VerifyAccountPage.xaml.cs">
+      <DependentUpon>VerifyAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="vista_estadisticas_jugador.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
@@ -197,6 +236,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\AddFriendPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AwaitingVerificationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangeEmailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeleteAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,7 +303,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RecoverPasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResetPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TutorialSections\PlayPhaseSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VerifyAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
