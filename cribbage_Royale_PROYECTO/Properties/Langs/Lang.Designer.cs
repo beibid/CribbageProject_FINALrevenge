@@ -169,6 +169,222 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a An account pending verification already exists with this email address.
+        /// </summary>
+        public static string AwaitingVerification_AccountAlreadyPending {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_AccountAlreadyPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your account has not been verified yet.
+        /// </summary>
+        public static string AwaitingVerification_AccountNotVerified {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_AccountNotVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Close.
+        /// </summary>
+        public static string AwaitingVerification_CloseButton {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_CloseButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We sent a verification code to {0}. Activate it to play online.
+        /// </summary>
+        public static string AwaitingVerification_CodeSentFormat {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_CodeSentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The account was created, but we could not send the verification email. Try resending it in a few minutes.
+        /// </summary>
+        public static string AwaitingVerification_EmailNotSent {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_EmailNotSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Resend email.
+        /// </summary>
+        public static string AwaitingVerification_ResendButton {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_ResendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verify your account.
+        /// </summary>
+        public static string AwaitingVerification_Title {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a your registered email.
+        /// </summary>
+        public static string AwaitingVerification_UnknownEmail {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_UnknownEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a I already verified my account.
+        /// </summary>
+        public static string AwaitingVerification_VerifiedButton {
+            get {
+                return ResourceManager.GetString("AwaitingVerification_VerifiedButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have reached the maximum number of attempts. Wait a few minutes before trying again.
+        /// </summary>
+        public static string ChangeEmail_AttemptLimitMessage {
+            get {
+                return ResourceManager.GetString("ChangeEmail_AttemptLimitMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string ChangeEmail_CancelButton {
+            get {
+                return ResourceManager.GetString("ChangeEmail_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirm new email address.
+        /// </summary>
+        public static string ChangeEmail_ConfirmEmailLabel {
+            get {
+                return ResourceManager.GetString("ChangeEmail_ConfirmEmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Continue.
+        /// </summary>
+        public static string ChangeEmail_ContinueButton {
+            get {
+                return ResourceManager.GetString("ChangeEmail_ContinueButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Current email: {0}.
+        /// </summary>
+        public static string ChangeEmail_CurrentEmailFormat {
+            get {
+                return ResourceManager.GetString("ChangeEmail_CurrentEmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This email address cannot be used. Check the information.
+        /// </summary>
+        public static string ChangeEmail_EmailNotAvailableMessage {
+            get {
+                return ResourceManager.GetString("ChangeEmail_EmailNotAvailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email addresses do not match.
+        /// </summary>
+        public static string ChangeEmail_EmailsDoNotMatchMessage {
+            get {
+                return ResourceManager.GetString("ChangeEmail_EmailsDoNotMatchMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password is incorrect.
+        /// </summary>
+        public static string ChangeEmail_IncorrectPasswordMessage {
+            get {
+                return ResourceManager.GetString("ChangeEmail_IncorrectPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email does not have a valid format. Check the information.
+        /// </summary>
+        public static string ChangeEmail_InvalidEmailMessage {
+            get {
+                return ResourceManager.GetString("ChangeEmail_InvalidEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New email address.
+        /// </summary>
+        public static string ChangeEmail_NewEmailLabel {
+            get {
+                return ResourceManager.GetString("ChangeEmail_NewEmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Current password.
+        /// </summary>
+        public static string ChangeEmail_PasswordLabel {
+            get {
+                return ResourceManager.GetString("ChangeEmail_PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The new email must be different from the current one.
+        /// </summary>
+        public static string ChangeEmail_SameEmailMessage {
+            get {
+                return ResourceManager.GetString("ChangeEmail_SameEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email address updated successfully.
+        /// </summary>
+        public static string ChangeEmail_SuccessMessage {
+            get {
+                return ResourceManager.GetString("ChangeEmail_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change Email.
+        /// </summary>
+        public static string ChangeEmail_Title {
+            get {
+                return ResourceManager.GetString("ChangeEmail_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a not registered.
+        /// </summary>
+        public static string ChangeEmail_UnknownEmail {
+            get {
+                return ResourceManager.GetString("ChangeEmail_UnknownEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Change password.
         /// </summary>
         public static string ChangePassword_ConfirmButton {
@@ -385,6 +601,123 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You have reached the maximum number of attempts. Wait a few minutes before trying again.
+        /// </summary>
+        public static string DeleteAccount_AttemptLimitMessage {
+            get {
+                return ResourceManager.GetString("DeleteAccount_AttemptLimitMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string DeleteAccount_CancelButton {
+            get {
+                return ResourceManager.GetString("DeleteAccount_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Type the word {0}.
+        /// </summary>
+        public static string DeleteAccount_ConfirmationLabelFormat {
+            get {
+                return ResourceManager.GetString("DeleteAccount_ConfirmationLabelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to delete your account permanently?.
+        /// </summary>
+        public static string DeleteAccount_ConfirmationMessage {
+            get {
+                return ResourceManager.GetString("DeleteAccount_ConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a DELETE.
+        /// </summary>
+        public static string DeleteAccount_ConfirmationWord {
+            get {
+                return ResourceManager.GetString("DeleteAccount_ConfirmationWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Delete account.
+        /// </summary>
+        public static string DeleteAccount_DeleteButton {
+            get {
+                return ResourceManager.GetString("DeleteAccount_DeleteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password is incorrect.
+        /// </summary>
+        public static string DeleteAccount_IncorrectPasswordMessage {
+            get {
+                return ResourceManager.GetString("DeleteAccount_IncorrectPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Type the word {0} to confirm.
+        /// </summary>
+        public static string DeleteAccount_InvalidConfirmationWordFormat {
+            get {
+                return ResourceManager.GetString("DeleteAccount_InvalidConfirmationWordFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You cannot delete your account while you have a match in progress. Finish or leave the match before continuing.
+        /// </summary>
+        public static string DeleteAccount_MatchInProgressMessage {
+            get {
+                return ResourceManager.GetString("DeleteAccount_MatchInProgressMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Current password.
+        /// </summary>
+        public static string DeleteAccount_PasswordLabel {
+            get {
+                return ResourceManager.GetString("DeleteAccount_PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your account was deleted.
+        /// </summary>
+        public static string DeleteAccount_SuccessMessage {
+            get {
+                return ResourceManager.GetString("DeleteAccount_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Delete Account.
+        /// </summary>
+        public static string DeleteAccount_Title {
+            get {
+                return ResourceManager.GetString("DeleteAccount_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If you delete your account you will lose your progress, your statistics and your friendships. This action cannot be undone.
+        /// </summary>
+        public static string DeleteAccount_WarningMessage {
+            get {
+                return ResourceManager.GetString("DeleteAccount_WarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a OK.
         /// </summary>
         public static string Dialog_AcceptButton {
@@ -435,6 +768,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Dialog_NoticeTitle {
             get {
                 return ResourceManager.GetString("Dialog_NoticeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your session has expired. Sign in again.
+        /// </summary>
+        public static string Dialog_SessionExpiredMessage {
+            get {
+                return ResourceManager.GetString("Dialog_SessionExpiredMessage", resourceCulture);
             }
         }
         
@@ -570,6 +912,30 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string EditProfile_UsernameHint {
             get {
                 return ResourceManager.GetString("EditProfile_UsernameHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Welcome to Cribbage Royale.
+        ///
+        ///Your verification code is: {0}
+        ///
+        ///Enter it in the application to activate your account. The code expires in 24 hours.
+        ///
+        ///If you did not create this account, ignore this message..
+        /// </summary>
+        public static string Email_VerificationBodyFormat {
+            get {
+                return ResourceManager.GetString("Email_VerificationBodyFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verification code - Cribbage Royale.
+        /// </summary>
+        public static string Email_VerificationSubject {
+            get {
+                return ResourceManager.GetString("Email_VerificationSubject", resourceCulture);
             }
         }
         
@@ -871,6 +1237,321 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Opponent.
+        /// </summary>
+        public static string Game_BoardOpponentRow {
+            get {
+                return ResourceManager.GetString("Game_BoardOpponentRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You.
+        /// </summary>
+        public static string Game_BoardPlayerRow {
+            get {
+                return ResourceManager.GetString("Game_BoardPlayerRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ROYAL BOARD.
+        /// </summary>
+        public static string Game_BoardTitle {
+            get {
+                return ResourceManager.GetString("Game_BoardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a That card cannot be played right now.
+        /// </summary>
+        public static string Game_CardNotPlayableMessage {
+            get {
+                return ResourceManager.GetString("Game_CardNotPlayableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select 2 cards to send them to the crib.
+        /// </summary>
+        public static string Game_CribInstruction {
+            get {
+                return ResourceManager.GetString("Game_CribInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CRIB.
+        /// </summary>
+        public static string Game_CribLabel {
+            get {
+                return ResourceManager.GetString("Game_CribLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The crib is your opponent&apos;s.
+        /// </summary>
+        public static string Game_CribOwnerOpponent {
+            get {
+                return ResourceManager.GetString("Game_CribOwnerOpponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The crib is yours.
+        /// </summary>
+        public static string Game_CribOwnerYou {
+            get {
+                return ResourceManager.GetString("Game_CribOwnerYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a DISCARD.
+        /// </summary>
+        public static string Game_DiscardButton {
+            get {
+                return ResourceManager.GetString("Game_DiscardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your discard could not be saved. Please try again.
+        /// </summary>
+        public static string Game_DiscardNotSavedMessage {
+            get {
+                return ResourceManager.GetString("Game_DiscardNotSavedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} — Goal.
+        /// </summary>
+        public static string Game_GoalFormat {
+            get {
+                return ResourceManager.GetString("Game_GoalFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Host.
+        /// </summary>
+        public static string Game_HostBadge {
+            get {
+                return ResourceManager.GetString("Game_HostBadge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a +{0} points.
+        /// </summary>
+        public static string Game_LastGainFormat {
+            get {
+                return ResourceManager.GetString("Game_LastGainFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Showing the last known state of the match.
+        /// </summary>
+        public static string Game_LastKnownStateMessage {
+            get {
+                return ResourceManager.GetString("Game_LastKnownStateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Leave.
+        /// </summary>
+        public static string Game_LeaveButton {
+            get {
+                return ResourceManager.GetString("Game_LeaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If you leave, the match will be recorded as a loss. Do you want to continue?.
+        /// </summary>
+        public static string Game_LeaveConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Game_LeaveConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This match has already ended.
+        /// </summary>
+        public static string Game_MatchAlreadyEndedMessage {
+            get {
+                return ResourceManager.GetString("Game_MatchAlreadyEndedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match information.
+        /// </summary>
+        public static string Game_MatchInfoButton {
+            get {
+                return ResourceManager.GetString("Game_MatchInfoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your move could not be saved. Please try again.
+        /// </summary>
+        public static string Game_MoveNotSavedMessage {
+            get {
+                return ResourceManager.GetString("Game_MoveNotSavedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent: {0}.
+        /// </summary>
+        public static string Game_OpponentFormat {
+            get {
+                return ResourceManager.GetString("Game_OpponentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent.
+        /// </summary>
+        public static string Game_OpponentUnknown {
+            get {
+                return ResourceManager.GetString("Game_OpponentUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Look at your starting hand of 6 cards..
+        /// </summary>
+        public static string Game_PhaseDiscardText1 {
+            get {
+                return ResourceManager.GetString("Game_PhaseDiscardText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You must give up 2 cards that will form the dealer&apos;s crib..
+        /// </summary>
+        public static string Game_PhaseDiscardText2 {
+            get {
+                return ResourceManager.GetString("Game_PhaseDiscardText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a DISCARD PHASE.
+        /// </summary>
+        public static string Game_PhaseDiscardTitle {
+            get {
+                return ResourceManager.GetString("Game_PhaseDiscardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Play one card per turn without going over 31..
+        /// </summary>
+        public static string Game_PhasePlayText1 {
+            get {
+                return ResourceManager.GetString("Game_PhasePlayText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You score when the count reaches 15 or 31 and when you form pairs and runs..
+        /// </summary>
+        public static string Game_PhasePlayText2 {
+            get {
+                return ResourceManager.GetString("Game_PhasePlayText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PLAY PHASE.
+        /// </summary>
+        public static string Game_PhasePlayTitle {
+            get {
+                return ResourceManager.GetString("Game_PhasePlayTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cards played.
+        /// </summary>
+        public static string Game_PlayedCardsLabel {
+            get {
+                return ResourceManager.GetString("Game_PlayedCardsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rules.
+        /// </summary>
+        public static string Game_RulesButton {
+            get {
+                return ResourceManager.GetString("Game_RulesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Count: {0}.
+        /// </summary>
+        public static string Game_RunningCountFormat {
+            get {
+                return ResourceManager.GetString("Game_RunningCountFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You {0} — Opponent {1} / {2}.
+        /// </summary>
+        public static string Game_ScoreFormat {
+            get {
+                return ResourceManager.GetString("Game_ScoreFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You must select exactly two cards for the crib.
+        /// </summary>
+        public static string Game_SelectTwoCardsMessage {
+            get {
+                return ResourceManager.GetString("Game_SelectTwoCardsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Starter card.
+        /// </summary>
+        public static string Game_StarterCardLabel {
+            get {
+                return ResourceManager.GetString("Game_StarterCardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Time remaining: {0}s.
+        /// </summary>
+        public static string Game_TimeRemainingFormat {
+            get {
+                return ResourceManager.GetString("Game_TimeRemainingFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You.
+        /// </summary>
+        public static string Game_YouLabel {
+            get {
+                return ResourceManager.GetString("Game_YouLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a MMMM d, yyyy.
         /// </summary>
         public static string Global_LongDateFormat {
@@ -979,6 +1660,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Guest.
+        /// </summary>
+        public static string Lobby_GuestLabel {
+            get {
+                return ResourceManager.GetString("Lobby_GuestLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a TUTORIAL AND RULES.
         /// </summary>
         public static string Lobby_LearnCardButton {
@@ -1002,6 +1692,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Lobby_LearnCardTitle {
             get {
                 return ResourceManager.GetString("Lobby_LearnCardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Level {0}.
+        /// </summary>
+        public static string Lobby_LevelFormat {
+            get {
+                return ResourceManager.GetString("Lobby_LevelFormat", resourceCulture);
             }
         }
         
@@ -1056,6 +1755,33 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Lobby_ProfileCardTitle {
             get {
                 return ResourceManager.GetString("Lobby_ProfileCardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a VIEW SCOREBOARD.
+        /// </summary>
+        public static string Lobby_ScoreboardCardButton {
+            get {
+                return ResourceManager.GetString("Lobby_ScoreboardCardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a See who leads the ranking and where you stand among all players..
+        /// </summary>
+        public static string Lobby_ScoreboardCardText {
+            get {
+                return ResourceManager.GetString("Lobby_ScoreboardCardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ranking.
+        /// </summary>
+        public static string Lobby_ScoreboardCardTitle {
+            get {
+                return ResourceManager.GetString("Lobby_ScoreboardCardTitle", resourceCulture);
             }
         }
         
@@ -1123,6 +1849,24 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a For security reasons, access to this account is temporarily locked. Try again in {0} minutes or reset your password.
+        /// </summary>
+        public static string Login_AccountLockedFormat {
+            get {
+                return ResourceManager.GetString("Login_AccountLockedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This account is suspended. Contact support if you believe this is a mistake.
+        /// </summary>
+        public static string Login_AccountSuspendedMessage {
+            get {
+                return ResourceManager.GetString("Login_AccountSuspendedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a CANCEL.
         /// </summary>
         public static string Login_CancelButton {
@@ -1141,11 +1885,29 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The database could not be reached. Please try again in a few minutes.
+        /// </summary>
+        public static string Login_DatabaseErrorMessage {
+            get {
+                return ResourceManager.GetString("Login_DatabaseErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Forgot your password?.
         /// </summary>
         public static string Login_ForgotPasswordButton {
             get {
                 return ResourceManager.GetString("Login_ForgotPasswordButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The username or password is incorrect.
+        /// </summary>
+        public static string Login_InvalidCredentialsMessage {
+            get {
+                return ResourceManager.GetString("Login_InvalidCredentialsMessage", resourceCulture);
             }
         }
         
@@ -1204,6 +1966,339 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a All.
+        /// </summary>
+        public static string MatchHistory_AllFilter {
+            get {
+                return ResourceManager.GetString("MatchHistory_AllFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Defeat.
+        /// </summary>
+        public static string MatchHistory_DefeatLabel {
+            get {
+                return ResourceManager.GetString("MatchHistory_DefeatLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a View details.
+        /// </summary>
+        public static string MatchHistory_DetailsButton {
+            get {
+                return ResourceManager.GetString("MatchHistory_DetailsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} min.
+        /// </summary>
+        public static string MatchHistory_DurationFormat {
+            get {
+                return ResourceManager.GetString("MatchHistory_DurationFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have not played any matches yet..
+        /// </summary>
+        public static string MatchHistory_EmptyMessage {
+            get {
+                return ResourceManager.GetString("MatchHistory_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your match history could not be loaded. Try again later..
+        /// </summary>
+        public static string MatchHistory_LoadingErrorMessage {
+            get {
+                return ResourceManager.GetString("MatchHistory_LoadingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a History unavailable.
+        /// </summary>
+        public static string MatchHistory_LoadingErrorTitle {
+            get {
+                return ResourceManager.GetString("MatchHistory_LoadingErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Load more.
+        /// </summary>
+        public static string MatchHistory_LoadMoreButton {
+            get {
+                return ResourceManager.GetString("MatchHistory_LoadMoreButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lost.
+        /// </summary>
+        public static string MatchHistory_LostFilter {
+            get {
+                return ResourceManager.GetString("MatchHistory_LostFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Normal finish.
+        /// </summary>
+        public static string MatchHistory_NormalEnding {
+            get {
+                return ResourceManager.GetString("MatchHistory_NormalEnding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a vs {0}.
+        /// </summary>
+        public static string MatchHistory_OpponentFormat {
+            get {
+                return ResourceManager.GetString("MatchHistory_OpponentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent quit.
+        /// </summary>
+        public static string MatchHistory_OpponentQuitEnding {
+            get {
+                return ResourceManager.GetString("MatchHistory_OpponentQuitEnding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match history.
+        /// </summary>
+        public static string MatchHistory_PageTitle {
+            get {
+                return ResourceManager.GetString("MatchHistory_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} - {1}.
+        /// </summary>
+        public static string MatchHistory_ScoreFormat {
+            get {
+                return ResourceManager.GetString("MatchHistory_ScoreFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Victory.
+        /// </summary>
+        public static string MatchHistory_VictoryLabel {
+            get {
+                return ResourceManager.GetString("MatchHistory_VictoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Won.
+        /// </summary>
+        public static string MatchHistory_WonFilter {
+            get {
+                return ResourceManager.GetString("MatchHistory_WonFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Back to lobby.
+        /// </summary>
+        public static string MatchResult_BackToLobbyButton {
+            get {
+                return ResourceManager.GetString("MatchResult_BackToLobbyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a DEFEAT.
+        /// </summary>
+        public static string MatchResult_DefeatTitle {
+            get {
+                return ResourceManager.GetString("MatchResult_DefeatTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a View details.
+        /// </summary>
+        public static string MatchResult_DetailButton {
+            get {
+                return ResourceManager.GetString("MatchResult_DetailButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} min {1} s.
+        /// </summary>
+        public static string MatchResult_DurationFormat {
+            get {
+                return ResourceManager.GetString("MatchResult_DurationFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Duration.
+        /// </summary>
+        public static string MatchResult_DurationLabel {
+            get {
+                return ResourceManager.GetString("MatchResult_DurationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match against {0}.
+        /// </summary>
+        public static string MatchResult_OpponentFormat {
+            get {
+                return ResourceManager.GetString("MatchResult_OpponentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent.
+        /// </summary>
+        public static string MatchResult_OpponentUnknown {
+            get {
+                return ResourceManager.GetString("MatchResult_OpponentUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Surrender by disconnection.
+        /// </summary>
+        public static string MatchResult_ReasonDisconnection {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonDisconnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reason: {0}.
+        /// </summary>
+        public static string MatchResult_ReasonFormat {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Inactivity.
+        /// </summary>
+        public static string MatchResult_ReasonInactivity {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonInactivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Victory by score.
+        /// </summary>
+        public static string MatchResult_ReasonPointsVictory {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonPointsVictory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Surrender.
+        /// </summary>
+        public static string MatchResult_ReasonSurrender {
+            get {
+                return ResourceManager.GetString("MatchResult_ReasonSurrender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rematch.
+        /// </summary>
+        public static string MatchResult_RematchButton {
+            get {
+                return ResourceManager.GetString("MatchResult_RematchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Report player.
+        /// </summary>
+        public static string MatchResult_ReportButton {
+            get {
+                return ResourceManager.GetString("MatchResult_ReportButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You {0} — Opponent {1}.
+        /// </summary>
+        public static string MatchResult_ScoreFormat {
+            get {
+                return ResourceManager.GetString("MatchResult_ScoreFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Skill level.
+        /// </summary>
+        public static string MatchResult_SkillLevelLabel {
+            get {
+                return ResourceManager.GetString("MatchResult_SkillLevelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a VICTORY.
+        /// </summary>
+        public static string MatchResult_VictoryTitle {
+            get {
+                return ResourceManager.GetString("MatchResult_VictoryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Close.
+        /// </summary>
+        public static string MessagePanel_DismissButton {
+            get {
+                return ResourceManager.GetString("MessagePanel_DismissButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error.
+        /// </summary>
+        public static string MessagePanel_ErrorLabel {
+            get {
+                return ResourceManager.GetString("MessagePanel_ErrorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Notice.
+        /// </summary>
+        public static string MessagePanel_InformationLabel {
+            get {
+                return ResourceManager.GetString("MessagePanel_InformationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Warning.
+        /// </summary>
+        public static string MessagePanel_WarningLabel {
+            get {
+                return ResourceManager.GetString("MessagePanel_WarningLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a {0} points.
         /// </summary>
         public static string Profile_BestHandFormat {
@@ -1222,6 +2317,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Change email.
+        /// </summary>
+        public static string Profile_ChangeEmailButton {
+            get {
+                return ResourceManager.GetString("Profile_ChangeEmailButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Change password.
         /// </summary>
         public static string Profile_ChangePasswordButton {
@@ -1236,6 +2340,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Profile_ChangePictureButton {
             get {
                 return ResourceManager.GetString("Profile_ChangePictureButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Delete account.
+        /// </summary>
+        public static string Profile_DeleteAccountButton {
+            get {
+                return ResourceManager.GetString("Profile_DeleteAccountButton", resourceCulture);
             }
         }
         
@@ -1366,11 +2479,119 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string RecoverPassword_CancelButton {
+            get {
+                return ResourceManager.GetString("RecoverPassword_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to cancel the recovery?.
+        /// </summary>
+        public static string RecoverPassword_CancelConfirmationMessage {
+            get {
+                return ResourceManager.GetString("RecoverPassword_CancelConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email.
+        /// </summary>
+        public static string RecoverPassword_EmailLabel {
+            get {
+                return ResourceManager.GetString("RecoverPassword_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We could not send the email at this time. Try resending it in a few minutes.
+        /// </summary>
+        public static string RecoverPassword_EmailNotSentMessage {
+            get {
+                return ResourceManager.GetString("RecoverPassword_EmailNotSentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please enter your email.
+        /// </summary>
+        public static string RecoverPassword_EmptyEmailMessage {
+            get {
+                return ResourceManager.GetString("RecoverPassword_EmptyEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email does not have a valid format. Check the information.
+        /// </summary>
+        public static string RecoverPassword_InvalidEmailMessage {
+            get {
+                return ResourceManager.GetString("RecoverPassword_InvalidEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send code.
+        /// </summary>
+        public static string RecoverPassword_SendCodeButton {
+            get {
+                return ResourceManager.GetString("RecoverPassword_SendCodeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We will send you the instructions to recover your access.
+        /// </summary>
+        public static string RecoverPassword_Subtitle {
+            get {
+                return ResourceManager.GetString("RecoverPassword_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recover Password.
+        /// </summary>
+        public static string RecoverPassword_Title {
+            get {
+                return ResourceManager.GetString("RecoverPassword_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have requested too many codes. Wait a few minutes before trying again.
+        /// </summary>
+        public static string RecoverPassword_TooManyRequestsMessage {
+            get {
+                return ResourceManager.GetString("RecoverPassword_TooManyRequestsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a BACK.
         /// </summary>
         public static string Register_BackButton {
             get {
                 return ResourceManager.GetString("Register_BackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string Register_CancelButton {
+            get {
+                return ResourceManager.GetString("Register_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to cancel the registration?.
+        /// </summary>
+        public static string Register_CancelConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Register_CancelConfirmationMessage", resourceCulture);
             }
         }
         
@@ -1384,6 +2605,24 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The database could not be reached. Please try again in a few minutes.
+        /// </summary>
+        public static string Register_DatabaseErrorMessage {
+            get {
+                return ResourceManager.GetString("Register_DatabaseErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An account already exists with this email address.
+        /// </summary>
+        public static string Register_EmailAlreadyRegisteredMessage {
+            get {
+                return ResourceManager.GetString("Register_EmailAlreadyRegisteredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Email.
         /// </summary>
         public static string Register_EmailLabel {
@@ -1393,11 +2632,56 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Please fill in all the fields and accept the terms and conditions.
+        /// </summary>
+        public static string Register_EmptyFieldsMessage {
+            get {
+                return ResourceManager.GetString("Register_EmptyFieldsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email does not have a valid format. Check the information.
+        /// </summary>
+        public static string Register_InvalidEmailMessage {
+            get {
+                return ResourceManager.GetString("Register_InvalidEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password must be at least 8 characters long and include at least one letter and one number.
+        /// </summary>
+        public static string Register_InvalidPasswordMessage {
+            get {
+                return ResourceManager.GetString("Register_InvalidPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The username must be between 3 and 16 characters and can only contain letters, numbers and underscores.
+        /// </summary>
+        public static string Register_InvalidUsernameMessage {
+            get {
+                return ResourceManager.GetString("Register_InvalidUsernameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         public static string Register_PasswordLabel {
             get {
                 return ResourceManager.GetString("Register_PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The passwords do not match.
+        /// </summary>
+        public static string Register_PasswordsDoNotMatchMessage {
+            get {
+                return ResourceManager.GetString("Register_PasswordsDoNotMatchMessage", resourceCulture);
             }
         }
         
@@ -1438,11 +2722,317 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a That username is already taken. Choose another one.
+        /// </summary>
+        public static string Register_UsernameAlreadyTakenMessage {
+            get {
+                return ResourceManager.GetString("Register_UsernameAlreadyTakenMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Username.
         /// </summary>
         public static string Register_UsernameLabel {
             get {
                 return ResourceManager.GetString("Register_UsernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string ResetPassword_CancelButton {
+            get {
+                return ResourceManager.GetString("ResetPassword_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to cancel the recovery?.
+        /// </summary>
+        public static string ResetPassword_CancelConfirmationMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_CancelConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Code.
+        /// </summary>
+        public static string ResetPassword_CodeLabel {
+            get {
+                return ResourceManager.GetString("ResetPassword_CodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We sent a new code. Check your spam folder as well.
+        /// </summary>
+        public static string ResetPassword_CodeResentMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_CodeResentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirm new password.
+        /// </summary>
+        public static string ResetPassword_ConfirmPasswordLabel {
+            get {
+                return ResourceManager.GetString("ResetPassword_ConfirmPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email: {0}.
+        /// </summary>
+        public static string ResetPassword_EmailFormat {
+            get {
+                return ResourceManager.GetString("ResetPassword_EmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We could not send the email at this time. Try resending it in a few minutes.
+        /// </summary>
+        public static string ResetPassword_EmailNotSentMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_EmailNotSentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please fill in all the fields.
+        /// </summary>
+        public static string ResetPassword_EmptyFieldsMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_EmptyFieldsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The code expired. Request a new one.
+        /// </summary>
+        public static string ResetPassword_ExpiredCodeMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_ExpiredCodeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The code is not valid. Check the information or request a new one.
+        /// </summary>
+        public static string ResetPassword_InvalidCodeMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_InvalidCodeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password must be at least 8 characters long and include at least one letter and one number.
+        /// </summary>
+        public static string ResetPassword_InvalidPasswordMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_InvalidPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New password.
+        /// </summary>
+        public static string ResetPassword_NewPasswordLabel {
+            get {
+                return ResourceManager.GetString("ResetPassword_NewPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The passwords do not match.
+        /// </summary>
+        public static string ResetPassword_PasswordsDoNotMatchMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_PasswordsDoNotMatchMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Resend code.
+        /// </summary>
+        public static string ResetPassword_ResendCodeButton {
+            get {
+                return ResourceManager.GetString("ResetPassword_ResendCodeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reset.
+        /// </summary>
+        public static string ResetPassword_ResetButton {
+            get {
+                return ResourceManager.GetString("ResetPassword_ResetButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The new password must be different from the previous one.
+        /// </summary>
+        public static string ResetPassword_SamePasswordMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_SamePasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If an account is associated with that email, we sent a code to reset the password.
+        /// </summary>
+        public static string ResetPassword_Subtitle {
+            get {
+                return ResourceManager.GetString("ResetPassword_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password reset successfully.
+        /// </summary>
+        public static string ResetPassword_SuccessMessage {
+            get {
+                return ResourceManager.GetString("ResetPassword_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reset Password.
+        /// </summary>
+        public static string ResetPassword_Title {
+            get {
+                return ResourceManager.GetString("ResetPassword_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There are no registered players yet..
+        /// </summary>
+        public static string Scoreboard_EmptyMessage {
+            get {
+                return ResourceManager.GetString("Scoreboard_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Level.
+        /// </summary>
+        public static string Scoreboard_LevelColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_LevelColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The scoreboard could not be loaded. Check your connection and try again..
+        /// </summary>
+        public static string Scoreboard_LoadingErrorMessage {
+            get {
+                return ResourceManager.GetString("Scoreboard_LoadingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Scoreboard unavailable.
+        /// </summary>
+        public static string Scoreboard_LoadingErrorTitle {
+            get {
+                return ResourceManager.GetString("Scoreboard_LoadingErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lost.
+        /// </summary>
+        public static string Scoreboard_LostColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_LostColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Scoreboard.
+        /// </summary>
+        public static string Scoreboard_PageTitle {
+            get {
+                return ResourceManager.GetString("Scoreboard_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Played.
+        /// </summary>
+        public static string Scoreboard_PlayedColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_PlayedColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player.
+        /// </summary>
+        public static string Scoreboard_PlayerColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_PlayerColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a #.
+        /// </summary>
+        public static string Scoreboard_PositionColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_PositionColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Refresh.
+        /// </summary>
+        public static string Scoreboard_RefreshButton {
+            get {
+                return ResourceManager.GetString("Scoreboard_RefreshButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Players ranked by skill level.
+        /// </summary>
+        public static string Scoreboard_SubtitleText {
+            get {
+                return ResourceManager.GetString("Scoreboard_SubtitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Win rate.
+        /// </summary>
+        public static string Scoreboard_WinRateColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_WinRateColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0:N1} %.
+        /// </summary>
+        public static string Scoreboard_WinRateFormat {
+            get {
+                return ResourceManager.GetString("Scoreboard_WinRateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Won.
+        /// </summary>
+        public static string Scoreboard_WonColumn {
+            get {
+                return ResourceManager.GetString("Scoreboard_WonColumn", resourceCulture);
             }
         }
         
@@ -1524,6 +3114,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Settings_LogoutButton {
             get {
                 return ResourceManager.GetString("Settings_LogoutButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to sign out?.
+        /// </summary>
+        public static string Settings_LogoutConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Settings_LogoutConfirmationMessage", resourceCulture);
             }
         }
         
@@ -1987,6 +3586,78 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a the play continues.
+        /// </summary>
+        public static string Tutorial_PlayPhase_Continues {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Continues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Count: {0}.
+        /// </summary>
+        public static string Tutorial_PlayPhase_CountFormat {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_CountFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Example of one play.
+        /// </summary>
+        public static string Tutorial_PlayPhase_ExampleLabel {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_ExampleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fifteen! +2 points.
+        /// </summary>
+        public static string Tutorial_PlayPhase_FifteenBadge {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_FifteenBadge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The player who did not deal starts by placing a card face up in front of them. From there, players alternate turns playing one card at a time, keeping their cards separate from the opponent&apos;s..
+        /// </summary>
+        public static string Tutorial_PlayPhase_Paragraph1 {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Paragraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a When you play a card you add its value to the running count on the table. Face cards are worth 10 and aces are worth 1. The most important rule is that the running count can never go above 31..
+        /// </summary>
+        public static string Tutorial_PlayPhase_Paragraph2 {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Paragraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You score immediately when the count reaches exactly 15 (2 points) or exactly 31 (2 points), and also when you form pairs (2 points) or runs of three or more consecutive cards (1 point per card)..
+        /// </summary>
+        public static string Tutorial_PlayPhase_Paragraph3 {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Paragraph3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If you cannot play any card without going over 31, you must say GO. Your opponent keeps playing to get as close to 31 as possible. Whoever played the last card scores 1 point, or 2 if the count reached exactly 31, and then the count resets to 0..
+        /// </summary>
+        public static string Tutorial_PlayPhase_Paragraph4 {
+            get {
+                return ResourceManager.GetString("Tutorial_PlayPhase_Paragraph4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The play.
         /// </summary>
         public static string Tutorial_PlayPhaseTab {
@@ -2010,6 +3681,150 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Validation_EmptyFields {
             get {
                 return ResourceManager.GetString("Validation_EmptyFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This account is already verified. You can sign in.
+        /// </summary>
+        public static string VerifyAccount_AlreadyVerifiedMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_AlreadyVerifiedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have reached the maximum number of attempts. Wait a few minutes before trying again.
+        /// </summary>
+        public static string VerifyAccount_AttemptLimitMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_AttemptLimitMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string VerifyAccount_CancelButton {
+            get {
+                return ResourceManager.GetString("VerifyAccount_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verification code.
+        /// </summary>
+        public static string VerifyAccount_CodeLabel {
+            get {
+                return ResourceManager.GetString("VerifyAccount_CodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We sent a new code to {0}. Please also check your spam folder.
+        /// </summary>
+        public static string VerifyAccount_CodeResentFormat {
+            get {
+                return ResourceManager.GetString("VerifyAccount_CodeResentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database could not be reached. Please try again in a few minutes.
+        /// </summary>
+        public static string VerifyAccount_DatabaseErrorMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_DatabaseErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please enter the verification code.
+        /// </summary>
+        public static string VerifyAccount_EmptyCodeMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_EmptyCodeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code expired. Request a new one.
+        /// </summary>
+        public static string VerifyAccount_ExpiredCodeMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_ExpiredCodeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code is not valid. Check the information or request a new one.
+        /// </summary>
+        public static string VerifyAccount_InvalidCodeMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_InvalidCodeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Resend email.
+        /// </summary>
+        public static string VerifyAccount_ResendButton {
+            get {
+                return ResourceManager.GetString("VerifyAccount_ResendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We could not send the email right now. Try again in a few minutes.
+        /// </summary>
+        public static string VerifyAccount_ResendFailedMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_ResendFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We sent the code to {0}. Check your inbox or your spam folder..
+        /// </summary>
+        public static string VerifyAccount_SubtitleFormat {
+            get {
+                return ResourceManager.GetString("VerifyAccount_SubtitleFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account verified successfully.
+        /// </summary>
+        public static string VerifyAccount_SuccessMessage {
+            get {
+                return ResourceManager.GetString("VerifyAccount_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter code.
+        /// </summary>
+        public static string VerifyAccount_Title {
+            get {
+                return ResourceManager.GetString("VerifyAccount_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a your registered email.
+        /// </summary>
+        public static string VerifyAccount_UnknownEmail {
+            get {
+                return ResourceManager.GetString("VerifyAccount_UnknownEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verify.
+        /// </summary>
+        public static string VerifyAccount_VerifyButton {
+            get {
+                return ResourceManager.GetString("VerifyAccount_VerifyButton", resourceCulture);
             }
         }
     }

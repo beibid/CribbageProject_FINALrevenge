@@ -768,4 +768,613 @@
   <data name="Common_InMatchStatus" xml:space="preserve">
     <value>In a match</value>
   </data>
+	<data name="MatchHistory_AllFilter" xml:space="preserve">
+    <value>All</value>
+  </data>
+	<data name="MatchHistory_DefeatLabel" xml:space="preserve">
+    <value>Defeat</value>
+  </data>
+	<data name="MatchHistory_DetailsButton" xml:space="preserve">
+    <value>View details</value>
+  </data>
+	<data name="MatchHistory_DurationFormat" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+	<data name="MatchHistory_EmptyMessage" xml:space="preserve">
+    <value>You have not played any matches yet.</value>
+  </data>
+	<data name="MatchHistory_LoadMoreButton" xml:space="preserve">
+    <value>Load more</value>
+  </data>
+	<data name="MatchHistory_LoadingErrorMessage" xml:space="preserve">
+    <value>Your match history could not be loaded. Try again later.</value>
+  </data>
+	<data name="MatchHistory_LoadingErrorTitle" xml:space="preserve">
+    <value>History unavailable</value>
+  </data>
+	<data name="MatchHistory_LostFilter" xml:space="preserve">
+    <value>Lost</value>
+  </data>
+	<data name="MatchHistory_NormalEnding" xml:space="preserve">
+    <value>Normal finish</value>
+  </data>
+	<data name="MatchHistory_OpponentFormat" xml:space="preserve">
+    <value>vs {0}</value>
+  </data>
+	<data name="MatchHistory_OpponentQuitEnding" xml:space="preserve">
+    <value>Opponent quit</value>
+  </data>
+	<data name="MatchHistory_PageTitle" xml:space="preserve">
+    <value>Match history</value>
+  </data>
+	<data name="MatchHistory_ScoreFormat" xml:space="preserve">
+    <value>{0} - {1}</value>
+  </data>
+	<data name="MatchHistory_VictoryLabel" xml:space="preserve">
+    <value>Victory</value>
+  </data>
+	<data name="MatchHistory_WonFilter" xml:space="preserve">
+    <value>Won</value>
+  </data>
+	<data name="Scoreboard_EmptyMessage" xml:space="preserve">
+    <value>There are no registered players yet.</value>
+  </data>
+	<data name="Scoreboard_LevelColumn" xml:space="preserve">
+    <value>Level</value>
+  </data>
+	<data name="Scoreboard_LoadingErrorMessage" xml:space="preserve">
+    <value>The scoreboard could not be loaded. Check your connection and try again.</value>
+  </data>
+	<data name="Scoreboard_LoadingErrorTitle" xml:space="preserve">
+    <value>Scoreboard unavailable</value>
+  </data>
+	<data name="Scoreboard_LostColumn" xml:space="preserve">
+    <value>Lost</value>
+  </data>
+	<data name="Scoreboard_PageTitle" xml:space="preserve">
+    <value>Scoreboard</value>
+  </data>
+	<data name="Scoreboard_PlayedColumn" xml:space="preserve">
+    <value>Played</value>
+  </data>
+	<data name="Scoreboard_PlayerColumn" xml:space="preserve">
+    <value>Player</value>
+  </data>
+	<data name="Scoreboard_PositionColumn" xml:space="preserve">
+    <value>#</value>
+  </data>
+	<data name="Scoreboard_RefreshButton" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+	<data name="Scoreboard_SubtitleText" xml:space="preserve">
+    <value>Players ranked by skill level</value>
+  </data>
+	<data name="Scoreboard_WinRateColumn" xml:space="preserve">
+    <value>Win rate</value>
+  </data>
+	<data name="Scoreboard_WinRateFormat" xml:space="preserve">
+    <value>{0:N1} %</value>
+  </data>
+	<data name="Scoreboard_WonColumn" xml:space="preserve">
+    <value>Won</value>
+  </data>
+	<data name="Lobby_ScoreboardCardButton" xml:space="preserve">
+    <value>VIEW SCOREBOARD</value>
+  </data>
+	<data name="Lobby_ScoreboardCardText" xml:space="preserve">
+    <value>See who leads the ranking and where you stand among all players.</value>
+  </data>
+	<data name="Lobby_ScoreboardCardTitle" xml:space="preserve">
+    <value>Ranking</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph1" xml:space="preserve">
+    <value>The player who did not deal starts by placing a card face up in front of them. From there, players alternate turns playing one card at a time, keeping their cards separate from the opponent's.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph2" xml:space="preserve">
+    <value>When you play a card you add its value to the running count on the table. Face cards are worth 10 and aces are worth 1. The most important rule is that the running count can never go above 31.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph3" xml:space="preserve">
+    <value>You score immediately when the count reaches exactly 15 (2 points) or exactly 31 (2 points), and also when you form pairs (2 points) or runs of three or more consecutive cards (1 point per card).</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Paragraph4" xml:space="preserve">
+    <value>If you cannot play any card without going over 31, you must say GO. Your opponent keeps playing to get as close to 31 as possible. Whoever played the last card scores 1 point, or 2 if the count reached exactly 31, and then the count resets to 0.</value>
+  </data>
+	<data name="Tutorial_PlayPhase_ExampleLabel" xml:space="preserve">
+    <value>Example of one play</value>
+  </data>
+	<data name="Tutorial_PlayPhase_CountFormat" xml:space="preserve">
+    <value>Count: {0}</value>
+  </data>
+	<data name="Tutorial_PlayPhase_FifteenBadge" xml:space="preserve">
+    <value>Fifteen! +2 points</value>
+  </data>
+	<data name="Tutorial_PlayPhase_Continues" xml:space="preserve">
+    <value>the play continues</value>
+  </data>
+	<data name="Game_OpponentFormat" xml:space="preserve">
+    <value>Opponent: {0}</value>
+  </data>
+	<data name="Game_OpponentUnknown" xml:space="preserve">
+    <value>Opponent</value>
+  </data>
+	<data name="Game_HostBadge" xml:space="preserve">
+    <value>Host</value>
+  </data>
+	<data name="Game_YouLabel" xml:space="preserve">
+    <value>You</value>
+  </data>
+	<data name="Game_BoardTitle" xml:space="preserve">
+    <value>ROYAL BOARD</value>
+  </data>
+	<data name="Game_BoardOpponentRow" xml:space="preserve">
+    <value>Opponent</value>
+  </data>
+	<data name="Game_BoardPlayerRow" xml:space="preserve">
+    <value>You</value>
+  </data>
+	<data name="Game_GoalFormat" xml:space="preserve">
+    <value>{0} — Goal</value>
+  </data>
+	<data name="Game_LastGainFormat" xml:space="preserve">
+    <value>+{0} points</value>
+  </data>
+	<data name="Game_ScoreFormat" xml:space="preserve">
+    <value>You {0} — Opponent {1} / {2}</value>
+  </data>
+	<data name="Game_PhaseDiscardTitle" xml:space="preserve">
+    <value>DISCARD PHASE</value>
+  </data>
+	<data name="Game_PhaseDiscardText1" xml:space="preserve">
+    <value>Look at your starting hand of 6 cards.</value>
+  </data>
+	<data name="Game_PhaseDiscardText2" xml:space="preserve">
+    <value>You must give up 2 cards that will form the dealer's crib.</value>
+  </data>
+	<data name="Game_CribLabel" xml:space="preserve">
+    <value>CRIB</value>
+  </data>
+	<data name="Game_CribInstruction" xml:space="preserve">
+    <value>Select 2 cards to send them to the crib</value>
+  </data>
+	<data name="Game_TimeRemainingFormat" xml:space="preserve">
+    <value>Time remaining: {0}s</value>
+  </data>
+	<data name="Game_DiscardButton" xml:space="preserve">
+    <value>DISCARD</value>
+  </data>
+	<data name="Game_LeaveButton" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+	<data name="Game_CribOwnerYou" xml:space="preserve">
+    <value>The crib is yours</value>
+  </data>
+	<data name="Game_CribOwnerOpponent" xml:space="preserve">
+    <value>The crib is your opponent's</value>
+  </data>
+	<data name="Game_StarterCardLabel" xml:space="preserve">
+    <value>Starter card</value>
+  </data>
+	<data name="Game_RunningCountFormat" xml:space="preserve">
+    <value>Count: {0}</value>
+  </data>
+	<data name="Game_PlayedCardsLabel" xml:space="preserve">
+    <value>Cards played</value>
+  </data>
+	<data name="Game_PhasePlayTitle" xml:space="preserve">
+    <value>PLAY PHASE</value>
+  </data>
+	<data name="Game_PhasePlayText1" xml:space="preserve">
+    <value>Play one card per turn without going over 31.</value>
+  </data>
+	<data name="Game_PhasePlayText2" xml:space="preserve">
+    <value>You score when the count reaches 15 or 31 and when you form pairs and runs.</value>
+  </data>
+	<data name="Game_RulesButton" xml:space="preserve">
+    <value>Rules</value>
+  </data>
+	<data name="Game_MatchInfoButton" xml:space="preserve">
+    <value>Match information</value>
+  </data>
+	<data name="Game_LeaveConfirmationMessage" xml:space="preserve">
+    <value>If you leave, the match will be recorded as a loss. Do you want to continue?</value>
+  </data>
+	<data name="Game_SelectTwoCardsMessage" xml:space="preserve">
+    <value>You must select exactly two cards for the crib</value>
+  </data>
+	<data name="Game_DiscardNotSavedMessage" xml:space="preserve">
+    <value>Your discard could not be saved. Please try again</value>
+  </data>
+	<data name="Game_CardNotPlayableMessage" xml:space="preserve">
+    <value>That card cannot be played right now</value>
+  </data>
+	<data name="Game_MoveNotSavedMessage" xml:space="preserve">
+    <value>Your move could not be saved. Please try again</value>
+  </data>
+	<data name="Game_LastKnownStateMessage" xml:space="preserve">
+    <value>Showing the last known state of the match</value>
+  </data>
+	<data name="Game_MatchAlreadyEndedMessage" xml:space="preserve">
+    <value>This match has already ended</value>
+  </data>
+	<data name="MessagePanel_DismissButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+	<data name="MessagePanel_ErrorLabel" xml:space="preserve">
+    <value>Error</value>
+  </data>
+	<data name="MessagePanel_WarningLabel" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+	<data name="MessagePanel_InformationLabel" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+	<data name="MatchResult_VictoryTitle" xml:space="preserve">
+    <value>VICTORY</value>
+  </data>
+	<data name="MatchResult_DefeatTitle" xml:space="preserve">
+    <value>DEFEAT</value>
+  </data>
+	<data name="MatchResult_OpponentFormat" xml:space="preserve">
+    <value>Match against {0}</value>
+  </data>
+	<data name="MatchResult_OpponentUnknown" xml:space="preserve">
+    <value>Opponent</value>
+  </data>
+	<data name="MatchResult_ScoreFormat" xml:space="preserve">
+    <value>You {0} — Opponent {1}</value>
+  </data>
+	<data name="MatchResult_ReasonFormat" xml:space="preserve">
+    <value>Reason: {0}</value>
+  </data>
+	<data name="MatchResult_ReasonPointsVictory" xml:space="preserve">
+    <value>Victory by score</value>
+  </data>
+	<data name="MatchResult_ReasonSurrender" xml:space="preserve">
+    <value>Surrender</value>
+  </data>
+	<data name="MatchResult_ReasonInactivity" xml:space="preserve">
+    <value>Inactivity</value>
+  </data>
+	<data name="MatchResult_ReasonDisconnection" xml:space="preserve">
+    <value>Surrender by disconnection</value>
+  </data>
+	<data name="MatchResult_DurationLabel" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+	<data name="MatchResult_DurationFormat" xml:space="preserve">
+    <value>{0} min {1} s</value>
+  </data>
+	<data name="MatchResult_SkillLevelLabel" xml:space="preserve">
+    <value>Skill level</value>
+  </data>
+	<data name="MatchResult_RematchButton" xml:space="preserve">
+    <value>Rematch</value>
+  </data>
+	<data name="MatchResult_DetailButton" xml:space="preserve">
+    <value>View details</value>
+  </data>
+	<data name="MatchResult_ReportButton" xml:space="preserve">
+    <value>Report player</value>
+  </data>
+	<data name="MatchResult_BackToLobbyButton" xml:space="preserve">
+    <value>Back to lobby</value>
+  </data>
+	<data name="AwaitingVerification_Title" xml:space="preserve">
+    <value>Verify your account</value>
+  </data>
+	<data name="AwaitingVerification_UnknownEmail" xml:space="preserve">
+    <value>your registered email</value>
+  </data>
+	<data name="AwaitingVerification_CodeSentFormat" xml:space="preserve">
+    <value>We sent a verification code to {0}. Activate it to play online</value>
+  </data>
+	<data name="AwaitingVerification_AccountAlreadyPending" xml:space="preserve">
+    <value>An account pending verification already exists with this email address</value>
+  </data>
+	<data name="AwaitingVerification_EmailNotSent" xml:space="preserve">
+    <value>The account was created, but we could not send the verification email. Try resending it in a few minutes</value>
+  </data>
+	<data name="AwaitingVerification_AccountNotVerified" xml:space="preserve">
+    <value>Your account has not been verified yet</value>
+  </data>
+	<data name="AwaitingVerification_VerifiedButton" xml:space="preserve">
+    <value>I already verified my account</value>
+  </data>
+	<data name="AwaitingVerification_ResendButton" xml:space="preserve">
+    <value>Resend email</value>
+  </data>
+	<data name="AwaitingVerification_CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+	<data name="VerifyAccount_Title" xml:space="preserve">
+    <value>Enter code</value>
+  </data>
+	<data name="VerifyAccount_SubtitleFormat" xml:space="preserve">
+    <value>We sent the code to {0}. Check your inbox or your spam folder.</value>
+  </data>
+	<data name="VerifyAccount_UnknownEmail" xml:space="preserve">
+    <value>your registered email</value>
+  </data>
+	<data name="VerifyAccount_CodeLabel" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+	<data name="VerifyAccount_VerifyButton" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+	<data name="VerifyAccount_ResendButton" xml:space="preserve">
+    <value>Resend email</value>
+  </data>
+	<data name="VerifyAccount_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="VerifyAccount_EmptyCodeMessage" xml:space="preserve">
+    <value>Please enter the verification code</value>
+  </data>
+	<data name="VerifyAccount_InvalidCodeMessage" xml:space="preserve">
+    <value>The verification code is not valid. Check the information or request a new one</value>
+  </data>
+	<data name="VerifyAccount_ExpiredCodeMessage" xml:space="preserve">
+    <value>The verification code expired. Request a new one</value>
+  </data>
+	<data name="VerifyAccount_AlreadyVerifiedMessage" xml:space="preserve">
+    <value>This account is already verified. You can sign in</value>
+  </data>
+	<data name="VerifyAccount_AttemptLimitMessage" xml:space="preserve">
+    <value>You have reached the maximum number of attempts. Wait a few minutes before trying again</value>
+  </data>
+	<data name="VerifyAccount_ResendFailedMessage" xml:space="preserve">
+    <value>We could not send the email right now. Try again in a few minutes</value>
+  </data>
+	<data name="VerifyAccount_CodeResentFormat" xml:space="preserve">
+    <value>We sent a new code to {0}. Please also check your spam folder</value>
+  </data>
+	<data name="VerifyAccount_SuccessMessage" xml:space="preserve">
+    <value>Account verified successfully</value>
+  </data>
+	<data name="RecoverPassword_Title" xml:space="preserve">
+    <value>Recover Password</value>
+  </data>
+	<data name="RecoverPassword_Subtitle" xml:space="preserve">
+    <value>We will send you the instructions to recover your access</value>
+  </data>
+	<data name="RecoverPassword_EmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+	<data name="RecoverPassword_SendCodeButton" xml:space="preserve">
+    <value>Send code</value>
+  </data>
+	<data name="RecoverPassword_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="RecoverPassword_EmptyEmailMessage" xml:space="preserve">
+    <value>Please enter your email</value>
+  </data>
+	<data name="RecoverPassword_InvalidEmailMessage" xml:space="preserve">
+    <value>The email does not have a valid format. Check the information</value>
+  </data>
+	<data name="RecoverPassword_TooManyRequestsMessage" xml:space="preserve">
+    <value>You have requested too many codes. Wait a few minutes before trying again</value>
+  </data>
+	<data name="RecoverPassword_EmailNotSentMessage" xml:space="preserve">
+    <value>We could not send the email at this time. Try resending it in a few minutes</value>
+  </data>
+	<data name="RecoverPassword_CancelConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to cancel the recovery?</value>
+  </data>
+	<data name="ResetPassword_Title" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+	<data name="ResetPassword_Subtitle" xml:space="preserve">
+    <value>If an account is associated with that email, we sent a code to reset the password</value>
+  </data>
+	<data name="ResetPassword_EmailFormat" xml:space="preserve">
+    <value>Email: {0}</value>
+  </data>
+	<data name="ResetPassword_CodeLabel" xml:space="preserve">
+    <value>Code</value>
+  </data>
+	<data name="ResetPassword_NewPasswordLabel" xml:space="preserve">
+    <value>New password</value>
+  </data>
+	<data name="ResetPassword_ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+	<data name="ResetPassword_ResetButton" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+	<data name="ResetPassword_ResendCodeButton" xml:space="preserve">
+    <value>Resend code</value>
+  </data>
+	<data name="ResetPassword_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="ResetPassword_EmptyFieldsMessage" xml:space="preserve">
+    <value>Please fill in all the fields</value>
+  </data>
+	<data name="ResetPassword_InvalidCodeMessage" xml:space="preserve">
+    <value>The code is not valid. Check the information or request a new one</value>
+  </data>
+	<data name="ResetPassword_ExpiredCodeMessage" xml:space="preserve">
+    <value>The code expired. Request a new one</value>
+  </data>
+	<data name="ResetPassword_InvalidPasswordMessage" xml:space="preserve">
+    <value>The password must be at least 8 characters long and include at least one letter and one number</value>
+  </data>
+	<data name="ResetPassword_PasswordsDoNotMatchMessage" xml:space="preserve">
+    <value>The passwords do not match</value>
+  </data>
+	<data name="ResetPassword_SamePasswordMessage" xml:space="preserve">
+    <value>The new password must be different from the previous one</value>
+  </data>
+	<data name="ResetPassword_CodeResentMessage" xml:space="preserve">
+    <value>We sent a new code. Check your spam folder as well</value>
+  </data>
+	<data name="ResetPassword_EmailNotSentMessage" xml:space="preserve">
+    <value>We could not send the email at this time. Try resending it in a few minutes</value>
+  </data>
+	<data name="ResetPassword_SuccessMessage" xml:space="preserve">
+    <value>Password reset successfully</value>
+  </data>
+	<data name="ResetPassword_CancelConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to cancel the recovery?</value>
+  </data>
+	<data name="Dialog_SessionExpiredMessage" xml:space="preserve">
+    <value>Your session has expired. Sign in again</value>
+  </data>
+	<data name="Login_InvalidCredentialsMessage" xml:space="preserve">
+    <value>The username or password is incorrect</value>
+  </data>
+	<data name="Login_DatabaseErrorMessage" xml:space="preserve">
+    <value>The database could not be reached. Please try again in a few minutes</value>
+  </data>
+	<data name="Login_AccountLockedFormat" xml:space="preserve">
+    <value>For security reasons, access to this account is temporarily locked. Try again in {0} minutes or reset your password</value>
+  </data>
+	<data name="Login_AccountSuspendedMessage" xml:space="preserve">
+    <value>This account is suspended. Contact support if you believe this is a mistake</value>
+  </data>
+	<data name="ChangeEmail_Title" xml:space="preserve">
+    <value>Change Email</value>
+  </data>
+	<data name="ChangeEmail_CurrentEmailFormat" xml:space="preserve">
+    <value>Current email: {0}</value>
+  </data>
+	<data name="ChangeEmail_UnknownEmail" xml:space="preserve">
+    <value>not registered</value>
+  </data>
+	<data name="ChangeEmail_NewEmailLabel" xml:space="preserve">
+    <value>New email address</value>
+  </data>
+	<data name="ChangeEmail_ConfirmEmailLabel" xml:space="preserve">
+    <value>Confirm new email address</value>
+  </data>
+	<data name="ChangeEmail_PasswordLabel" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+	<data name="ChangeEmail_ContinueButton" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+	<data name="ChangeEmail_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="ChangeEmail_AttemptLimitMessage" xml:space="preserve">
+    <value>You have reached the maximum number of attempts. Wait a few minutes before trying again</value>
+  </data>
+	<data name="ChangeEmail_IncorrectPasswordMessage" xml:space="preserve">
+    <value>The password is incorrect</value>
+  </data>
+	<data name="ChangeEmail_EmailsDoNotMatchMessage" xml:space="preserve">
+    <value>The email addresses do not match</value>
+  </data>
+	<data name="ChangeEmail_InvalidEmailMessage" xml:space="preserve">
+    <value>The email does not have a valid format. Check the information</value>
+  </data>
+	<data name="ChangeEmail_SameEmailMessage" xml:space="preserve">
+    <value>The new email must be different from the current one</value>
+  </data>
+	<data name="ChangeEmail_EmailNotAvailableMessage" xml:space="preserve">
+    <value>This email address cannot be used. Check the information</value>
+  </data>
+	<data name="ChangeEmail_SuccessMessage" xml:space="preserve">
+    <value>Email address updated successfully</value>
+  </data>
+	<data name="DeleteAccount_Title" xml:space="preserve">
+    <value>Delete Account</value>
+  </data>
+	<data name="DeleteAccount_WarningMessage" xml:space="preserve">
+    <value>If you delete your account you will lose your progress, your statistics and your friendships. This action cannot be undone</value>
+  </data>
+	<data name="DeleteAccount_PasswordLabel" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+	<data name="DeleteAccount_ConfirmationWord" xml:space="preserve">
+    <value>DELETE</value>
+  </data>
+	<data name="DeleteAccount_ConfirmationLabelFormat" xml:space="preserve">
+    <value>Type the word {0}</value>
+  </data>
+	<data name="DeleteAccount_InvalidConfirmationWordFormat" xml:space="preserve">
+    <value>Type the word {0} to confirm</value>
+  </data>
+	<data name="DeleteAccount_DeleteButton" xml:space="preserve">
+    <value>Delete account</value>
+  </data>
+	<data name="DeleteAccount_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="DeleteAccount_AttemptLimitMessage" xml:space="preserve">
+    <value>You have reached the maximum number of attempts. Wait a few minutes before trying again</value>
+  </data>
+	<data name="DeleteAccount_IncorrectPasswordMessage" xml:space="preserve">
+    <value>The password is incorrect</value>
+  </data>
+	<data name="DeleteAccount_MatchInProgressMessage" xml:space="preserve">
+    <value>You cannot delete your account while you have a match in progress. Finish or leave the match before continuing</value>
+  </data>
+	<data name="DeleteAccount_ConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to delete your account permanently?</value>
+  </data>
+	<data name="DeleteAccount_SuccessMessage" xml:space="preserve">
+    <value>Your account was deleted</value>
+  </data>
+	<data name="Profile_ChangeEmailButton" xml:space="preserve">
+    <value>Change email</value>
+  </data>
+	<data name="Profile_DeleteAccountButton" xml:space="preserve">
+    <value>Delete account</value>
+  </data>
+	<data name="Register_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="Register_EmptyFieldsMessage" xml:space="preserve">
+    <value>Please fill in all the fields and accept the terms and conditions</value>
+  </data>
+	<data name="Register_InvalidUsernameMessage" xml:space="preserve">
+    <value>The username must be between 3 and 16 characters and can only contain letters, numbers and underscores</value>
+  </data>
+	<data name="Register_InvalidEmailMessage" xml:space="preserve">
+    <value>The email does not have a valid format. Check the information</value>
+  </data>
+	<data name="Register_InvalidPasswordMessage" xml:space="preserve">
+    <value>The password must be at least 8 characters long and include at least one letter and one number</value>
+  </data>
+	<data name="Register_PasswordsDoNotMatchMessage" xml:space="preserve">
+    <value>The passwords do not match</value>
+  </data>
+	<data name="Register_UsernameAlreadyTakenMessage" xml:space="preserve">
+    <value>That username is already taken. Choose another one</value>
+  </data>
+	<data name="Register_EmailAlreadyRegisteredMessage" xml:space="preserve">
+    <value>An account already exists with this email address</value>
+  </data>
+	<data name="Register_CancelConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to cancel the registration?</value>
+  </data>
+	<data name="Register_DatabaseErrorMessage" xml:space="preserve">
+    <value>The database could not be reached. Please try again in a few minutes</value>
+  </data>
+	<data name="VerifyAccount_DatabaseErrorMessage" xml:space="preserve">
+    <value>The database could not be reached. Please try again in a few minutes</value>
+  </data>
+	<data name="Email_VerificationSubject" xml:space="preserve">
+    <value>Verification code - Cribbage Royale</value>
+  </data>
+	<data name="Email_VerificationBodyFormat" xml:space="preserve">
+    <value>Welcome to Cribbage Royale.
+
+Your verification code is: {0}
+
+Enter it in the application to activate your account. The code expires in 24 hours.
+
+If you did not create this account, ignore this message.</value>
+  </data>
+	<data name="Lobby_LevelFormat" xml:space="preserve">
+    <value>Level {0}</value>
+  </data>
+	<data name="Lobby_GuestLabel" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+	<data name="Settings_LogoutConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to sign out?</value>
+  </data>
 </root>

@@ -6,7 +6,7 @@
       xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
       mc:Ignorable="d"
       d:DesignHeight="800" d:DesignWidth="1280"
-      Title="ProfilePage">
+      Title="{x:Static lang:Lang.Profile_PageTitle}">
 
     <Grid Background="{StaticResource BackgroundBrush}" Margin="40,30">
         <Grid.RowDefinitions>
@@ -47,8 +47,15 @@
                 <Button x:Name="changePasswordButton" Content="{x:Static lang:Lang.Profile_ChangePasswordButton}"
                         Style="{StaticResource SecondaryButton}" MinWidth="0" Height="34" FontSize="12"
                         Click="ChangePasswordButton_Click"/>
+                <Button x:Name="changeEmailButton" Content="{x:Static lang:Lang.Profile_ChangeEmailButton}"
+                        Style="{StaticResource SecondaryButton}" MinWidth="0" Height="34" FontSize="12"
+                        Click="ChangeEmailButton_Click"/>
                 <Button x:Name="matchHistoryButton" Content="{x:Static lang:Lang.Profile_MatchHistoryButton}"
-                        Style="{StaticResource SecondaryButton}" MinWidth="0" Height="34" FontSize="12"/>
+                        Style="{StaticResource SecondaryButton}" MinWidth="0" Height="34" FontSize="12"
+                        Click="MatchHistoryButton_Click"/>
+                <Button x:Name="deleteAccountButton" Content="{x:Static lang:Lang.Profile_DeleteAccountButton}"
+                        Style="{StaticResource DangerOutlineButton}" MinWidth="0" Height="34" FontSize="12"
+                        Margin="0,18,0,0" Click="DeleteAccountButton_Click"/>
             </StackPanel>
         </Border>
 

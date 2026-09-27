@@ -12,6 +12,7 @@
         <AssociationConnector Association="CribbageModel.fk_ajustes_jugador_usuario" ManuallyRouted="false" />
         <AssociationConnector Association="CribbageModel.fk_codigo_verificacion_usuario" ManuallyRouted="false" />
         <AssociationConnector Association="CribbageModel.fk_perfil_jugador_usuario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CribbageModel.vista_estadisticas_jugador" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

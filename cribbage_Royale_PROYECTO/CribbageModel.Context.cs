@@ -29,5 +29,6 @@ namespace cribbage_Royale_PROYECTO
         public virtual DbSet<codigo_verificacion> codigo_verificacion { get; set; }
         public virtual DbSet<perfil_jugador> perfil_jugador { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<vista_estadisticas_jugador> vista_estadisticas_jugador { get; set; }
     }
 }

@@ -24,8 +24,7 @@ namespace cribbage_Royale_PROYECTO
         public string nombre_usuario { get; set; }
         public string correo { get; set; }
         public string correo_pendiente { get; set; }
-        public byte[] hash_contrasena { get; set; }
-        public byte[] salt_contrasena { get; set; }
+        public string hash_contrasena { get; set; }
         public string estado_cuenta { get; set; }
         public System.DateTime fecha_registro { get; set; }
         public byte intentos_fallidos { get; set; }
