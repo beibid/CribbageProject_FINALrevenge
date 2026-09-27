@@ -1377,4 +1377,13 @@ If you did not create this account, ignore this message.</value>
 	<data name="Settings_LogoutConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to sign out?</value>
   </data>
+	<data name="Login_UserNotFoundMessage" xml:space="preserve">
+    <value>No account was found with that username or email</value>
+  </data>
+	<data name="Login_IncorrectPasswordMessage" xml:space="preserve">
+    <value>The password is incorrect</value>
+  </data>
+	<data name="Register_SuccessMessage" xml:space="preserve">
+    <value>Account created successfully</value>
+  </data>
 </root>

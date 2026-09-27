@@ -55,7 +55,7 @@ namespace cribbage_Royale_PROYECTO.DataAccess
 
                 if (account == null)
                 {
-                    result = BuildFailedResult(AuthenticationOutcome.InvalidCredentials);
+                    result = BuildFailedResult(AuthenticationOutcome.UserNotFound);
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace cribbage_Royale_PROYECTO.DataAccess
             else if (!IsPasswordCorrect(password, account.hash_contrasena))
             {
                 RegisterFailedAttempt(context, account);
-                result = BuildFailedResult(AuthenticationOutcome.InvalidCredentials);
+                result = BuildFailedResult(AuthenticationOutcome.InvalidPassword);
             }
             else if (account.estado_cuenta == SuspendedAccountStatus)
             {

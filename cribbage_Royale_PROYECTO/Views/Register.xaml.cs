@@ -150,7 +150,7 @@ namespace cribbage_Royale_PROYECTO.Views
             return notice;
         }
 
-        private void SendVerificationCode()
+        private void CompleteRegistration()
         {
             int userId = _userRepository.GetUserId(GetEmail());
             string code = _verificationCodeRepository.CreateCode(
@@ -158,7 +158,10 @@ namespace cribbage_Royale_PROYECTO.Views
                 VerificationCodeRepository.AccountVerificationPurpose,
                 GetEmail());
 
-            ShowAwaitingVerificationPage(DeliverCode(code));
+            VerificationNotice notice = DeliverCode(code);
+
+            MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.Register_SuccessMessage);
+            ShowAwaitingVerificationPage(notice);
         }
 
         private void ProcessRegistrationOutcome(RegistrationOutcome outcome)
@@ -166,7 +169,7 @@ namespace cribbage_Royale_PROYECTO.Views
             switch (outcome)
             {
                 case RegistrationOutcome.Success:
-                    SendVerificationCode();
+                    CompleteRegistration();
                     break;
                 case RegistrationOutcome.EmailPendingVerification:
                     ShowAwaitingVerificationPage(VerificationNotice.AccountAlreadyPending);

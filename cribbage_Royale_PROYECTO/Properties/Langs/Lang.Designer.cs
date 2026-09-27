@@ -1903,6 +1903,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The password is incorrect.
+        /// </summary>
+        public static string Login_IncorrectPasswordMessage {
+            get {
+                return ResourceManager.GetString("Login_IncorrectPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The username or password is incorrect.
         /// </summary>
         public static string Login_InvalidCredentialsMessage {
@@ -1962,6 +1971,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Login_UsernameLabel {
             get {
                 return ResourceManager.GetString("Login_UsernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No account was found with that username or email.
+        /// </summary>
+        public static string Login_UserNotFoundMessage {
+            get {
+                return ResourceManager.GetString("Login_UserNotFoundMessage", resourceCulture);
             }
         }
         
@@ -2700,6 +2718,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Register_Subtitle {
             get {
                 return ResourceManager.GetString("Register_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account created successfully.
+        /// </summary>
+        public static string Register_SuccessMessage {
+            get {
+                return ResourceManager.GetString("Register_SuccessMessage", resourceCulture);
             }
         }
         

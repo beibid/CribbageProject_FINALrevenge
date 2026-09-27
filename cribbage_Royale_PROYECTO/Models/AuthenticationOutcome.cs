@@ -9,7 +9,8 @@ namespace cribbage_Royale_PROYECTO.Models
     public enum AuthenticationOutcome
     {
         Success,
-        InvalidCredentials,
+        UserNotFound,
+        InvalidPassword,
         AccountNotVerified,
         AccountSuspended,
         AccountLocked,
