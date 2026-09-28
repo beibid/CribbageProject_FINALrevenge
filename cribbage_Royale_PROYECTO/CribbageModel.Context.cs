@@ -30,5 +30,24 @@ namespace cribbage_Royale_PROYECTO
         public virtual DbSet<perfil_jugador> perfil_jugador { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
         public virtual DbSet<vista_estadisticas_jugador> vista_estadisticas_jugador { get; set; }
+        public virtual DbSet<amistad> amistad { get; set; }
+        public virtual DbSet<auditoria_soporte> auditoria_soporte { get; set; }
+        public virtual DbSet<bitacora_evento> bitacora_evento { get; set; }
+        public virtual DbSet<bloqueo> bloqueo { get; set; }
+        public virtual DbSet<carta> carta { get; set; }
+        public virtual DbSet<carta_en_manga> carta_en_manga { get; set; }
+        public virtual DbSet<invitacion_partida> invitacion_partida { get; set; }
+        public virtual DbSet<jugada_pegging> jugada_pegging { get; set; }
+        public virtual DbSet<manga> manga { get; set; }
+        public virtual DbSet<participante_partida> participante_partida { get; set; }
+        public virtual DbSet<partida> partida { get; set; }
+        public virtual DbSet<puntuacion> puntuacion { get; set; }
+        public virtual DbSet<reporte> reporte { get; set; }
+        public virtual DbSet<sancion> sancion { get; set; }
+        public virtual DbSet<sesion> sesion { get; set; }
+        public virtual DbSet<vista_amigos> vista_amigos { get; set; }
+        public virtual DbSet<vista_crib> vista_crib { get; set; }
+        public virtual DbSet<vista_marcador_partida> vista_marcador_partida { get; set; }
+        public virtual DbSet<vista_suspension_vigente> vista_suspension_vigente { get; set; }
     }
 }

@@ -13,6 +13,60 @@
         <AssociationConnector Association="CribbageModel.fk_codigo_verificacion_usuario" ManuallyRouted="false" />
         <AssociationConnector Association="CribbageModel.fk_perfil_jugador_usuario" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CribbageModel.vista_estadisticas_jugador" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CribbageModel.amistad" Width="1.5" PointX="3" PointY="24.125" />
+        <EntityTypeShape EntityType="CribbageModel.auditoria_soporte" Width="1.5" PointX="5.25" PointY="16.5" />
+        <EntityTypeShape EntityType="CribbageModel.bitacora_evento" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="CribbageModel.bloqueo" Width="1.5" PointX="3" PointY="27.375" />
+        <EntityTypeShape EntityType="CribbageModel.carta" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="CribbageModel.carta_en_manga" Width="1.5" PointX="7.5" PointY="8.75" />
+        <EntityTypeShape EntityType="CribbageModel.invitacion_partida" Width="1.5" PointX="8.25" PointY="12.5" />
+        <EntityTypeShape EntityType="CribbageModel.jugada_pegging" Width="1.5" PointX="12.75" PointY="11.25" />
+        <EntityTypeShape EntityType="CribbageModel.manga" Width="1.5" PointX="10.5" PointY="13.5" />
+        <EntityTypeShape EntityType="CribbageModel.participante_partida" Width="1.5" PointX="5.25" PointY="8.125" />
+        <EntityTypeShape EntityType="CribbageModel.partida" Width="1.5" PointX="3" PointY="19.5" />
+        <EntityTypeShape EntityType="CribbageModel.puntuacion" Width="1.5" PointX="15.75" PointY="11.5" />
+        <EntityTypeShape EntityType="CribbageModel.reporte" Width="1.5" PointX="8.25" PointY="16.625" />
+        <EntityTypeShape EntityType="CribbageModel.sancion" Width="1.5" PointX="10.5" PointY="9.125" />
+        <EntityTypeShape EntityType="CribbageModel.sesion" Width="1.5" PointX="3" PointY="12.625" />
+        <EntityTypeShape EntityType="CribbageModel.vista_amigos" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CribbageModel.vista_crib" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="CribbageModel.vista_marcador_partida" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CribbageModel.vista_suspension_vigente" Width="1.5" PointX="9.375" PointY="3.75" />
+        <AssociationConnector Association="CribbageModel.fk_amistad_destinatario" />
+        <AssociationConnector Association="CribbageModel.fk_amistad_solicitante" />
+        <AssociationConnector Association="CribbageModel.fk_auditoria_soporte_partida" />
+        <AssociationConnector Association="CribbageModel.fk_auditoria_soporte_reporte" />
+        <AssociationConnector Association="CribbageModel.fk_auditoria_soporte_usuario" />
+        <AssociationConnector Association="CribbageModel.fk_bitacora_partida" />
+        <AssociationConnector Association="CribbageModel.fk_bitacora_usuario" />
+        <AssociationConnector Association="CribbageModel.fk_bloqueo_bloqueado" />
+        <AssociationConnector Association="CribbageModel.fk_bloqueo_que_bloquea" />
+        <AssociationConnector Association="CribbageModel.fk_carta_en_manga_carta" />
+        <AssociationConnector Association="CribbageModel.fk_jugada_carta" />
+        <AssociationConnector Association="CribbageModel.fk_manga_carta_volteada" />
+        <AssociationConnector Association="CribbageModel.fk_carta_en_manga_manga" />
+        <AssociationConnector Association="CribbageModel.fk_carta_en_manga_participante" />
+        <AssociationConnector Association="CribbageModel.fk_invitacion_destinatario" />
+        <AssociationConnector Association="CribbageModel.fk_invitacion_emisor" />
+        <AssociationConnector Association="CribbageModel.fk_invitacion_partida" />
+        <AssociationConnector Association="CribbageModel.fk_jugada_manga" />
+        <AssociationConnector Association="CribbageModel.fk_jugada_participante" />
+        <AssociationConnector Association="CribbageModel.fk_manga_en_turno" />
+        <AssociationConnector Association="CribbageModel.fk_manga_partida" />
+        <AssociationConnector Association="CribbageModel.fk_manga_repartidor" />
+        <AssociationConnector Association="CribbageModel.fk_puntuacion_manga" />
+        <AssociationConnector Association="CribbageModel.fk_participante_partida" />
+        <AssociationConnector Association="CribbageModel.fk_participante_usuario" />
+        <AssociationConnector Association="CribbageModel.fk_puntuacion_participante" />
+        <AssociationConnector Association="CribbageModel.fk_partida_ganador" />
+        <AssociationConnector Association="CribbageModel.fk_reporte_partida" />
+        <AssociationConnector Association="CribbageModel.fk_reporte_reportado" />
+        <AssociationConnector Association="CribbageModel.fk_reporte_reportante" />
+        <AssociationConnector Association="CribbageModel.fk_reporte_soporte" />
+        <AssociationConnector Association="CribbageModel.fk_sancion_reporte" />
+        <AssociationConnector Association="CribbageModel.fk_sancion_sancionado" />
+        <AssociationConnector Association="CribbageModel.fk_sancion_soporte" />
+        <AssociationConnector Association="CribbageModel.fk_sesion_usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

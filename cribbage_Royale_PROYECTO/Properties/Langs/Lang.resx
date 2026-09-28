@@ -1386,4 +1386,232 @@ If you did not create this account, ignore this message.</value>
 	<data name="Register_SuccessMessage" xml:space="preserve">
     <value>Account created successfully</value>
   </data>
+	<data name="SuspendAccount_Title" xml:space="preserve">
+    <value>Suspend account</value>
+  </data>
+	<data name="SuspendAccount_UsernameFormat" xml:space="preserve">
+    <value>Player: {0}</value>
+  </data>
+	<data name="SuspendAccount_ReasonLabel" xml:space="preserve">
+    <value>Sanction reason</value>
+  </data>
+	<data name="SuspendAccount_DurationLabel" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+	<data name="SuspendAccount_ApplyButton" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+	<data name="SuspendAccount_ModifyDurationButton" xml:space="preserve">
+    <value>Modify duration</value>
+  </data>
+	<data name="SuspendAccount_ReactivateButton" xml:space="preserve">
+    <value>Reactivate account</value>
+  </data>
+	<data name="SuspendAccount_Duration1Day" xml:space="preserve">
+    <value>1 day</value>
+  </data>
+	<data name="SuspendAccount_Duration3Days" xml:space="preserve">
+    <value>3 days</value>
+  </data>
+	<data name="SuspendAccount_Duration7Days" xml:space="preserve">
+    <value>7 days</value>
+  </data>
+	<data name="SuspendAccount_Duration30Days" xml:space="preserve">
+    <value>30 days</value>
+  </data>
+	<data name="SuspendAccount_AlreadySuspendedMessage" xml:space="preserve">
+    <value>This account is already suspended until {0}</value>
+  </data>
+	<data name="SuspendAccount_ApplyErrorMessage" xml:space="preserve">
+    <value>The sanction could not be applied. Please try again in a few minutes</value>
+  </data>
+	<data name="SuspendAccount_EmailPendingMessage" xml:space="preserve">
+    <value>The sanction was applied. The notification email will be sent shortly</value>
+  </data>
+	<data name="SuspendAccount_SuccessMessage" xml:space="preserve">
+    <value>Account suspended successfully</value>
+  </data>
+	<data name="SanctionEmail_Subject" xml:space="preserve">
+    <value>Your Cribbage Royale account was suspended</value>
+  </data>
+	<data name="SanctionEmail_TemporaryBodyFormat" xml:space="preserve">
+    <value>Your account was suspended for the following reason: {0}. It will be reactivated on {1}.</value>
+  </data>
+	<data name="Dialog_ConfirmReactivateAccountMessage" xml:space="preserve">
+    <value>Are you sure you want to lift this account's suspension?</value>
+  </data>
+	<data name="SupportPanel_Title" xml:space="preserve">
+    <value>Support panel</value>
+  </data>
+	<data name="SupportPanel_PendingReportsHeader" xml:space="preserve">
+    <value>Pending reports</value>
+  </data>
+	<data name="SupportPanel_SuspendedAccountsHeader" xml:space="preserve">
+    <value>Suspended accounts</value>
+  </data>
+	<data name="SupportPanel_ReportedColumnHeader" xml:space="preserve">
+    <value>Reported player</value>
+  </data>
+	<data name="SupportPanel_ReporterColumnHeader" xml:space="preserve">
+    <value>Reported by</value>
+  </data>
+	<data name="SupportPanel_ReasonColumnHeader" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+	<data name="SupportPanel_DateColumnHeader" xml:space="preserve">
+    <value>Date</value>
+  </data>
+	<data name="SupportPanel_ReviewColumnHeader" xml:space="preserve">
+    <value>Review</value>
+  </data>
+	<data name="SupportPanel_ReviewButton" xml:space="preserve">
+    <value>Review</value>
+  </data>
+	<data name="SupportPanel_UsernameColumnHeader" xml:space="preserve">
+    <value>Username</value>
+  </data>
+	<data name="SupportPanel_SuspendedUntilColumnHeader" xml:space="preserve">
+    <value>Suspended until</value>
+  </data>
+	<data name="SupportPanel_ReactivateColumnHeader" xml:space="preserve">
+    <value>Reactivate</value>
+  </data>
+	<data name="BlockedPlayers_Title" xml:space="preserve">
+    <value>Blocked players</value>
+  </data>
+	<data name="BlockedPlayers_NoBlocksMessage" xml:space="preserve">
+    <value>You have not blocked any players</value>
+  </data>
+	<data name="BlockedPlayers_DisplayNameColumnHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+	<data name="BlockedPlayers_UsernameColumnHeader" xml:space="preserve">
+    <value>Username</value>
+  </data>
+	<data name="BlockedPlayers_DateColumnHeader" xml:space="preserve">
+    <value>Blocked on</value>
+  </data>
+	<data name="BlockedPlayers_UnblockColumnHeader" xml:space="preserve">
+    <value>Unblock</value>
+  </data>
+	<data name="BlockedPlayers_UnblockButton" xml:space="preserve">
+    <value>Unblock</value>
+  </data>
+	<data name="Dialog_ConfirmUnblockMessageFormat" xml:space="preserve">
+    <value>Do you want to unblock {0}?</value>
+  </data>
+	<data name="Dialog_UnblockSuccessMessage" xml:space="preserve">
+    <value>Player unblocked</value>
+  </data>
+	<data name="PublicProfile_Title" xml:space="preserve">
+    <value>Player profile</value>
+  </data>
+	<data name="PublicProfile_SkillLevelFormat" xml:space="preserve">
+    <value>Skill level: {0}</value>
+  </data>
+	<data name="PublicProfile_MatchesPlayedFormat" xml:space="preserve">
+    <value>Matches: {0} played, {1} won</value>
+  </data>
+	<data name="PublicProfile_WinPercentageFormat" xml:space="preserve">
+    <value>Win rate: {0}%</value>
+  </data>
+	<data name="PublicProfile_RegistrationDateFormat" xml:space="preserve">
+    <value>Member since {0}</value>
+  </data>
+	<data name="PublicProfile_AddFriendButton" xml:space="preserve">
+    <value>Add friend</value>
+  </data>
+	<data name="PublicProfile_CancelRequestButton" xml:space="preserve">
+    <value>Cancel request</value>
+  </data>
+	<data name="PublicProfile_AcceptRequestButton" xml:space="preserve">
+    <value>Accept request</value>
+  </data>
+	<data name="PublicProfile_RejectRequestButton" xml:space="preserve">
+    <value>Reject request</value>
+  </data>
+	<data name="PublicProfile_RemoveFriendButton" xml:space="preserve">
+    <value>Remove friend</value>
+  </data>
+	<data name="PublicProfile_BlockButton" xml:space="preserve">
+    <value>Block</value>
+  </data>
+	<data name="PublicProfile_ReportButton" xml:space="preserve">
+    <value>Report player</value>
+  </data>
+	<data name="Dialog_ConfirmSendRequestMessageFormat" xml:space="preserve">
+    <value>Do you want to send a friend request to {0}?</value>
+  </data>
+	<data name="Dialog_FriendRequestSentMessage" xml:space="preserve">
+    <value>Friend request sent</value>
+  </data>
+	<data name="Dialog_ConfirmCancelRequestMessageFormat" xml:space="preserve">
+    <value>Do you want to cancel the friend request sent to {0}?</value>
+  </data>
+	<data name="Dialog_RequestCancelledMessage" xml:space="preserve">
+    <value>Request cancelled</value>
+  </data>
+	<data name="Dialog_ConfirmAcceptRequestMessageFormat" xml:space="preserve">
+    <value>Do you want to accept the friend request from {0}?</value>
+  </data>
+	<data name="Dialog_ConfirmRejectRequestMessageFormat" xml:space="preserve">
+    <value>Do you want to reject the request from {0}?</value>
+  </data>
+	<data name="Dialog_NowFriendsMessage" xml:space="preserve">
+    <value>You are now friends</value>
+  </data>
+	<data name="Dialog_RequestRejectedMessage" xml:space="preserve">
+    <value>Request rejected</value>
+  </data>
+	<data name="Dialog_ConfirmRemoveFriendMessageFormat" xml:space="preserve">
+    <value>Are you sure you want to remove {0} from your friends list?</value>
+  </data>
+	<data name="Dialog_FriendRemovedMessage" xml:space="preserve">
+    <value>Friend removed</value>
+  </data>
+	<data name="Dialog_ConfirmBlockMessageFormat" xml:space="preserve">
+    <value>Blocking {0} will remove them as a friend, they will not be able to send you requests or invitations, and they will not appear in your searches. Do you want to continue?</value>
+  </data>
+	<data name="Dialog_PlayerBlockedMessage" xml:space="preserve">
+    <value>Player blocked</value>
+  </data>
+	<data name="Dialog_DatabaseAccessErrorMessage" xml:space="preserve">
+    <value>No se pudo conectar con la base de datos. Intenta de nuevo más tarde.</value>
+  </data>
+	<data name="ReportPlayer_Title" xml:space="preserve">
+    <value>Reportar jugador</value>
+  </data>
+	<data name="ReportPlayer_ReportedUsernameFormat" xml:space="preserve">
+    <value>Estás reportando a {0}</value>
+  </data>
+	<data name="ReportPlayer_ReasonLabel" xml:space="preserve">
+    <value>Motivo del reporte</value>
+  </data>
+	<data name="ReportPlayer_ReasonMisconduct" xml:space="preserve">
+    <value>Conducta indebida</value>
+  </data>
+	<data name="ReportPlayer_ReasonCheating" xml:space="preserve">
+    <value>Sospecha de trampa</value>
+  </data>
+	<data name="ReportPlayer_ReasonOffensiveName" xml:space="preserve">
+    <value>Nombre ofensivo</value>
+  </data>
+	<data name="ReportPlayer_CommentLabel" xml:space="preserve">
+    <value>Comentario adicional (opcional)</value>
+  </data>
+	<data name="ReportPlayer_SubmitButton" xml:space="preserve">
+    <value>Enviar reporte</value>
+  </data>
+	<data name="ReportPlayer_SubmitAndBlockButton" xml:space="preserve">
+    <value>Reportar y bloquear</value>
+  </data>
+	<data name="ReportPlayer_MissingReasonMessage" xml:space="preserve">
+    <value>Selecciona un motivo para continuar.</value>
+  </data>
+	<data name="ReportPlayer_DuplicateReportMessageFormat" xml:space="preserve">
+    <value>Ya existe un reporte con folio {0} para este jugador.</value>
+  </data>
+	<data name="ReportPlayer_SuccessMessageFormat" xml:space="preserve">
+    <value>Reporte enviado. Tu folio es {0}.</value>
+  </data>
 </root>

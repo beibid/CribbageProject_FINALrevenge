@@ -43,10 +43,9 @@ namespace cribbage_Royale_PROYECTO.Views
                 languageComboBox.SelectedItem = matchingItem;
             }
         }
-
         private bool HasActiveSession()
         {
-            return CurrentSession.Kind != SessionKind.None;
+            return CurrentSession.Kind != CurrentSession.SessionKind.None;
         }
 
         private void ShowAvailableOptions()

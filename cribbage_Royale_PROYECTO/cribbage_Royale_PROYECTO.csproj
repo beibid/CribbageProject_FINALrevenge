@@ -87,6 +87,24 @@
     <Compile Include="ajustes_jugador.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="amistad.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="auditoria_soporte.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bitacora_evento.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bloqueo.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="carta.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="carta_en_manga.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="codigo_verificacion.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
@@ -105,25 +123,59 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CribbageModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\AccountStatus.cs" />
+    <Compile Include="DataAccess\BlockRepository.cs" />
+    <Compile Include="DataAccess\FriendshipRepository.cs" />
+    <Compile Include="DataAccess\FriendshipStatus.cs" />
+    <Compile Include="DataAccess\PlayerProfileRepository.cs" />
+    <Compile Include="DataAccess\RelationshipStatus.cs" />
+    <Compile Include="DataAccess\ReportReason.cs" />
+    <Compile Include="DataAccess\ReportRepository.cs" />
+    <Compile Include="DataAccess\ReportStatus.cs" />
+    <Compile Include="DataAccess\SanctionType.cs" />
     <Compile Include="DataAccess\ScoreboardRepository.cs" />
+    <Compile Include="DataAccess\SupportRepository.cs" />
     <Compile Include="DataAccess\UserRepository.cs" />
     <Compile Include="DataAccess\VerificationCodeRepository.cs" />
+    <Compile Include="invitacion_partida.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="jugada_pegging.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Localization\LanguageManager.cs" />
+    <Compile Include="Mail\SanctionEmailSender.cs" />
     <Compile Include="Mail\VerificationEmailSender.cs" />
+    <Compile Include="manga.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountSanctionStatus.cs" />
     <Compile Include="Models\AuthenticationOutcome.cs" />
     <Compile Include="Models\AuthenticationResult.cs" />
+    <Compile Include="Models\BlockedPlayerSummary.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
     <Compile Include="Models\CodeValidationOutcome.cs" />
     <Compile Include="Models\MatchEndReason.cs" />
     <Compile Include="Models\MatchItem.cs" />
     <Compile Include="Models\MatchPhase.cs" />
     <Compile Include="Models\MatchResultItem.cs" />
+    <Compile Include="Models\PendingReportSummary.cs" />
     <Compile Include="Models\PlayerItem.cs" />
     <Compile Include="Models\PlayingCardItem.cs" />
+    <Compile Include="Models\PublicProfileSummary.cs" />
     <Compile Include="Models\RegistrationOutcome.cs" />
+    <Compile Include="Models\ReportReasonOption.cs" />
     <Compile Include="Models\ScoreboardItem.cs" />
     <Compile Include="Models\SessionKind.cs" />
+    <Compile Include="Models\SuspendedAccountSummary.cs" />
+    <Compile Include="Models\SuspensionDurationOption.cs" />
     <Compile Include="Models\VerificationNotice.cs" />
+    <Compile Include="participante_partida.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="partida.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="perfil_jugador.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
@@ -131,6 +183,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
+    <Compile Include="puntuacion.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="reporte.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sancion.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sesion.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Session\CurrentSession.cs" />
     <Compile Include="usuario.cs">
@@ -141,6 +205,9 @@
     </Compile>
     <Compile Include="Views\AwaitingVerificationPage.xaml.cs">
       <DependentUpon>AwaitingVerificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BlockedPlayersPage.xaml.cs">
+      <DependentUpon>BlockedPlayersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChangeEmailPage.xaml.cs">
       <DependentUpon>ChangeEmailPage.xaml</DependentUpon>
@@ -153,6 +220,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\SuspendAccountDialogWindow.xaml.cs">
+      <DependentUpon>SuspendAccountDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditProfilePage.xaml.cs">
       <DependentUpon>EditProfilePage.xaml</DependentUpon>
@@ -187,11 +257,17 @@
     <Compile Include="Views\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PublicProfilePage.xaml.cs">
+      <DependentUpon>PublicProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RecoverPasswordPage.xaml.cs">
       <DependentUpon>RecoverPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportPlayerPage.xaml.cs">
+      <DependentUpon>ReportPlayerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ResetPasswordPage.xaml.cs">
       <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
@@ -204,6 +280,9 @@
     </Compile>
     <Compile Include="Views\StartMenu.xaml.cs">
       <DependentUpon>StartMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupportPanelPage.xaml.cs">
+      <DependentUpon>SupportPanelPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tutorial.xaml.cs">
       <DependentUpon>Tutorial.xaml</DependentUpon>
@@ -226,7 +305,19 @@
     <Compile Include="Views\VerifyAccountPage.xaml.cs">
       <DependentUpon>VerifyAccountPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="vista_amigos.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vista_crib.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="vista_estadisticas_jugador.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vista_marcador_partida.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vista_suspension_vigente.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -249,6 +340,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BlockedPlayersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ChangeEmailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -262,6 +357,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\MessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\SuspendAccountDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -309,11 +408,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PublicProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RecoverPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportPlayerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -330,6 +437,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StartMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupportPanelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

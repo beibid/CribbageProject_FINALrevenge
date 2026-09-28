@@ -250,6 +250,69 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Blocked on.
+        /// </summary>
+        public static string BlockedPlayers_DateColumnHeader {
+            get {
+                return ResourceManager.GetString("BlockedPlayers_DateColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Name.
+        /// </summary>
+        public static string BlockedPlayers_DisplayNameColumnHeader {
+            get {
+                return ResourceManager.GetString("BlockedPlayers_DisplayNameColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have not blocked any players.
+        /// </summary>
+        public static string BlockedPlayers_NoBlocksMessage {
+            get {
+                return ResourceManager.GetString("BlockedPlayers_NoBlocksMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Blocked players.
+        /// </summary>
+        public static string BlockedPlayers_Title {
+            get {
+                return ResourceManager.GetString("BlockedPlayers_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unblock.
+        /// </summary>
+        public static string BlockedPlayers_UnblockButton {
+            get {
+                return ResourceManager.GetString("BlockedPlayers_UnblockButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unblock.
+        /// </summary>
+        public static string BlockedPlayers_UnblockColumnHeader {
+            get {
+                return ResourceManager.GetString("BlockedPlayers_UnblockColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username.
+        /// </summary>
+        public static string BlockedPlayers_UsernameColumnHeader {
+            get {
+                return ResourceManager.GetString("BlockedPlayers_UsernameColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You have reached the maximum number of attempts. Wait a few minutes before trying again.
         /// </summary>
         public static string ChangeEmail_AttemptLimitMessage {
@@ -736,6 +799,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to accept the friend request from {0}?.
+        /// </summary>
+        public static string Dialog_ConfirmAcceptRequestMessageFormat {
+            get {
+                return ResourceManager.GetString("Dialog_ConfirmAcceptRequestMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirmation.
         /// </summary>
         public static string Dialog_ConfirmationTitle {
@@ -745,11 +817,101 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Blocking {0} will remove them as a friend, they will not be able to send you requests or invitations, and they will not appear in your searches. Do you want to continue?.
+        /// </summary>
+        public static string Dialog_ConfirmBlockMessageFormat {
+            get {
+                return ResourceManager.GetString("Dialog_ConfirmBlockMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to cancel the friend request sent to {0}?.
+        /// </summary>
+        public static string Dialog_ConfirmCancelRequestMessageFormat {
+            get {
+                return ResourceManager.GetString("Dialog_ConfirmCancelRequestMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to lift this account&apos;s suspension?.
+        /// </summary>
+        public static string Dialog_ConfirmReactivateAccountMessage {
+            get {
+                return ResourceManager.GetString("Dialog_ConfirmReactivateAccountMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to reject the request from {0}?.
+        /// </summary>
+        public static string Dialog_ConfirmRejectRequestMessageFormat {
+            get {
+                return ResourceManager.GetString("Dialog_ConfirmRejectRequestMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to remove {0} from your friends list?.
+        /// </summary>
+        public static string Dialog_ConfirmRemoveFriendMessageFormat {
+            get {
+                return ResourceManager.GetString("Dialog_ConfirmRemoveFriendMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to send a friend request to {0}?.
+        /// </summary>
+        public static string Dialog_ConfirmSendRequestMessageFormat {
+            get {
+                return ResourceManager.GetString("Dialog_ConfirmSendRequestMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to unblock {0}?.
+        /// </summary>
+        public static string Dialog_ConfirmUnblockMessageFormat {
+            get {
+                return ResourceManager.GetString("Dialog_ConfirmUnblockMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo conectar con la base de datos. Intenta de nuevo más tarde..
+        /// </summary>
+        public static string Dialog_DatabaseAccessErrorMessage {
+            get {
+                return ResourceManager.GetString("Dialog_DatabaseAccessErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a System error.
         /// </summary>
         public static string Dialog_ErrorTitle {
             get {
                 return ResourceManager.GetString("Dialog_ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend removed.
+        /// </summary>
+        public static string Dialog_FriendRemovedMessage {
+            get {
+                return ResourceManager.GetString("Dialog_FriendRemovedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend request sent.
+        /// </summary>
+        public static string Dialog_FriendRequestSentMessage {
+            get {
+                return ResourceManager.GetString("Dialog_FriendRequestSentMessage", resourceCulture);
             }
         }
         
@@ -772,6 +934,42 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You are now friends.
+        /// </summary>
+        public static string Dialog_NowFriendsMessage {
+            get {
+                return ResourceManager.GetString("Dialog_NowFriendsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player blocked.
+        /// </summary>
+        public static string Dialog_PlayerBlockedMessage {
+            get {
+                return ResourceManager.GetString("Dialog_PlayerBlockedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request cancelled.
+        /// </summary>
+        public static string Dialog_RequestCancelledMessage {
+            get {
+                return ResourceManager.GetString("Dialog_RequestCancelledMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request rejected.
+        /// </summary>
+        public static string Dialog_RequestRejectedMessage {
+            get {
+                return ResourceManager.GetString("Dialog_RequestRejectedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Your session has expired. Sign in again.
         /// </summary>
         public static string Dialog_SessionExpiredMessage {
@@ -786,6 +984,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Dialog_SuccessTitle {
             get {
                 return ResourceManager.GetString("Dialog_SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player unblocked.
+        /// </summary>
+        public static string Dialog_UnblockSuccessMessage {
+            get {
+                return ResourceManager.GetString("Dialog_UnblockSuccessMessage", resourceCulture);
             }
         }
         
@@ -2497,6 +2704,114 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Accept request.
+        /// </summary>
+        public static string PublicProfile_AcceptRequestButton {
+            get {
+                return ResourceManager.GetString("PublicProfile_AcceptRequestButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Add friend.
+        /// </summary>
+        public static string PublicProfile_AddFriendButton {
+            get {
+                return ResourceManager.GetString("PublicProfile_AddFriendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Block.
+        /// </summary>
+        public static string PublicProfile_BlockButton {
+            get {
+                return ResourceManager.GetString("PublicProfile_BlockButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel request.
+        /// </summary>
+        public static string PublicProfile_CancelRequestButton {
+            get {
+                return ResourceManager.GetString("PublicProfile_CancelRequestButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Matches: {0} played, {1} won.
+        /// </summary>
+        public static string PublicProfile_MatchesPlayedFormat {
+            get {
+                return ResourceManager.GetString("PublicProfile_MatchesPlayedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Member since {0}.
+        /// </summary>
+        public static string PublicProfile_RegistrationDateFormat {
+            get {
+                return ResourceManager.GetString("PublicProfile_RegistrationDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reject request.
+        /// </summary>
+        public static string PublicProfile_RejectRequestButton {
+            get {
+                return ResourceManager.GetString("PublicProfile_RejectRequestButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Remove friend.
+        /// </summary>
+        public static string PublicProfile_RemoveFriendButton {
+            get {
+                return ResourceManager.GetString("PublicProfile_RemoveFriendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Report player.
+        /// </summary>
+        public static string PublicProfile_ReportButton {
+            get {
+                return ResourceManager.GetString("PublicProfile_ReportButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Skill level: {0}.
+        /// </summary>
+        public static string PublicProfile_SkillLevelFormat {
+            get {
+                return ResourceManager.GetString("PublicProfile_SkillLevelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player profile.
+        /// </summary>
+        public static string PublicProfile_Title {
+            get {
+                return ResourceManager.GetString("PublicProfile_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Win rate: {0}%.
+        /// </summary>
+        public static string PublicProfile_WinPercentageFormat {
+            get {
+                return ResourceManager.GetString("PublicProfile_WinPercentageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancel.
         /// </summary>
         public static string RecoverPassword_CancelButton {
@@ -2767,6 +3082,114 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Comentario adicional (opcional).
+        /// </summary>
+        public static string ReportPlayer_CommentLabel {
+            get {
+                return ResourceManager.GetString("ReportPlayer_CommentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ya existe un reporte con folio {0} para este jugador..
+        /// </summary>
+        public static string ReportPlayer_DuplicateReportMessageFormat {
+            get {
+                return ResourceManager.GetString("ReportPlayer_DuplicateReportMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Selecciona un motivo para continuar..
+        /// </summary>
+        public static string ReportPlayer_MissingReasonMessage {
+            get {
+                return ResourceManager.GetString("ReportPlayer_MissingReasonMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sospecha de trampa.
+        /// </summary>
+        public static string ReportPlayer_ReasonCheating {
+            get {
+                return ResourceManager.GetString("ReportPlayer_ReasonCheating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Motivo del reporte.
+        /// </summary>
+        public static string ReportPlayer_ReasonLabel {
+            get {
+                return ResourceManager.GetString("ReportPlayer_ReasonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Conducta indebida.
+        /// </summary>
+        public static string ReportPlayer_ReasonMisconduct {
+            get {
+                return ResourceManager.GetString("ReportPlayer_ReasonMisconduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre ofensivo.
+        /// </summary>
+        public static string ReportPlayer_ReasonOffensiveName {
+            get {
+                return ResourceManager.GetString("ReportPlayer_ReasonOffensiveName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Estás reportando a {0}.
+        /// </summary>
+        public static string ReportPlayer_ReportedUsernameFormat {
+            get {
+                return ResourceManager.GetString("ReportPlayer_ReportedUsernameFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reportar y bloquear.
+        /// </summary>
+        public static string ReportPlayer_SubmitAndBlockButton {
+            get {
+                return ResourceManager.GetString("ReportPlayer_SubmitAndBlockButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enviar reporte.
+        /// </summary>
+        public static string ReportPlayer_SubmitButton {
+            get {
+                return ResourceManager.GetString("ReportPlayer_SubmitButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reporte enviado. Tu folio es {0}..
+        /// </summary>
+        public static string ReportPlayer_SuccessMessageFormat {
+            get {
+                return ResourceManager.GetString("ReportPlayer_SuccessMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reportar jugador.
+        /// </summary>
+        public static string ReportPlayer_Title {
+            get {
+                return ResourceManager.GetString("ReportPlayer_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancel.
         /// </summary>
         public static string ResetPassword_CancelButton {
@@ -2934,6 +3357,24 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string ResetPassword_Title {
             get {
                 return ResourceManager.GetString("ResetPassword_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your Cribbage Royale account was suspended.
+        /// </summary>
+        public static string SanctionEmail_Subject {
+            get {
+                return ResourceManager.GetString("SanctionEmail_Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your account was suspended for the following reason: {0}. It will be reactivated on {1}..
+        /// </summary>
+        public static string SanctionEmail_TemporaryBodyFormat {
+            get {
+                return ResourceManager.GetString("SanctionEmail_TemporaryBodyFormat", resourceCulture);
             }
         }
         
@@ -3267,6 +3708,249 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string StartMenu_Version {
             get {
                 return ResourceManager.GetString("StartMenu_Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Date.
+        /// </summary>
+        public static string SupportPanel_DateColumnHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_DateColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pending reports.
+        /// </summary>
+        public static string SupportPanel_PendingReportsHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_PendingReportsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reactivate.
+        /// </summary>
+        public static string SupportPanel_ReactivateColumnHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_ReactivateColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reason.
+        /// </summary>
+        public static string SupportPanel_ReasonColumnHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_ReasonColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reported player.
+        /// </summary>
+        public static string SupportPanel_ReportedColumnHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_ReportedColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reported by.
+        /// </summary>
+        public static string SupportPanel_ReporterColumnHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_ReporterColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Review.
+        /// </summary>
+        public static string SupportPanel_ReviewButton {
+            get {
+                return ResourceManager.GetString("SupportPanel_ReviewButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Review.
+        /// </summary>
+        public static string SupportPanel_ReviewColumnHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_ReviewColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suspended accounts.
+        /// </summary>
+        public static string SupportPanel_SuspendedAccountsHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_SuspendedAccountsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suspended until.
+        /// </summary>
+        public static string SupportPanel_SuspendedUntilColumnHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_SuspendedUntilColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Support panel.
+        /// </summary>
+        public static string SupportPanel_Title {
+            get {
+                return ResourceManager.GetString("SupportPanel_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username.
+        /// </summary>
+        public static string SupportPanel_UsernameColumnHeader {
+            get {
+                return ResourceManager.GetString("SupportPanel_UsernameColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This account is already suspended until {0}.
+        /// </summary>
+        public static string SuspendAccount_AlreadySuspendedMessage {
+            get {
+                return ResourceManager.GetString("SuspendAccount_AlreadySuspendedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Apply.
+        /// </summary>
+        public static string SuspendAccount_ApplyButton {
+            get {
+                return ResourceManager.GetString("SuspendAccount_ApplyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The sanction could not be applied. Please try again in a few minutes.
+        /// </summary>
+        public static string SuspendAccount_ApplyErrorMessage {
+            get {
+                return ResourceManager.GetString("SuspendAccount_ApplyErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 1 day.
+        /// </summary>
+        public static string SuspendAccount_Duration1Day {
+            get {
+                return ResourceManager.GetString("SuspendAccount_Duration1Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 30 days.
+        /// </summary>
+        public static string SuspendAccount_Duration30Days {
+            get {
+                return ResourceManager.GetString("SuspendAccount_Duration30Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 3 days.
+        /// </summary>
+        public static string SuspendAccount_Duration3Days {
+            get {
+                return ResourceManager.GetString("SuspendAccount_Duration3Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 7 days.
+        /// </summary>
+        public static string SuspendAccount_Duration7Days {
+            get {
+                return ResourceManager.GetString("SuspendAccount_Duration7Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Duration.
+        /// </summary>
+        public static string SuspendAccount_DurationLabel {
+            get {
+                return ResourceManager.GetString("SuspendAccount_DurationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The sanction was applied. The notification email will be sent shortly.
+        /// </summary>
+        public static string SuspendAccount_EmailPendingMessage {
+            get {
+                return ResourceManager.GetString("SuspendAccount_EmailPendingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Modify duration.
+        /// </summary>
+        public static string SuspendAccount_ModifyDurationButton {
+            get {
+                return ResourceManager.GetString("SuspendAccount_ModifyDurationButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reactivate account.
+        /// </summary>
+        public static string SuspendAccount_ReactivateButton {
+            get {
+                return ResourceManager.GetString("SuspendAccount_ReactivateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sanction reason.
+        /// </summary>
+        public static string SuspendAccount_ReasonLabel {
+            get {
+                return ResourceManager.GetString("SuspendAccount_ReasonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account suspended successfully.
+        /// </summary>
+        public static string SuspendAccount_SuccessMessage {
+            get {
+                return ResourceManager.GetString("SuspendAccount_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suspend account.
+        /// </summary>
+        public static string SuspendAccount_Title {
+            get {
+                return ResourceManager.GetString("SuspendAccount_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player: {0}.
+        /// </summary>
+        public static string SuspendAccount_UsernameFormat {
+            get {
+                return ResourceManager.GetString("SuspendAccount_UsernameFormat", resourceCulture);
             }
         }
         

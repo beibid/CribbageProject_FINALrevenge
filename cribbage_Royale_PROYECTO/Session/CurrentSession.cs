@@ -4,11 +4,23 @@ namespace cribbage_Royale_PROYECTO.Session
 {
     public static class CurrentSession
     {
+
+        public enum SessionKind
+        {
+            None,
+            Registered,
+            Guest,
+            Support
+        }
         public static SessionKind Kind { get; private set; }
 
         public static string Username { get; private set; }
 
         public static string Email { get; private set; }
+
+        public static int SupportAccountId { get; private set; }
+
+        public static string SupportUsername { get; private set; }
 
         public static void StartRegisteredSession(string username, string email)
         {
@@ -24,11 +36,20 @@ namespace cribbage_Royale_PROYECTO.Session
             Email = string.Empty;
         }
 
+        public static void StartSupportSession(int supportAccountId, string supportUsername)
+        {
+            Kind = SessionKind.Support;
+            SupportAccountId = supportAccountId;
+            SupportUsername = supportUsername;
+        }
+
         public static void EndSession()
         {
             Kind = SessionKind.None;
             Username = string.Empty;
             Email = string.Empty;
+            SupportAccountId = 0;
+            SupportUsername = string.Empty;
         }
 
         public static bool IsGuest()
