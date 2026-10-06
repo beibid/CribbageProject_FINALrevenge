@@ -100,6 +100,7 @@ namespace cribbage_Royale_PROYECTO.Views
             catch (Exception dataAccessException)
             {
                 messagePanel.ShowError(Lang.Dialog_DatabaseAccessErrorMessage);
+
             }
         }
 

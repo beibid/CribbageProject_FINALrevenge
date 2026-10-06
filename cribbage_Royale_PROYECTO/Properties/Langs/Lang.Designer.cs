@@ -169,6 +169,96 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You already invited this player. Wait for their response.
+        /// </summary>
+        public static string AwaitingInvite_AlreadyInvitedMessage {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_AlreadyInvitedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Back.
+        /// </summary>
+        public static string AwaitingInvite_BackButton {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_BackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel invitation.
+        /// </summary>
+        public static string AwaitingInvite_CancelButton {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The invitation expired without a response.
+        /// </summary>
+        public static string AwaitingInvite_ExpiredMessage {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_ExpiredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invite again.
+        /// </summary>
+        public static string AwaitingInvite_InviteAgainButton {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_InviteAgainButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This player is in a match right now.
+        /// </summary>
+        public static string AwaitingInvite_RecipientInMatchMessage {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_RecipientInMatchMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This player is not connected right now.
+        /// </summary>
+        public static string AwaitingInvite_RecipientOfflineMessage {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_RecipientOfflineMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} cannot play right now.
+        /// </summary>
+        public static string AwaitingInvite_RecipientRejectedMessage {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_RecipientRejectedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Waiting for response.
+        /// </summary>
+        public static string AwaitingInvite_TitleText {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_TitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Waiting for {0} to respond....
+        /// </summary>
+        public static string AwaitingInvite_WaitingMessage {
+            get {
+                return ResourceManager.GetString("AwaitingInvite_WaitingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a An account pending verification already exists with this email address.
         /// </summary>
         public static string AwaitingVerification_AccountAlreadyPending {
@@ -642,6 +732,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Common_OnlineStatus {
             get {
                 return ResourceManager.GetString("Common_OnlineStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Retry.
+        /// </summary>
+        public static string Common_RetryButton {
+            get {
+                return ResourceManager.GetString("Common_RetryButton", resourceCulture);
             }
         }
         
@@ -2335,6 +2434,213 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Connected.
+        /// </summary>
+        public static string MatchInfo_ConnectedStatus {
+            get {
+                return ResourceManager.GetString("MatchInfo_ConnectedStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Count.
+        /// </summary>
+        public static string MatchInfo_CountLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_CountLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cut card.
+        /// </summary>
+        public static string MatchInfo_CutCardLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_CutCardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Dealer.
+        /// </summary>
+        public static string MatchInfo_DealerLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_DealerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hand.
+        /// </summary>
+        public static string MatchInfo_HandLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_HandLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent&apos;s cards.
+        /// </summary>
+        public static string MatchInfo_OpponentCardsLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_OpponentCardsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent.
+        /// </summary>
+        public static string MatchInfo_OpponentLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_OpponentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Opponent status.
+        /// </summary>
+        public static string MatchInfo_OpponentStatusLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_OpponentStatusLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reconnecting.
+        /// </summary>
+        public static string MatchInfo_ReconnectingStatus {
+            get {
+                return ResourceManager.GetString("MatchInfo_ReconnectingStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Report player.
+        /// </summary>
+        public static string MatchInfo_ReportPlayerButton {
+            get {
+                return ResourceManager.GetString("MatchInfo_ReportPlayerButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Score.
+        /// </summary>
+        public static string MatchInfo_ScoreLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_ScoreLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} s.
+        /// </summary>
+        public static string MatchInfo_SecondsFormat {
+            get {
+                return ResourceManager.GetString("MatchInfo_SecondsFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Skill level.
+        /// </summary>
+        public static string MatchInfo_SkillLevelLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_SkillLevelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Showing the last known state of the match.
+        /// </summary>
+        public static string MatchInfo_StaleStateWarning {
+            get {
+                return ResourceManager.GetString("MatchInfo_StaleStateWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match information.
+        /// </summary>
+        public static string MatchInfo_TitleText {
+            get {
+                return ResourceManager.GetString("MatchInfo_TitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Turn time.
+        /// </summary>
+        public static string MatchInfo_TurnTimeLabel {
+            get {
+                return ResourceManager.GetString("MatchInfo_TurnTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Accept.
+        /// </summary>
+        public static string MatchInvite_AcceptButton {
+            get {
+                return ResourceManager.GetString("MatchInvite_AcceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Go to my match.
+        /// </summary>
+        public static string MatchInvite_GoToMatchButton {
+            get {
+                return ResourceManager.GetString("MatchInvite_GoToMatchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} invites you to play a match.
+        /// </summary>
+        public static string MatchInvite_InvitationMessage {
+            get {
+                return ResourceManager.GetString("MatchInvite_InvitationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reject.
+        /// </summary>
+        public static string MatchInvite_RejectButton {
+            get {
+                return ResourceManager.GetString("MatchInvite_RejectButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match invitation.
+        /// </summary>
+        public static string MatchInvite_TitleText {
+            get {
+                return ResourceManager.GetString("MatchInvite_TitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This invitation is no longer available.
+        /// </summary>
+        public static string MatchInvite_UnavailableMessage {
+            get {
+                return ResourceManager.GetString("MatchInvite_UnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You must finish or abandon your current match before accepting an invitation.
+        /// </summary>
+        public static string MatchInvite_UnfinishedMatchMessage {
+            get {
+                return ResourceManager.GetString("MatchInvite_UnfinishedMatchMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Back to lobby.
         /// </summary>
         public static string MatchResult_BackToLobbyButton {
@@ -3357,6 +3663,87 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string ResetPassword_Title {
             get {
                 return ResourceManager.GetString("ResetPassword_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Abandon match.
+        /// </summary>
+        public static string ResumeMatch_AbandonButton {
+            get {
+                return ResourceManager.GetString("ResumeMatch_AbandonButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If you abandon, the match will be recorded as a defeat. Do you want to continue?.
+        /// </summary>
+        public static string ResumeMatch_AbandonConfirmMessage {
+            get {
+                return ResourceManager.GetString("ResumeMatch_AbandonConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The abandonment could not be recorded. Please try again.
+        /// </summary>
+        public static string ResumeMatch_AbandonErrorMessage {
+            get {
+                return ResourceManager.GetString("ResumeMatch_AbandonErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This match has already ended.
+        /// </summary>
+        public static string ResumeMatch_AlreadyConcludedMessage {
+            get {
+                return ResourceManager.GetString("ResumeMatch_AlreadyConcludedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have no unfinished matches.
+        /// </summary>
+        public static string ResumeMatch_NoMatchMessage {
+            get {
+                return ResourceManager.GetString("ResumeMatch_NoMatchMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We could not recover your match at this time.
+        /// </summary>
+        public static string ResumeMatch_RecoverErrorMessage {
+            get {
+                return ResourceManager.GetString("ResumeMatch_RecoverErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Resume.
+        /// </summary>
+        public static string ResumeMatch_ResumeButton {
+            get {
+                return ResourceManager.GetString("ResumeMatch_ResumeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unfinished match.
+        /// </summary>
+        public static string ResumeMatch_TitleText {
+            get {
+                return ResourceManager.GetString("ResumeMatch_TitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have an unfinished match against {0}, with score {1} - {2}.
+        /// </summary>
+        public static string ResumeMatch_UnfinishedMatchMessage {
+            get {
+                return ResourceManager.GetString("ResumeMatch_UnfinishedMatchMessage", resourceCulture);
             }
         }
         

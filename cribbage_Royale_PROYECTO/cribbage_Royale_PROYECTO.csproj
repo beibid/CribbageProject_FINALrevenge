@@ -123,10 +123,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CribbageModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\AbandonmentOutcome.cs" />
     <Compile Include="DataAccess\AccountStatus.cs" />
     <Compile Include="DataAccess\BlockRepository.cs" />
+    <Compile Include="DataAccess\CardInMatchState.cs" />
     <Compile Include="DataAccess\FriendshipRepository.cs" />
     <Compile Include="DataAccess\FriendshipStatus.cs" />
+    <Compile Include="DataAccess\HandState.cs" />
+    <Compile Include="DataAccess\InvitationAcceptOutcome.cs" />
+    <Compile Include="DataAccess\InvitationCreationOutcome.cs" />
+    <Compile Include="DataAccess\InvitationRepository.cs" />
+    <Compile Include="DataAccess\InvitationStatus.cs" />
+    <Compile Include="DataAccess\MatchOrigin.cs" />
+    <Compile Include="DataAccess\MatchRepository.cs" />
+    <Compile Include="DataAccess\MatchStatus.cs" />
+    <Compile Include="DataAccess\MatchTerminationReason.cs" />
     <Compile Include="DataAccess\PlayerProfileRepository.cs" />
     <Compile Include="DataAccess\RelationshipStatus.cs" />
     <Compile Include="DataAccess\ReportReason.cs" />
@@ -155,8 +166,13 @@
     <Compile Include="Models\AuthenticationResult.cs" />
     <Compile Include="Models\BlockedPlayerSummary.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
+    <Compile Include="Models\CardTextFormatter.cs" />
     <Compile Include="Models\CodeValidationOutcome.cs" />
+    <Compile Include="Models\InvitationCreationResult.cs" />
+    <Compile Include="Models\InvitationResponseResult.cs" />
     <Compile Include="Models\MatchEndReason.cs" />
+    <Compile Include="Models\MatchInformationSummary.cs" />
+    <Compile Include="Models\MatchInvitationSummary.cs" />
     <Compile Include="Models\MatchItem.cs" />
     <Compile Include="Models\MatchPhase.cs" />
     <Compile Include="Models\MatchResultItem.cs" />
@@ -170,6 +186,7 @@
     <Compile Include="Models\SessionKind.cs" />
     <Compile Include="Models\SuspendedAccountSummary.cs" />
     <Compile Include="Models\SuspensionDurationOption.cs" />
+    <Compile Include="Models\UnfinishedMatchSummary.cs" />
     <Compile Include="Models\VerificationNotice.cs" />
     <Compile Include="participante_partida.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
@@ -204,6 +221,9 @@
     <Compile Include="Views\AddFriendPage.xaml.cs">
       <DependentUpon>AddFriendPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AwaitingInviteResponsePage.xaml.cs">
+      <DependentUpon>AwaitingInviteResponsePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AwaitingVerificationPage.xaml.cs">
       <DependentUpon>AwaitingVerificationPage.xaml</DependentUpon>
     </Compile>
@@ -218,6 +238,12 @@
     </Compile>
     <Compile Include="Views\Dialogs\ChangePasswordDialogWindow.xaml.cs">
       <DependentUpon>ChangePasswordDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\MatchInformationDialogWindow.xaml.cs">
+      <DependentUpon>MatchInformationDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\MatchInvitationDialogWindow.xaml.cs">
+      <DependentUpon>MatchInvitationDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
@@ -272,6 +298,9 @@
     </Compile>
     <Compile Include="Views\ResetPasswordPage.xaml.cs">
       <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResumeMatchPage.xaml.cs">
+      <DependentUpon>ResumeMatchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ScoreboardPage.xaml.cs">
       <DependentUpon>ScoreboardPage.xaml</DependentUpon>
@@ -337,6 +366,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AwaitingInviteResponsePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AwaitingVerificationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -354,6 +387,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\ChangePasswordDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\MatchInformationDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\MatchInvitationDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -426,6 +467,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ResetPasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResumeMatchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

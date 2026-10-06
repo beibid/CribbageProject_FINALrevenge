@@ -1614,4 +1614,133 @@ If you did not create this account, ignore this message.</value>
 	<data name="ReportPlayer_SuccessMessageFormat" xml:space="preserve">
     <value>Reporte enviado. Tu folio es {0}.</value>
   </data>
+	<data name="Common_RetryButton" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+	<data name="ResumeMatch_TitleText" xml:space="preserve">
+    <value>Unfinished match</value>
+  </data>
+	<data name="ResumeMatch_UnfinishedMatchMessage" xml:space="preserve">
+    <value>You have an unfinished match against {0}, with score {1} - {2}</value>
+  </data>
+	<data name="ResumeMatch_ResumeButton" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+	<data name="ResumeMatch_AbandonButton" xml:space="preserve">
+    <value>Abandon match</value>
+  </data>
+	<data name="ResumeMatch_NoMatchMessage" xml:space="preserve">
+    <value>You have no unfinished matches</value>
+  </data>
+	<data name="ResumeMatch_RecoverErrorMessage" xml:space="preserve">
+    <value>We could not recover your match at this time</value>
+  </data>
+	<data name="ResumeMatch_AbandonConfirmMessage" xml:space="preserve">
+    <value>If you abandon, the match will be recorded as a defeat. Do you want to continue?</value>
+  </data>
+	<data name="ResumeMatch_AlreadyConcludedMessage" xml:space="preserve">
+    <value>This match has already ended</value>
+  </data>
+	<data name="ResumeMatch_AbandonErrorMessage" xml:space="preserve">
+    <value>The abandonment could not be recorded. Please try again</value>
+  </data>
+	<data name="MatchInfo_TitleText" xml:space="preserve">
+    <value>Match information</value>
+  </data>
+	<data name="MatchInfo_OpponentLabel" xml:space="preserve">
+    <value>Opponent</value>
+  </data>
+	<data name="MatchInfo_SkillLevelLabel" xml:space="preserve">
+    <value>Skill level</value>
+  </data>
+	<data name="MatchInfo_ScoreLabel" xml:space="preserve">
+    <value>Score</value>
+  </data>
+	<data name="MatchInfo_HandLabel" xml:space="preserve">
+    <value>Hand</value>
+  </data>
+	<data name="MatchInfo_DealerLabel" xml:space="preserve">
+    <value>Dealer</value>
+  </data>
+	<data name="MatchInfo_CutCardLabel" xml:space="preserve">
+    <value>Cut card</value>
+  </data>
+	<data name="MatchInfo_CountLabel" xml:space="preserve">
+    <value>Count</value>
+  </data>
+	<data name="MatchInfo_OpponentCardsLabel" xml:space="preserve">
+    <value>Opponent's cards</value>
+  </data>
+	<data name="MatchInfo_TurnTimeLabel" xml:space="preserve">
+    <value>Turn time</value>
+  </data>
+	<data name="MatchInfo_OpponentStatusLabel" xml:space="preserve">
+    <value>Opponent status</value>
+  </data>
+	<data name="MatchInfo_ConnectedStatus" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+	<data name="MatchInfo_ReconnectingStatus" xml:space="preserve">
+    <value>Reconnecting</value>
+  </data>
+	<data name="MatchInfo_StaleStateWarning" xml:space="preserve">
+    <value>Showing the last known state of the match</value>
+  </data>
+	<data name="MatchInfo_ReportPlayerButton" xml:space="preserve">
+    <value>Report player</value>
+  </data>
+	<data name="MatchInfo_SecondsFormat" xml:space="preserve">
+    <value>{0} s</value>
+  </data>
+	<data name="MatchInvite_TitleText" xml:space="preserve">
+    <value>Match invitation</value>
+  </data>
+	<data name="MatchInvite_InvitationMessage" xml:space="preserve">
+    <value>{0} invites you to play a match</value>
+  </data>
+	<data name="MatchInvite_AcceptButton" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+	<data name="MatchInvite_RejectButton" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+	<data name="MatchInvite_UnavailableMessage" xml:space="preserve">
+    <value>This invitation is no longer available</value>
+  </data>
+	<data name="MatchInvite_UnfinishedMatchMessage" xml:space="preserve">
+    <value>You must finish or abandon your current match before accepting an invitation</value>
+  </data>
+	<data name="MatchInvite_GoToMatchButton" xml:space="preserve">
+    <value>Go to my match</value>
+  </data>
+	<data name="AwaitingInvite_TitleText" xml:space="preserve">
+    <value>Waiting for response</value>
+  </data>
+	<data name="AwaitingInvite_WaitingMessage" xml:space="preserve">
+    <value>Waiting for {0} to respond...</value>
+  </data>
+	<data name="AwaitingInvite_CancelButton" xml:space="preserve">
+    <value>Cancel invitation</value>
+  </data>
+	<data name="AwaitingInvite_BackButton" xml:space="preserve">
+    <value>Back</value>
+  </data>
+	<data name="AwaitingInvite_InviteAgainButton" xml:space="preserve">
+    <value>Invite again</value>
+  </data>
+	<data name="AwaitingInvite_RecipientInMatchMessage" xml:space="preserve">
+    <value>This player is in a match right now</value>
+  </data>
+	<data name="AwaitingInvite_RecipientOfflineMessage" xml:space="preserve">
+    <value>This player is not connected right now</value>
+  </data>
+	<data name="AwaitingInvite_AlreadyInvitedMessage" xml:space="preserve">
+    <value>You already invited this player. Wait for their response</value>
+  </data>
+	<data name="AwaitingInvite_RecipientRejectedMessage" xml:space="preserve">
+    <value>{0} cannot play right now</value>
+  </data>
+	<data name="AwaitingInvite_ExpiredMessage" xml:space="preserve">
+    <value>The invitation expired without a response</value>
+  </data>
 </root>
