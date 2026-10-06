@@ -144,6 +144,7 @@
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Localization\LanguageManager.cs" />
+    <Compile Include="Mail\EmailSender.cs" />
     <Compile Include="Mail\SanctionEmailSender.cs" />
     <Compile Include="Mail\VerificationEmailSender.cs" />
     <Compile Include="manga.cs">
@@ -239,11 +240,11 @@
     <Compile Include="Views\GuestAccessPage.xaml.cs">
       <DependentUpon>GuestAccessPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Lobby.xaml.cs">
-      <DependentUpon>Lobby.xaml</DependentUpon>
+    <Compile Include="Views\LobbyPage.xaml.cs">
+      <DependentUpon>LobbyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MatchHistoryPage.xaml.cs">
       <DependentUpon>MatchHistoryPage.xaml</DependentUpon>
@@ -263,8 +264,8 @@
     <Compile Include="Views\RecoverPasswordPage.xaml.cs">
       <DependentUpon>RecoverPasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Register.xaml.cs">
-      <DependentUpon>Register.xaml</DependentUpon>
+    <Compile Include="Views\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReportPlayerPage.xaml.cs">
       <DependentUpon>ReportPlayerPage.xaml</DependentUpon>
@@ -275,17 +276,17 @@
     <Compile Include="Views\ScoreboardPage.xaml.cs">
       <DependentUpon>ScoreboardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
+    <Compile Include="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StartMenu.xaml.cs">
-      <DependentUpon>StartMenu.xaml</DependentUpon>
+    <Compile Include="Views\StartMenuPage.xaml.cs">
+      <DependentUpon>StartMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SupportPanelPage.xaml.cs">
       <DependentUpon>SupportPanelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Tutorial.xaml.cs">
-      <DependentUpon>Tutorial.xaml</DependentUpon>
+    <Compile Include="Views\TutorialPage.xaml.cs">
+      <DependentUpon>TutorialPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TutorialSections\BoardSection.xaml.cs">
       <DependentUpon>BoardSection.xaml</DependentUpon>
@@ -384,11 +385,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login.xaml">
+    <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Lobby.xaml">
+    <Page Include="Views\LobbyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -416,7 +417,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Register.xaml">
+    <Page Include="Views\RegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -432,11 +433,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Settings.xaml">
+    <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StartMenu.xaml">
+    <Page Include="Views\StartMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -444,7 +445,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Tutorial.xaml">
+    <Page Include="Views\TutorialPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

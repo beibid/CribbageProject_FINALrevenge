@@ -56,10 +56,8 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             bool isIncomplete = false;
 
-            if (string.IsNullOrWhiteSpace(GetUsername())
-                || string.IsNullOrWhiteSpace(GetEmail())
-                || string.IsNullOrEmpty(GetPassword())
-                || string.IsNullOrEmpty(GetConfirmedPassword())
+            if (string.IsNullOrWhiteSpace(GetUsername()) || string.IsNullOrWhiteSpace(GetEmail())
+                || string.IsNullOrEmpty(GetPassword()) || string.IsNullOrEmpty(GetConfirmedPassword())
                 || !AreTermsAccepted())
             {
                 isIncomplete = true;
@@ -81,21 +79,22 @@ namespace cribbage_Royale_PROYECTO.Views
         private bool IsPasswordFormatValid()
         {
             string password = GetPassword();
-            bool isValid = false;
+            bool isValidPassword = false;
 
             if (password.Length >= MinimumPasswordLength
                 && password.Any(char.IsLetter)
                 && password.Any(char.IsDigit))
             {
-                isValid = true;
+                isValidPassword = true;
             }
 
-            return isValid;
+            return isValidPassword;
         }
 
         private bool DoPasswordsMatch()
         {
-            return string.Equals(GetPassword(), GetConfirmedPassword(), StringComparison.Ordinal);
+            return string.Equals(GetPassword(), GetConfirmedPassword(), 
+                StringComparison.Ordinal);
         }
 
         private void ClearPasswordFields()
@@ -126,42 +125,42 @@ namespace cribbage_Royale_PROYECTO.Views
             MessageDialog.ShowError(Window.GetWindow(this), Lang.Register_DatabaseErrorMessage);
         }
 
-        private VerificationNotice SendCodeByEmail(string code)
+        private VerificationNotice SendCodeByEmail(string codeEmail)
         {
-            VerificationNotice notice = VerificationNotice.EmailNotSent;
+            VerificationNotice noticeCodeEmail = VerificationNotice.EmailNotSent;
 
-            if (_emailSender.SendVerificationCode(GetEmail(), code))
+            if (_emailSender.SendVerificationCode(GetEmail(), codeEmail))
             {
-                notice = VerificationNotice.CodeSent;
+                noticeCodeEmail = VerificationNotice.CodeSent;
             }
 
-            return notice;
+            return noticeCodeEmail;
         }
 
-        private VerificationNotice DeliverCode(string code)
+        private VerificationNotice DeliverCode(string codeEmail)
         {
-            VerificationNotice notice = VerificationNotice.EmailNotSent;
+            VerificationNotice noticeCodeEmail = VerificationNotice.EmailNotSent;
 
-            if (!string.IsNullOrEmpty(code))
+            if (!string.IsNullOrEmpty(codeEmail))
             {
-                notice = SendCodeByEmail(code);
+                noticeCodeEmail = SendCodeByEmail(codeEmail);
             }
 
-            return notice;
+            return noticeCodeEmail;
         }
 
         private void CompleteRegistration()
         {
             int userId = _userRepository.GetUserId(GetEmail());
-            string code = _verificationCodeRepository.CreateCode(
+            string codeVerificationEmail = _verificationCodeRepository.CreateCode(
                 userId,
                 VerificationCodeRepository.AccountVerificationPurpose,
                 GetEmail());
 
-            VerificationNotice notice = DeliverCode(code);
+            VerificationNotice noticeRegistration = DeliverCode(codeVerificationEmail);
 
             MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.Register_SuccessMessage);
-            ShowAwaitingVerificationPage(notice);
+            ShowAwaitingVerificationPage(noticeRegistration);
         }
 
         private void ProcessRegistrationOutcome(RegistrationOutcome outcome)

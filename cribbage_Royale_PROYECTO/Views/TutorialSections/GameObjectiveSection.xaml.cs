@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace cribbage_Royale_PROYECTO.Views.TutorialSections
 {
-    /// <summary>
-    /// Lógica de interacción para GameObjectiveSection.xaml
-    /// </summary>
+
     public partial class GameObjectiveSection : UserControl
     {
         public GameObjectiveSection()
