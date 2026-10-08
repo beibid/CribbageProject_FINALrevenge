@@ -1,0 +1,2134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CribbageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ajustes_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="volumen_musica" Type="tinyint" Nullable="false" />
+          <Property Name="volumen_efectos" Type="tinyint" Nullable="false" />
+          <Property Name="idioma" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="modo_daltonismo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="mostrar_animaciones" Type="bit" Nullable="false" />
+          <Property Name="notificaciones_solicitudes" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="amistad">
+          <Key>
+            <PropertyRef Name="id_amistad" />
+          </Key>
+          <Property Name="id_amistad" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario_solicitante" Type="int" Nullable="false" />
+          <Property Name="id_usuario_destinatario" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="fecha_solicitud" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_respuesta" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="auditoria_soporte">
+          <Key>
+            <PropertyRef Name="id_auditoria" />
+          </Key>
+          <Property Name="id_auditoria" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario_soporte" Type="int" Nullable="false" />
+          <Property Name="id_reporte" Type="bigint" />
+          <Property Name="id_partida" Type="bigint" />
+          <Property Name="accion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_acceso" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bitacora_evento">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="id_partida" Type="bigint" />
+          <Property Name="tipo_evento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="identificador_operacion" Type="char" MaxLength="36" />
+          <Property Name="fecha_evento" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bloqueo">
+          <Key>
+            <PropertyRef Name="id_bloqueo" />
+          </Key>
+          <Property Name="id_bloqueo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario_que_bloquea" Type="int" Nullable="false" />
+          <Property Name="id_usuario_bloqueado" Type="int" Nullable="false" />
+          <Property Name="fecha_bloqueo" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="carta">
+          <Key>
+            <PropertyRef Name="id_carta" />
+          </Key>
+          <Property Name="id_carta" Type="tinyint" Nullable="false" />
+          <Property Name="palo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="valor" Type="tinyint" Nullable="false" />
+          <Property Name="puntaje" Type="int" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="carta_en_manga">
+          <Key>
+            <PropertyRef Name="id_manga" />
+            <PropertyRef Name="id_carta" />
+          </Key>
+          <Property Name="id_manga" Type="bigint" Nullable="false" />
+          <Property Name="id_carta" Type="tinyint" Nullable="false" />
+          <Property Name="id_participante_origen" Type="bigint" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="codigo_verificacion">
+          <Key>
+            <PropertyRef Name="id_codigo" />
+          </Key>
+          <Property Name="id_codigo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="valor_codigo" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="correo_destino" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_expiracion" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_uso" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="invitacion_partida">
+          <Key>
+            <PropertyRef Name="id_invitacion" />
+          </Key>
+          <Property Name="id_invitacion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario_emisor" Type="int" Nullable="false" />
+          <Property Name="id_usuario_destinatario" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="fecha_envio" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_expiracion" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="id_partida" Type="bigint" />
+        </EntityType>
+        <EntityType Name="jugada_pegging">
+          <Key>
+            <PropertyRef Name="id_jugada" />
+          </Key>
+          <Property Name="id_jugada" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_manga" Type="bigint" Nullable="false" />
+          <Property Name="id_participante" Type="bigint" Nullable="false" />
+          <Property Name="id_carta" Type="tinyint" />
+          <Property Name="numero_serie" Type="smallint" Nullable="false" />
+          <Property Name="orden_jugada" Type="smallint" Nullable="false" />
+          <Property Name="conteo_resultante" Type="tinyint" Nullable="false" />
+          <Property Name="puntos_ganados" Type="tinyint" Nullable="false" />
+          <Property Name="es_automatica" Type="bit" Nullable="false" />
+          <Property Name="fecha_jugada" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="manga">
+          <Key>
+            <PropertyRef Name="id_manga" />
+          </Key>
+          <Property Name="id_manga" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_partida" Type="bigint" Nullable="false" />
+          <Property Name="numero_manga" Type="smallint" Nullable="false" />
+          <Property Name="id_participante_repartidor" Type="bigint" Nullable="false" />
+          <Property Name="id_participante_en_turno" Type="bigint" />
+          <Property Name="id_carta_volteada" Type="tinyint" />
+          <Property Name="estado_actual" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="conteo_actual" Type="tinyint" Nullable="false" />
+          <Property Name="numero_serie" Type="smallint" Nullable="false" />
+          <Property Name="fecha_inicio" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_fin_turno" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="participante_partida">
+          <Key>
+            <PropertyRef Name="id_participante" />
+          </Key>
+          <Property Name="id_participante" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_partida" Type="bigint" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="posicion_tablero" Type="tinyint" Nullable="false" />
+          <Property Name="esta_conectado" Type="bit" Nullable="false" />
+          <Property Name="fecha_ultima_desconexion" Type="datetime2" Precision="7" />
+          <Property Name="agotamientos_consecutivos" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="partida">
+          <Key>
+            <PropertyRef Name="id_partida" />
+          </Key>
+          <Property Name="id_partida" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estado_partida" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="motivo_termino" Type="varchar" MaxLength="25" />
+          <Property Name="origen" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="fecha_inicio" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime2" Precision="7" />
+          <Property Name="id_usuario_ganador" Type="int" />
+          <Property Name="segundos_por_turno" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="perfil_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="nombre_mostrado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="biografia" Type="varchar" MaxLength="255" />
+          <Property Name="avatar" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tutorial_completado" Type="bit" Nullable="false" />
+          <Property Name="nivel_habilidad" Type="smallint" Nullable="false" />
+          <Property Name="partidas_jugadas" Type="int" Nullable="false" />
+          <Property Name="victorias" Type="int" Nullable="false" />
+          <Property Name="derrotas" Type="int" Nullable="false" />
+          <Property Name="racha_actual" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="puntuacion">
+          <Key>
+            <PropertyRef Name="id_puntuacion" />
+          </Key>
+          <Property Name="id_puntuacion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_manga" Type="bigint" Nullable="false" />
+          <Property Name="id_participante" Type="bigint" Nullable="false" />
+          <Property Name="fase_puntuacion" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tipo_puntuacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="puntos" Type="tinyint" Nullable="false" />
+          <Property Name="orden_acreditacion" Type="smallint" Nullable="false" />
+          <Property Name="fecha_acreditacion" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reporte">
+          <Key>
+            <PropertyRef Name="id_reporte" />
+          </Key>
+          <Property Name="id_reporte" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="folio" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="id_usuario_reportante" Type="int" Nullable="false" />
+          <Property Name="id_usuario_reportado" Type="int" Nullable="false" />
+          <Property Name="id_partida" Type="bigint" />
+          <Property Name="motivo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="comentario" Type="varchar" MaxLength="500" />
+          <Property Name="fecha_reporte" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="resolucion" Type="varchar" MaxLength="15" />
+          <Property Name="id_usuario_soporte" Type="int" />
+          <Property Name="fecha_revision" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="sancion">
+          <Key>
+            <PropertyRef Name="id_sancion" />
+          </Key>
+          <Property Name="id_sancion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario_sancionado" Type="int" Nullable="false" />
+          <Property Name="id_usuario_soporte" Type="int" />
+          <Property Name="id_reporte" Type="bigint" />
+          <Property Name="tipo" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="motivo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="fecha_inicio" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime2" Precision="7" />
+          <Property Name="fecha_revocacion" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="sesion">
+          <Key>
+            <PropertyRef Name="id_sesion" />
+          </Key>
+          <Property Name="id_sesion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="testigo" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="dispositivo" Type="varchar" MaxLength="100" />
+          <Property Name="fecha_emision" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_expiracion" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="fecha_revocacion" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="254" />
+          <Property Name="correo_pendiente" Type="varchar" MaxLength="254" />
+          <Property Name="hash_contrasena" Type="varchar" MaxLength="60" />
+          <Property Name="estado_cuenta" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="fecha_registro" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="intentos_fallidos" Type="tinyint" Nullable="false" />
+          <Property Name="fecha_fin_bloqueo_acceso" Type="datetime2" Precision="7" />
+        </EntityType>
+        <Association Name="fk_ajustes_jugador_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="ajustes_jugador" Type="Self.ajustes_jugador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="ajustes_jugador">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_amistad_destinatario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="amistad" Type="Self.amistad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="amistad">
+              <PropertyRef Name="id_usuario_destinatario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_amistad_solicitante">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="amistad" Type="Self.amistad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="amistad">
+              <PropertyRef Name="id_usuario_solicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_auditoria_soporte_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="0..1" />
+          <End Role="auditoria_soporte" Type="Self.auditoria_soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="auditoria_soporte">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_auditoria_soporte_reporte">
+          <End Role="reporte" Type="Self.reporte" Multiplicity="0..1" />
+          <End Role="auditoria_soporte" Type="Self.auditoria_soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reporte">
+              <PropertyRef Name="id_reporte" />
+            </Principal>
+            <Dependent Role="auditoria_soporte">
+              <PropertyRef Name="id_reporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_auditoria_soporte_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="auditoria_soporte" Type="Self.auditoria_soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="auditoria_soporte">
+              <PropertyRef Name="id_usuario_soporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bitacora_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="0..1" />
+          <End Role="bitacora_evento" Type="Self.bitacora_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="bitacora_evento">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bitacora_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="bitacora_evento" Type="Self.bitacora_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="bitacora_evento">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bloqueo_bloqueado">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="bloqueo" Type="Self.bloqueo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="bloqueo">
+              <PropertyRef Name="id_usuario_bloqueado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bloqueo_que_bloquea">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="bloqueo" Type="Self.bloqueo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="bloqueo">
+              <PropertyRef Name="id_usuario_que_bloquea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_carta_en_manga_carta">
+          <End Role="carta" Type="Self.carta" Multiplicity="1" />
+          <End Role="carta_en_manga" Type="Self.carta_en_manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carta">
+              <PropertyRef Name="id_carta" />
+            </Principal>
+            <Dependent Role="carta_en_manga">
+              <PropertyRef Name="id_carta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_carta_en_manga_manga">
+          <End Role="manga" Type="Self.manga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="carta_en_manga" Type="Self.carta_en_manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manga">
+              <PropertyRef Name="id_manga" />
+            </Principal>
+            <Dependent Role="carta_en_manga">
+              <PropertyRef Name="id_manga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_carta_en_manga_participante">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="1" />
+          <End Role="carta_en_manga" Type="Self.carta_en_manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="carta_en_manga">
+              <PropertyRef Name="id_participante_origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_codigo_verificacion_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="codigo_verificacion" Type="Self.codigo_verificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="codigo_verificacion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invitacion_destinatario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="invitacion_partida" Type="Self.invitacion_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="invitacion_partida">
+              <PropertyRef Name="id_usuario_destinatario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invitacion_emisor">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="invitacion_partida" Type="Self.invitacion_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="invitacion_partida">
+              <PropertyRef Name="id_usuario_emisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invitacion_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="0..1" />
+          <End Role="invitacion_partida" Type="Self.invitacion_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="invitacion_partida">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_jugada_carta">
+          <End Role="carta" Type="Self.carta" Multiplicity="0..1" />
+          <End Role="jugada_pegging" Type="Self.jugada_pegging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carta">
+              <PropertyRef Name="id_carta" />
+            </Principal>
+            <Dependent Role="jugada_pegging">
+              <PropertyRef Name="id_carta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_jugada_manga">
+          <End Role="manga" Type="Self.manga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="jugada_pegging" Type="Self.jugada_pegging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manga">
+              <PropertyRef Name="id_manga" />
+            </Principal>
+            <Dependent Role="jugada_pegging">
+              <PropertyRef Name="id_manga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_jugada_participante">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="1" />
+          <End Role="jugada_pegging" Type="Self.jugada_pegging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="jugada_pegging">
+              <PropertyRef Name="id_participante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_manga_carta_volteada">
+          <End Role="carta" Type="Self.carta" Multiplicity="0..1" />
+          <End Role="manga" Type="Self.manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carta">
+              <PropertyRef Name="id_carta" />
+            </Principal>
+            <Dependent Role="manga">
+              <PropertyRef Name="id_carta_volteada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_manga_en_turno">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="0..1" />
+          <End Role="manga" Type="Self.manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="manga">
+              <PropertyRef Name="id_participante_en_turno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_manga_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="manga" Type="Self.manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="manga">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_manga_repartidor">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="1" />
+          <End Role="manga" Type="Self.manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="manga">
+              <PropertyRef Name="id_participante_repartidor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_participante_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="participante_partida">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_participante_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="participante_partida">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_partida_ganador">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="partida" Type="Self.partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="partida">
+              <PropertyRef Name="id_usuario_ganador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_perfil_jugador_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="perfil_jugador" Type="Self.perfil_jugador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="perfil_jugador">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puntuacion_manga">
+          <End Role="manga" Type="Self.manga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="puntuacion" Type="Self.puntuacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manga">
+              <PropertyRef Name="id_manga" />
+            </Principal>
+            <Dependent Role="puntuacion">
+              <PropertyRef Name="id_manga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puntuacion_participante">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="1" />
+          <End Role="puntuacion" Type="Self.puntuacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="puntuacion">
+              <PropertyRef Name="id_participante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reporte_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="0..1" />
+          <End Role="reporte" Type="Self.reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="reporte">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reporte_reportado">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="reporte" Type="Self.reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="reporte">
+              <PropertyRef Name="id_usuario_reportado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reporte_reportante">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="reporte" Type="Self.reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="reporte">
+              <PropertyRef Name="id_usuario_reportante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reporte_soporte">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="reporte" Type="Self.reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="reporte">
+              <PropertyRef Name="id_usuario_soporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sancion_reporte">
+          <End Role="reporte" Type="Self.reporte" Multiplicity="0..1" />
+          <End Role="sancion" Type="Self.sancion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reporte">
+              <PropertyRef Name="id_reporte" />
+            </Principal>
+            <Dependent Role="sancion">
+              <PropertyRef Name="id_reporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sancion_sancionado">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="sancion" Type="Self.sancion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="sancion">
+              <PropertyRef Name="id_usuario_sancionado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sancion_soporte">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="sancion" Type="Self.sancion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="sancion">
+              <PropertyRef Name="id_usuario_soporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sesion_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="sesion" Type="Self.sesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="sesion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CribbageModelStoreContainer">
+          <EntitySet Name="ajustes_jugador" EntityType="Self.ajustes_jugador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="amistad" EntityType="Self.amistad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="auditoria_soporte" EntityType="Self.auditoria_soporte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bitacora_evento" EntityType="Self.bitacora_evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bloqueo" EntityType="Self.bloqueo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="carta" EntityType="Self.carta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="carta_en_manga" EntityType="Self.carta_en_manga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="codigo_verificacion" EntityType="Self.codigo_verificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invitacion_partida" EntityType="Self.invitacion_partida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jugada_pegging" EntityType="Self.jugada_pegging" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="manga" EntityType="Self.manga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="participante_partida" EntityType="Self.participante_partida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="partida" EntityType="Self.partida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perfil_jugador" EntityType="Self.perfil_jugador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="puntuacion" EntityType="Self.puntuacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reporte" EntityType="Self.reporte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sancion" EntityType="Self.sancion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sesion" EntityType="Self.sesion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_ajustes_jugador_usuario" Association="Self.fk_ajustes_jugador_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ajustes_jugador" EntitySet="ajustes_jugador" />
+          </AssociationSet>
+          <AssociationSet Name="fk_amistad_destinatario" Association="Self.fk_amistad_destinatario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="amistad" EntitySet="amistad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_amistad_solicitante" Association="Self.fk_amistad_solicitante">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="amistad" EntitySet="amistad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_auditoria_soporte_partida" Association="Self.fk_auditoria_soporte_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="auditoria_soporte" EntitySet="auditoria_soporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_auditoria_soporte_reporte" Association="Self.fk_auditoria_soporte_reporte">
+            <End Role="reporte" EntitySet="reporte" />
+            <End Role="auditoria_soporte" EntitySet="auditoria_soporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_auditoria_soporte_usuario" Association="Self.fk_auditoria_soporte_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="auditoria_soporte" EntitySet="auditoria_soporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bitacora_partida" Association="Self.fk_bitacora_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="bitacora_evento" EntitySet="bitacora_evento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bitacora_usuario" Association="Self.fk_bitacora_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="bitacora_evento" EntitySet="bitacora_evento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bloqueo_bloqueado" Association="Self.fk_bloqueo_bloqueado">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="bloqueo" EntitySet="bloqueo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bloqueo_que_bloquea" Association="Self.fk_bloqueo_que_bloquea">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="bloqueo" EntitySet="bloqueo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_carta_en_manga_carta" Association="Self.fk_carta_en_manga_carta">
+            <End Role="carta" EntitySet="carta" />
+            <End Role="carta_en_manga" EntitySet="carta_en_manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_carta_en_manga_manga" Association="Self.fk_carta_en_manga_manga">
+            <End Role="manga" EntitySet="manga" />
+            <End Role="carta_en_manga" EntitySet="carta_en_manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_carta_en_manga_participante" Association="Self.fk_carta_en_manga_participante">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="carta_en_manga" EntitySet="carta_en_manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_codigo_verificacion_usuario" Association="Self.fk_codigo_verificacion_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="codigo_verificacion" EntitySet="codigo_verificacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invitacion_destinatario" Association="Self.fk_invitacion_destinatario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="invitacion_partida" EntitySet="invitacion_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invitacion_emisor" Association="Self.fk_invitacion_emisor">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="invitacion_partida" EntitySet="invitacion_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invitacion_partida" Association="Self.fk_invitacion_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="invitacion_partida" EntitySet="invitacion_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_jugada_carta" Association="Self.fk_jugada_carta">
+            <End Role="carta" EntitySet="carta" />
+            <End Role="jugada_pegging" EntitySet="jugada_pegging" />
+          </AssociationSet>
+          <AssociationSet Name="fk_jugada_manga" Association="Self.fk_jugada_manga">
+            <End Role="manga" EntitySet="manga" />
+            <End Role="jugada_pegging" EntitySet="jugada_pegging" />
+          </AssociationSet>
+          <AssociationSet Name="fk_jugada_participante" Association="Self.fk_jugada_participante">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="jugada_pegging" EntitySet="jugada_pegging" />
+          </AssociationSet>
+          <AssociationSet Name="fk_manga_carta_volteada" Association="Self.fk_manga_carta_volteada">
+            <End Role="carta" EntitySet="carta" />
+            <End Role="manga" EntitySet="manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_manga_en_turno" Association="Self.fk_manga_en_turno">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="manga" EntitySet="manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_manga_partida" Association="Self.fk_manga_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="manga" EntitySet="manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_manga_repartidor" Association="Self.fk_manga_repartidor">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="manga" EntitySet="manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_participante_partida" Association="Self.fk_participante_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="participante_partida" EntitySet="participante_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_participante_usuario" Association="Self.fk_participante_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="participante_partida" EntitySet="participante_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_partida_ganador" Association="Self.fk_partida_ganador">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="partida" EntitySet="partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_perfil_jugador_usuario" Association="Self.fk_perfil_jugador_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="perfil_jugador" EntitySet="perfil_jugador" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puntuacion_manga" Association="Self.fk_puntuacion_manga">
+            <End Role="manga" EntitySet="manga" />
+            <End Role="puntuacion" EntitySet="puntuacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puntuacion_participante" Association="Self.fk_puntuacion_participante">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="puntuacion" EntitySet="puntuacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reporte_partida" Association="Self.fk_reporte_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="reporte" EntitySet="reporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reporte_reportado" Association="Self.fk_reporte_reportado">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reporte" EntitySet="reporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reporte_reportante" Association="Self.fk_reporte_reportante">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reporte" EntitySet="reporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reporte_soporte" Association="Self.fk_reporte_soporte">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reporte" EntitySet="reporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sancion_reporte" Association="Self.fk_sancion_reporte">
+            <End Role="reporte" EntitySet="reporte" />
+            <End Role="sancion" EntitySet="sancion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sancion_sancionado" Association="Self.fk_sancion_sancionado">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="sancion" EntitySet="sancion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sancion_soporte" Association="Self.fk_sancion_soporte">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="sancion" EntitySet="sancion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sesion_usuario" Association="Self.fk_sesion_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="sesion" EntitySet="sesion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CribbageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ajustes_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="volumen_musica" Type="Byte" Nullable="false" />
+          <Property Name="volumen_efectos" Type="Byte" Nullable="false" />
+          <Property Name="idioma" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modo_daltonismo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mostrar_animaciones" Type="Boolean" Nullable="false" />
+          <Property Name="notificaciones_solicitudes" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_ajustes_jugador_usuario" FromRole="ajustes_jugador" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="amistad">
+          <Key>
+            <PropertyRef Name="id_amistad" />
+          </Key>
+          <Property Name="id_amistad" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario_solicitante" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario_destinatario" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_respuesta" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_amistad_destinatario" FromRole="amistad" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.fk_amistad_solicitante" FromRole="amistad" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="auditoria_soporte">
+          <Key>
+            <PropertyRef Name="id_auditoria" />
+          </Key>
+          <Property Name="id_auditoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario_soporte" Type="Int32" Nullable="false" />
+          <Property Name="id_reporte" Type="Int64" />
+          <Property Name="id_partida" Type="Int64" />
+          <Property Name="accion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_acceso" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="partida" Relationship="Self.fk_auditoria_soporte_partida" FromRole="auditoria_soporte" ToRole="partida" />
+          <NavigationProperty Name="reporte" Relationship="Self.fk_auditoria_soporte_reporte" FromRole="auditoria_soporte" ToRole="reporte" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_auditoria_soporte_usuario" FromRole="auditoria_soporte" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="bitacora_evento">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="id_partida" Type="Int64" />
+          <Property Name="tipo_evento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="identificador_operacion" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="fecha_evento" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="partida" Relationship="Self.fk_bitacora_partida" FromRole="bitacora_evento" ToRole="partida" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_bitacora_usuario" FromRole="bitacora_evento" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="bloqueo">
+          <Key>
+            <PropertyRef Name="id_bloqueo" />
+          </Key>
+          <Property Name="id_bloqueo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario_que_bloquea" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario_bloqueado" Type="Int32" Nullable="false" />
+          <Property Name="fecha_bloqueo" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_bloqueo_bloqueado" FromRole="bloqueo" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.fk_bloqueo_que_bloquea" FromRole="bloqueo" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="carta">
+          <Key>
+            <PropertyRef Name="id_carta" />
+          </Key>
+          <Property Name="id_carta" Type="Byte" Nullable="false" />
+          <Property Name="palo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valor" Type="Byte" Nullable="false" />
+          <Property Name="puntaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="carta_en_manga" Relationship="Self.fk_carta_en_manga_carta" FromRole="carta" ToRole="carta_en_manga" />
+          <NavigationProperty Name="jugada_pegging" Relationship="Self.fk_jugada_carta" FromRole="carta" ToRole="jugada_pegging" />
+          <NavigationProperty Name="manga" Relationship="Self.fk_manga_carta_volteada" FromRole="carta" ToRole="manga" />
+        </EntityType>
+        <EntityType Name="carta_en_manga">
+          <Key>
+            <PropertyRef Name="id_manga" />
+            <PropertyRef Name="id_carta" />
+          </Key>
+          <Property Name="id_manga" Type="Int64" Nullable="false" />
+          <Property Name="id_carta" Type="Byte" Nullable="false" />
+          <Property Name="id_participante_origen" Type="Int64" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="carta" Relationship="Self.fk_carta_en_manga_carta" FromRole="carta_en_manga" ToRole="carta" />
+          <NavigationProperty Name="manga" Relationship="Self.fk_carta_en_manga_manga" FromRole="carta_en_manga" ToRole="manga" />
+          <NavigationProperty Name="participante_partida" Relationship="Self.fk_carta_en_manga_participante" FromRole="carta_en_manga" ToRole="participante_partida" />
+        </EntityType>
+        <EntityType Name="codigo_verificacion">
+          <Key>
+            <PropertyRef Name="id_codigo" />
+          </Key>
+          <Property Name="id_codigo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valor_codigo" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="correo_destino" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_expiracion" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_uso" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_codigo_verificacion_usuario" FromRole="codigo_verificacion" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="invitacion_partida">
+          <Key>
+            <PropertyRef Name="id_invitacion" />
+          </Key>
+          <Property Name="id_invitacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario_emisor" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario_destinatario" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_envio" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_expiracion" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="id_partida" Type="Int64" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_invitacion_destinatario" FromRole="invitacion_partida" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.fk_invitacion_emisor" FromRole="invitacion_partida" ToRole="usuario" />
+          <NavigationProperty Name="partida" Relationship="Self.fk_invitacion_partida" FromRole="invitacion_partida" ToRole="partida" />
+        </EntityType>
+        <EntityType Name="jugada_pegging">
+          <Key>
+            <PropertyRef Name="id_jugada" />
+          </Key>
+          <Property Name="id_jugada" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_manga" Type="Int64" Nullable="false" />
+          <Property Name="id_participante" Type="Int64" Nullable="false" />
+          <Property Name="id_carta" Type="Byte" />
+          <Property Name="numero_serie" Type="Int16" Nullable="false" />
+          <Property Name="orden_jugada" Type="Int16" Nullable="false" />
+          <Property Name="conteo_resultante" Type="Byte" Nullable="false" />
+          <Property Name="puntos_ganados" Type="Byte" Nullable="false" />
+          <Property Name="es_automatica" Type="Boolean" Nullable="false" />
+          <Property Name="fecha_jugada" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="carta" Relationship="Self.fk_jugada_carta" FromRole="jugada_pegging" ToRole="carta" />
+          <NavigationProperty Name="manga" Relationship="Self.fk_jugada_manga" FromRole="jugada_pegging" ToRole="manga" />
+          <NavigationProperty Name="participante_partida" Relationship="Self.fk_jugada_participante" FromRole="jugada_pegging" ToRole="participante_partida" />
+        </EntityType>
+        <EntityType Name="manga">
+          <Key>
+            <PropertyRef Name="id_manga" />
+          </Key>
+          <Property Name="id_manga" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_partida" Type="Int64" Nullable="false" />
+          <Property Name="numero_manga" Type="Int16" Nullable="false" />
+          <Property Name="id_participante_repartidor" Type="Int64" Nullable="false" />
+          <Property Name="id_participante_en_turno" Type="Int64" />
+          <Property Name="id_carta_volteada" Type="Byte" />
+          <Property Name="estado_actual" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="conteo_actual" Type="Byte" Nullable="false" />
+          <Property Name="numero_serie" Type="Int16" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_fin_turno" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="carta" Relationship="Self.fk_manga_carta_volteada" FromRole="manga" ToRole="carta" />
+          <NavigationProperty Name="carta_en_manga" Relationship="Self.fk_carta_en_manga_manga" FromRole="manga" ToRole="carta_en_manga" />
+          <NavigationProperty Name="jugada_pegging" Relationship="Self.fk_jugada_manga" FromRole="manga" ToRole="jugada_pegging" />
+          <NavigationProperty Name="participante_partida" Relationship="Self.fk_manga_en_turno" FromRole="manga" ToRole="participante_partida" />
+          <NavigationProperty Name="partida" Relationship="Self.fk_manga_partida" FromRole="manga" ToRole="partida" />
+          <NavigationProperty Name="participante_partida1" Relationship="Self.fk_manga_repartidor" FromRole="manga" ToRole="participante_partida" />
+          <NavigationProperty Name="puntuacion" Relationship="Self.fk_puntuacion_manga" FromRole="manga" ToRole="puntuacion" />
+        </EntityType>
+        <EntityType Name="participante_partida">
+          <Key>
+            <PropertyRef Name="id_participante" />
+          </Key>
+          <Property Name="id_participante" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_partida" Type="Int64" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="posicion_tablero" Type="Byte" Nullable="false" />
+          <Property Name="esta_conectado" Type="Boolean" Nullable="false" />
+          <Property Name="fecha_ultima_desconexion" Type="DateTime" Precision="7" />
+          <Property Name="agotamientos_consecutivos" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="carta_en_manga" Relationship="Self.fk_carta_en_manga_participante" FromRole="participante_partida" ToRole="carta_en_manga" />
+          <NavigationProperty Name="jugada_pegging" Relationship="Self.fk_jugada_participante" FromRole="participante_partida" ToRole="jugada_pegging" />
+          <NavigationProperty Name="manga" Relationship="Self.fk_manga_en_turno" FromRole="participante_partida" ToRole="manga" />
+          <NavigationProperty Name="manga1" Relationship="Self.fk_manga_repartidor" FromRole="participante_partida" ToRole="manga" />
+          <NavigationProperty Name="partida" Relationship="Self.fk_participante_partida" FromRole="participante_partida" ToRole="partida" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_participante_usuario" FromRole="participante_partida" ToRole="usuario" />
+          <NavigationProperty Name="puntuacion" Relationship="Self.fk_puntuacion_participante" FromRole="participante_partida" ToRole="puntuacion" />
+        </EntityType>
+        <EntityType Name="partida">
+          <Key>
+            <PropertyRef Name="id_partida" />
+          </Key>
+          <Property Name="id_partida" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estado_partida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="motivo_termino" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="origen" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="7" />
+          <Property Name="id_usuario_ganador" Type="Int32" />
+          <Property Name="segundos_por_turno" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="auditoria_soporte" Relationship="Self.fk_auditoria_soporte_partida" FromRole="partida" ToRole="auditoria_soporte" />
+          <NavigationProperty Name="bitacora_evento" Relationship="Self.fk_bitacora_partida" FromRole="partida" ToRole="bitacora_evento" />
+          <NavigationProperty Name="invitacion_partida" Relationship="Self.fk_invitacion_partida" FromRole="partida" ToRole="invitacion_partida" />
+          <NavigationProperty Name="manga" Relationship="Self.fk_manga_partida" FromRole="partida" ToRole="manga" />
+          <NavigationProperty Name="participante_partida" Relationship="Self.fk_participante_partida" FromRole="partida" ToRole="participante_partida" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_partida_ganador" FromRole="partida" ToRole="usuario" />
+          <NavigationProperty Name="reporte" Relationship="Self.fk_reporte_partida" FromRole="partida" ToRole="reporte" />
+        </EntityType>
+        <EntityType Name="perfil_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nombre_mostrado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="biografia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="avatar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tutorial_completado" Type="Boolean" Nullable="false" />
+          <Property Name="nivel_habilidad" Type="Int16" Nullable="false" />
+          <Property Name="partidas_jugadas" Type="Int32" Nullable="false" />
+          <Property Name="victorias" Type="Int32" Nullable="false" />
+          <Property Name="derrotas" Type="Int32" Nullable="false" />
+          <Property Name="racha_actual" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_perfil_jugador_usuario" FromRole="perfil_jugador" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="puntuacion">
+          <Key>
+            <PropertyRef Name="id_puntuacion" />
+          </Key>
+          <Property Name="id_puntuacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_manga" Type="Int64" Nullable="false" />
+          <Property Name="id_participante" Type="Int64" Nullable="false" />
+          <Property Name="fase_puntuacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo_puntuacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="puntos" Type="Byte" Nullable="false" />
+          <Property Name="orden_acreditacion" Type="Int16" Nullable="false" />
+          <Property Name="fecha_acreditacion" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="manga" Relationship="Self.fk_puntuacion_manga" FromRole="puntuacion" ToRole="manga" />
+          <NavigationProperty Name="participante_partida" Relationship="Self.fk_puntuacion_participante" FromRole="puntuacion" ToRole="participante_partida" />
+        </EntityType>
+        <EntityType Name="reporte">
+          <Key>
+            <PropertyRef Name="id_reporte" />
+          </Key>
+          <Property Name="id_reporte" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="folio" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="id_usuario_reportante" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario_reportado" Type="Int32" Nullable="false" />
+          <Property Name="id_partida" Type="Int64" />
+          <Property Name="motivo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_reporte" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="resolucion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="id_usuario_soporte" Type="Int32" />
+          <Property Name="fecha_revision" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="auditoria_soporte" Relationship="Self.fk_auditoria_soporte_reporte" FromRole="reporte" ToRole="auditoria_soporte" />
+          <NavigationProperty Name="partida" Relationship="Self.fk_reporte_partida" FromRole="reporte" ToRole="partida" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_reporte_reportado" FromRole="reporte" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.fk_reporte_reportante" FromRole="reporte" ToRole="usuario" />
+          <NavigationProperty Name="usuario2" Relationship="Self.fk_reporte_soporte" FromRole="reporte" ToRole="usuario" />
+          <NavigationProperty Name="sancion" Relationship="Self.fk_sancion_reporte" FromRole="reporte" ToRole="sancion" />
+        </EntityType>
+        <EntityType Name="sancion">
+          <Key>
+            <PropertyRef Name="id_sancion" />
+          </Key>
+          <Property Name="id_sancion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario_sancionado" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario_soporte" Type="Int32" />
+          <Property Name="id_reporte" Type="Int64" />
+          <Property Name="tipo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="7" />
+          <Property Name="fecha_revocacion" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="reporte" Relationship="Self.fk_sancion_reporte" FromRole="sancion" ToRole="reporte" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_sancion_sancionado" FromRole="sancion" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.fk_sancion_soporte" FromRole="sancion" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="sesion">
+          <Key>
+            <PropertyRef Name="id_sesion" />
+          </Key>
+          <Property Name="id_sesion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="testigo" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dispositivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_emision" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_expiracion" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="fecha_revocacion" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_sesion_usuario" FromRole="sesion" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="correo_pendiente" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="hash_contrasena" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="estado_cuenta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="intentos_fallidos" Type="Byte" Nullable="false" />
+          <Property Name="fecha_fin_bloqueo_acceso" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="ajustes_jugador" Relationship="Self.fk_ajustes_jugador_usuario" FromRole="usuario" ToRole="ajustes_jugador" />
+          <NavigationProperty Name="amistad" Relationship="Self.fk_amistad_destinatario" FromRole="usuario" ToRole="amistad" />
+          <NavigationProperty Name="amistad1" Relationship="Self.fk_amistad_solicitante" FromRole="usuario" ToRole="amistad" />
+          <NavigationProperty Name="auditoria_soporte" Relationship="Self.fk_auditoria_soporte_usuario" FromRole="usuario" ToRole="auditoria_soporte" />
+          <NavigationProperty Name="bitacora_evento" Relationship="Self.fk_bitacora_usuario" FromRole="usuario" ToRole="bitacora_evento" />
+          <NavigationProperty Name="bloqueo" Relationship="Self.fk_bloqueo_bloqueado" FromRole="usuario" ToRole="bloqueo" />
+          <NavigationProperty Name="bloqueo1" Relationship="Self.fk_bloqueo_que_bloquea" FromRole="usuario" ToRole="bloqueo" />
+          <NavigationProperty Name="codigo_verificacion" Relationship="Self.fk_codigo_verificacion_usuario" FromRole="usuario" ToRole="codigo_verificacion" />
+          <NavigationProperty Name="invitacion_partida" Relationship="Self.fk_invitacion_destinatario" FromRole="usuario" ToRole="invitacion_partida" />
+          <NavigationProperty Name="invitacion_partida1" Relationship="Self.fk_invitacion_emisor" FromRole="usuario" ToRole="invitacion_partida" />
+          <NavigationProperty Name="participante_partida" Relationship="Self.fk_participante_usuario" FromRole="usuario" ToRole="participante_partida" />
+          <NavigationProperty Name="partida" Relationship="Self.fk_partida_ganador" FromRole="usuario" ToRole="partida" />
+          <NavigationProperty Name="perfil_jugador" Relationship="Self.fk_perfil_jugador_usuario" FromRole="usuario" ToRole="perfil_jugador" />
+          <NavigationProperty Name="reporte" Relationship="Self.fk_reporte_reportado" FromRole="usuario" ToRole="reporte" />
+          <NavigationProperty Name="reporte1" Relationship="Self.fk_reporte_reportante" FromRole="usuario" ToRole="reporte" />
+          <NavigationProperty Name="reporte2" Relationship="Self.fk_reporte_soporte" FromRole="usuario" ToRole="reporte" />
+          <NavigationProperty Name="sancion" Relationship="Self.fk_sancion_sancionado" FromRole="usuario" ToRole="sancion" />
+          <NavigationProperty Name="sancion1" Relationship="Self.fk_sancion_soporte" FromRole="usuario" ToRole="sancion" />
+          <NavigationProperty Name="sesion" Relationship="Self.fk_sesion_usuario" FromRole="usuario" ToRole="sesion" />
+        </EntityType>
+        <Association Name="fk_ajustes_jugador_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="ajustes_jugador" Type="Self.ajustes_jugador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="ajustes_jugador">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_amistad_destinatario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="amistad" Type="Self.amistad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="amistad">
+              <PropertyRef Name="id_usuario_destinatario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_amistad_solicitante">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="amistad" Type="Self.amistad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="amistad">
+              <PropertyRef Name="id_usuario_solicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_auditoria_soporte_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="0..1" />
+          <End Role="auditoria_soporte" Type="Self.auditoria_soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="auditoria_soporte">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_auditoria_soporte_reporte">
+          <End Role="reporte" Type="Self.reporte" Multiplicity="0..1" />
+          <End Role="auditoria_soporte" Type="Self.auditoria_soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reporte">
+              <PropertyRef Name="id_reporte" />
+            </Principal>
+            <Dependent Role="auditoria_soporte">
+              <PropertyRef Name="id_reporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_auditoria_soporte_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="auditoria_soporte" Type="Self.auditoria_soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="auditoria_soporte">
+              <PropertyRef Name="id_usuario_soporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bitacora_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="0..1" />
+          <End Role="bitacora_evento" Type="Self.bitacora_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="bitacora_evento">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bitacora_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="bitacora_evento" Type="Self.bitacora_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="bitacora_evento">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bloqueo_bloqueado">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="bloqueo" Type="Self.bloqueo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="bloqueo">
+              <PropertyRef Name="id_usuario_bloqueado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bloqueo_que_bloquea">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="bloqueo" Type="Self.bloqueo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="bloqueo">
+              <PropertyRef Name="id_usuario_que_bloquea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_carta_en_manga_carta">
+          <End Role="carta" Type="Self.carta" Multiplicity="1" />
+          <End Role="carta_en_manga" Type="Self.carta_en_manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carta">
+              <PropertyRef Name="id_carta" />
+            </Principal>
+            <Dependent Role="carta_en_manga">
+              <PropertyRef Name="id_carta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_jugada_carta">
+          <End Role="carta" Type="Self.carta" Multiplicity="0..1" />
+          <End Role="jugada_pegging" Type="Self.jugada_pegging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carta">
+              <PropertyRef Name="id_carta" />
+            </Principal>
+            <Dependent Role="jugada_pegging">
+              <PropertyRef Name="id_carta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_manga_carta_volteada">
+          <End Role="carta" Type="Self.carta" Multiplicity="0..1" />
+          <End Role="manga" Type="Self.manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carta">
+              <PropertyRef Name="id_carta" />
+            </Principal>
+            <Dependent Role="manga">
+              <PropertyRef Name="id_carta_volteada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_carta_en_manga_manga">
+          <End Role="manga" Type="Self.manga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="carta_en_manga" Type="Self.carta_en_manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manga">
+              <PropertyRef Name="id_manga" />
+            </Principal>
+            <Dependent Role="carta_en_manga">
+              <PropertyRef Name="id_manga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_carta_en_manga_participante">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="1" />
+          <End Role="carta_en_manga" Type="Self.carta_en_manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="carta_en_manga">
+              <PropertyRef Name="id_participante_origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_codigo_verificacion_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="codigo_verificacion" Type="Self.codigo_verificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="codigo_verificacion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invitacion_destinatario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="invitacion_partida" Type="Self.invitacion_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="invitacion_partida">
+              <PropertyRef Name="id_usuario_destinatario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invitacion_emisor">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="invitacion_partida" Type="Self.invitacion_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="invitacion_partida">
+              <PropertyRef Name="id_usuario_emisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invitacion_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="0..1" />
+          <End Role="invitacion_partida" Type="Self.invitacion_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="invitacion_partida">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_jugada_manga">
+          <End Role="manga" Type="Self.manga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="jugada_pegging" Type="Self.jugada_pegging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manga">
+              <PropertyRef Name="id_manga" />
+            </Principal>
+            <Dependent Role="jugada_pegging">
+              <PropertyRef Name="id_manga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_jugada_participante">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="1" />
+          <End Role="jugada_pegging" Type="Self.jugada_pegging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="jugada_pegging">
+              <PropertyRef Name="id_participante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_manga_en_turno">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="0..1" />
+          <End Role="manga" Type="Self.manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="manga">
+              <PropertyRef Name="id_participante_en_turno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_manga_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="manga" Type="Self.manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="manga">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_manga_repartidor">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="1" />
+          <End Role="manga" Type="Self.manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="manga">
+              <PropertyRef Name="id_participante_repartidor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puntuacion_manga">
+          <End Role="manga" Type="Self.manga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="puntuacion" Type="Self.puntuacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manga">
+              <PropertyRef Name="id_manga" />
+            </Principal>
+            <Dependent Role="puntuacion">
+              <PropertyRef Name="id_manga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_participante_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="participante_partida">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_participante_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="participante_partida">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puntuacion_participante">
+          <End Role="participante_partida" Type="Self.participante_partida" Multiplicity="1" />
+          <End Role="puntuacion" Type="Self.puntuacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participante_partida">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="puntuacion">
+              <PropertyRef Name="id_participante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_partida_ganador">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="partida" Type="Self.partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="partida">
+              <PropertyRef Name="id_usuario_ganador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reporte_partida">
+          <End Role="partida" Type="Self.partida" Multiplicity="0..1" />
+          <End Role="reporte" Type="Self.reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partida">
+              <PropertyRef Name="id_partida" />
+            </Principal>
+            <Dependent Role="reporte">
+              <PropertyRef Name="id_partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_perfil_jugador_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="perfil_jugador" Type="Self.perfil_jugador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="perfil_jugador">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reporte_reportado">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="reporte" Type="Self.reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="reporte">
+              <PropertyRef Name="id_usuario_reportado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reporte_reportante">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="reporte" Type="Self.reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="reporte">
+              <PropertyRef Name="id_usuario_reportante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reporte_soporte">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="reporte" Type="Self.reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="reporte">
+              <PropertyRef Name="id_usuario_soporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sancion_reporte">
+          <End Role="reporte" Type="Self.reporte" Multiplicity="0..1" />
+          <End Role="sancion" Type="Self.sancion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reporte">
+              <PropertyRef Name="id_reporte" />
+            </Principal>
+            <Dependent Role="sancion">
+              <PropertyRef Name="id_reporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sancion_sancionado">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="sancion" Type="Self.sancion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="sancion">
+              <PropertyRef Name="id_usuario_sancionado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sancion_soporte">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="sancion" Type="Self.sancion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="sancion">
+              <PropertyRef Name="id_usuario_soporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sesion_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="sesion" Type="Self.sesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="sesion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CribbageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ajustes_jugador" EntityType="Self.ajustes_jugador" />
+          <EntitySet Name="amistad" EntityType="Self.amistad" />
+          <EntitySet Name="auditoria_soporte" EntityType="Self.auditoria_soporte" />
+          <EntitySet Name="bitacora_evento" EntityType="Self.bitacora_evento" />
+          <EntitySet Name="bloqueo" EntityType="Self.bloqueo" />
+          <EntitySet Name="carta" EntityType="Self.carta" />
+          <EntitySet Name="carta_en_manga" EntityType="Self.carta_en_manga" />
+          <EntitySet Name="codigo_verificacion" EntityType="Self.codigo_verificacion" />
+          <EntitySet Name="invitacion_partida" EntityType="Self.invitacion_partida" />
+          <EntitySet Name="jugada_pegging" EntityType="Self.jugada_pegging" />
+          <EntitySet Name="manga" EntityType="Self.manga" />
+          <EntitySet Name="participante_partida" EntityType="Self.participante_partida" />
+          <EntitySet Name="partida" EntityType="Self.partida" />
+          <EntitySet Name="perfil_jugador" EntityType="Self.perfil_jugador" />
+          <EntitySet Name="puntuacion" EntityType="Self.puntuacion" />
+          <EntitySet Name="reporte" EntityType="Self.reporte" />
+          <EntitySet Name="sancion" EntityType="Self.sancion" />
+          <EntitySet Name="sesion" EntityType="Self.sesion" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="fk_ajustes_jugador_usuario" Association="Self.fk_ajustes_jugador_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ajustes_jugador" EntitySet="ajustes_jugador" />
+          </AssociationSet>
+          <AssociationSet Name="fk_amistad_destinatario" Association="Self.fk_amistad_destinatario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="amistad" EntitySet="amistad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_amistad_solicitante" Association="Self.fk_amistad_solicitante">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="amistad" EntitySet="amistad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_auditoria_soporte_partida" Association="Self.fk_auditoria_soporte_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="auditoria_soporte" EntitySet="auditoria_soporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_auditoria_soporte_reporte" Association="Self.fk_auditoria_soporte_reporte">
+            <End Role="reporte" EntitySet="reporte" />
+            <End Role="auditoria_soporte" EntitySet="auditoria_soporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_auditoria_soporte_usuario" Association="Self.fk_auditoria_soporte_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="auditoria_soporte" EntitySet="auditoria_soporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bitacora_partida" Association="Self.fk_bitacora_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="bitacora_evento" EntitySet="bitacora_evento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bitacora_usuario" Association="Self.fk_bitacora_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="bitacora_evento" EntitySet="bitacora_evento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bloqueo_bloqueado" Association="Self.fk_bloqueo_bloqueado">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="bloqueo" EntitySet="bloqueo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bloqueo_que_bloquea" Association="Self.fk_bloqueo_que_bloquea">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="bloqueo" EntitySet="bloqueo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_carta_en_manga_carta" Association="Self.fk_carta_en_manga_carta">
+            <End Role="carta" EntitySet="carta" />
+            <End Role="carta_en_manga" EntitySet="carta_en_manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_jugada_carta" Association="Self.fk_jugada_carta">
+            <End Role="carta" EntitySet="carta" />
+            <End Role="jugada_pegging" EntitySet="jugada_pegging" />
+          </AssociationSet>
+          <AssociationSet Name="fk_manga_carta_volteada" Association="Self.fk_manga_carta_volteada">
+            <End Role="carta" EntitySet="carta" />
+            <End Role="manga" EntitySet="manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_carta_en_manga_manga" Association="Self.fk_carta_en_manga_manga">
+            <End Role="manga" EntitySet="manga" />
+            <End Role="carta_en_manga" EntitySet="carta_en_manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_carta_en_manga_participante" Association="Self.fk_carta_en_manga_participante">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="carta_en_manga" EntitySet="carta_en_manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_codigo_verificacion_usuario" Association="Self.fk_codigo_verificacion_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="codigo_verificacion" EntitySet="codigo_verificacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invitacion_destinatario" Association="Self.fk_invitacion_destinatario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="invitacion_partida" EntitySet="invitacion_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invitacion_emisor" Association="Self.fk_invitacion_emisor">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="invitacion_partida" EntitySet="invitacion_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invitacion_partida" Association="Self.fk_invitacion_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="invitacion_partida" EntitySet="invitacion_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_jugada_manga" Association="Self.fk_jugada_manga">
+            <End Role="manga" EntitySet="manga" />
+            <End Role="jugada_pegging" EntitySet="jugada_pegging" />
+          </AssociationSet>
+          <AssociationSet Name="fk_jugada_participante" Association="Self.fk_jugada_participante">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="jugada_pegging" EntitySet="jugada_pegging" />
+          </AssociationSet>
+          <AssociationSet Name="fk_manga_en_turno" Association="Self.fk_manga_en_turno">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="manga" EntitySet="manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_manga_partida" Association="Self.fk_manga_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="manga" EntitySet="manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_manga_repartidor" Association="Self.fk_manga_repartidor">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="manga" EntitySet="manga" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puntuacion_manga" Association="Self.fk_puntuacion_manga">
+            <End Role="manga" EntitySet="manga" />
+            <End Role="puntuacion" EntitySet="puntuacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_participante_partida" Association="Self.fk_participante_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="participante_partida" EntitySet="participante_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_participante_usuario" Association="Self.fk_participante_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="participante_partida" EntitySet="participante_partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puntuacion_participante" Association="Self.fk_puntuacion_participante">
+            <End Role="participante_partida" EntitySet="participante_partida" />
+            <End Role="puntuacion" EntitySet="puntuacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_partida_ganador" Association="Self.fk_partida_ganador">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="partida" EntitySet="partida" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reporte_partida" Association="Self.fk_reporte_partida">
+            <End Role="partida" EntitySet="partida" />
+            <End Role="reporte" EntitySet="reporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_perfil_jugador_usuario" Association="Self.fk_perfil_jugador_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="perfil_jugador" EntitySet="perfil_jugador" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reporte_reportado" Association="Self.fk_reporte_reportado">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reporte" EntitySet="reporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reporte_reportante" Association="Self.fk_reporte_reportante">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reporte" EntitySet="reporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reporte_soporte" Association="Self.fk_reporte_soporte">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reporte" EntitySet="reporte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sancion_reporte" Association="Self.fk_sancion_reporte">
+            <End Role="reporte" EntitySet="reporte" />
+            <End Role="sancion" EntitySet="sancion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sancion_sancionado" Association="Self.fk_sancion_sancionado">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="sancion" EntitySet="sancion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sancion_soporte" Association="Self.fk_sancion_soporte">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="sancion" EntitySet="sancion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sesion_usuario" Association="Self.fk_sesion_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="sesion" EntitySet="sesion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CribbageModelStoreContainer" CdmEntityContainer="CribbageEntities">
+          <EntitySetMapping Name="ajustes_jugador">
+            <EntityTypeMapping TypeName="CribbageModel.ajustes_jugador">
+              <MappingFragment StoreEntitySet="ajustes_jugador">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="volumen_musica" ColumnName="volumen_musica" />
+                <ScalarProperty Name="volumen_efectos" ColumnName="volumen_efectos" />
+                <ScalarProperty Name="idioma" ColumnName="idioma" />
+                <ScalarProperty Name="modo_daltonismo" ColumnName="modo_daltonismo" />
+                <ScalarProperty Name="mostrar_animaciones" ColumnName="mostrar_animaciones" />
+                <ScalarProperty Name="notificaciones_solicitudes" ColumnName="notificaciones_solicitudes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="amistad">
+            <EntityTypeMapping TypeName="CribbageModel.amistad">
+              <MappingFragment StoreEntitySet="amistad">
+                <ScalarProperty Name="id_amistad" ColumnName="id_amistad" />
+                <ScalarProperty Name="id_usuario_solicitante" ColumnName="id_usuario_solicitante" />
+                <ScalarProperty Name="id_usuario_destinatario" ColumnName="id_usuario_destinatario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_respuesta" ColumnName="fecha_respuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="auditoria_soporte">
+            <EntityTypeMapping TypeName="CribbageModel.auditoria_soporte">
+              <MappingFragment StoreEntitySet="auditoria_soporte">
+                <ScalarProperty Name="id_auditoria" ColumnName="id_auditoria" />
+                <ScalarProperty Name="id_usuario_soporte" ColumnName="id_usuario_soporte" />
+                <ScalarProperty Name="id_reporte" ColumnName="id_reporte" />
+                <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+                <ScalarProperty Name="accion" ColumnName="accion" />
+                <ScalarProperty Name="fecha_acceso" ColumnName="fecha_acceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bitacora_evento">
+            <EntityTypeMapping TypeName="CribbageModel.bitacora_evento">
+              <MappingFragment StoreEntitySet="bitacora_evento">
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+                <ScalarProperty Name="tipo_evento" ColumnName="tipo_evento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="identificador_operacion" ColumnName="identificador_operacion" />
+                <ScalarProperty Name="fecha_evento" ColumnName="fecha_evento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bloqueo">
+            <EntityTypeMapping TypeName="CribbageModel.bloqueo">
+              <MappingFragment StoreEntitySet="bloqueo">
+                <ScalarProperty Name="id_bloqueo" ColumnName="id_bloqueo" />
+                <ScalarProperty Name="id_usuario_que_bloquea" ColumnName="id_usuario_que_bloquea" />
+                <ScalarProperty Name="id_usuario_bloqueado" ColumnName="id_usuario_bloqueado" />
+                <ScalarProperty Name="fecha_bloqueo" ColumnName="fecha_bloqueo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carta">
+            <EntityTypeMapping TypeName="CribbageModel.carta">
+              <MappingFragment StoreEntitySet="carta">
+                <ScalarProperty Name="id_carta" ColumnName="id_carta" />
+                <ScalarProperty Name="palo" ColumnName="palo" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="puntaje" ColumnName="puntaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carta_en_manga">
+            <EntityTypeMapping TypeName="CribbageModel.carta_en_manga">
+              <MappingFragment StoreEntitySet="carta_en_manga">
+                <ScalarProperty Name="id_manga" ColumnName="id_manga" />
+                <ScalarProperty Name="id_carta" ColumnName="id_carta" />
+                <ScalarProperty Name="id_participante_origen" ColumnName="id_participante_origen" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="codigo_verificacion">
+            <EntityTypeMapping TypeName="CribbageModel.codigo_verificacion">
+              <MappingFragment StoreEntitySet="codigo_verificacion">
+                <ScalarProperty Name="id_codigo" ColumnName="id_codigo" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="valor_codigo" ColumnName="valor_codigo" />
+                <ScalarProperty Name="correo_destino" ColumnName="correo_destino" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_expiracion" ColumnName="fecha_expiracion" />
+                <ScalarProperty Name="fecha_uso" ColumnName="fecha_uso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invitacion_partida">
+            <EntityTypeMapping TypeName="CribbageModel.invitacion_partida">
+              <MappingFragment StoreEntitySet="invitacion_partida">
+                <ScalarProperty Name="id_invitacion" ColumnName="id_invitacion" />
+                <ScalarProperty Name="id_usuario_emisor" ColumnName="id_usuario_emisor" />
+                <ScalarProperty Name="id_usuario_destinatario" ColumnName="id_usuario_destinatario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_envio" ColumnName="fecha_envio" />
+                <ScalarProperty Name="fecha_expiracion" ColumnName="fecha_expiracion" />
+                <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jugada_pegging">
+            <EntityTypeMapping TypeName="CribbageModel.jugada_pegging">
+              <MappingFragment StoreEntitySet="jugada_pegging">
+                <ScalarProperty Name="id_jugada" ColumnName="id_jugada" />
+                <ScalarProperty Name="id_manga" ColumnName="id_manga" />
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+                <ScalarProperty Name="id_carta" ColumnName="id_carta" />
+                <ScalarProperty Name="numero_serie" ColumnName="numero_serie" />
+                <ScalarProperty Name="orden_jugada" ColumnName="orden_jugada" />
+                <ScalarProperty Name="conteo_resultante" ColumnName="conteo_resultante" />
+                <ScalarProperty Name="puntos_ganados" ColumnName="puntos_ganados" />
+                <ScalarProperty Name="es_automatica" ColumnName="es_automatica" />
+                <ScalarProperty Name="fecha_jugada" ColumnName="fecha_jugada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="manga">
+            <EntityTypeMapping TypeName="CribbageModel.manga">
+              <MappingFragment StoreEntitySet="manga">
+                <ScalarProperty Name="id_manga" ColumnName="id_manga" />
+                <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+                <ScalarProperty Name="numero_manga" ColumnName="numero_manga" />
+                <ScalarProperty Name="id_participante_repartidor" ColumnName="id_participante_repartidor" />
+                <ScalarProperty Name="id_participante_en_turno" ColumnName="id_participante_en_turno" />
+                <ScalarProperty Name="id_carta_volteada" ColumnName="id_carta_volteada" />
+                <ScalarProperty Name="estado_actual" ColumnName="estado_actual" />
+                <ScalarProperty Name="conteo_actual" ColumnName="conteo_actual" />
+                <ScalarProperty Name="numero_serie" ColumnName="numero_serie" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin_turno" ColumnName="fecha_fin_turno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="participante_partida">
+            <EntityTypeMapping TypeName="CribbageModel.participante_partida">
+              <MappingFragment StoreEntitySet="participante_partida">
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+                <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="posicion_tablero" ColumnName="posicion_tablero" />
+                <ScalarProperty Name="esta_conectado" ColumnName="esta_conectado" />
+                <ScalarProperty Name="fecha_ultima_desconexion" ColumnName="fecha_ultima_desconexion" />
+                <ScalarProperty Name="agotamientos_consecutivos" ColumnName="agotamientos_consecutivos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="partida">
+            <EntityTypeMapping TypeName="CribbageModel.partida">
+              <MappingFragment StoreEntitySet="partida">
+                <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+                <ScalarProperty Name="estado_partida" ColumnName="estado_partida" />
+                <ScalarProperty Name="motivo_termino" ColumnName="motivo_termino" />
+                <ScalarProperty Name="origen" ColumnName="origen" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="id_usuario_ganador" ColumnName="id_usuario_ganador" />
+                <ScalarProperty Name="segundos_por_turno" ColumnName="segundos_por_turno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perfil_jugador">
+            <EntityTypeMapping TypeName="CribbageModel.perfil_jugador">
+              <MappingFragment StoreEntitySet="perfil_jugador">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre_mostrado" ColumnName="nombre_mostrado" />
+                <ScalarProperty Name="biografia" ColumnName="biografia" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="tutorial_completado" ColumnName="tutorial_completado" />
+                <ScalarProperty Name="nivel_habilidad" ColumnName="nivel_habilidad" />
+                <ScalarProperty Name="partidas_jugadas" ColumnName="partidas_jugadas" />
+                <ScalarProperty Name="victorias" ColumnName="victorias" />
+                <ScalarProperty Name="derrotas" ColumnName="derrotas" />
+                <ScalarProperty Name="racha_actual" ColumnName="racha_actual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="puntuacion">
+            <EntityTypeMapping TypeName="CribbageModel.puntuacion">
+              <MappingFragment StoreEntitySet="puntuacion">
+                <ScalarProperty Name="id_puntuacion" ColumnName="id_puntuacion" />
+                <ScalarProperty Name="id_manga" ColumnName="id_manga" />
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+                <ScalarProperty Name="fase_puntuacion" ColumnName="fase_puntuacion" />
+                <ScalarProperty Name="tipo_puntuacion" ColumnName="tipo_puntuacion" />
+                <ScalarProperty Name="puntos" ColumnName="puntos" />
+                <ScalarProperty Name="orden_acreditacion" ColumnName="orden_acreditacion" />
+                <ScalarProperty Name="fecha_acreditacion" ColumnName="fecha_acreditacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reporte">
+            <EntityTypeMapping TypeName="CribbageModel.reporte">
+              <MappingFragment StoreEntitySet="reporte">
+                <ScalarProperty Name="id_reporte" ColumnName="id_reporte" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="id_usuario_reportante" ColumnName="id_usuario_reportante" />
+                <ScalarProperty Name="id_usuario_reportado" ColumnName="id_usuario_reportado" />
+                <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_reporte" ColumnName="fecha_reporte" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="resolucion" ColumnName="resolucion" />
+                <ScalarProperty Name="id_usuario_soporte" ColumnName="id_usuario_soporte" />
+                <ScalarProperty Name="fecha_revision" ColumnName="fecha_revision" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sancion">
+            <EntityTypeMapping TypeName="CribbageModel.sancion">
+              <MappingFragment StoreEntitySet="sancion">
+                <ScalarProperty Name="id_sancion" ColumnName="id_sancion" />
+                <ScalarProperty Name="id_usuario_sancionado" ColumnName="id_usuario_sancionado" />
+                <ScalarProperty Name="id_usuario_soporte" ColumnName="id_usuario_soporte" />
+                <ScalarProperty Name="id_reporte" ColumnName="id_reporte" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="fecha_revocacion" ColumnName="fecha_revocacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sesion">
+            <EntityTypeMapping TypeName="CribbageModel.sesion">
+              <MappingFragment StoreEntitySet="sesion">
+                <ScalarProperty Name="id_sesion" ColumnName="id_sesion" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="testigo" ColumnName="testigo" />
+                <ScalarProperty Name="dispositivo" ColumnName="dispositivo" />
+                <ScalarProperty Name="fecha_emision" ColumnName="fecha_emision" />
+                <ScalarProperty Name="fecha_expiracion" ColumnName="fecha_expiracion" />
+                <ScalarProperty Name="fecha_revocacion" ColumnName="fecha_revocacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="CribbageModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="correo_pendiente" ColumnName="correo_pendiente" />
+                <ScalarProperty Name="hash_contrasena" ColumnName="hash_contrasena" />
+                <ScalarProperty Name="estado_cuenta" ColumnName="estado_cuenta" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="intentos_fallidos" ColumnName="intentos_fallidos" />
+                <ScalarProperty Name="fecha_fin_bloqueo_acceso" ColumnName="fecha_fin_bloqueo_acceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
