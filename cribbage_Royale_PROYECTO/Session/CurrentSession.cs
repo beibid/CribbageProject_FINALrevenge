@@ -1,4 +1,5 @@
 ﻿using cribbage_Royale_PROYECTO.Models;
+using cribbage_Royale_DataAccess.Models;
 
 namespace cribbage_Royale_PROYECTO.Session
 {

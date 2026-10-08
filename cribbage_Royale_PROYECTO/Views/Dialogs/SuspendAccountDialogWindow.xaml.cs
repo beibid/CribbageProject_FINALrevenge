@@ -2,8 +2,9 @@
 using cribbage_Royale_PROYECTO.Session;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 using cribbage_Royale_PROYECTO.Views.Messages;
-using cribbage_Royale_PROYECTO.DataAccess;
+using cribbage_Royale_DataAccess.DataAccess;
 using cribbage_Royale_PROYECTO.Models;
+using cribbage_Royale_DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows;

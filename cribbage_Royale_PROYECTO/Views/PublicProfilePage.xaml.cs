@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using cribbage_Royale_PROYECTO.DataAccess;
+using cribbage_Royale_DataAccess.DataAccess;
 using cribbage_Royale_PROYECTO.Models;
+using cribbage_Royale_DataAccess.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 using cribbage_Royale_PROYECTO.Session;
