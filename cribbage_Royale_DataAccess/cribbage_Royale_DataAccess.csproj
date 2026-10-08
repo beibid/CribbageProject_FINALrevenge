@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.2\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E1F779A-5E40-468E-A457-AD861D63C8FA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>cribbage_Royale_DataAccess</RootNamespace>
+    <AssemblyName>cribbage_Royale_DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BCrypt-Net-Next, Version=4.2.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.2.0\lib\net48\BCrypt-Net-Next.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ajustes_jugador.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="amistad.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="auditoria_soporte.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bitacora_evento.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bloqueo.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="carta.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="carta_en_manga.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="codigo_verificacion.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CribbageModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CribbageModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CribbageModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CribbageModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CribbageModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\AbandonmentOutcome.cs" />
+    <Compile Include="DataAccess\AccountStatus.cs" />
+    <Compile Include="DataAccess\BlockRepository.cs" />
+    <Compile Include="DataAccess\CardInMatchState.cs" />
+    <Compile Include="DataAccess\FriendshipRepository.cs" />
+    <Compile Include="DataAccess\FriendshipStatus.cs" />
+    <Compile Include="DataAccess\HandState.cs" />
+    <Compile Include="DataAccess\InvitationAcceptOutcome.cs" />
+    <Compile Include="DataAccess\InvitationCreationOutcome.cs" />
+    <Compile Include="DataAccess\InvitationRepository.cs" />
+    <Compile Include="DataAccess\InvitationStatus.cs" />
+    <Compile Include="DataAccess\MatchOrigin.cs" />
+    <Compile Include="DataAccess\MatchRepository.cs" />
+    <Compile Include="DataAccess\MatchStatus.cs" />
+    <Compile Include="DataAccess\MatchTerminationReason.cs" />
+    <Compile Include="DataAccess\PlayerProfileRepository.cs" />
+    <Compile Include="DataAccess\RelationshipStatus.cs" />
+    <Compile Include="DataAccess\ReportReason.cs" />
+    <Compile Include="DataAccess\ReportRepository.cs" />
+    <Compile Include="DataAccess\ReportStatus.cs" />
+    <Compile Include="DataAccess\SanctionType.cs" />
+    <Compile Include="DataAccess\ScoreboardRepository.cs" />
+    <Compile Include="DataAccess\SupportRepository.cs" />
+    <Compile Include="DataAccess\UserRepository.cs" />
+    <Compile Include="DataAccess\VerificationCodeRepository.cs" />
+    <Compile Include="invitacion_partida.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="jugada_pegging.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="manga.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountSanctionStatus.cs" />
+    <Compile Include="Models\AuthenticationOutcome.cs" />
+    <Compile Include="Models\AuthenticationResult.cs" />
+    <Compile Include="Models\BlockedPlayerSummary.cs" />
+    <Compile Include="Models\CardTextFormatter.cs" />
+    <Compile Include="Models\CodeValidationOutcome.cs" />
+    <Compile Include="Models\InvitationCreationResult.cs" />
+    <Compile Include="Models\InvitationResponseResult.cs" />
+    <Compile Include="Models\MatchInformationSummary.cs" />
+    <Compile Include="Models\MatchInvitationSummary.cs" />
+    <Compile Include="Models\PendingReportSummary.cs" />
+    <Compile Include="Models\PublicProfileSummary.cs" />
+    <Compile Include="Models\RegistrationOutcome.cs" />
+    <Compile Include="Models\ReportReasonOption.cs" />
+    <Compile Include="Models\ScoreboardItem.cs" />
+    <Compile Include="Models\SuspendedAccountSummary.cs" />
+    <Compile Include="Models\SuspensionDurationOption.cs" />
+    <Compile Include="Models\UnfinishedMatchSummary.cs" />
+    <Compile Include="Models\VerificationNotice.cs" />
+    <Compile Include="participante_partida.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="partida.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="perfil_jugador.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="puntuacion.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="reporte.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sancion.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sesion.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usuario.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vista_amigos.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vista_crib.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vista_estadisticas_jugador.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vista_marcador_partida.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vista_suspension_vigente.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="CribbageModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CribbageModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CribbageModel.edmx.diagram">
+      <DependentUpon>CribbageModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CribbageModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CribbageModel.edmx</DependentUpon>
+      <LastGenOutput>CribbageModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CribbageModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CribbageModel.edmx</DependentUpon>
+      <LastGenOutput>CribbageModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.2\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.2\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.2\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.targets')" />
+</Project>

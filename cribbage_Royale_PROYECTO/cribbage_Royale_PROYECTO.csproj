@@ -84,140 +84,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ajustes_jugador.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="amistad.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="auditoria_soporte.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bitacora_evento.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bloqueo.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="carta.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="carta_en_manga.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="codigo_verificacion.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CribbageModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CribbageModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CribbageModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CribbageModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CribbageModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\AbandonmentOutcome.cs" />
-    <Compile Include="DataAccess\AccountStatus.cs" />
-    <Compile Include="DataAccess\BlockRepository.cs" />
-    <Compile Include="DataAccess\CardInMatchState.cs" />
-    <Compile Include="DataAccess\FriendshipRepository.cs" />
-    <Compile Include="DataAccess\FriendshipStatus.cs" />
-    <Compile Include="DataAccess\HandState.cs" />
-    <Compile Include="DataAccess\InvitationAcceptOutcome.cs" />
-    <Compile Include="DataAccess\InvitationCreationOutcome.cs" />
-    <Compile Include="DataAccess\InvitationRepository.cs" />
-    <Compile Include="DataAccess\InvitationStatus.cs" />
-    <Compile Include="DataAccess\MatchOrigin.cs" />
-    <Compile Include="DataAccess\MatchRepository.cs" />
-    <Compile Include="DataAccess\MatchStatus.cs" />
-    <Compile Include="DataAccess\MatchTerminationReason.cs" />
-    <Compile Include="DataAccess\PlayerProfileRepository.cs" />
-    <Compile Include="DataAccess\RelationshipStatus.cs" />
-    <Compile Include="DataAccess\ReportReason.cs" />
-    <Compile Include="DataAccess\ReportRepository.cs" />
-    <Compile Include="DataAccess\ReportStatus.cs" />
-    <Compile Include="DataAccess\SanctionType.cs" />
-    <Compile Include="DataAccess\ScoreboardRepository.cs" />
-    <Compile Include="DataAccess\SupportRepository.cs" />
-    <Compile Include="DataAccess\UserRepository.cs" />
-    <Compile Include="DataAccess\VerificationCodeRepository.cs" />
-    <Compile Include="invitacion_partida.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="jugada_pegging.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Localization\LanguageManager.cs" />
     <Compile Include="Mail\EmailSender.cs" />
     <Compile Include="Mail\SanctionEmailSender.cs" />
     <Compile Include="Mail\VerificationEmailSender.cs" />
-    <Compile Include="manga.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AccountSanctionStatus.cs" />
-    <Compile Include="Models\AuthenticationOutcome.cs" />
-    <Compile Include="Models\AuthenticationResult.cs" />
-    <Compile Include="Models\BlockedPlayerSummary.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
-    <Compile Include="Models\CardTextFormatter.cs" />
-    <Compile Include="Models\CodeValidationOutcome.cs" />
-    <Compile Include="Models\InvitationCreationResult.cs" />
-    <Compile Include="Models\InvitationResponseResult.cs" />
     <Compile Include="Models\MatchEndReason.cs" />
-    <Compile Include="Models\MatchInformationSummary.cs" />
-    <Compile Include="Models\MatchInvitationSummary.cs" />
     <Compile Include="Models\MatchItem.cs" />
     <Compile Include="Models\MatchPhase.cs" />
     <Compile Include="Models\MatchResultItem.cs" />
-    <Compile Include="Models\PendingReportSummary.cs" />
     <Compile Include="Models\PlayerItem.cs" />
     <Compile Include="Models\PlayingCardItem.cs" />
-    <Compile Include="Models\PublicProfileSummary.cs" />
-    <Compile Include="Models\RegistrationOutcome.cs" />
-    <Compile Include="Models\ReportReasonOption.cs" />
-    <Compile Include="Models\ScoreboardItem.cs" />
     <Compile Include="Models\SessionKind.cs" />
-    <Compile Include="Models\SuspendedAccountSummary.cs" />
-    <Compile Include="Models\SuspensionDurationOption.cs" />
-    <Compile Include="Models\UnfinishedMatchSummary.cs" />
-    <Compile Include="Models\VerificationNotice.cs" />
-    <Compile Include="participante_partida.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="partida.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="perfil_jugador.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Langs\Lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
-    <Compile Include="puntuacion.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="reporte.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sancion.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sesion.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Session\CurrentSession.cs" />
-    <Compile Include="usuario.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Views\AddFriendPage.xaml.cs">
       <DependentUpon>AddFriendPage.xaml</DependentUpon>
     </Compile>
@@ -334,21 +218,6 @@
     </Compile>
     <Compile Include="Views\VerifyAccountPage.xaml.cs">
       <DependentUpon>VerifyAccountPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="vista_amigos.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vista_crib.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vista_estadisticas_jugador.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vista_marcador_partida.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vista_suspension_vigente.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -545,13 +414,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="CribbageModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CribbageModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="CribbageModel.edmx.diagram">
-      <DependentUpon>CribbageModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -562,22 +424,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CribbageModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CribbageModel.edmx</DependentUpon>
-      <LastGenOutput>CribbageModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="CribbageModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CribbageModel.edmx</DependentUpon>
-      <LastGenOutput>CribbageModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Cards\ImagesCards\card-fan.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cribbage_Royale_DataAccess\cribbage_Royale_DataAccess.csproj">
+      <Project>{2e1f779a-5e40-468e-a457-ad861d63c8fa}</Project>
+      <Name>cribbage_Royale_DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
