@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CribbageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CribbageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ajustes_jugador">
           <Key>
             <PropertyRef Name="id_usuario" />
@@ -244,6 +244,82 @@
           <Property Name="fecha_registro" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="intentos_fallidos" Type="tinyint" Nullable="false" />
           <Property Name="fecha_fin_bloqueo_acceso" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'cribbage_royale.dbo.vista_amigos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vista_amigos">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="id_usuario_amigo" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_usuario_amigo" Type="int" Nullable="false" />
+          <Property Name="fecha_respuesta" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'cribbage_royale.dbo.vista_crib' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vista_crib">
+          <Key>
+            <PropertyRef Name="id_manga" />
+            <PropertyRef Name="id_participante_dueno" />
+            <PropertyRef Name="id_carta" />
+            <PropertyRef Name="palo" />
+            <PropertyRef Name="valor" />
+          </Key>
+          <Property Name="id_manga" Type="bigint" Nullable="false" />
+          <Property Name="id_participante_dueno" Type="bigint" Nullable="false" />
+          <Property Name="id_carta" Type="tinyint" Nullable="false" />
+          <Property Name="palo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="valor" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'cribbage_royale.dbo.vista_estadisticas_jugador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vista_estadisticas_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="nombre_usuario" />
+            <PropertyRef Name="nombre_mostrado" />
+            <PropertyRef Name="nivel_habilidad" />
+            <PropertyRef Name="partidas_jugadas" />
+            <PropertyRef Name="victorias" />
+            <PropertyRef Name="derrotas" />
+            <PropertyRef Name="racha_actual" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="nombre_mostrado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nivel_habilidad" Type="smallint" Nullable="false" />
+          <Property Name="partidas_jugadas" Type="int" Nullable="false" />
+          <Property Name="victorias" Type="int" Nullable="false" />
+          <Property Name="derrotas" Type="int" Nullable="false" />
+          <Property Name="racha_actual" Type="smallint" Nullable="false" />
+          <Property Name="porcentaje_victorias" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'cribbage_royale.dbo.vista_marcador_partida' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vista_marcador_partida">
+          <Key>
+            <PropertyRef Name="id_partida" />
+            <PropertyRef Name="id_participante" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="posicion_tablero" />
+          </Key>
+          <Property Name="id_partida" Type="bigint" Nullable="false" />
+          <Property Name="id_participante" Type="bigint" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="posicion_tablero" Type="tinyint" Nullable="false" />
+          <Property Name="puntos_acreditados" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'cribbage_royale.dbo.vista_suspension_vigente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vista_suspension_vigente">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="motivo" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="motivo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime2" Precision="7" />
         </EntityType>
         <Association Name="fk_ajustes_jugador_usuario">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
@@ -731,6 +807,51 @@
           <EntitySet Name="sancion" EntityType="Self.sancion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sesion" EntityType="Self.sesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vista_amigos" EntityType="Self.vista_amigos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vista_amigos].[id_usuario] AS [id_usuario], 
+    [vista_amigos].[id_usuario_amigo] AS [id_usuario_amigo], 
+    [vista_amigos].[fecha_respuesta] AS [fecha_respuesta]
+    FROM [dbo].[vista_amigos] AS [vista_amigos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vista_crib" EntityType="Self.vista_crib" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vista_crib].[id_manga] AS [id_manga], 
+    [vista_crib].[id_participante_dueno] AS [id_participante_dueno], 
+    [vista_crib].[id_carta] AS [id_carta], 
+    [vista_crib].[palo] AS [palo], 
+    [vista_crib].[valor] AS [valor]
+    FROM [dbo].[vista_crib] AS [vista_crib]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vista_estadisticas_jugador" EntityType="Self.vista_estadisticas_jugador" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vista_estadisticas_jugador].[id_usuario] AS [id_usuario], 
+    [vista_estadisticas_jugador].[nombre_usuario] AS [nombre_usuario], 
+    [vista_estadisticas_jugador].[nombre_mostrado] AS [nombre_mostrado], 
+    [vista_estadisticas_jugador].[nivel_habilidad] AS [nivel_habilidad], 
+    [vista_estadisticas_jugador].[partidas_jugadas] AS [partidas_jugadas], 
+    [vista_estadisticas_jugador].[victorias] AS [victorias], 
+    [vista_estadisticas_jugador].[derrotas] AS [derrotas], 
+    [vista_estadisticas_jugador].[racha_actual] AS [racha_actual], 
+    [vista_estadisticas_jugador].[porcentaje_victorias] AS [porcentaje_victorias]
+    FROM [dbo].[vista_estadisticas_jugador] AS [vista_estadisticas_jugador]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vista_marcador_partida" EntityType="Self.vista_marcador_partida" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vista_marcador_partida].[id_partida] AS [id_partida], 
+    [vista_marcador_partida].[id_participante] AS [id_participante], 
+    [vista_marcador_partida].[id_usuario] AS [id_usuario], 
+    [vista_marcador_partida].[posicion_tablero] AS [posicion_tablero], 
+    [vista_marcador_partida].[puntos_acreditados] AS [puntos_acreditados]
+    FROM [dbo].[vista_marcador_partida] AS [vista_marcador_partida]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vista_suspension_vigente" EntityType="Self.vista_suspension_vigente" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vista_suspension_vigente].[id_usuario] AS [id_usuario], 
+    [vista_suspension_vigente].[motivo] AS [motivo], 
+    [vista_suspension_vigente].[fecha_fin] AS [fecha_fin]
+    FROM [dbo].[vista_suspension_vigente] AS [vista_suspension_vigente]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="fk_ajustes_jugador_usuario" Association="Self.fk_ajustes_jugador_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="ajustes_jugador" EntitySet="ajustes_jugador" />
@@ -884,8 +1005,7 @@
             <End Role="sesion" EntitySet="sesion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CribbageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1843,7 +1963,78 @@
             <End Role="usuario" EntitySet="usuario" />
             <End Role="sesion" EntitySet="sesion" />
           </AssociationSet>
+          <EntitySet Name="vista_amigos" EntityType="CribbageModel.vista_amigos" />
+          <EntitySet Name="vista_crib" EntityType="CribbageModel.vista_crib" />
+          <EntitySet Name="vista_estadisticas_jugador" EntityType="CribbageModel.vista_estadisticas_jugador" />
+          <EntitySet Name="vista_marcador_partida" EntityType="CribbageModel.vista_marcador_partida" />
+          <EntitySet Name="vista_suspension_vigente" EntityType="CribbageModel.vista_suspension_vigente" />
         </EntityContainer>
+        <EntityType Name="vista_amigos">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="id_usuario_amigo" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario_amigo" Type="Int32" Nullable="false" />
+          <Property Name="fecha_respuesta" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="vista_crib">
+          <Key>
+            <PropertyRef Name="id_manga" />
+            <PropertyRef Name="id_participante_dueno" />
+            <PropertyRef Name="id_carta" />
+            <PropertyRef Name="palo" />
+            <PropertyRef Name="valor" />
+          </Key>
+          <Property Name="id_manga" Type="Int64" Nullable="false" />
+          <Property Name="id_participante_dueno" Type="Int64" Nullable="false" />
+          <Property Name="id_carta" Type="Byte" Nullable="false" />
+          <Property Name="palo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vista_estadisticas_jugador">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="nombre_usuario" />
+            <PropertyRef Name="nombre_mostrado" />
+            <PropertyRef Name="nivel_habilidad" />
+            <PropertyRef Name="partidas_jugadas" />
+            <PropertyRef Name="victorias" />
+            <PropertyRef Name="derrotas" />
+            <PropertyRef Name="racha_actual" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nombre_usuario" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_mostrado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nivel_habilidad" Type="Int16" Nullable="false" />
+          <Property Name="partidas_jugadas" Type="Int32" Nullable="false" />
+          <Property Name="victorias" Type="Int32" Nullable="false" />
+          <Property Name="derrotas" Type="Int32" Nullable="false" />
+          <Property Name="racha_actual" Type="Int16" Nullable="false" />
+          <Property Name="porcentaje_victorias" Type="Decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="vista_marcador_partida">
+          <Key>
+            <PropertyRef Name="id_partida" />
+            <PropertyRef Name="id_participante" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="posicion_tablero" />
+          </Key>
+          <Property Name="id_partida" Type="Int64" Nullable="false" />
+          <Property Name="id_participante" Type="Int64" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="posicion_tablero" Type="Byte" Nullable="false" />
+          <Property Name="puntos_acreditados" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vista_suspension_vigente">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="motivo" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="motivo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="7" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2105,6 +2296,61 @@
                 <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
                 <ScalarProperty Name="intentos_fallidos" ColumnName="intentos_fallidos" />
                 <ScalarProperty Name="fecha_fin_bloqueo_acceso" ColumnName="fecha_fin_bloqueo_acceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vista_amigos">
+            <EntityTypeMapping TypeName="CribbageModel.vista_amigos">
+              <MappingFragment StoreEntitySet="vista_amigos">
+                <ScalarProperty Name="fecha_respuesta" ColumnName="fecha_respuesta" />
+                <ScalarProperty Name="id_usuario_amigo" ColumnName="id_usuario_amigo" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vista_crib">
+            <EntityTypeMapping TypeName="CribbageModel.vista_crib">
+              <MappingFragment StoreEntitySet="vista_crib">
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="palo" ColumnName="palo" />
+                <ScalarProperty Name="id_carta" ColumnName="id_carta" />
+                <ScalarProperty Name="id_participante_dueno" ColumnName="id_participante_dueno" />
+                <ScalarProperty Name="id_manga" ColumnName="id_manga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vista_estadisticas_jugador">
+            <EntityTypeMapping TypeName="CribbageModel.vista_estadisticas_jugador">
+              <MappingFragment StoreEntitySet="vista_estadisticas_jugador">
+                <ScalarProperty Name="porcentaje_victorias" ColumnName="porcentaje_victorias" />
+                <ScalarProperty Name="racha_actual" ColumnName="racha_actual" />
+                <ScalarProperty Name="derrotas" ColumnName="derrotas" />
+                <ScalarProperty Name="victorias" ColumnName="victorias" />
+                <ScalarProperty Name="partidas_jugadas" ColumnName="partidas_jugadas" />
+                <ScalarProperty Name="nivel_habilidad" ColumnName="nivel_habilidad" />
+                <ScalarProperty Name="nombre_mostrado" ColumnName="nombre_mostrado" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vista_marcador_partida">
+            <EntityTypeMapping TypeName="CribbageModel.vista_marcador_partida">
+              <MappingFragment StoreEntitySet="vista_marcador_partida">
+                <ScalarProperty Name="puntos_acreditados" ColumnName="puntos_acreditados" />
+                <ScalarProperty Name="posicion_tablero" ColumnName="posicion_tablero" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+                <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vista_suspension_vigente">
+            <EntityTypeMapping TypeName="CribbageModel.vista_suspension_vigente">
+              <MappingFragment StoreEntitySet="vista_suspension_vigente">
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

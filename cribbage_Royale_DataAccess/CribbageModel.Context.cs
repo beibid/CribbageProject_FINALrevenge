@@ -44,5 +44,10 @@ namespace cribbage_Royale_DataAccess
         public virtual DbSet<sancion> sancion { get; set; }
         public virtual DbSet<sesion> sesion { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<vista_amigos> vista_amigos { get; set; }
+        public virtual DbSet<vista_crib> vista_crib { get; set; }
+        public virtual DbSet<vista_estadisticas_jugador> vista_estadisticas_jugador { get; set; }
+        public virtual DbSet<vista_marcador_partida> vista_marcador_partida { get; set; }
+        public virtual DbSet<vista_suspension_vigente> vista_suspension_vigente { get; set; }
     }
 }

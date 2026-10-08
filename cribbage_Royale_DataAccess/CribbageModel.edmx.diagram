@@ -62,6 +62,11 @@
         <AssociationConnector Association="CribbageModel.fk_sancion_sancionado" ManuallyRouted="false" />
         <AssociationConnector Association="CribbageModel.fk_sancion_soporte" ManuallyRouted="false" />
         <AssociationConnector Association="CribbageModel.fk_sesion_usuario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CribbageModel.vista_amigos" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CribbageModel.vista_crib" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CribbageModel.vista_estadisticas_jugador" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CribbageModel.vista_marcador_partida" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CribbageModel.vista_suspension_vigente" Width="1.5" PointX="4.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
