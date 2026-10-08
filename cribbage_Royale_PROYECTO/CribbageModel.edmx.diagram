@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="33441e1c78454a8799b4bef98c35adde" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="33441e1c78454a8799b4bef98c35adde" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="CribbageModel.ajustes_jugador" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CribbageModel.codigo_verificacion" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CribbageModel.perfil_jugador" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />

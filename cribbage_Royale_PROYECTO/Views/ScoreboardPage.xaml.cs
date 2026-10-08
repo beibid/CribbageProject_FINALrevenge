@@ -12,10 +12,13 @@ namespace cribbage_Royale_PROYECTO.Views
 {
     public partial class ScoreboardPage : Page
     {
+        private const int FirstPosition = 1;
+        private const decimal WinRateWithoutMatches = 0m;
+
         private readonly ScoreboardRepository _scoreboardRepository;
         private readonly string _currentUserName;
 
-        public ScoreboardPage(string currentUserName = null)
+        public ScoreboardPage(string currentUserName)
         {
             InitializeComponent();
             _scoreboardRepository = new ScoreboardRepository();
@@ -40,36 +43,52 @@ namespace cribbage_Royale_PROYECTO.Views
         private List<ScoreboardItem> BuildScoreboardItems(List<vista_estadisticas_jugador> ranking)
         {
             List<ScoreboardItem> items = new List<ScoreboardItem>();
-            int position = 1;
+            int position = FirstPosition;
 
             foreach (vista_estadisticas_jugador record in ranking)
             {
-                decimal winRate = record.porcentaje_victorias ?? 0;
-
-                items.Add(new ScoreboardItem
-                {
-                    Position = position,
-                    PlayerName = record.nombre_mostrado,
-                    Level = record.nivel_habilidad,
-                    Played = record.partidas_jugadas,
-                    Won = record.victorias,
-                    Lost = record.derrotas,
-                    WinRate = winRate,
-                    WinRateText = string.Format(CultureInfo.CurrentCulture,
-                        Lang.Scoreboard_WinRateFormat, winRate),
-                    IsCurrentPlayer = record.nombre_usuario == _currentUserName
-                });
-
+                items.Add(BuildScoreboardItem(record, position));
                 position++;
             }
 
             return items;
         }
 
+        private ScoreboardItem BuildScoreboardItem(vista_estadisticas_jugador record, int position)
+        {
+            decimal winRate = record.porcentaje_victorias ?? WinRateWithoutMatches;
+
+            return new ScoreboardItem
+            {
+                Position = position,
+                PlayerName = record.nombre_mostrado,
+                Level = record.nivel_habilidad,
+                Played = record.partidas_jugadas,
+                Won = record.victorias,
+                Lost = record.derrotas,
+                WinRate = winRate,
+                WinRateText = string.Format(CultureInfo.CurrentCulture,
+                    Lang.Scoreboard_WinRateFormat, winRate),
+                IsCurrentPlayer = record.nombre_usuario == _currentUserName
+            };
+        }
+
         private void ShowRanking(List<ScoreboardItem> items)
         {
             scoreboardDataGrid.ItemsSource = items;
-            emptyListTextBlock.Visibility = items.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            ShowEmptyListNotice(items.Count == 0);
+        }
+
+        private void ShowEmptyListNotice(bool isListEmpty)
+        {
+            if (isListEmpty)
+            {
+                emptyListTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                emptyListTextBlock.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -82,10 +101,11 @@ namespace cribbage_Royale_PROYECTO.Views
             if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
-                return;
             }
-
-            NavigationService.Navigate(new Lobby());
+            else
+            {
+                NavigationService.Navigate(new Lobby());
+            }
         }
     }
 }
