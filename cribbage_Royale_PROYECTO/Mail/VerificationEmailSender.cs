@@ -14,4 +14,4 @@ namespace cribbage_Royale_PROYECTO.Mail
             return SendMessage(recipient, Lang.Email_VerificationSubject, body);
         }
     }
-}
+} 

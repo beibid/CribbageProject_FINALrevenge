@@ -9,7 +9,7 @@ namespace cribbage_Royale_PROYECTO.Views
 {
     public partial class Lobby : Page
     {
-        private const int SamplePlayerSkillLevel = 1000;
+        private const int SamplePlayerSkillLevel = 0;
 
         public Lobby()
         {
@@ -67,7 +67,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private void ScoreboardButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ScoreboardPage());
+            NavigationService.Navigate(new ScoreboardPage(CurrentSession.Username));
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
