@@ -1743,4 +1743,10 @@ If you did not create this account, ignore this message.</value>
 	<data name="AwaitingInvite_ExpiredMessage" xml:space="preserve">
     <value>The invitation expired without a response</value>
   </data>
+	<data name="Scoreboard_ConnectionErrorMessage" xml:space="preserve">
+    <value>Could not connect to the server. Check your connection and try again.</value>
+  </data>
+	<data name="Scoreboard_TimeoutMessage" xml:space="preserve">
+    <value>The server took too long to respond. Please try again in a moment.</value>
+  </data>
 </root>

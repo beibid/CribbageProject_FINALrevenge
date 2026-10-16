@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace cribbage_Royale_DataAccess.DataAccess
 {
     public class ScoreboardRepository
     {
-        public List<vista_estadisticas_jugador> GetRanking()
+        public async Task<List<vista_estadisticas_jugador>> GetRankingAsync()
         {
             using (CribbageEntities context = new CribbageEntities())
             {
-                return context.vista_estadisticas_jugador
+                return await context.vista_estadisticas_jugador
                     .OrderByDescending(record => record.nivel_habilidad)
                     .ThenByDescending(record => record.victorias)
-                    .ToList();
+                    .ToListAsync();
             }
         }
     }

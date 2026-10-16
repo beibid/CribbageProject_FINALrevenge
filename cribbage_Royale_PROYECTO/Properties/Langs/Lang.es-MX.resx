@@ -1743,4 +1743,10 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="AwaitingInvite_ExpiredMessage" xml:space="preserve">
     <value>La invitación expiró sin respuesta</value>
   </data>
+	<data name="Scoreboard_ConnectionErrorMessage" xml:space="preserve">
+    <value>No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.</value>
+  </data>
+	<data name="Scoreboard_TimeoutMessage" xml:space="preserve">
+    <value>El servidor tardó demasiado en responder. Inténtalo de nuevo en un momento.</value>
+  </data>
 </root>

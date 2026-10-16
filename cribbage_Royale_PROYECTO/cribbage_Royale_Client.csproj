@@ -99,6 +99,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Threading.Channels, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Channels.8.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
     </Reference>
@@ -141,6 +142,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
+    <Compile Include="ServiceAccess\StatisticsServiceClient.cs" />
     <Compile Include="Session\CurrentSession.cs" />
     <Compile Include="Views\AddFriendPage.xaml.cs">
       <DependentUpon>AddFriendPage.xaml</DependentUpon>
@@ -470,6 +472,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\cribbage_Royale_Contracts\cribbage_Royale_Contracts.csproj">
+      <Project>{5568171d-f908-4f13-9c43-2c6d5aa9bcde}</Project>
+      <Name>cribbage_Royale_Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\cribbage_Royale_DataAccess\cribbage_Royale_DataAccess.csproj">
       <Project>{2e1f779a-5e40-468e-a457-ad861d63c8fa}</Project>
       <Name>cribbage_Royale_DataAccess</Name>

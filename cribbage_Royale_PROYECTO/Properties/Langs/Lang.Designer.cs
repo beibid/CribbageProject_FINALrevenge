@@ -3766,6 +3766,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Could not connect to the server. Check your connection and try again..
+        /// </summary>
+        public static string Scoreboard_ConnectionErrorMessage {
+            get {
+                return ResourceManager.GetString("Scoreboard_ConnectionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a There are no registered players yet..
         /// </summary>
         public static string Scoreboard_EmptyMessage {
@@ -3861,6 +3870,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Scoreboard_SubtitleText {
             get {
                 return ResourceManager.GetString("Scoreboard_SubtitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server took too long to respond. Please try again in a moment..
+        /// </summary>
+        public static string Scoreboard_TimeoutMessage {
+            get {
+                return ResourceManager.GetString("Scoreboard_TimeoutMessage", resourceCulture);
             }
         }
         
