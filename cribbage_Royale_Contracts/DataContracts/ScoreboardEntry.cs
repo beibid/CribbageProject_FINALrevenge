@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace CribbageRoyale.Contracts.Transfer
+namespace CribbageRoyale.Contracts.DataContracts
 {
     [DataContract]
     public class ScoreboardEntry

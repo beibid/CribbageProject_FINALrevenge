@@ -4,8 +4,8 @@ using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
-using CribbageRoyale.Contracts.Faults;
-using CribbageRoyale.Contracts.Transfer;
+using CribbageRoyale.Contracts.FaultContracts;
+using CribbageRoyale.Contracts.DataContracts;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -54,21 +54,21 @@ namespace cribbage_Royale_PROYECTO.Views
 
                 ShowRanking(BuildScoreboardItems(ranking));
             }
-            catch (FaultException<ServiceFault> exception)
+            catch (FaultException<ServiceFault> exceptionServiceFault)
             {
-                ShowLoadingFailure(exception, Lang.Scoreboard_LoadingErrorMessage);
+                ShowLoadingFailure(exceptionServiceFault, Lang.Scoreboard_LoadingErrorMessage);
             }
-            catch (EndpointNotFoundException exception)
+            catch (EndpointNotFoundException exceptionEndpointNotFound)
             {
-                ShowLoadingFailure(exception, Lang.Scoreboard_ConnectionErrorMessage);
+                ShowLoadingFailure(exceptionEndpointNotFound, Lang.Scoreboard_ConnectionErrorMessage);
             }
-            catch (TimeoutException exception)
+            catch (TimeoutException exceptionTimeout)
             {
-                ShowLoadingFailure(exception, Lang.Scoreboard_TimeoutMessage);
+                ShowLoadingFailure(exceptionTimeout, Lang.Scoreboard_TimeoutMessage);
             }
-            catch (CommunicationException exception)
+            catch (CommunicationException exceptionCommunication)
             {
-                ShowLoadingFailure(exception, Lang.Scoreboard_ConnectionErrorMessage);
+                ShowLoadingFailure(exceptionCommunication, Lang.Scoreboard_ConnectionErrorMessage);
             }
         }
 

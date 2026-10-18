@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using CribbageRoyale.Contracts.Services;
-using CribbageRoyale.Contracts.Transfer;
+using CribbageRoyale.Contracts.ServiceContracts;
+using CribbageRoyale.Contracts.DataContracts;
 
 namespace cribbage_Royale_PROYECTO.ServiceAccess
 {
@@ -19,7 +19,7 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             {
                 IStatistics channel = factory.CreateChannel();
 
-                return await channel.GetScoreboardAsync();
+                return await Task.Run(() => channel.GetScoreboard());
             }
             finally
             {

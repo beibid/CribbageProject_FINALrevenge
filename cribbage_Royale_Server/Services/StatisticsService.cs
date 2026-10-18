@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
 using System.ServiceModel;
-using System.Threading.Tasks;
 using cribbage_Royale_DataAccess;
 using cribbage_Royale_DataAccess.DataAccess;
-using CribbageRoyale.Contracts.Faults;
-using CribbageRoyale.Contracts.Services;
-using CribbageRoyale.Contracts.Transfer;
+using CribbageRoyale.Contracts.FaultContracts;
+using CribbageRoyale.Contracts.ServiceContracts;
+using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Server.Faults;
 using CribbageRoyale.Server.Logging;
 using CribbageRoyale.Server.Projection;
@@ -33,22 +32,21 @@ namespace CribbageRoyale.Server.Services
             _logger = ApplicationLogging.CreateLogger<StatisticsService>();
         }
 
-        public async Task<List<ScoreboardEntry>> GetScoreboardAsync()
+        public List<ScoreboardEntry> GetScoreboard()
         {
             try
             {
-                List<vista_estadisticas_jugador> ranking =
-                    await _scoreboardRepository.GetRankingAsync();
+                List<vista_estadisticas_jugador> ranking = _scoreboardRepository.GetRanking();
 
                 return _scoreboardProjection.BuildScoreboard(ranking);
             }
-            catch (EntityException exception)
+            catch (EntityException entityException)
             {
-                throw BuildDataAccessFault(exception);
+                throw BuildDataAccessFault(entityException);
             }
-            catch (SqlException exception)
+            catch (SqlException sqlException)
             {
-                throw BuildDataAccessFault(exception);
+                throw BuildDataAccessFault(sqlException);
             }
         }
 

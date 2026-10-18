@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace CribbageRoyale.Contracts.Faults
+namespace CribbageRoyale.Contracts.FaultContracts
 {
     [DataContract]
     public class ServiceFault

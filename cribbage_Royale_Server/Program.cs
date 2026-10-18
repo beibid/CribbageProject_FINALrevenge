@@ -9,16 +9,16 @@ namespace CribbageRoyale.Server
     public class Program
     {
         private const string ServiceStartedMessage =
-            "Servicio iniciado. Presiona Enter para detenerlo.";
+            "Server started. Press Enter to stop it.";
 
         private const string PortInUseMessage =
-            "El puerto ya esta en uso. Cierra la otra instancia del servidor y vuelve a intentarlo.";
+            "The port is already in use. Close the other instance of the server and try again.";
 
         private const string ServiceStartedLogMessage =
-            "El servidor quedo escuchando";
+            "The Server started";
 
         private const string ServiceStoppedLogMessage =
-            "El servidor se detuvo";
+            "The Server stopped";
 
         private Program()
         {
