@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="cribbage_Royale_Contracts/cribbage_Royale_Contracts.csproj" Id="5568171d-f908-4f13-9c43-2c6d5aa9bcde" />
+  <Project Path="cribbage_Royale_DataAccess/cribbage_Royale_DataAccess.csproj" Id="2e1f779a-5e40-468e-a457-ad861d63c8fa" />
+  <Project Path="cribbage_Royale_Rules/cribbage_Royale_Rules.csproj" Id="fe1dece5-9316-43e3-80ed-b7352474aea0" />
+  <Project Path="cribbage_Royale_Server/cribbage_Royale_Server.csproj" Id="4c8db0c3-41a9-4d6d-a215-37be8ec55426" />
+</Solution>
