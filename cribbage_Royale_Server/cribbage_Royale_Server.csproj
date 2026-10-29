@@ -122,6 +122,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CribbageRoyale.Exceptions\CribbageRoyale.Exceptions.csproj">
+      <Project>{4f2c05f1-68be-42dc-8039-847a14a3d268}</Project>
+      <Name>CribbageRoyale.Exceptions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\cribbage_Royale_Contracts\cribbage_Royale_Contracts.csproj">
       <Project>{5568171d-f908-4f13-9c43-2c6d5aa9bcde}</Project>
       <Name>cribbage_Royale_Contracts</Name>
