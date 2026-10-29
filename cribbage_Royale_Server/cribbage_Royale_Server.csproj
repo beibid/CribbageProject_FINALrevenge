@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Faults\ServiceFaultBuilder.cs" />
+    <Compile Include="Hosting\InstanceProviderBehavior.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projection\ScoreboardProjection.cs" />
