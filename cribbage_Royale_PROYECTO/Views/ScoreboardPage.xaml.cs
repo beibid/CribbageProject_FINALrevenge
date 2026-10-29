@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using cribbage_Royale_DataAccess.Models;
+﻿using cribbage_Royale_DataAccess.Models;
 using cribbage_Royale_PROYECTO.Logging;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 using CribbageRoyale.Contracts.DataContracts;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace cribbage_Royale_PROYECTO.Views
 {

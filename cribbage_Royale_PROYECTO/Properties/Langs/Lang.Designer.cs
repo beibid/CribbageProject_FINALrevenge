@@ -169,6 +169,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred and the game will close. Open it again to continue..
+        /// </summary>
+        public static string Application_UnexpectedErrorMessage {
+            get {
+                return ResourceManager.GetString("Application_UnexpectedErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You already invited this player. Wait for their response.
         /// </summary>
         public static string AwaitingInvite_AlreadyInvitedMessage {

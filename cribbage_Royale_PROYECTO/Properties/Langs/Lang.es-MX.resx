@@ -1749,4 +1749,7 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="Scoreboard_TimeoutMessage" xml:space="preserve">
     <value>El servidor tardó demasiado en responder. Inténtalo de nuevo en un momento.</value>
   </data>
+	<data name="Application_UnexpectedErrorMessage" xml:space="preserve">
+    <value>Ocurrió un error inesperado y el juego se cerrará. Vuelve a abrirlo para continuar.</value>
+  </data>
 </root>
