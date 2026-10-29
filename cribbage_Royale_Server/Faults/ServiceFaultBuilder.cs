@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
-using CribbageRoyale.Contracts.Faults;
+using CribbageRoyale.Contracts.FaultContracts;
 
 namespace CribbageRoyale.Server.Faults
 {

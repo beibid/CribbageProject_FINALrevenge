@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Faults\ServiceFaultCode.cs" />
-    <Compile Include="Faults\ServiceFault.cs" />
+    <Compile Include="FaultContracts\ServiceFaultCode.cs" />
+    <Compile Include="FaultContracts\ServiceFault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IStatistics.cs" />
-    <Compile Include="Transfer\ScoreboardEntry.cs" />
+    <Compile Include="ServiceContracts\IStatistics.cs" />
+    <Compile Include="DataContracts\ScoreboardEntry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
