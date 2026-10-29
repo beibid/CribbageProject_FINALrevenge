@@ -208,6 +208,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CribbageModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ConnectionStrings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="CribbageModel.edmx.diagram">
       <DependentUpon>CribbageModel.edmx</DependentUpon>
     </None>
