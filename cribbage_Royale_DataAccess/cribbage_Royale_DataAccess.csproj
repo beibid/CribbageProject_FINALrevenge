@@ -119,6 +119,7 @@
     <Compile Include="DataAccess\InvitationCreationOutcome.cs" />
     <Compile Include="DataAccess\InvitationRepository.cs" />
     <Compile Include="DataAccess\InvitationStatus.cs" />
+    <Compile Include="DataAccess\IScoreboardRepository.cs" />
     <Compile Include="DataAccess\MatchOrigin.cs" />
     <Compile Include="DataAccess\MatchRepository.cs" />
     <Compile Include="DataAccess\MatchStatus.cs" />
