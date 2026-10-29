@@ -54,7 +54,7 @@ namespace CribbageRoyale.Server.Services
         {
             _logger.LogError(exception, ScoreboardQueryFailureMessage);
 
-            return ServiceFaultBuilder.Build(ServiceFaultCode.DataAccess, exception.Message);
+            return ServiceFaultBuilder.Build(ServiceFaultCode.DataAccess, ScoreboardQueryFailureMessage);
         }
     }
 }
