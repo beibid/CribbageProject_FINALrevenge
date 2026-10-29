@@ -119,6 +119,7 @@
     <Compile Include="DataAccess\InvitationCreationOutcome.cs" />
     <Compile Include="DataAccess\InvitationRepository.cs" />
     <Compile Include="DataAccess\InvitationStatus.cs" />
+    <Compile Include="DataAccess\IScoreboardRepository.cs" />
     <Compile Include="DataAccess\MatchOrigin.cs" />
     <Compile Include="DataAccess\MatchRepository.cs" />
     <Compile Include="DataAccess\MatchStatus.cs" />
@@ -230,6 +231,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CribbageRoyale.Exceptions\CribbageRoyale.Exceptions.csproj">
+      <Project>{4f2c05f1-68be-42dc-8039-847a14a3d268}</Project>
+      <Name>CribbageRoyale.Exceptions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

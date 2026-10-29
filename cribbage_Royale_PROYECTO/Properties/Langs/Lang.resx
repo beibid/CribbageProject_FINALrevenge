@@ -1749,4 +1749,7 @@ If you did not create this account, ignore this message.</value>
 	<data name="Scoreboard_TimeoutMessage" xml:space="preserve">
     <value>The server took too long to respond. Please try again in a moment.</value>
   </data>
+	<data name="Application_UnexpectedErrorMessage" xml:space="preserve">
+    <value>An unexpected error occurred and the game will close. Open it again to continue.</value>
+  </data>
 </root>

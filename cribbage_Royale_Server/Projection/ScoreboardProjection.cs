@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using cribbage_Royale_DataAccess;
+using CribbageRoyale.Contracts.DataContracts;
 using System;
 using System.Collections.Generic;
-using cribbage_Royale_DataAccess;
-using CribbageRoyale.Contracts.DataContracts;
 
 namespace CribbageRoyale.Server.Projection
 {

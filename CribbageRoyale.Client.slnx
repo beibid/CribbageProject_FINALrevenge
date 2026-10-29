@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="CribbageRoyale.Exceptions/CribbageRoyale.Exceptions.csproj" Id="4f2c05f1-68be-42dc-8039-847a14a3d268" />
   <Project Path="cribbage_Royale_Contracts/cribbage_Royale_Contracts.csproj" Id="5568171d-f908-4f13-9c43-2c6d5aa9bcde" />
   <Project Path="cribbage_Royale_DataAccess/cribbage_Royale_DataAccess.csproj" Id="2e1f779a-5e40-468e-a457-ad861d63c8fa" />
   <Project Path="cribbage_Royale_PROYECTO/cribbage_Royale_Client.csproj" Id="cca8c43e-52af-4dbb-a2f2-781d99264496" />

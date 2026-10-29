@@ -1,24 +1,24 @@
-﻿using System;
-using System.ServiceModel;
+﻿using cribbage_Royale_DataAccess.DataAccess;
+using cribbage_Royale_Server.Hosting;
 using CribbageRoyale.Server.Logging;
+using CribbageRoyale.Server.Projection;
 using CribbageRoyale.Server.Services;
 using Microsoft.Extensions.Logging;
+using System;
+using System.ServiceModel;
 
 namespace CribbageRoyale.Server
 {
     public class Program
     {
-        private const string ServiceStartedMessage =
-            "Server started. Press Enter to stop it.";
+        private const string ServiceStartedMessage = "Server started. Press Enter to stop it.";
 
         private const string PortInUseMessage =
             "The port is already in use. Close the other instance of the server and try again.";
 
-        private const string ServiceStartedLogMessage =
-            "The Server started";
+        private const string ServiceStartedLogMessage = "The server started.";
 
-        private const string ServiceStoppedLogMessage =
-            "The Server stopped";
+        private const string ServiceStoppedLogMessage = "The server stopped.";
 
         private Program()
         {
@@ -34,25 +34,39 @@ namespace CribbageRoyale.Server
         private static void StartService()
         {
             ILogger logger = ApplicationLogging.CreateLogger<Program>();
+            ServiceHost host = CreateStatisticsHost();
 
             try
             {
-                using (ServiceHost host = new ServiceHost(typeof(StatisticsService)))
-                {
-                    host.Open();
-                    logger.LogInformation(ServiceStartedLogMessage);
-                    Console.WriteLine(ServiceStartedMessage);
-                    Console.ReadLine();
-                    host.Close();
-                    logger.LogInformation(ServiceStoppedLogMessage);
-                }
+                host.Open();
+                logger.LogInformation(ServiceStartedLogMessage);
+                Console.WriteLine(ServiceStartedMessage);
+                Console.ReadLine();
+                host.Close();
+                logger.LogInformation(ServiceStoppedLogMessage);
             }
-            catch (AddressAlreadyInUseException exceptionLogger)
+            catch (AddressAlreadyInUseException addressAlreadyInUseException)
             {
-                logger.LogError(exceptionLogger, PortInUseMessage);
+                logger.LogCritical(addressAlreadyInUseException, PortInUseMessage);
+                host.Abort();
                 Console.WriteLine(PortInUseMessage);
                 Console.ReadLine();
             }
+        }
+
+        private static ServiceHost CreateStatisticsHost()
+        {
+            ServiceHost host = new ServiceHost(typeof(StatisticsService));
+            host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreateStatisticsService()));
+            return host;
+        }
+
+        private static StatisticsService CreateStatisticsService()
+        {
+            return new StatisticsService(
+                new ScoreboardRepository(),
+                new ScoreboardProjection(),
+                ApplicationLogging.CreateLogger<StatisticsService>());
         }
     }
 }
