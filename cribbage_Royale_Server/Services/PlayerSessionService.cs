@@ -145,14 +145,14 @@ namespace CribbageRoyale.Server.Services
 
         private int ResolveAccountId(string token)
         {
-            int accountId;
+            SessionIdentity identity;
 
-            if (!_services.SessionTokens.TryGetAccountId(token, out accountId))
+            if (!_services.SessionTokens.TryValidateToken(token, out identity))
             {
                 throw SessionFaultBuilder.Build(SessionFailure.InvalidSession);
             }
 
-            return accountId;
+            return identity.AccountId;
         }
 
         private string StartExclusiveSession(AccountReference account)
@@ -184,8 +184,8 @@ namespace CribbageRoyale.Server.Services
             if (_currentAccount != null)
             {
                 _services.SessionTokens.RevokeToken(_currentToken);
-                _services.PlayerRegistry.Remove(_currentAccount.AccountId);
                 _services.PlayerChannel.RemovePlayer(_currentAccount.AccountId);
+                _services.PlayerRegistry.Remove(_currentAccount.AccountId);
 
                 _currentAccount = null;
                 _currentToken = null;

@@ -129,6 +129,7 @@
     <Compile Include="Sessions\LogInGate.cs" />
     <Compile Include="Sessions\PlayerRegistry.cs" />
     <Compile Include="Sessions\SessionFaultBuilder.cs" />
+    <Compile Include="Sessions\SessionIdentity.cs" />
     <Compile Include="Sessions\SessionLifetime.cs" />
     <Compile Include="Sessions\SessionServices.cs" />
     <Compile Include="Sessions\SessionToken.cs" />
