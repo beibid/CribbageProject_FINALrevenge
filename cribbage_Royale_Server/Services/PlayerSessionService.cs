@@ -108,12 +108,7 @@ namespace CribbageRoyale.Server.Services
             account.AccountId = credentials.AccountId;
             account.DisplayName = credentials.DisplayName;
 
-            string token = IssueExclusiveToken(account);
-
-            _currentAccount = account;
-            _currentToken = token;
-
-            _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
+            string token = StartExclusiveSession(account);
 
             AuthenticatedSession session = new AuthenticatedSession();
             session.Account = account;
@@ -129,12 +124,7 @@ namespace CribbageRoyale.Server.Services
             account.AccountId = _services.GuestAccountIds.Next();
             account.DisplayName = guestName;
 
-            string token = IssueExclusiveToken(account);
-
-            _currentAccount = account;
-            _currentToken = token;
-
-            _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
+            string token = StartExclusiveSession(account);
 
             GuestSession session = new GuestSession();
             session.Account = account;
@@ -143,7 +133,7 @@ namespace CribbageRoyale.Server.Services
             return session;
         }
 
-        private string IssueExclusiveToken(AccountReference account)
+        private string StartExclusiveSession(AccountReference account)
         {
             string token;
 
@@ -151,7 +141,12 @@ namespace CribbageRoyale.Server.Services
             {
                 _services.SessionTokens.RevokeAllTokens(account.AccountId);
                 token = _services.SessionTokens.IssueToken(account.AccountId);
+
+                _currentAccount = account;
+                _currentToken = token;
                 _services.PlayerRegistry.Register(account);
+
+                _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
             }
 
             return token;
