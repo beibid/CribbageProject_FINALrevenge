@@ -1752,4 +1752,34 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="Application_UnexpectedErrorMessage" xml:space="preserve">
     <value>Ocurrió un error inesperado y el juego se cerrará. Vuelve a abrirlo para continuar.</value>
   </data>
+	<data name="Login_InvalidCredentialsMessage" xml:space="preserve">
+    <value>El usuario, el correo o la contraseña son incorrectos.</value>
+  </data>
+	<data name="Login_AccountDeletedMessage" xml:space="preserve">
+    <value>Esta cuenta fue eliminada y ya no se puede usar.</value>
+  </data>
+	<data name="Login_ServerUnavailableMessage" xml:space="preserve">
+    <value>El servidor no está disponible. Revisa tu conexión e inténtalo de nuevo.</value>
+  </data>
+	<data name="Login_TimeoutMessage" xml:space="preserve">
+    <value>El servidor tardó demasiado en responder. Inténtalo de nuevo.</value>
+  </data>
+	<data name="Login_ServerErrorMessage" xml:space="preserve">
+    <value>El servidor no pudo completar el inicio de sesión. Inténtalo más tarde.</value>
+  </data>
+	<data name="Session_SignedInElsewhereTitle" xml:space="preserve">
+    <value>Sesión cerrada</value>
+  </data>
+	<data name="Session_SignedInElsewhereMessage" xml:space="preserve">
+    <value>Tu cuenta inició sesión desde otro dispositivo.</value>
+  </data>
+	<data name="Session_ConnectionLostTitle" xml:space="preserve">
+    <value>Conexión perdida</value>
+  </data>
+	<data name="Session_ConnectionLostMessage" xml:space="preserve">
+    <value>Se perdió la conexión con el servidor. Vuelve a iniciar sesión.</value>
+  </data>
+	<data name="Login_AccountNotVerifiedMessage" xml:space="preserve">
+    <value>Tu cuenta todavía no ha sido verificada. Revisa tu correo.</value>
+  </data>
 </root>

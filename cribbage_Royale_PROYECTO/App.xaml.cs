@@ -5,6 +5,7 @@ using System.Windows.Threading;
 using cribbage_Royale_PROYECTO.Localization;
 using cribbage_Royale_PROYECTO.Logging;
 using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 using Microsoft.Extensions.Logging;
 
@@ -24,6 +25,18 @@ namespace cribbage_Royale_PROYECTO
             "An unhandled exception occurred outside the user interface thread.";
 
         private ILogger _logger;
+        private GameClientCallback _sessionCallback;
+        private PlayerSessionClient _sessionClient;
+
+        public GameClientCallback SessionCallback
+        {
+            get { return _sessionCallback; }
+        }
+
+        public PlayerSessionClient SessionClient
+        {
+            get { return _sessionClient; }
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -32,6 +45,7 @@ namespace cribbage_Royale_PROYECTO
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             LanguageManager.ApplyCulture(LanguageManager.DefaultCulture);
+            CreateSessionClient();
             base.OnStartup(e);
             _logger.LogInformation(ApplicationStartedMessage);
         }
@@ -40,6 +54,14 @@ namespace cribbage_Royale_PROYECTO
         {
             ApplicationLogging.Shutdown();
             base.OnExit(e);
+        }
+
+        private void CreateSessionClient()
+        {
+            _sessionCallback = new GameClientCallback(Dispatcher);
+            _sessionClient = new PlayerSessionClient(
+                _sessionCallback,
+                ApplicationLogging.CreateLogger<PlayerSessionClient>());
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

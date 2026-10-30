@@ -13,6 +13,9 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
     {
         private const string EndpointName = "StatisticsEndpoint";
 
+        private const string ScoreboardServerFaultMessage =
+            "The scoreboard could not be retrieved. Code: {Code}. CorrelationId: {CorrelationId}.";
+
         private readonly ILogger _logger;
 
         public StatisticsServiceClient(ILogger logger)
@@ -54,7 +57,7 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             }
             catch (FaultException<ServiceFault> faultException)
             {
-                scoreboardResult = BuildFailure(ServiceFailureReason.ServerError, faultException);
+                scoreboardResult = BuildServerFaultFailure(faultException);
             }
             catch (EndpointNotFoundException endpointNotFoundException)
             {
@@ -70,6 +73,14 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             }
 
             return scoreboardResult;
+        }
+
+        private ScoreboardResult BuildServerFaultFailure(FaultException<ServiceFault> faultException)
+        {
+            _logger.LogError(faultException, ScoreboardServerFaultMessage, faultException.Detail.Code,
+                faultException.Detail.CorrelationId);
+
+            return new ScoreboardResult(false, ServiceFailureReason.ServerError, new List<ScoreboardEntry>());
         }
 
         private ScoreboardResult BuildFailure(ServiceFailureReason reason, Exception exception)

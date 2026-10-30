@@ -1,10 +1,9 @@
-﻿using System.Globalization;
+﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using cribbage_Royale_DataAccess.DataAccess;
-using cribbage_Royale_PROYECTO.Models;
-using cribbage_Royale_DataAccess.Models;
+using CribbageRoyale.Contracts.FaultContracts;
 using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Session;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 
@@ -12,11 +11,14 @@ namespace cribbage_Royale_PROYECTO.Views
 {
     public partial class Login : Page
     {
-        private readonly UserRepository _userRepository = new UserRepository();
+        private readonly PlayerSessionClient _sessionClient;
+
+        private bool _signInInProgress;
 
         public Login()
         {
             InitializeComponent();
+            _sessionClient = ((App)Application.Current).SessionClient;
             usernameTextBox.Focus();
         }
 
@@ -60,99 +62,89 @@ namespace cribbage_Royale_PROYECTO.Views
             NavigationService.Navigate(new Lobby());
         }
 
-        private void ShowAwaitingVerificationPage(string email)
-        {
-            NavigationService.Navigate(
-                new AwaitingVerificationPage(email, VerificationNotice.AccountNotVerified));
-        }
-
-        private void ShowUserNotFound()
-        {
-            loginMessagePanel.ShowError(Lang.Login_UserNotFoundMessage);
-        }
-
-        private void ShowIncorrectPassword()
-        {
-            loginMessagePanel.ShowError(Lang.Login_IncorrectPasswordMessage);
-            ClearPasswordField();
-        }
-
-        private void ShowAccountLocked(int remainingMinutes)
-        {
-            string message = string.Format(
-                CultureInfo.CurrentCulture,
-                Lang.Login_AccountLockedFormat,
-                remainingMinutes);
-
-            loginMessagePanel.ShowError(message);
-        }
-
-        private void ShowAccountSuspended()
-        {
-            loginMessagePanel.ShowError(Lang.Login_AccountSuspendedMessage);
-        }
-
-        private void ShowDatabaseError()
-        {
-            MessageDialog.ShowError(Window.GetWindow(this), Lang.Login_DatabaseErrorMessage);
-        }
-
-        private void StartSession(AuthenticationResult result)
+        private void StartSession(SignInResult result)
         {
             loginMessagePanel.HidePanel();
             MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.Login_SuccessMessage);
-            CurrentSession.StartRegisteredSession(result.Username, result.Email);
+            CurrentSession.StartRegisteredSession(result.Session.Account.DisplayName, result.Session.Email);
             ShowLobby();
         }
 
-        private void ProcessAuthenticationResult(AuthenticationResult result)
+        private void ShowRejection(SessionFailure failure)
         {
-            switch (result.Outcome)
+            switch (failure)
             {
-                case AuthenticationOutcome.Success:
-                    StartSession(result);
+                case SessionFailure.AccountNotVerified:
+                    loginMessagePanel.ShowError(Lang.Login_AccountNotVerifiedMessage);
                     break;
-                case AuthenticationOutcome.AccountNotVerified:
-                    loginMessagePanel.HidePanel();
-                    ShowAwaitingVerificationPage(result.Email);
+                case SessionFailure.AccountSuspended:
+                    loginMessagePanel.ShowError(Lang.Login_AccountSuspendedMessage);
                     break;
-                case AuthenticationOutcome.AccountLocked:
-                    ShowAccountLocked(result.LockoutRemainingMinutes);
+                case SessionFailure.AccountDeleted:
+                    loginMessagePanel.ShowError(Lang.Login_AccountDeletedMessage);
                     break;
-                case AuthenticationOutcome.AccountSuspended:
-                    ShowAccountSuspended();
-                    break;
-                case AuthenticationOutcome.DatabaseError:
-                    ShowDatabaseError();
-                    break;
-                case AuthenticationOutcome.UserNotFound:
-                    ShowUserNotFound();
-                    break;
-                case AuthenticationOutcome.InvalidPassword:
+                case SessionFailure.InvalidCredentials:
                 default:
-                    ShowIncorrectPassword();
+                    loginMessagePanel.ShowError(Lang.Login_InvalidCredentialsMessage);
+                    ClearPasswordField();
                     break;
             }
         }
 
-        private void SignIn()
+        private void ShowServiceFailure(ServiceFailureReason reason)
         {
-            AuthenticationResult result = _userRepository.AuthenticateUser(
-                GetUsernameOrEmail(),
-                GetPassword());
-
-            ProcessAuthenticationResult(result);
+            switch (reason)
+            {
+                case ServiceFailureReason.Timeout:
+                    MessageDialog.ShowError(Window.GetWindow(this), Lang.Login_TimeoutMessage);
+                    break;
+                case ServiceFailureReason.ServerError:
+                    MessageDialog.ShowError(Window.GetWindow(this), Lang.Login_ServerErrorMessage);
+                    break;
+                case ServiceFailureReason.ServerUnavailable:
+                default:
+                    MessageDialog.ShowError(Window.GetWindow(this), Lang.Login_ServerUnavailableMessage);
+                    break;
+            }
         }
 
-        private void SignInButton_Click(object sender, RoutedEventArgs e)
+        private void ProcessSignInResult(SignInResult result)
         {
-            if (AreCredentialsEmpty())
+            if (result.Succeeded)
             {
-                loginMessagePanel.ShowError(Lang.Validation_EmptyFields);
+                StartSession(result);
+            }
+            else if (result.Reason == ServiceFailureReason.SessionRejected)
+            {
+                ShowRejection(result.Failure.Value);
             }
             else
             {
-                SignIn();
+                ShowServiceFailure(result.Reason);
+            }
+        }
+
+        private async Task SignIn()
+        {
+            _signInInProgress = true;
+            SignInResult result = await _sessionClient.SignInAsync(GetUsernameOrEmail(), GetPassword());
+            _signInInProgress = false;
+
+            ProcessSignInResult(result);
+        }
+
+        private async void SignInButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_signInInProgress)
+            {
+                if (AreCredentialsEmpty())
+                {
+                    loginMessagePanel.ShowError(Lang.Validation_EmptyFields);
+                }
+                else
+                {
+                    await SignIn();
+                }
             }
         }
 

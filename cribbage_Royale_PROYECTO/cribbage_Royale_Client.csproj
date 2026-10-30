@@ -142,8 +142,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
+    <Compile Include="ServiceAccess\GameClientCallback.cs" />
+    <Compile Include="ServiceAccess\PlayerSessionClient.cs" />
+    <Compile Include="ServiceAccess\PresenceChangedEventArgs.cs" />
     <Compile Include="ServiceAccess\ScoreboardResult.cs" />
     <Compile Include="ServiceAccess\ServiceFailureReason.cs" />
+    <Compile Include="ServiceAccess\SessionRevokedEventArgs.cs" />
+    <Compile Include="ServiceAccess\SessionTokenHeader.cs" />
+    <Compile Include="ServiceAccess\SignInResult.cs" />
     <Compile Include="ServiceAccess\StatisticsServiceClient.cs" />
     <Compile Include="Session\CurrentSession.cs" />
     <Compile Include="Views\AddFriendPage.xaml.cs">

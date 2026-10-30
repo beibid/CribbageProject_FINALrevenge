@@ -43,6 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContracts\AccountReference.cs" />
+    <Compile Include="DataContracts\AuthenticatedSession.cs" />
+    <Compile Include="DataContracts\GuestSession.cs" />
+    <Compile Include="ServiceContracts\IGameClientCallback.cs" />
+    <Compile Include="ServiceContracts\IPlayerSession.cs" />
+    <Compile Include="DataContracts\PresenceChange.cs" />
+    <Compile Include="DataContracts\PresenceScope.cs" />
+    <Compile Include="FaultContracts\SessionFailure.cs" />
+    <Compile Include="FaultContracts\SessionFault.cs" />
+    <Compile Include="DataContracts\SessionRevocation.cs" />
+    <Compile Include="DataContracts\SessionRevocationReason.cs" />
     <Compile Include="FaultContracts\ServiceFaultCode.cs" />
     <Compile Include="FaultContracts\ServiceFault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

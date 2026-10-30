@@ -120,6 +120,7 @@
     <Compile Include="DataAccess\InvitationRepository.cs" />
     <Compile Include="DataAccess\InvitationStatus.cs" />
     <Compile Include="DataAccess\IScoreboardRepository.cs" />
+    <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="DataAccess\MatchOrigin.cs" />
     <Compile Include="DataAccess\MatchRepository.cs" />
     <Compile Include="DataAccess\MatchStatus.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="DataAccess\SanctionType.cs" />
     <Compile Include="DataAccess\ScoreboardRepository.cs" />
     <Compile Include="DataAccess\SupportRepository.cs" />
+    <Compile Include="DataAccess\UserCredentials.cs" />
     <Compile Include="DataAccess\UserRepository.cs" />
     <Compile Include="DataAccess\VerificationCodeRepository.cs" />
     <Compile Include="invitacion_partida.cs">

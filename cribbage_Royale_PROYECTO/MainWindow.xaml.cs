@@ -1,29 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.ServiceAccess;
+using cribbage_Royale_PROYECTO.Views;
+using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly PlayerSessionClient _sessionClient;
+
+        private bool _sessionEnded;
+
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Views.StartMenu());
+            _sessionClient = ((App)Application.Current).SessionClient;
+            _sessionClient.ConnectionLost += SessionClient_ConnectionLost;
+            ((App)Application.Current).SessionCallback.RevocationReceived += SessionCallback_RevocationReceived;
+            MainFrame.Navigate(new StartMenu());
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            RequestSignOut();
+            base.OnClosing(e);
+        }
+
+        private void RequestSignOut()
+        {
+            if (!_sessionEnded && _sessionClient.IsConnected())
+            {
+                _sessionEnded = true;
+                _sessionClient.SignOutAsync();
+            }
+        }
+
+        private void SessionClient_ConnectionLost(object sender, EventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() => ShowConnectionLost()));
+        }
+
+        private void SessionCallback_RevocationReceived(object sender, SessionRevokedEventArgs e)
+        {
+            if (!_sessionEnded)
+            {
+                _sessionEnded = true;
+                MessageDialog.ShowError(this, Lang.Session_SignedInElsewhereMessage);
+                ReturnToLogin();
+            }
+        }
+
+        private void ShowConnectionLost()
+        {
+            if (!_sessionEnded)
+            {
+                _sessionEnded = true;
+                MessageDialog.ShowError(this, Lang.Session_ConnectionLostMessage);
+                ReturnToLogin();
+            }
+        }
+
+        private void ReturnToLogin()
+        {
+            MainFrame.Navigate(new Login());
         }
     }
 }

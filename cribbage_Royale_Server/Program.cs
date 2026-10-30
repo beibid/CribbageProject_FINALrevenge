@@ -1,11 +1,13 @@
-﻿using cribbage_Royale_DataAccess.DataAccess;
+﻿using System;
+using System.ServiceModel;
+using cribbage_Royale_DataAccess.DataAccess;
 using cribbage_Royale_Server.Hosting;
+using CribbageRoyale.Server.Connections;
 using CribbageRoyale.Server.Logging;
 using CribbageRoyale.Server.Projection;
 using CribbageRoyale.Server.Services;
+using CribbageRoyale.Server.Sessions;
 using Microsoft.Extensions.Logging;
-using System;
-using System.ServiceModel;
 
 namespace CribbageRoyale.Server
 {
@@ -20,6 +22,8 @@ namespace CribbageRoyale.Server
 
         private const string ServiceStoppedLogMessage = "The server stopped.";
 
+        private static SessionServices _sessionServices;
+
         private Program()
         {
         }
@@ -27,28 +31,32 @@ namespace CribbageRoyale.Server
         public static void Main()
         {
             ApplicationLogging.Initialize();
-            StartService();
+            StartServices();
             ApplicationLogging.Shutdown();
         }
 
-        private static void StartService()
+        private static void StartServices()
         {
             ILogger logger = ApplicationLogging.CreateLogger<Program>();
-            ServiceHost host = CreateStatisticsHost();
+            ServiceHost statisticsHost = CreateStatisticsHost();
+            ServiceHost sessionHost = CreateSessionHost();
 
             try
             {
-                host.Open();
+                statisticsHost.Open();
+                sessionHost.Open();
                 logger.LogInformation(ServiceStartedLogMessage);
                 Console.WriteLine(ServiceStartedMessage);
                 Console.ReadLine();
-                host.Close();
+                sessionHost.Close();
+                statisticsHost.Close();
                 logger.LogInformation(ServiceStoppedLogMessage);
             }
             catch (AddressAlreadyInUseException addressAlreadyInUseException)
             {
                 logger.LogCritical(addressAlreadyInUseException, PortInUseMessage);
-                host.Abort();
+                sessionHost.Abort();
+                statisticsHost.Abort();
                 Console.WriteLine(PortInUseMessage);
                 Console.ReadLine();
             }
@@ -58,7 +66,30 @@ namespace CribbageRoyale.Server
         {
             ServiceHost host = new ServiceHost(typeof(StatisticsService));
             host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreateStatisticsService()));
+
             return host;
+        }
+
+        private static ServiceHost CreateSessionHost()
+        {
+            _sessionServices = CreateSessionServices();
+            ServiceHost host = new ServiceHost(typeof(PlayerSessionService));
+            host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreateSessionService()));
+
+            return host;
+        }
+
+        private static SessionServices CreateSessionServices()
+        {
+            SessionServices services = new SessionServices();
+            services.Authenticator = new Authenticator(new UserRepository());
+            services.SessionTokens = new SessionTokenStore();
+            services.PlayerChannel = new PlayerChannel(ApplicationLogging.CreateLogger<PlayerChannel>());
+            services.PlayerRegistry = new PlayerRegistry();
+            services.GuestAccountIds = new GuestAccountIds();
+            services.LogInGate = new LogInGate();
+
+            return services;
         }
 
         private static StatisticsService CreateStatisticsService()
@@ -67,6 +98,13 @@ namespace CribbageRoyale.Server
                 new ScoreboardRepository(),
                 new ScoreboardProjection(),
                 ApplicationLogging.CreateLogger<StatisticsService>());
+        }
+
+        private static PlayerSessionService CreateSessionService()
+        {
+            return new PlayerSessionService(
+                _sessionServices,
+                ApplicationLogging.CreateLogger<PlayerSessionService>());
         }
     }
 }

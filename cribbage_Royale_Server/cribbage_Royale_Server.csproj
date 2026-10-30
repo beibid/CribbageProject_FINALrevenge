@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt-Net-Next, Version=4.2.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.2.0\lib\net48\BCrypt-Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -107,13 +110,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\IPlayerChannel.cs" />
+    <Compile Include="Connections\PlayerChannel.cs" />
+    <Compile Include="Connections\PlayerConnectionChangedEventArgs.cs" />
     <Compile Include="Faults\ServiceFaultBuilder.cs" />
     <Compile Include="Hosting\InstanceProviderBehavior.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projection\ScoreboardProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PlayerSessionService.cs" />
     <Compile Include="Services\StatisticsService.cs" />
+    <Compile Include="Sessions\Authenticator.cs" />
+    <Compile Include="Sessions\GuestAccountIds.cs" />
+    <Compile Include="Sessions\GuestNames.cs" />
+    <Compile Include="Sessions\IAuthenticator.cs" />
+    <Compile Include="Sessions\ISessionTokens.cs" />
+    <Compile Include="Sessions\LogInGate.cs" />
+    <Compile Include="Sessions\PlayerRegistry.cs" />
+    <Compile Include="Sessions\SessionFaultBuilder.cs" />
+    <Compile Include="Sessions\SessionServices.cs" />
+    <Compile Include="Sessions\SessionToken.cs" />
+    <Compile Include="Sessions\SessionTokenStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

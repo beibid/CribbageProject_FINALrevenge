@@ -2164,11 +2164,29 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a This account was deleted and can no longer be used..
+        /// </summary>
+        public static string Login_AccountDeletedMessage {
+            get {
+                return ResourceManager.GetString("Login_AccountDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a For security reasons, access to this account is temporarily locked. Try again in {0} minutes or reset your password.
         /// </summary>
         public static string Login_AccountLockedFormat {
             get {
                 return ResourceManager.GetString("Login_AccountLockedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your account has not been verified yet. Check your email..
+        /// </summary>
+        public static string Login_AccountNotVerifiedMessage {
+            get {
+                return ResourceManager.GetString("Login_AccountNotVerifiedMessage", resourceCulture);
             }
         }
         
@@ -2227,7 +2245,7 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a The username or password is incorrect.
+        ///   Busca una cadena traducida similar a The username, email or password is incorrect..
         /// </summary>
         public static string Login_InvalidCredentialsMessage {
             get {
@@ -2241,6 +2259,24 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Login_PasswordLabel {
             get {
                 return ResourceManager.GetString("Login_PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server could not complete the sign in. Try again later..
+        /// </summary>
+        public static string Login_ServerErrorMessage {
+            get {
+                return ResourceManager.GetString("Login_ServerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server is not available. Check your connection and try again..
+        /// </summary>
+        public static string Login_ServerUnavailableMessage {
+            get {
+                return ResourceManager.GetString("Login_ServerUnavailableMessage", resourceCulture);
             }
         }
         
@@ -2268,6 +2304,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Login_SuccessMessage {
             get {
                 return ResourceManager.GetString("Login_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server took too long to answer. Try again..
+        /// </summary>
+        public static string Login_TimeoutMessage {
+            get {
+                return ResourceManager.GetString("Login_TimeoutMessage", resourceCulture);
             }
         }
         
@@ -3915,6 +3960,42 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Scoreboard_WonColumn {
             get {
                 return ResourceManager.GetString("Scoreboard_WonColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The connection to the server was lost. Please sign in again..
+        /// </summary>
+        public static string Session_ConnectionLostMessage {
+            get {
+                return ResourceManager.GetString("Session_ConnectionLostMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Connection lost.
+        /// </summary>
+        public static string Session_ConnectionLostTitle {
+            get {
+                return ResourceManager.GetString("Session_ConnectionLostTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your account was signed in from another device..
+        /// </summary>
+        public static string Session_SignedInElsewhereMessage {
+            get {
+                return ResourceManager.GetString("Session_SignedInElsewhereMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Session closed.
+        /// </summary>
+        public static string Session_SignedInElsewhereTitle {
+            get {
+                return ResourceManager.GetString("Session_SignedInElsewhereTitle", resourceCulture);
             }
         }
         

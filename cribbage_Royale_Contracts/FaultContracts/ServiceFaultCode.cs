@@ -1,17 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace CribbageRoyale.Contracts.FaultContracts
 {
+    /// <summary>
+    /// Códigos de falla técnica que puede transportar <see cref="ServiceFault"/>.
+    /// </summary>
+    [DataContract]
     public enum ServiceFaultCode
     {
-        InvalidSession,
-        MatchNotFound,
-        DataAccess,
-        Unauthorized,
-        InvalidRequest
+        /// <summary>
+        /// La operación falló al leer o escribir en la base de datos.
+        /// </summary>
+        [EnumMember]
+        DataAccessFailure,
+
+        /// <summary>
+        /// La operación no pudo entregar un correo electrónico.
+        /// </summary>
+        [EnumMember]
+        MailDeliveryFailure,
+
+        /// <summary>
+        /// La operación falló por una condición no prevista dentro del servidor.
+        /// </summary>
+        [EnumMember]
+        InternalFailure
     }
 }

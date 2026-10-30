@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ServiceModel;
 using CribbageRoyale.Contracts.FaultContracts;
 
@@ -10,15 +6,16 @@ namespace CribbageRoyale.Server.Faults
 {
     public static class ServiceFaultBuilder
     {
-        public static FaultException<ServiceFault> Build(ServiceFaultCode code, string detail)
+        public static FaultException<ServiceFault> Build(ServiceFaultCode code)
         {
-            ServiceFault fault = new ServiceFault
-            {
-                Code = code,
-                Detail = detail
-            };
+            ServiceFault serviceFault = new ServiceFault();
+            serviceFault.Code = code;
+            serviceFault.CorrelationId = Guid.NewGuid().ToString("N");
 
-            return new FaultException<ServiceFault>(fault, new FaultReason(code.ToString()));
+            FaultException<ServiceFault> faultException =
+                new FaultException<ServiceFault>(serviceFault, new FaultReason(code.ToString()));
+
+            return faultException;
         }
     }
 }

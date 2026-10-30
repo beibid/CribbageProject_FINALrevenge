@@ -5,6 +5,7 @@
         None,
         ServerUnavailable,
         Timeout,
-        ServerError
+        ServerError,
+        SessionRejected
     }
 }

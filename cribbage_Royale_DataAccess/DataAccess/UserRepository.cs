@@ -1,14 +1,15 @@
-﻿using cribbage_Royale_DataAccess.Models;
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using cribbage_Royale_DataAccess.Models;
+using CribbageRoyale.Exceptions;
 
 namespace cribbage_Royale_DataAccess.DataAccess
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private const string VerifiedAccountStatus = "VERIFICADA";
         private const string SuspendedAccountStatus = "SUSPENDIDA";
@@ -21,6 +22,9 @@ namespace cribbage_Royale_DataAccess.DataAccess
         private const byte DefaultMusicVolume = 70;
         private const byte DefaultEffectsVolume = 80;
         private const short InitialSkillLevel = 1000;
+        private const string CredentialsQueryFailureMessage = "The user credentials could not be queried.";
+        private const string FailedAttemptUpdateFailureMessage = "The failed attempt could not be registered.";
+        private const string SuccessfulAccessUpdateFailureMessage = "The successful access could not be registered.";
 
         public AuthenticationResult AuthenticateUser(string usernameOrEmail, string password)
         {
@@ -42,6 +46,166 @@ namespace cribbage_Royale_DataAccess.DataAccess
             }
 
             return result;
+        }
+
+        public RegistrationOutcome RegisterAccount(string username, string email, string password)
+        {
+            RegistrationOutcome outcome;
+
+            try
+            {
+                outcome = CreateAccount(username, email, password);
+            }
+            catch (EntityException entityException)
+            {
+                Trace.WriteLine(entityException.Message);
+                outcome = RegistrationOutcome.DatabaseError;
+            }
+            catch (SqlException sqlException)
+            {
+                Trace.WriteLine(sqlException.Message);
+                outcome = RegistrationOutcome.DatabaseError;
+            }
+
+            return outcome;
+        }
+
+        public int GetUserId(string email)
+        {
+            int userId = 0;
+
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    usuario account = context.usuario.FirstOrDefault(user => user.correo == email);
+
+                    if (account != null)
+                    {
+                        userId = account.id_usuario;
+                    }
+                }
+            }
+            catch (EntityException entityException)
+            {
+                Trace.WriteLine(entityException.Message);
+            }
+            catch (SqlException sqlException)
+            {
+                Trace.WriteLine(sqlException.Message);
+            }
+
+            return userId;
+        }
+
+        public UserCredentials FindCredentials(string userNameOrEmail)
+        {
+            UserCredentials credentials;
+
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    credentials = BuildCredentials(context, userNameOrEmail);
+                }
+            }
+            catch (EntityException entityException)
+            {
+                throw new DataAccessException(CredentialsQueryFailureMessage, entityException);
+            }
+            catch (SqlException sqlException)
+            {
+                throw new DataAccessException(CredentialsQueryFailureMessage, sqlException);
+            }
+
+            return credentials;
+        }
+
+        public void RegisterFailedAttempt(int accountId)
+        {
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    usuario account = context.usuario.FirstOrDefault(user => user.id_usuario == accountId);
+
+                    if (account != null)
+                    {
+                        ApplyFailedAttempt(context, account);
+                    }
+                }
+            }
+            catch (EntityException entityException)
+            {
+                throw new DataAccessException(FailedAttemptUpdateFailureMessage, entityException);
+            }
+            catch (SqlException sqlException)
+            {
+                throw new DataAccessException(FailedAttemptUpdateFailureMessage, sqlException);
+            }
+        }
+
+        public void RegisterSuccessfulAccess(int accountId)
+        {
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    usuario account = context.usuario.FirstOrDefault(user => user.id_usuario == accountId);
+
+                    if (account != null)
+                    {
+                        ApplySuccessfulAccess(context, account);
+                    }
+                }
+            }
+            catch (EntityException entityException)
+            {
+                throw new DataAccessException(SuccessfulAccessUpdateFailureMessage, entityException);
+            }
+            catch (SqlException sqlException)
+            {
+                throw new DataAccessException(SuccessfulAccessUpdateFailureMessage, sqlException);
+            }
+        }
+
+        private UserCredentials BuildCredentials(CribbageEntities context, string userNameOrEmail)
+        {
+            UserCredentials credentials = null;
+
+            usuario account = context.usuario.FirstOrDefault(
+                user => user.nombre_usuario == userNameOrEmail || user.correo == userNameOrEmail);
+
+            if (account != null)
+            {
+                int accountId = account.id_usuario;
+                perfil_jugador profile = context.perfil_jugador.FirstOrDefault(
+                    record => record.id_usuario == accountId);
+
+                credentials = new UserCredentials
+                {
+                    AccountId = accountId,
+                    DisplayName = ResolveDisplayName(account, profile),
+                    Email = account.correo,
+                    PasswordHash = account.hash_contrasena,
+                    Status = account.estado_cuenta,
+                    LockoutEndDate = account.fecha_fin_bloqueo_acceso
+                };
+            }
+
+            return credentials;
+        }
+
+        private string ResolveDisplayName(usuario account, perfil_jugador profile)
+        {
+            string displayName = account.nombre_usuario;
+
+            if (profile != null)
+            {
+                displayName = profile.nombre_mostrado;
+            }
+
+            return displayName;
         }
 
         private AuthenticationResult EvaluateCredentials(string usernameOrEmail, string password)
@@ -76,7 +240,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             }
             else if (!IsPasswordCorrect(password, account.hash_contrasena))
             {
-                RegisterFailedAttempt(context, account);
+                ApplyFailedAttempt(context, account);
                 result = BuildFailedResult(AuthenticationOutcome.InvalidPassword);
             }
             else if (account.estado_cuenta == SuspendedAccountStatus)
@@ -89,7 +253,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             }
             else
             {
-                RegisterSuccessfulAccess(context, account);
+                ApplySuccessfulAccess(context, account);
                 result = BuildAccountResult(account, AuthenticationOutcome.Success);
             }
 
@@ -121,7 +285,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return isCorrect;
         }
 
-        private void RegisterFailedAttempt(CribbageEntities context, usuario account)
+        private void ApplyFailedAttempt(CribbageEntities context, usuario account)
         {
             account.intentos_fallidos = (byte)(account.intentos_fallidos + 1);
 
@@ -134,7 +298,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             context.SaveChanges();
         }
 
-        private void RegisterSuccessfulAccess(CribbageEntities context, usuario account)
+        private void ApplySuccessfulAccess(CribbageEntities context, usuario account)
         {
             account.intentos_fallidos = 0;
             account.fecha_fin_bloqueo_acceso = null;
@@ -176,27 +340,6 @@ namespace cribbage_Royale_DataAccess.DataAccess
             result.LockoutRemainingMinutes = CalculateRemainingLockoutMinutes(account);
 
             return result;
-        }
-        public RegistrationOutcome RegisterAccount(string username, string email, string password)
-        {
-            RegistrationOutcome outcome;
-
-            try
-            {
-                outcome = CreateAccount(username, email, password);
-            }
-            catch (EntityException entityException)
-            {
-                Trace.WriteLine(entityException.Message);
-                outcome = RegistrationOutcome.DatabaseError;
-            }
-            catch (SqlException sqlException)
-            {
-                Trace.WriteLine(sqlException.Message);
-                outcome = RegistrationOutcome.DatabaseError;
-            }
-
-            return outcome;
         }
 
         private RegistrationOutcome CreateAccount(string username, string email, string password)
@@ -307,33 +450,5 @@ namespace cribbage_Royale_DataAccess.DataAccess
                 notificaciones_solicitudes = true
             };
         }
-        public int GetUserId(string email)
-        {
-            int userId = 0;
-
-            try
-            {
-                using (CribbageEntities context = new CribbageEntities())
-                {
-                    usuario account = context.usuario.FirstOrDefault(user => user.correo == email);
-
-                    if (account != null)
-                    {
-                        userId = account.id_usuario;
-                    }
-                }
-            }
-            catch (EntityException entityException)
-            {
-                Trace.WriteLine(entityException.Message);
-            }
-            catch (SqlException sqlException)
-            {
-                Trace.WriteLine(sqlException.Message);
-            }
-
-            return userId;
-        }
-
     }
 }

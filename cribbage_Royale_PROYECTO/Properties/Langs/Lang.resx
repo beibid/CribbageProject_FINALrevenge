@@ -1752,4 +1752,34 @@ If you did not create this account, ignore this message.</value>
 	<data name="Application_UnexpectedErrorMessage" xml:space="preserve">
     <value>An unexpected error occurred and the game will close. Open it again to continue.</value>
   </data>
+	<data name="Login_InvalidCredentialsMessage" xml:space="preserve">
+    <value>The username, email or password is incorrect.</value>
+  </data>
+	<data name="Login_AccountDeletedMessage" xml:space="preserve">
+    <value>This account was deleted and can no longer be used.</value>
+  </data>
+	<data name="Login_ServerUnavailableMessage" xml:space="preserve">
+    <value>The server is not available. Check your connection and try again.</value>
+  </data>
+	<data name="Login_TimeoutMessage" xml:space="preserve">
+    <value>The server took too long to answer. Try again.</value>
+  </data>
+	<data name="Login_ServerErrorMessage" xml:space="preserve">
+    <value>The server could not complete the sign in. Try again later.</value>
+  </data>
+	<data name="Session_SignedInElsewhereTitle" xml:space="preserve">
+    <value>Session closed</value>
+  </data>
+	<data name="Session_SignedInElsewhereMessage" xml:space="preserve">
+    <value>Your account was signed in from another device.</value>
+  </data>
+	<data name="Session_ConnectionLostTitle" xml:space="preserve">
+    <value>Connection lost</value>
+  </data>
+	<data name="Session_ConnectionLostMessage" xml:space="preserve">
+    <value>The connection to the server was lost. Please sign in again.</value>
+  </data>
+	<data name="Login_AccountNotVerifiedMessage" xml:space="preserve">
+    <value>Your account has not been verified yet. Check your email.</value>
+  </data>
 </root>
