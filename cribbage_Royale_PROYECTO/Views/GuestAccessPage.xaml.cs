@@ -34,7 +34,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private void StartGuestSession(GuestSignInResult result)
         {
-            CurrentSession.StartGuestSession(result.Session.DisplayName);
+            CurrentSession.StartGuestSession(result.Session.DisplayName, result.Session.SessionToken);
             NavigationService.Navigate(new Lobby());
         }
 

@@ -6,6 +6,7 @@
         ServerUnavailable,
         Timeout,
         ServerError,
-        SessionRejected
+        SessionRejected,
+        RequestRejected
     }
 }

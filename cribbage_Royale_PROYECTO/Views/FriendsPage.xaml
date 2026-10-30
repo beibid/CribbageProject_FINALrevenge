@@ -6,7 +6,8 @@
       xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
       mc:Ignorable="d"
       d:DesignHeight="800" d:DesignWidth="1280"
-      Title="FriendsPage">
+      Title="FriendsPage"
+      Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid Background="{StaticResource BackgroundBrush}" Margin="40,30">
         <Grid.RowDefinitions>
@@ -54,10 +55,10 @@
                         <DataTemplate>
                             <Grid Margin="4,8" Width="1000">
                                 <StackPanel VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding UserName}"
+                                    <TextBlock Text="{Binding DisplayName}"
                                                Foreground="{StaticResource TextBrush}"
                                                FontSize="14" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Status}"
+                                    <TextBlock Text="{Binding StatusText}"
                                                Foreground="{StaticResource MutedTextBrush}"
                                                FontSize="12"/>
                                 </StackPanel>

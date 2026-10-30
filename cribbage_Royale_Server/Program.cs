@@ -25,6 +25,7 @@ namespace CribbageRoyale.Server
         private const int SessionLifetimeHours = 10;
 
         private static SessionServices _sessionServices;
+        private static FriendListServices _friendListServices;
 
         private Program()
         {
@@ -42,14 +43,17 @@ namespace CribbageRoyale.Server
             ILogger logger = ApplicationLogging.CreateLogger<Program>();
             ServiceHost statisticsHost = CreateStatisticsHost();
             ServiceHost sessionHost = CreateSessionHost();
+            ServiceHost friendListHost = CreateFriendListHost();
 
             try
             {
                 statisticsHost.Open();
                 sessionHost.Open();
+                friendListHost.Open();
                 logger.LogInformation(ServiceStartedLogMessage);
                 Console.WriteLine(ServiceStartedMessage);
                 Console.ReadLine();
+                friendListHost.Close();
                 sessionHost.Close();
                 statisticsHost.Close();
                 logger.LogInformation(ServiceStoppedLogMessage);
@@ -57,6 +61,7 @@ namespace CribbageRoyale.Server
             catch (AddressAlreadyInUseException addressAlreadyInUseException)
             {
                 logger.LogCritical(addressAlreadyInUseException, PortInUseMessage);
+                friendListHost.Abort();
                 sessionHost.Abort();
                 statisticsHost.Abort();
                 Console.WriteLine(PortInUseMessage);
@@ -81,6 +86,15 @@ namespace CribbageRoyale.Server
             return host;
         }
 
+        private static ServiceHost CreateFriendListHost()
+        {
+            _friendListServices = CreateFriendListServices(_sessionServices);
+            ServiceHost host = new ServiceHost(typeof(FriendListService));
+            host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreateFriendListService()));
+
+            return host;
+        }
+
         private static SessionServices CreateSessionServices()
         {
             SessionLifetime sessionLifetime = new SessionLifetime(TimeSpan.FromHours(SessionLifetimeHours));
@@ -92,6 +106,24 @@ namespace CribbageRoyale.Server
             services.PlayerChannel = new PlayerChannel(ApplicationLogging.CreateLogger<PlayerChannel>());
             services.PlayerRegistry = new PlayerRegistry();
             services.LogInGate = new LogInGate();
+
+            return services;
+        }
+
+        private static FriendListServices CreateFriendListServices(SessionServices sessionServices)
+        {
+            FriendshipRepository friendshipRepository = new FriendshipRepository();
+
+            FriendPresenceNotifier presenceNotifier = new FriendPresenceNotifier(
+                friendshipRepository,
+                new StateProjection(sessionServices.PlayerRegistry),
+                ApplicationLogging.CreateLogger<FriendPresenceNotifier>());
+            presenceNotifier.Attach(sessionServices.PlayerChannel);
+
+            FriendListServices services = new FriendListServices();
+            services.CallerSession = new CallerSession(sessionServices.SessionTokens);
+            services.FriendshipRepository = friendshipRepository;
+            services.PlayerChannel = sessionServices.PlayerChannel;
 
             return services;
         }
@@ -109,6 +141,13 @@ namespace CribbageRoyale.Server
             return new PlayerSessionService(
                 _sessionServices,
                 ApplicationLogging.CreateLogger<PlayerSessionService>());
+        }
+
+        private static FriendListService CreateFriendListService()
+        {
+            return new FriendListService(
+                _friendListServices,
+                ApplicationLogging.CreateLogger<FriendListService>());
         }
     }
 }
