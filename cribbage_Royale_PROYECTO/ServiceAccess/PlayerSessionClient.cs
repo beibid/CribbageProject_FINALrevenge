@@ -36,6 +36,11 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             return Task.Run(() => SignIn(userNameOrEmail, password));
         }
 
+        public Task<GuestSignInResult> SignInAsGuestAsync(string displayName)
+        {
+            return Task.Run(() => SignInAsGuest(displayName));
+        }
+
         public Task SignOutAsync()
         {
             return Task.Run(() => SignOut());
@@ -56,31 +61,52 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
 
         private SignInResult SignIn(string userNameOrEmail, string password)
         {
-            SignInResult result;
+            return ExecuteSessionOperation(
+                () => OpenSession(userNameOrEmail, password),
+                (reason, failure) => new SignInResult(reason, failure, null));
+        }
+
+        private GuestSignInResult SignInAsGuest(string displayName)
+        {
+            return ExecuteSessionOperation(
+                () => OpenGuestSession(displayName),
+                (reason, failure) => new GuestSignInResult(reason, failure, null));
+        }
+
+        private TResult ExecuteSessionOperation<TResult>(
+            Func<TResult> openSession,
+            Func<ServiceFailureReason, SessionFailure?, TResult> buildFailedResult)
+        {
+            TResult result;
 
             try
             {
-                result = OpenSession(userNameOrEmail, password);
+                result = openSession();
             }
             catch (FaultException<SessionFault> sessionFaultException)
             {
-                result = BuildRejection(sessionFaultException.Detail.Failure);
+                CloseChannel();
+                result = buildFailedResult(ServiceFailureReason.SessionRejected, sessionFaultException.Detail.Failure);
             }
             catch (FaultException<ServiceFault> serviceFaultException)
             {
-                result = BuildFailure(ServiceFailureReason.ServerError, serviceFaultException);
+                RegisterFailure(ServiceFailureReason.ServerError, serviceFaultException);
+                result = buildFailedResult(ServiceFailureReason.ServerError, null);
             }
             catch (EndpointNotFoundException endpointNotFoundException)
             {
-                result = BuildFailure(ServiceFailureReason.ServerUnavailable, endpointNotFoundException);
+                RegisterFailure(ServiceFailureReason.ServerUnavailable, endpointNotFoundException);
+                result = buildFailedResult(ServiceFailureReason.ServerUnavailable, null);
             }
             catch (TimeoutException timeoutException)
             {
-                result = BuildFailure(ServiceFailureReason.Timeout, timeoutException);
+                RegisterFailure(ServiceFailureReason.Timeout, timeoutException);
+                result = buildFailedResult(ServiceFailureReason.Timeout, null);
             }
             catch (CommunicationException communicationException)
             {
-                result = BuildFailure(ServiceFailureReason.ServerUnavailable, communicationException);
+                RegisterFailure(ServiceFailureReason.ServerUnavailable, communicationException);
+                result = buildFailedResult(ServiceFailureReason.ServerUnavailable, null);
             }
 
             return result;
@@ -93,6 +119,15 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             _sessionOpen = true;
 
             return new SignInResult(ServiceFailureReason.None, null, session);
+        }
+
+        private GuestSignInResult OpenGuestSession(string displayName)
+        {
+            CreateChannel();
+            GuestSession session = _channel.LogInAsGuest(displayName);
+            _sessionOpen = true;
+
+            return new GuestSignInResult(ServiceFailureReason.None, null, session);
         }
 
         private void CreateChannel()
@@ -193,19 +228,10 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             }
         }
 
-        private SignInResult BuildRejection(SessionFailure failure)
-        {
-            CloseChannel();
-
-            return new SignInResult(ServiceFailureReason.SessionRejected, failure, null);
-        }
-
-        private SignInResult BuildFailure(ServiceFailureReason reason, Exception exception)
+        private void RegisterFailure(ServiceFailureReason reason, Exception exception)
         {
             _logger.LogError(exception, SignInFailureMessage, reason);
             CloseChannel();
-
-            return new SignInResult(reason, null, null);
         }
 
         private void RaiseConnectionLost()

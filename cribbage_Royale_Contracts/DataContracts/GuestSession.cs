@@ -1,23 +1,31 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Sesión concedida a un jugador que entra sin cuenta registrada.
+    /// Sesión de invitado con el nombre confirmado por el servidor.
     /// </summary>
     [DataContract]
     public class GuestSession
     {
         /// <summary>
-        /// Identidad temporal asignada al invitado.
-        /// </summary>
-        [DataMember(IsRequired = true)]
-        public AccountReference Account { get; set; }
-
-        /// <summary>
-        /// Credencial que el cliente debe enviar en el encabezado de cada operación posterior.
+        /// Testigo opaco de la sesión de invitado; el cliente lo envía en el encabezado SessionToken
+        /// de cada operación posterior.
         /// </summary>
         [DataMember(IsRequired = true)]
         public string SessionToken { get; set; }
+
+        /// <summary>
+        /// Nombre definitivo del invitado, con el prefijo reservado que añade el servidor.
+        /// </summary>
+        [DataMember(IsRequired = true)]
+        public string DisplayName { get; set; }
+
+        /// <summary>
+        /// Instante en UTC en que caduca la sesión.
+        /// </summary>
+        [DataMember(IsRequired = true)]
+        public DateTime ExpiresAtUtc { get; set; }
     }
 }

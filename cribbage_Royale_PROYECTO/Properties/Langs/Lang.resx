@@ -448,7 +448,7 @@
     <value>As a guest you cannot add friends or save your statistics.</value>
   </data>
   <data name="GuestAccess_NameAlreadyInUseMessage" xml:space="preserve">
-    <value>That display name is being used in this match.</value>
+    <value>That name is already in use. Choose another one.</value>
   </data>
   <data name="GuestAccess_NameHint" xml:space="preserve">
     <value>Choose a display name</value>
@@ -746,9 +746,6 @@
   </data>
   <data name="Common_UsernameLabel" xml:space="preserve">
     <value>Username</value>
-  </data>
-  <data name="GuestAccess_DisplayNameFormat" xml:space="preserve">
-    <value>Guest-{0}</value>
   </data>
   <data name="Global_LongDateFormat" xml:space="preserve">
     <value>MMMM d, yyyy</value>
@@ -1781,5 +1778,17 @@ If you did not create this account, ignore this message.</value>
   </data>
 	<data name="Login_AccountNotVerifiedMessage" xml:space="preserve">
     <value>Your account has not been verified yet. Check your email.</value>
+  </data>
+	<data name="GuestAccess_InvalidNameMessage" xml:space="preserve">
+    <value>That name cannot be used. Try a different one.</value>
+  </data>
+	<data name="GuestAccess_ServerUnavailableMessage" xml:space="preserve">
+    <value>The server is not available. Check your connection and try again.</value>
+  </data>
+	<data name="GuestAccess_TimeoutMessage" xml:space="preserve">
+    <value>The server took too long to answer. Try again.</value>
+  </data>
+	<data name="GuestAccess_ServerErrorMessage" xml:space="preserve">
+    <value>The server could not start your guest session. Try again later.</value>
   </data>
 </root>

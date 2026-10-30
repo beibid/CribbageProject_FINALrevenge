@@ -126,6 +126,7 @@ namespace CribbageRoyale.Server.Services
 
         private GuestSession GrantGuestSession(string guestName)
         {
+            DateTime expiresAtUtc = _services.SessionLifetime.CalculateExpiration();
             string token = _services.SessionTokens.IssueGuestToken(guestName);
 
             AccountReference account = new AccountReference();
@@ -135,8 +136,9 @@ namespace CribbageRoyale.Server.Services
             ActivateSession(account, token);
 
             GuestSession session = new GuestSession();
-            session.Account = account;
             session.SessionToken = token;
+            session.DisplayName = guestName;
+            session.ExpiresAtUtc = expiresAtUtc;
 
             return session;
         }
