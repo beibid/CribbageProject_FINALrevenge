@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using cribbage_Royale_DataAccess.DataAccess;
 using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Contracts.FaultContracts;
@@ -108,33 +109,30 @@ namespace CribbageRoyale.Server.Services
             account.AccountId = credentials.AccountId;
             account.DisplayName = credentials.DisplayName;
 
-            string token = IssueExclusiveToken(account);
-
-            _currentAccount = account;
-            _currentToken = token;
-
-            _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
+            DateTime expiresAtUtc = _services.SessionLifetime.CalculateExpiration();
+            string token = StartExclusiveSession(account);
 
             AuthenticatedSession session = new AuthenticatedSession();
-            session.Account = account;
-            session.Email = credentials.Email;
             session.SessionToken = token;
+            session.Account = account;
+            session.EmailAddress = credentials.Email;
+            session.PreferredLocaleCode = credentials.PreferredLocaleCode;
+            session.ExpiresAtUtc = expiresAtUtc;
+            session.IsSupportAccount = false;
+            session.UnfinishedMatchId = null;
 
             return session;
         }
 
         private GuestSession GrantGuestSession(string guestName)
         {
+            string token = _services.SessionTokens.IssueGuestToken(guestName);
+
             AccountReference account = new AccountReference();
-            account.AccountId = _services.GuestAccountIds.Next();
+            account.AccountId = ResolveAccountId(token);
             account.DisplayName = guestName;
 
-            string token = IssueExclusiveToken(account);
-
-            _currentAccount = account;
-            _currentToken = token;
-
-            _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
+            ActivateSession(account, token);
 
             GuestSession session = new GuestSession();
             session.Account = account;
@@ -143,7 +141,19 @@ namespace CribbageRoyale.Server.Services
             return session;
         }
 
-        private string IssueExclusiveToken(AccountReference account)
+        private int ResolveAccountId(string token)
+        {
+            int accountId;
+
+            if (!_services.SessionTokens.TryGetAccountId(token, out accountId))
+            {
+                throw SessionFaultBuilder.Build(SessionFailure.InvalidSession);
+            }
+
+            return accountId;
+        }
+
+        private string StartExclusiveSession(AccountReference account)
         {
             string token;
 
@@ -151,10 +161,20 @@ namespace CribbageRoyale.Server.Services
             {
                 _services.SessionTokens.RevokeAllTokens(account.AccountId);
                 token = _services.SessionTokens.IssueToken(account.AccountId);
-                _services.PlayerRegistry.Register(account);
+
+                ActivateSession(account, token);
             }
 
             return token;
+        }
+
+        private void ActivateSession(AccountReference account, string token)
+        {
+            _currentAccount = account;
+            _currentToken = token;
+            _services.PlayerRegistry.Register(account);
+
+            _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
         }
 
         private void ReleaseCurrentSession()

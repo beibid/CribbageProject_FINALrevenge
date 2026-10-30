@@ -6,11 +6,13 @@ namespace CribbageRoyale.Server.Sessions
     {
         private readonly int _accountId;
         private readonly DateTime _expiresAt;
+        private readonly bool _isGuest;
 
-        public SessionToken(int accountId, DateTime expiresAt)
+        public SessionToken(int accountId, DateTime expiresAt, bool isGuest)
         {
             _accountId = accountId;
             _expiresAt = expiresAt;
+            _isGuest = isGuest;
         }
 
         public int AccountId
@@ -21,6 +23,11 @@ namespace CribbageRoyale.Server.Sessions
         public DateTime ExpiresAt
         {
             get { return _expiresAt; }
+        }
+
+        public bool IsGuest
+        {
+            get { return _isGuest; }
         }
     }
 }
