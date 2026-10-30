@@ -10,6 +10,8 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         public string Email { get; set; }
 
+        public string PreferredLocaleCode { get; set; }
+
         public string PasswordHash { get; set; }
 
         public string Status { get; set; }

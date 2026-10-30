@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using cribbage_Royale_DataAccess.DataAccess;
 using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Contracts.FaultContracts;
@@ -108,12 +109,17 @@ namespace CribbageRoyale.Server.Services
             account.AccountId = credentials.AccountId;
             account.DisplayName = credentials.DisplayName;
 
+            DateTime expiresAtUtc = _services.SessionLifetime.CalculateExpiration();
             string token = StartExclusiveSession(account);
 
             AuthenticatedSession session = new AuthenticatedSession();
-            session.Account = account;
-            session.Email = credentials.Email;
             session.SessionToken = token;
+            session.Account = account;
+            session.EmailAddress = credentials.Email;
+            session.PreferredLocaleCode = credentials.PreferredLocaleCode;
+            session.ExpiresAtUtc = expiresAtUtc;
+            session.IsSupportAccount = false;
+            session.UnfinishedMatchId = null;
 
             return session;
         }

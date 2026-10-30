@@ -8,6 +8,8 @@ namespace CribbageRoyale.Server.Sessions
 
         public ISessionTokens SessionTokens { get; set; }
 
+        public SessionLifetime SessionLifetime { get; set; }
+
         public IPlayerChannel PlayerChannel { get; set; }
 
         public PlayerRegistry PlayerRegistry { get; set; }

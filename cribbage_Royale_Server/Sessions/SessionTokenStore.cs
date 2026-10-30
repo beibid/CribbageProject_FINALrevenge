@@ -9,16 +9,17 @@ namespace CribbageRoyale.Server.Sessions
     public class SessionTokenStore : ISessionTokens
     {
         private const int TokenByteLength = 32;
-        private const int TokenLifetimeHours = 10;
 
         private readonly ConcurrentDictionary<string, SessionToken> _tokens =
             new ConcurrentDictionary<string, SessionToken>();
 
         private readonly GuestAccountIds _guestAccountIds;
+        private readonly SessionLifetime _sessionLifetime;
 
-        public SessionTokenStore(GuestAccountIds guestAccountIds)
+        public SessionTokenStore(GuestAccountIds guestAccountIds, SessionLifetime sessionLifetime)
         {
             _guestAccountIds = guestAccountIds;
+            _sessionLifetime = sessionLifetime;
         }
 
         public string IssueToken(int accountId)
@@ -80,7 +81,7 @@ namespace CribbageRoyale.Server.Sessions
         private string StoreToken(int accountId, bool isGuest)
         {
             string token = CreateTokenValue();
-            DateTime expiresAt = DateTime.UtcNow.AddHours(TokenLifetimeHours);
+            DateTime expiresAt = _sessionLifetime.CalculateExpiration();
 
             _tokens[token] = new SessionToken(accountId, expiresAt, isGuest);
 

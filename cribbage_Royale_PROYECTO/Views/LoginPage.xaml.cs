@@ -66,7 +66,7 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             loginMessagePanel.HidePanel();
             MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.Login_SuccessMessage);
-            CurrentSession.StartRegisteredSession(result.Session.Account.DisplayName, result.Session.Email);
+            CurrentSession.StartRegisteredSession(result.Session.Account.DisplayName, result.Session.EmailAddress);
             ShowLobby();
         }
 

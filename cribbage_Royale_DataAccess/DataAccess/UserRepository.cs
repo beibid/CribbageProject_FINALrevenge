@@ -181,12 +181,15 @@ namespace cribbage_Royale_DataAccess.DataAccess
                 int accountId = account.id_usuario;
                 perfil_jugador profile = context.perfil_jugador.FirstOrDefault(
                     record => record.id_usuario == accountId);
+                ajustes_jugador settings = context.ajustes_jugador.FirstOrDefault(
+                    record => record.id_usuario == accountId);
 
                 credentials = new UserCredentials
                 {
                     AccountId = accountId,
                     DisplayName = ResolveDisplayName(account, profile),
                     Email = account.correo,
+                    PreferredLocaleCode = ResolveLocaleCode(settings),
                     PasswordHash = account.hash_contrasena,
                     Status = account.estado_cuenta,
                     LockoutEndDate = account.fecha_fin_bloqueo_acceso
@@ -206,6 +209,18 @@ namespace cribbage_Royale_DataAccess.DataAccess
             }
 
             return displayName;
+        }
+
+        private string ResolveLocaleCode(ajustes_jugador settings)
+        {
+            string localeCode = DefaultLanguage;
+
+            if (settings != null)
+            {
+                localeCode = settings.idioma;
+            }
+
+            return localeCode;
         }
 
         private AuthenticationResult EvaluateCredentials(string usernameOrEmail, string password)

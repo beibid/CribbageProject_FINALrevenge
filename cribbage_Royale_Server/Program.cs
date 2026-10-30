@@ -22,6 +22,8 @@ namespace CribbageRoyale.Server
 
         private const string ServiceStoppedLogMessage = "The server stopped.";
 
+        private const int SessionLifetimeHours = 10;
+
         private static SessionServices _sessionServices;
 
         private Program()
@@ -81,9 +83,12 @@ namespace CribbageRoyale.Server
 
         private static SessionServices CreateSessionServices()
         {
+            SessionLifetime sessionLifetime = new SessionLifetime(TimeSpan.FromHours(SessionLifetimeHours));
+
             SessionServices services = new SessionServices();
             services.Authenticator = new Authenticator(new UserRepository());
-            services.SessionTokens = new SessionTokenStore(new GuestAccountIds());
+            services.SessionTokens = new SessionTokenStore(new GuestAccountIds(), sessionLifetime);
+            services.SessionLifetime = sessionLifetime;
             services.PlayerChannel = new PlayerChannel(ApplicationLogging.CreateLogger<PlayerChannel>());
             services.PlayerRegistry = new PlayerRegistry();
             services.LogInGate = new LogInGate();
