@@ -4,6 +4,8 @@
     {
         string IssueToken(int accountId);
 
+        string IssueGuestToken(string displayName);
+
         void RevokeToken(string token);
 
         void RevokeAllTokens(int accountId);

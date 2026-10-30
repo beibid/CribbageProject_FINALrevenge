@@ -120,17 +120,31 @@ namespace CribbageRoyale.Server.Services
 
         private GuestSession GrantGuestSession(string guestName)
         {
+            string token = _services.SessionTokens.IssueGuestToken(guestName);
+
             AccountReference account = new AccountReference();
-            account.AccountId = _services.GuestAccountIds.Next();
+            account.AccountId = ResolveAccountId(token);
             account.DisplayName = guestName;
 
-            string token = StartExclusiveSession(account);
+            ActivateSession(account, token);
 
             GuestSession session = new GuestSession();
             session.Account = account;
             session.SessionToken = token;
 
             return session;
+        }
+
+        private int ResolveAccountId(string token)
+        {
+            int accountId;
+
+            if (!_services.SessionTokens.TryGetAccountId(token, out accountId))
+            {
+                throw SessionFaultBuilder.Build(SessionFailure.InvalidSession);
+            }
+
+            return accountId;
         }
 
         private string StartExclusiveSession(AccountReference account)
@@ -142,14 +156,19 @@ namespace CribbageRoyale.Server.Services
                 _services.SessionTokens.RevokeAllTokens(account.AccountId);
                 token = _services.SessionTokens.IssueToken(account.AccountId);
 
-                _currentAccount = account;
-                _currentToken = token;
-                _services.PlayerRegistry.Register(account);
-
-                _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
+                ActivateSession(account, token);
             }
 
             return token;
+        }
+
+        private void ActivateSession(AccountReference account, string token)
+        {
+            _currentAccount = account;
+            _currentToken = token;
+            _services.PlayerRegistry.Register(account);
+
+            _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
         }
 
         private void ReleaseCurrentSession()

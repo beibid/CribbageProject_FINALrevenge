@@ -3,7 +3,8 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Motivos por los que el servidor puede rechazar la apertura de una sesión.
+    /// Motivos por los que el servidor rechaza el inicio o el cierre de una sesión, o una operación
+    /// que exige una sesión válida.
     /// </summary>
     [DataContract]
     public enum SessionFailure
@@ -31,6 +32,12 @@ namespace CribbageRoyale.Contracts.FaultContracts
         /// </summary>
         [EnumMember]
         AccountDeleted,
+
+        /// <summary>
+        /// El testigo de sesión no es válido o ya fue revocado.
+        /// </summary>
+        [EnumMember]
+        InvalidSession,
 
         /// <summary>
         /// El nombre propuesto por el invitado no cumple el formato permitido.

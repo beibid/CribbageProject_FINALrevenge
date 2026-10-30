@@ -14,12 +14,26 @@ namespace CribbageRoyale.Server.Sessions
         private readonly ConcurrentDictionary<string, SessionToken> _tokens =
             new ConcurrentDictionary<string, SessionToken>();
 
+        private readonly GuestAccountIds _guestAccountIds;
+
+        public SessionTokenStore(GuestAccountIds guestAccountIds)
+        {
+            _guestAccountIds = guestAccountIds;
+        }
+
         public string IssueToken(int accountId)
         {
-            string token = CreateTokenValue();
-            _tokens[token] = new SessionToken(accountId, DateTime.UtcNow.AddHours(TokenLifetimeHours));
+            return StoreToken(accountId, false);
+        }
 
-            return token;
+        public string IssueGuestToken(string displayName)
+        {
+            if (displayName == null)
+            {
+                throw new ArgumentNullException(nameof(displayName));
+            }
+
+            return StoreToken(_guestAccountIds.Next(), true);
         }
 
         public void RevokeToken(string token)
@@ -61,6 +75,16 @@ namespace CribbageRoyale.Server.Sessions
             }
 
             return resolved;
+        }
+
+        private string StoreToken(int accountId, bool isGuest)
+        {
+            string token = CreateTokenValue();
+            DateTime expiresAt = DateTime.UtcNow.AddHours(TokenLifetimeHours);
+
+            _tokens[token] = new SessionToken(accountId, expiresAt, isGuest);
+
+            return token;
         }
 
         private string CreateTokenValue()

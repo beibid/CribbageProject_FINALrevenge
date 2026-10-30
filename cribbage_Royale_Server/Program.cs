@@ -83,10 +83,9 @@ namespace CribbageRoyale.Server
         {
             SessionServices services = new SessionServices();
             services.Authenticator = new Authenticator(new UserRepository());
-            services.SessionTokens = new SessionTokenStore();
+            services.SessionTokens = new SessionTokenStore(new GuestAccountIds());
             services.PlayerChannel = new PlayerChannel(ApplicationLogging.CreateLogger<PlayerChannel>());
             services.PlayerRegistry = new PlayerRegistry();
-            services.GuestAccountIds = new GuestAccountIds();
             services.LogInGate = new LogInGate();
 
             return services;

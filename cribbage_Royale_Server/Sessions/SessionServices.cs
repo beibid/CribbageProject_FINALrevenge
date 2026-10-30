@@ -12,8 +12,6 @@ namespace CribbageRoyale.Server.Sessions
 
         public PlayerRegistry PlayerRegistry { get; set; }
 
-        public GuestAccountIds GuestAccountIds { get; set; }
-
         public LogInGate LogInGate { get; set; }
     }
 }
