@@ -432,7 +432,7 @@
 	<data name="Lobby_LearnCardButton" xml:space="preserve">
     <value>TUTORIAL Y REGLAS</value>
   </data>
-	<data name="GuestAccess_ContinueButton" xml:space="preserve">
+	<data name="GuestAccess_ContinueButton" xml:space="preserve">GuestAccess_DisplayNameFormat
     <value>Continuar</value>
   </data>
 	<data name="GuestAccess_FeatureBlockedMessage" xml:space="preserve">
@@ -448,7 +448,7 @@
     <value>Como invitado no puedes agregar amigos ni guardar tus estadísticas.</value>
   </data>
 	<data name="GuestAccess_NameAlreadyInUseMessage" xml:space="preserve">
-    <value>Ese nombre ya se está usando en esta partida.</value>
+    <value>Ese nombre ya está en uso. Elige otro.</value>
   </data>
 	<data name="GuestAccess_NameHint" xml:space="preserve">
     <value>Elige un nombre para mostrar</value>
@@ -746,9 +746,6 @@
   </data>
 	<data name="Common_UsernameLabel" xml:space="preserve">
     <value>Nombre de usuario</value>
-  </data>
-	<data name="GuestAccess_DisplayNameFormat" xml:space="preserve">
-    <value>Invitado-{0}</value>
   </data>
 	<data name="Global_LongDateFormat" xml:space="preserve">
     <value>d 'de' MMMM 'de' yyyy</value>
@@ -1781,5 +1778,17 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
   </data>
 	<data name="Login_AccountNotVerifiedMessage" xml:space="preserve">
     <value>Tu cuenta todavía no ha sido verificada. Revisa tu correo.</value>
+  </data>
+	<data name="GuestAccess_InvalidNameMessage" xml:space="preserve">
+    <value>Ese nombre no se puede usar. Prueba con otro.</value>
+  </data>
+	<data name="GuestAccess_ServerUnavailableMessage" xml:space="preserve">
+    <value>El servidor no está disponible. Revisa tu conexión e inténtalo de nuevo.</value>
+  </data>
+	<data name="GuestAccess_TimeoutMessage" xml:space="preserve">
+    <value>El servidor tardó demasiado en responder. Inténtalo de nuevo.</value>
+  </data>
+	<data name="GuestAccess_ServerErrorMessage" xml:space="preserve">
+    <value>El servidor no pudo iniciar tu sesión de invitado. Inténtalo más tarde.</value>
   </data>
 </root>

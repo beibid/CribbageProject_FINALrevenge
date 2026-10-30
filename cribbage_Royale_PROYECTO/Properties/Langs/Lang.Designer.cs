@@ -1894,15 +1894,6 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Guest-{0}.
-        /// </summary>
-        public static string GuestAccess_DisplayNameFormat {
-            get {
-                return ResourceManager.GetString("GuestAccess_DisplayNameFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Create an account to use this feature..
         /// </summary>
         public static string GuestAccess_FeatureBlockedMessage {
@@ -1930,6 +1921,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a That name cannot be used. Try a different one..
+        /// </summary>
+        public static string GuestAccess_InvalidNameMessage {
+            get {
+                return ResourceManager.GetString("GuestAccess_InvalidNameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a As a guest you cannot add friends or save your statistics..
         /// </summary>
         public static string GuestAccess_LimitationsText {
@@ -1939,7 +1939,7 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a That display name is being used in this match..
+        ///   Busca una cadena traducida similar a That name is already in use. Choose another one..
         /// </summary>
         public static string GuestAccess_NameAlreadyInUseMessage {
             get {
@@ -1971,6 +1971,33 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string GuestAccess_PageTitle {
             get {
                 return ResourceManager.GetString("GuestAccess_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server could not start your guest session. Try again later..
+        /// </summary>
+        public static string GuestAccess_ServerErrorMessage {
+            get {
+                return ResourceManager.GetString("GuestAccess_ServerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server is not available. Check your connection and try again..
+        /// </summary>
+        public static string GuestAccess_ServerUnavailableMessage {
+            get {
+                return ResourceManager.GetString("GuestAccess_ServerUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server took too long to answer. Try again..
+        /// </summary>
+        public static string GuestAccess_TimeoutMessage {
+            get {
+                return ResourceManager.GetString("GuestAccess_TimeoutMessage", resourceCulture);
             }
         }
         

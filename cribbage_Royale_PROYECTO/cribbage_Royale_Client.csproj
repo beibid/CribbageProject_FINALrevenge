@@ -143,6 +143,7 @@
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
     <Compile Include="ServiceAccess\GameClientCallback.cs" />
+    <Compile Include="ServiceAccess\GuestSignInResult.cs" />
     <Compile Include="ServiceAccess\PlayerSessionClient.cs" />
     <Compile Include="ServiceAccess\PresenceChangedEventArgs.cs" />
     <Compile Include="ServiceAccess\ScoreboardResult.cs" />
