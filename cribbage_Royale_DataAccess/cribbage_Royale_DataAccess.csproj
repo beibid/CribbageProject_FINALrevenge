@@ -112,9 +112,11 @@
     <Compile Include="DataAccess\AccountStatus.cs" />
     <Compile Include="DataAccess\BlockRepository.cs" />
     <Compile Include="DataAccess\CardInMatchState.cs" />
+    <Compile Include="DataAccess\FriendRecord.cs" />
     <Compile Include="DataAccess\FriendshipRepository.cs" />
     <Compile Include="DataAccess\FriendshipStatus.cs" />
     <Compile Include="DataAccess\HandState.cs" />
+    <Compile Include="DataAccess\IFriendshipRepository.cs" />
     <Compile Include="DataAccess\InvitationAcceptOutcome.cs" />
     <Compile Include="DataAccess\InvitationCreationOutcome.cs" />
     <Compile Include="DataAccess\InvitationRepository.cs" />

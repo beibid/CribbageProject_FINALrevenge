@@ -130,6 +130,7 @@
     <Compile Include="Mail\SanctionEmailSender.cs" />
     <Compile Include="Mail\VerificationEmailSender.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
+    <Compile Include="Models\FriendItem.cs" />
     <Compile Include="Models\MatchEndReason.cs" />
     <Compile Include="Models\MatchItem.cs" />
     <Compile Include="Models\MatchPhase.cs" />
@@ -142,6 +143,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
+    <Compile Include="ServiceAccess\FriendListClient.cs" />
+    <Compile Include="ServiceAccess\FriendListResult.cs" />
     <Compile Include="ServiceAccess\GameClientCallback.cs" />
     <Compile Include="ServiceAccess\GuestSignInResult.cs" />
     <Compile Include="ServiceAccess\PlayerSessionClient.cs" />

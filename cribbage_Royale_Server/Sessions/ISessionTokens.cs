@@ -6,10 +6,10 @@
 
         string IssueGuestToken(string displayName);
 
+        bool TryValidateToken(string token, out SessionIdentity identity);
+
         void RevokeToken(string token);
 
         void RevokeAllTokens(int accountId);
-
-        bool TryGetAccountId(string token, out int accountId);
     }
 }

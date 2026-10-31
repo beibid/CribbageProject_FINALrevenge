@@ -110,6 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\FriendPresenceNotifier.cs" />
     <Compile Include="Connections\IPlayerChannel.cs" />
     <Compile Include="Connections\PlayerChannel.cs" />
     <Compile Include="Connections\PlayerConnectionChangedEventArgs.cs" />
@@ -117,8 +118,13 @@
     <Compile Include="Hosting\InstanceProviderBehavior.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Projection\IStateProjection.cs" />
     <Compile Include="Projection\ScoreboardProjection.cs" />
+    <Compile Include="Projection\StateProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CallerSession.cs" />
+    <Compile Include="Services\FriendListService.cs" />
+    <Compile Include="Services\FriendListServices.cs" />
     <Compile Include="Services\PlayerSessionService.cs" />
     <Compile Include="Services\StatisticsService.cs" />
     <Compile Include="Sessions\Authenticator.cs" />
@@ -129,6 +135,7 @@
     <Compile Include="Sessions\LogInGate.cs" />
     <Compile Include="Sessions\PlayerRegistry.cs" />
     <Compile Include="Sessions\SessionFaultBuilder.cs" />
+    <Compile Include="Sessions\SessionIdentity.cs" />
     <Compile Include="Sessions\SessionLifetime.cs" />
     <Compile Include="Sessions\SessionServices.cs" />
     <Compile Include="Sessions\SessionToken.cs" />

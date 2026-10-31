@@ -34,10 +34,22 @@ namespace CribbageRoyale.Contracts.FaultContracts
         AccountDeleted,
 
         /// <summary>
+        /// El encabezado del testigo de sesión está ausente o vacío.
+        /// </summary>
+        [EnumMember]
+        MissingSessionToken,
+
+        /// <summary>
         /// El testigo de sesión no es válido o ya fue revocado.
         /// </summary>
         [EnumMember]
         InvalidSession,
+
+        /// <summary>
+        /// La operación exige una cuenta registrada y la sesión es de invitado.
+        /// </summary>
+        [EnumMember]
+        GuestNotAllowed,
 
         /// <summary>
         /// El nombre propuesto por el invitado no cumple el formato permitido.

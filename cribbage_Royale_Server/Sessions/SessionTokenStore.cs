@@ -37,6 +37,28 @@ namespace CribbageRoyale.Server.Sessions
             return StoreToken(_guestAccountIds.Next(), true);
         }
 
+        public bool TryValidateToken(string token, out SessionIdentity identity)
+        {
+            identity = null;
+            bool resolved = false;
+            SessionToken storedToken;
+
+            if (token != null && _tokens.TryGetValue(token, out storedToken))
+            {
+                if (storedToken.ExpiresAt > DateTime.UtcNow)
+                {
+                    identity = new SessionIdentity(storedToken.AccountId, storedToken.IsGuest);
+                    resolved = true;
+                }
+                else
+                {
+                    RevokeToken(token);
+                }
+            }
+
+            return resolved;
+        }
+
         public void RevokeToken(string token)
         {
             SessionToken removedToken;
@@ -54,28 +76,6 @@ namespace CribbageRoyale.Server.Sessions
             {
                 RevokeToken(token);
             }
-        }
-
-        public bool TryGetAccountId(string token, out int accountId)
-        {
-            accountId = 0;
-            bool resolved = false;
-            SessionToken storedToken;
-
-            if (_tokens.TryGetValue(token, out storedToken))
-            {
-                if (storedToken.ExpiresAt > DateTime.UtcNow)
-                {
-                    accountId = storedToken.AccountId;
-                    resolved = true;
-                }
-                else
-                {
-                    RevokeToken(token);
-                }
-            }
-
-            return resolved;
         }
 
         private string StoreToken(int accountId, bool isGuest)

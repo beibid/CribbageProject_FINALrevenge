@@ -9,15 +9,15 @@ namespace CribbageRoyale.Contracts.DataContracts
     public enum PresenceScope
     {
         /// <summary>
-        /// El cambio corresponde a la lista de amigos del destinatario.
+        /// El cambio corresponde al rival de la partida en curso.
         /// </summary>
         [EnumMember]
-        Friends,
+        Rival,
 
         /// <summary>
-        /// El cambio corresponde a una partida en la que participa el destinatario.
+        /// El cambio corresponde a un amigo del destinatario.
         /// </summary>
         [EnumMember]
-        Match
+        Friend
     }
 }
