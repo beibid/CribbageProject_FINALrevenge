@@ -23,6 +23,17 @@ namespace CribbageRoyale.Server.Projection
             return presence;
         }
 
+        public SocialEvent BuildSocialEvent(SocialEventRecord record)
+        {
+            SocialEvent social = new SocialEvent();
+            social.Counterpart = ResolveAccount(record.CounterpartAccountId);
+            social.FriendRequestId = record.FriendRequestId;
+            social.InvitationId = null;
+            social.OccurredAtUtc = record.OccurredAtUtc;
+
+            return social;
+        }
+
         private AccountReference ResolveAccount(int accountId)
         {
             AccountReference account = _playerRegistry.Find(accountId);

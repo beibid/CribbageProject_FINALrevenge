@@ -26,6 +26,7 @@ namespace CribbageRoyale.Server
 
         private static SessionServices _sessionServices;
         private static FriendListServices _friendListServices;
+        private static FriendRequestsServices _friendRequestsServices;
 
         private Program()
         {
@@ -44,15 +45,18 @@ namespace CribbageRoyale.Server
             ServiceHost statisticsHost = CreateStatisticsHost();
             ServiceHost sessionHost = CreateSessionHost();
             ServiceHost friendListHost = CreateFriendListHost();
+            ServiceHost friendRequestsHost = CreateFriendRequestsHost();
 
             try
             {
                 statisticsHost.Open();
                 sessionHost.Open();
                 friendListHost.Open();
+                friendRequestsHost.Open();
                 logger.LogInformation(ServiceStartedLogMessage);
                 Console.WriteLine(ServiceStartedMessage);
                 Console.ReadLine();
+                friendRequestsHost.Close();
                 friendListHost.Close();
                 sessionHost.Close();
                 statisticsHost.Close();
@@ -61,6 +65,7 @@ namespace CribbageRoyale.Server
             catch (AddressAlreadyInUseException addressAlreadyInUseException)
             {
                 logger.LogCritical(addressAlreadyInUseException, PortInUseMessage);
+                friendRequestsHost.Abort();
                 friendListHost.Abort();
                 sessionHost.Abort();
                 statisticsHost.Abort();
@@ -91,6 +96,15 @@ namespace CribbageRoyale.Server
             _friendListServices = CreateFriendListServices(_sessionServices);
             ServiceHost host = new ServiceHost(typeof(FriendListService));
             host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreateFriendListService()));
+
+            return host;
+        }
+
+        private static ServiceHost CreateFriendRequestsHost()
+        {
+            _friendRequestsServices = CreateFriendRequestsServices(_sessionServices);
+            ServiceHost host = new ServiceHost(typeof(FriendRequestsService));
+            host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreateFriendRequestsService()));
 
             return host;
         }
@@ -128,6 +142,17 @@ namespace CribbageRoyale.Server
             return services;
         }
 
+        private static FriendRequestsServices CreateFriendRequestsServices(SessionServices sessionServices)
+        {
+            FriendRequestsServices services = new FriendRequestsServices();
+            services.CallerSession = new CallerSession(sessionServices.SessionTokens);
+            services.FriendshipRepository = new FriendshipRepository();
+            services.PlayerChannel = sessionServices.PlayerChannel;
+            services.StateProjection = new StateProjection(sessionServices.PlayerRegistry);
+
+            return services;
+        }
+
         private static StatisticsService CreateStatisticsService()
         {
             return new StatisticsService(
@@ -148,6 +173,13 @@ namespace CribbageRoyale.Server
             return new FriendListService(
                 _friendListServices,
                 ApplicationLogging.CreateLogger<FriendListService>());
+        }
+
+        private static FriendRequestsService CreateFriendRequestsService()
+        {
+            return new FriendRequestsService(
+                _friendRequestsServices,
+                ApplicationLogging.CreateLogger<FriendRequestsService>());
         }
     }
 }

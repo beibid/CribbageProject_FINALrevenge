@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Text.RegularExpressions;
 using cribbage_Royale_DataAccess.DataAccess;
 using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Contracts.FaultContracts;
@@ -15,8 +16,11 @@ namespace CribbageRoyale.Server.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class FriendListService : IFriendList
     {
+        private const string SearchTextPattern = @"^[A-Za-z0-9_]{1,16}$";
         private const string FriendsQueryFailureMessage =
             "The friends list could not be returned. CorrelationId: {CorrelationId}";
+        private const string PlayerSearchFailureMessage =
+            "The player search could not be completed. CorrelationId: {CorrelationId}";
 
         private readonly FriendListServices _services;
         private readonly ILogger _logger;
@@ -27,6 +31,27 @@ namespace CribbageRoyale.Server.Services
             _logger = logger;
         }
 
+        public PlayerSummary[] FindPlayers(string searchText)
+        {
+            SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
+            EnsureSearchTextIsValid(searchText);
+
+            PlayerSummary[] players;
+
+            try
+            {
+                List<PlayerRecord> records = _services.FriendshipRepository.SearchPlayers(caller.AccountId, searchText);
+                RelationshipSnapshot relationships = LoadRelationships(caller.AccountId);
+                players = BuildPlayerSummaries(records, relationships);
+            }
+            catch (DataAccessException dataAccessException)
+            {
+                throw BuildServiceFault(dataAccessException, PlayerSearchFailureMessage);
+            }
+
+            return players;
+        }
+
         public FriendSummary[] GetFriends()
         {
             SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
@@ -35,42 +60,79 @@ namespace CribbageRoyale.Server.Services
             try
             {
                 List<FriendRecord> records = _services.FriendshipRepository.GetFriends(caller.AccountId);
-                friends = BuildSummaries(records);
+                friends = BuildFriendSummaries(records);
             }
             catch (DataAccessException dataAccessException)
             {
-                throw BuildServiceFault(dataAccessException);
+                throw BuildServiceFault(dataAccessException, FriendsQueryFailureMessage);
             }
 
             return friends;
         }
 
-        private FriendSummary[] BuildSummaries(List<FriendRecord> records)
+        private void EnsureSearchTextIsValid(string searchText)
         {
-            List<FriendSummary> summaries = new List<FriendSummary>();
-
-            foreach (FriendRecord record in records)
+            if (searchText == null || !Regex.IsMatch(searchText, SearchTextPattern))
             {
-                summaries.Add(BuildSummary(record));
+                throw FriendshipFaultBuilder.Build(FriendshipFailure.InvalidSearchText);
+            }
+        }
+
+        private RelationshipSnapshot LoadRelationships(int accountId)
+        {
+            return new RelationshipSnapshot(
+                _services.FriendshipRepository.GetFriendIds(accountId),
+                _services.FriendshipRepository.GetSentRequestRecipientIds(accountId),
+                _services.FriendshipRepository.GetReceivedRequestSenderIds(accountId));
+        }
+
+        private PlayerSummary[] BuildPlayerSummaries(List<PlayerRecord> records, RelationshipSnapshot relationships)
+        {
+            List<PlayerSummary> summaries = new List<PlayerSummary>();
+
+            foreach (PlayerRecord record in records)
+            {
+                PlayerSummary summary = new PlayerSummary();
+                summary.Account = BuildAccount(record);
+                summary.HasProfileImage = record.HasProfileImage;
+                summary.Relationship = relationships.Resolve(record.AccountId);
+                summaries.Add(summary);
             }
 
             return summaries.ToArray();
         }
 
-        private FriendSummary BuildSummary(FriendRecord record)
+        private FriendSummary[] BuildFriendSummaries(List<FriendRecord> records)
+        {
+            List<FriendSummary> summaries = new List<FriendSummary>();
+
+            foreach (FriendRecord record in records)
+            {
+                summaries.Add(BuildFriendSummary(record));
+            }
+
+            return summaries.ToArray();
+        }
+
+        private FriendSummary BuildFriendSummary(FriendRecord record)
+        {
+            FriendSummary summary = new FriendSummary();
+            summary.Account = BuildAccount(record);
+            summary.HasProfileImage = record.HasProfileImage;
+            summary.IsOnline = _services.PlayerChannel.IsPlayerConnected(record.AccountId);
+            summary.FriendsSinceUtc = ResolveFriendsSinceUtc(record.FriendsSince);
+
+            return summary;
+        }
+
+        private AccountReference BuildAccount(PlayerRecord record)
         {
             AccountReference account = new AccountReference();
             account.AccountId = record.AccountId;
             account.UserName = record.UserName;
             account.DisplayName = record.DisplayName;
 
-            FriendSummary summary = new FriendSummary();
-            summary.Account = account;
-            summary.HasProfileImage = record.HasProfileImage;
-            summary.IsOnline = _services.PlayerChannel.IsPlayerConnected(record.AccountId);
-            summary.FriendsSinceUtc = ResolveFriendsSinceUtc(record.FriendsSince);
-
-            return summary;
+            return account;
         }
 
         private DateTime ResolveFriendsSinceUtc(DateTime? friendsSince)
@@ -85,12 +147,12 @@ namespace CribbageRoyale.Server.Services
             return friendsSinceUtc;
         }
 
-        private FaultException<ServiceFault> BuildServiceFault(DataAccessException dataAccessException)
+        private FaultException<ServiceFault> BuildServiceFault(DataAccessException dataAccessException, string message)
         {
             FaultException<ServiceFault> faultException =
                 ServiceFaultBuilder.Build(ServiceFaultCode.DataAccessFailure);
 
-            _logger.LogError(dataAccessException, FriendsQueryFailureMessage, faultException.Detail.CorrelationId);
+            _logger.LogError(dataAccessException, message, faultException.Detail.CorrelationId);
 
             return faultException;
         }

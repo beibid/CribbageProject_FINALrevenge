@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using cribbage_Royale_DataAccess.DataAccess;
-using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_DataAccess.Models;
+using cribbage_Royale_PROYECTO.Localization;
+using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
-using cribbage_Royale_PROYECTO.Views.Dialogs;
+using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Session;
+using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO.Views
 {
@@ -16,6 +19,7 @@ namespace cribbage_Royale_PROYECTO.Views
         private readonly FriendshipRepository _friendshipRepository;
         private readonly BlockRepository _blockRepository;
         private readonly UserRepository _userRepository;
+        private readonly FriendRequestsClient _friendRequestsClient;
         private readonly int _viewerAccountId;
         private readonly int _targetAccountId;
 
@@ -26,6 +30,7 @@ namespace cribbage_Royale_PROYECTO.Views
             _friendshipRepository = new FriendshipRepository();
             _blockRepository = new BlockRepository();
             _userRepository = new UserRepository();
+            _friendRequestsClient = ((App)Application.Current).FriendRequestsClient;
             _viewerAccountId = _userRepository.GetUserId(CurrentSession.Username);
             _targetAccountId = targetAccountId;
             LoadProfile();
@@ -84,21 +89,43 @@ namespace cribbage_Royale_PROYECTO.Views
             }
         }
 
-        private void AddFriendButton_Click(object sender, RoutedEventArgs e)
+        private async void AddFriendButton_Click(object sender, RoutedEventArgs e)
         {
-            bool confirmed = MessageDialog.ShowConfirmation(Window.GetWindow(this), string.Format(Lang.Dialog_ConfirmSendRequestMessageFormat, displayNameTextBlock.Text));
+            bool confirmed = MessageDialog.ShowConfirmation(
+                Window.GetWindow(this),
+                string.Format(Lang.Dialog_ConfirmSendRequestMessageFormat, displayNameTextBlock.Text));
+
             if (confirmed)
             {
-                try
-                {
-                    _friendshipRepository.SendFriendRequest(_viewerAccountId, _targetAccountId);
-                    MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.Dialog_FriendRequestSentMessage);
-                    LoadProfile();
-                }
-                catch (Exception dataAccessException)
-                {
-                    MessageDialog.ShowError(Window.GetWindow(this), Lang.Dialog_DatabaseAccessErrorMessage);
-                }
+                await SendFriendRequestAsync();
+            }
+        }
+
+        private async Task SendFriendRequestAsync()
+        {
+            FriendRequestResult result = await _friendRequestsClient.SendFriendRequestAsync(
+                CurrentSession.SessionToken,
+                _targetAccountId);
+
+            ProcessSendResult(result);
+        }
+
+        private void ProcessSendResult(FriendRequestResult result)
+        {
+            if (result.Succeeded)
+            {
+                MessageDialog.ShowSuccess(Window.GetWindow(this), Lang.Dialog_FriendRequestSentMessage);
+                LoadProfile();
+            }
+            else if (result.Reason == ServiceFailureReason.RequestRejected)
+            {
+                MessageDialog.ShowWarning(
+                    Window.GetWindow(this),
+                    FriendRequestMessages.ResolveRejection(result.Failure.Value));
+            }
+            else
+            {
+                MessageDialog.ShowError(Window.GetWindow(this), Lang.AddFriend_RequestErrorMessage);
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
+using CribbageRoyale.Contracts.DataContracts;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Views;
@@ -20,6 +22,7 @@ namespace cribbage_Royale_PROYECTO
             _sessionClient = ((App)Application.Current).SessionClient;
             _sessionClient.ConnectionLost += SessionClient_ConnectionLost;
             ((App)Application.Current).SessionCallback.RevocationReceived += SessionCallback_RevocationReceived;
+            ((App)Application.Current).SessionCallback.SocialEventReceived += SessionCallback_SocialEventReceived;
             MainFrame.Navigate(new StartMenu());
         }
 
@@ -51,6 +54,24 @@ namespace cribbage_Royale_PROYECTO
                 MessageDialog.ShowError(this, Lang.Session_SignedInElsewhereMessage);
                 ReturnToLogin();
             }
+        }
+
+        private void SessionCallback_SocialEventReceived(object sender, SocialEventReceivedEventArgs e)
+        {
+            if (!_sessionEnded && e.EventType == SocialEventType.FriendRequestReceived)
+            {
+                ShowFriendRequestReceived(e.Social);
+            }
+        }
+
+        private void ShowFriendRequestReceived(SocialEvent social)
+        {
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Lang.MainWindow_FriendRequestReceivedFormat,
+                social.Counterpart.DisplayName);
+
+            MessageDialog.ShowWarning(this, message);
         }
 
         private void ShowConnectionLost()

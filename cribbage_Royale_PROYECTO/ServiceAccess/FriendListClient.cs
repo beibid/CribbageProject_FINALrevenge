@@ -11,124 +11,117 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
     public class FriendListClient
     {
         private const string EndpointName = "FriendListEndpoint";
-        private const int CloseTimeoutSeconds = 3;
-        private const string FriendsQueryFailureMessage = "The friends list could not be loaded. Reason: {Reason}.";
-        private const string CloseFailureMessage = "The friends list channel could not be closed.";
+        private const string OperationFailureMessage =
+            "The friend list operation could not be completed. Reason: {Reason}.";
 
         private readonly ILogger _logger;
+        private readonly ChannelCloser _channelCloser;
 
         public FriendListClient(ILogger logger)
         {
             _logger = logger;
+            _channelCloser = new ChannelCloser(logger);
         }
 
         public Task<FriendListResult> GetFriendsAsync(string sessionToken)
         {
-            return Task.Run(() => GetFriends(sessionToken));
+            return Task.Run(() => Execute(
+                sessionToken,
+                channel => new FriendListResult(ServiceFailureReason.None, channel.GetFriends()),
+                (reason, failure) => new FriendListResult(reason, new FriendSummary[0])));
         }
 
-        private FriendListResult GetFriends(string sessionToken)
+        public Task<PlayerSearchResult> FindPlayersAsync(string sessionToken, string searchText)
+        {
+            return Task.Run(() => Execute(
+                sessionToken,
+                channel => new PlayerSearchResult(ServiceFailureReason.None, null, channel.FindPlayers(searchText)),
+                (reason, failure) => new PlayerSearchResult(reason, failure, new PlayerSummary[0])));
+        }
+
+        private TResult Execute<TResult>(
+            string sessionToken,
+            Func<IFriendList, TResult> operation,
+            Func<ServiceFailureReason, FriendshipFailure?, TResult> buildFailedResult)
         {
             ChannelFactory<IFriendList> factory = new ChannelFactory<IFriendList>(EndpointName);
             IFriendList channel = factory.CreateChannel();
+            bool callSucceeded;
 
-            FriendListResult result = RequestFriends(channel, sessionToken);
+            TResult result = Request(
+                () => Invoke(channel, sessionToken, operation),
+                buildFailedResult,
+                out callSucceeded);
 
-            ReleaseCommunicationObject((ICommunicationObject)channel, result.Succeeded);
-            ReleaseCommunicationObject(factory, result.Succeeded);
+            _channelCloser.Release((ICommunicationObject)channel, callSucceeded);
+            _channelCloser.Release(factory, callSucceeded);
 
             return result;
         }
 
-        private FriendListResult RequestFriends(IFriendList channel, string sessionToken)
+        private TResult Request<TResult>(
+            Func<TResult> invocation,
+            Func<ServiceFailureReason, FriendshipFailure?, TResult> buildFailedResult,
+            out bool callSucceeded)
         {
-            FriendListResult result;
+            TResult result;
+            callSucceeded = false;
 
             try
             {
-                result = new FriendListResult(ServiceFailureReason.None, InvokeGetFriends(channel, sessionToken));
+                result = invocation();
+                callSucceeded = true;
+            }
+            catch (FaultException<FriendshipFault> friendshipFaultException)
+            {
+                result = buildFailedResult(
+                    ServiceFailureReason.RequestRejected,
+                    friendshipFaultException.Detail.Reason);
             }
             catch (FaultException<SessionFault>)
             {
-                result = BuildFailedResult(ServiceFailureReason.SessionRejected);
-            }
-            catch (FaultException<FriendshipFault>)
-            {
-                result = BuildFailedResult(ServiceFailureReason.RequestRejected);
+                result = buildFailedResult(ServiceFailureReason.SessionRejected, null);
             }
             catch (FaultException<ServiceFault> serviceFaultException)
             {
-                result = RegisterFailure(ServiceFailureReason.ServerError, serviceFaultException);
+                RegisterFailure(ServiceFailureReason.ServerError, serviceFaultException);
+                result = buildFailedResult(ServiceFailureReason.ServerError, null);
             }
             catch (EndpointNotFoundException endpointNotFoundException)
             {
-                result = RegisterFailure(ServiceFailureReason.ServerUnavailable, endpointNotFoundException);
+                RegisterFailure(ServiceFailureReason.ServerUnavailable, endpointNotFoundException);
+                result = buildFailedResult(ServiceFailureReason.ServerUnavailable, null);
             }
             catch (TimeoutException timeoutException)
             {
-                result = RegisterFailure(ServiceFailureReason.Timeout, timeoutException);
+                RegisterFailure(ServiceFailureReason.Timeout, timeoutException);
+                result = buildFailedResult(ServiceFailureReason.Timeout, null);
             }
             catch (CommunicationException communicationException)
             {
-                result = RegisterFailure(ServiceFailureReason.ServerUnavailable, communicationException);
+                RegisterFailure(ServiceFailureReason.ServerUnavailable, communicationException);
+                result = buildFailedResult(ServiceFailureReason.ServerUnavailable, null);
             }
 
             return result;
         }
 
-        private FriendSummary[] InvokeGetFriends(IFriendList channel, string sessionToken)
+        private TResult Invoke<TResult>(IFriendList channel, string sessionToken, Func<IFriendList, TResult> operation)
         {
-            FriendSummary[] friends;
+            TResult result;
 
             using (OperationContextScope scope = new OperationContextScope((IContextChannel)channel))
             {
                 SessionTokenHeader.Attach(OperationContext.Current, sessionToken);
-                friends = channel.GetFriends();
+                result = operation(channel);
             }
 
-            return friends;
+            return result;
         }
 
-        private FriendListResult RegisterFailure(ServiceFailureReason reason, Exception exception)
+        private void RegisterFailure(ServiceFailureReason reason, Exception exception)
         {
-            _logger.LogError(exception, FriendsQueryFailureMessage, reason);
-
-            return BuildFailedResult(reason);
-        }
-
-        private FriendListResult BuildFailedResult(ServiceFailureReason reason)
-        {
-            return new FriendListResult(reason, new FriendSummary[0]);
-        }
-
-        private void ReleaseCommunicationObject(ICommunicationObject communicationObject, bool callSucceeded)
-        {
-            if (callSucceeded && communicationObject.State != CommunicationState.Faulted)
-            {
-                CloseCommunicationObject(communicationObject);
-            }
-            else
-            {
-                communicationObject.Abort();
-            }
-        }
-
-        private void CloseCommunicationObject(ICommunicationObject communicationObject)
-        {
-            try
-            {
-                communicationObject.Close(TimeSpan.FromSeconds(CloseTimeoutSeconds));
-            }
-            catch (CommunicationException communicationException)
-            {
-                _logger.LogWarning(communicationException, CloseFailureMessage);
-                communicationObject.Abort();
-            }
-            catch (TimeoutException timeoutException)
-            {
-                _logger.LogWarning(timeoutException, CloseFailureMessage);
-                communicationObject.Abort();
-            }
+            _logger.LogError(exception, OperationFailureMessage, reason);
         }
     }
 }

@@ -1791,4 +1791,28 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="GuestAccess_ServerErrorMessage" xml:space="preserve">
     <value>El servidor no pudo iniciar tu sesión de invitado. Inténtalo más tarde.</value>
   </data>
+	<data name="AddFriend_PlayerUnavailableMessage" xml:space="preserve">
+    <value>Este jugador no puede recibir solicitudes de amistad.</value>
+  </data>
+	<data name="MainWindow_FriendRequestReceivedFormat" xml:space="preserve">
+    <value>{0} te envió una solicitud de amistad.</value>
+  </data>
+  <data name="AddFriend_ViewProfileButton" xml:space="preserve">
+    <value>Ver perfil</value>
+  </data>
+  <data name="AddFriend_InvalidSearchMessage" xml:space="preserve">
+    <value>Usa solo letras, números y guion bajo, hasta 16 caracteres.</value>
+  </data>
+  <data name="AddFriend_SearchErrorMessage" xml:space="preserve">
+    <value>No se pudo completar la búsqueda. Inténtalo más tarde.</value>
+  </data>
+  <data name="AddFriend_FriendStatus" xml:space="preserve">
+    <value>Ya es tu amigo</value>
+  </data>
+  <data name="AddFriend_RequestSentStatus" xml:space="preserve">
+    <value>Solicitud enviada</value>
+  </data>
+  <data name="AddFriend_RequestReceivedStatus" xml:space="preserve">
+    <value>Te envió una solicitud</value>
+  </data>
 </root>

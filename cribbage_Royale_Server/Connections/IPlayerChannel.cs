@@ -1,5 +1,4 @@
 ﻿using System;
-using CribbageRoyale.Contracts.DataContracts;
 
 namespace CribbageRoyale.Server.Connections
 {
@@ -13,6 +12,6 @@ namespace CribbageRoyale.Server.Connections
 
         bool IsPlayerConnected(int accountId);
 
-        bool TrySendPresence(int accountId, PresenceChange presence);
+        bool TrySendNotification(int accountId, Notification notification);
     }
 }
