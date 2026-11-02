@@ -112,8 +112,10 @@
   <ItemGroup>
     <Compile Include="Connections\FriendPresenceNotifier.cs" />
     <Compile Include="Connections\IPlayerChannel.cs" />
+    <Compile Include="Connections\Notification.cs" />
     <Compile Include="Connections\PlayerChannel.cs" />
     <Compile Include="Connections\PlayerConnectionChangedEventArgs.cs" />
+    <Compile Include="Connections\PresenceNotification.cs" />
     <Compile Include="Faults\ServiceFaultBuilder.cs" />
     <Compile Include="Hosting\InstanceProviderBehavior.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />

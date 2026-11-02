@@ -12,7 +12,7 @@ namespace CribbageRoyale.Server.Connections
         private const int CloseTimeoutSeconds = 3;
         private const string RevocationFailureMessage = "The session revocation could not be delivered.";
         private const string CloseFailureMessage = "The replaced callback channel could not be closed.";
-        private const string PresenceFailureMessage = "The presence notification could not be delivered.";
+        private const string NotificationFailureMessage = "The notification could not be delivered.";
 
         private readonly Dictionary<int, IGameClientCallback> _callbacks =
             new Dictionary<int, IGameClientCallback>();
@@ -34,7 +34,7 @@ namespace CribbageRoyale.Server.Connections
 
             AttachChannelEvents(accountId, callback);
             RevokeReplacedCallback(replacedCallback);
-            RaiseConnectionChanged(accountId, true);
+            OnPlayerConnectionChanged(accountId, true);
         }
 
         public void RemovePlayer(int accountId)
@@ -48,7 +48,7 @@ namespace CribbageRoyale.Server.Connections
 
             if (removed)
             {
-                RaiseConnectionChanged(accountId, false);
+                OnPlayerConnectionChanged(accountId, false);
             }
         }
 
@@ -64,14 +64,14 @@ namespace CribbageRoyale.Server.Connections
             return connected;
         }
 
-        public bool TrySendPresence(int accountId, PresenceChange presence)
+        public bool TrySendNotification(int accountId, Notification notification)
         {
             IGameClientCallback callback = FindCallback(accountId);
             bool sent = false;
 
             if (callback != null)
             {
-                sent = TryInvokePresence(callback, presence);
+                sent = TryDeliver(callback, notification);
 
                 if (!sent)
                 {
@@ -128,7 +128,7 @@ namespace CribbageRoyale.Server.Connections
 
             if (removed)
             {
-                RaiseConnectionChanged(accountId, false);
+                OnPlayerConnectionChanged(accountId, false);
             }
         }
 
@@ -155,26 +155,26 @@ namespace CribbageRoyale.Server.Connections
             }
         }
 
-        private bool TryInvokePresence(IGameClientCallback callback, PresenceChange presence)
+        private bool TryDeliver(IGameClientCallback callback, Notification notification)
         {
             bool sent = false;
 
             try
             {
-                callback.PresenceChanged(presence);
+                notification.Deliver(callback);
                 sent = true;
             }
             catch (CommunicationException communicationException)
             {
-                _logger.LogWarning(communicationException, PresenceFailureMessage);
+                _logger.LogWarning(communicationException, NotificationFailureMessage);
             }
             catch (TimeoutException timeoutException)
             {
-                _logger.LogWarning(timeoutException, PresenceFailureMessage);
+                _logger.LogWarning(timeoutException, NotificationFailureMessage);
             }
             catch (ObjectDisposedException objectDisposedException)
             {
-                _logger.LogWarning(objectDisposedException, PresenceFailureMessage);
+                _logger.LogWarning(objectDisposedException, NotificationFailureMessage);
             }
 
             return sent;
@@ -223,7 +223,7 @@ namespace CribbageRoyale.Server.Connections
             }
         }
 
-        private void RaiseConnectionChanged(int accountId, bool isOnline)
+        private void OnPlayerConnectionChanged(int accountId, bool isOnline)
         {
             EventHandler<PlayerConnectionChangedEventArgs> handler = PlayerConnectionChanged;
 
