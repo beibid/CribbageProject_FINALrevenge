@@ -1797,4 +1797,22 @@ If you did not create this account, ignore this message.</value>
 	<data name="MainWindow_FriendRequestReceivedFormat" xml:space="preserve">
     <value>{0} sent you a friend request.</value>
   </data>
+	<data name="AddFriend_ViewProfileButton" xml:space="preserve">
+    <value>View profile</value>
+  </data>
+	<data name="AddFriend_InvalidSearchMessage" xml:space="preserve">
+    <value>Use only letters, numbers and underscores, up to 16 characters.</value>
+  </data>
+	<data name="AddFriend_SearchErrorMessage" xml:space="preserve">
+    <value>The search could not be completed. Try again later.</value>
+  </data>
+	<data name="AddFriend_FriendStatus" xml:space="preserve">
+    <value>Already your friend</value>
+  </data>
+	<data name="AddFriend_RequestSentStatus" xml:space="preserve">
+    <value>Request sent</value>
+  </data>
+	<data name="AddFriend_RequestReceivedStatus" xml:space="preserve">
+    <value>Sent you a request</value>
+  </data>
 </root>

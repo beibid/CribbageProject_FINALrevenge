@@ -8,6 +8,12 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         List<int> GetFriendIds(int accountId);
 
+        List<PlayerRecord> SearchPlayers(int searcherAccountId, string searchText);
+
+        List<int> GetSentRequestRecipientIds(int accountId);
+
+        List<int> GetReceivedRequestSenderIds(int accountId);
+
         bool IsAccountAvailable(int accountId);
 
         bool AreFriends(int firstAccountId, int secondAccountId);

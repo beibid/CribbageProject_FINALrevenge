@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="searchTextBox" Style="{StaticResource FormTextBox}"
-                     Margin="0,0,10,0" MaxLength="20"/>
+                     Margin="0,0,10,0" MaxLength="16"/>
             <Button x:Name="searchButton" Grid.Column="1"
                     Content="{x:Static lang:Lang.Common_SearchButton}"
                     Style="{StaticResource SecondaryButton}" MinWidth="0"
@@ -52,14 +52,29 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="4,8" Width="1000">
-                                <TextBlock Text="{Binding UserName}"
-                                           Foreground="{StaticResource TextBrush}"
-                                           FontSize="14" FontWeight="Bold"
-                                           VerticalAlignment="Center"/>
-                                <Button Content="{x:Static lang:Lang.AddFriend_SendRequestButton}"
-                                        Style="{StaticResource SecondaryButton}" MinWidth="0"
-                                        Width="200" Height="28" FontSize="11"
-                                        HorizontalAlignment="Right"/>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding DisplayName}"
+                                               Foreground="{StaticResource TextBrush}"
+                                               FontSize="14" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding UserName}"
+                                               Foreground="{StaticResource MutedTextBrush}"
+                                               FontSize="12"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding RelationshipText}"
+                                               Foreground="{StaticResource MutedTextBrush}"
+                                               FontSize="12" VerticalAlignment="Center"
+                                               Margin="0,0,12,0"/>
+                                    <Button Content="{x:Static lang:Lang.AddFriend_SendRequestButton}"
+                                            Style="{StaticResource SecondaryButton}" MinWidth="0"
+                                            Width="200" Height="28" FontSize="11" Margin="0,0,8,0"
+                                            Visibility="{Binding SendRequestVisibility}"
+                                            Click="SendRequestButton_Click"/>
+                                    <Button Content="{x:Static lang:Lang.AddFriend_ViewProfileButton}"
+                                            Style="{StaticResource SecondaryButton}" MinWidth="0"
+                                            Width="140" Height="28" FontSize="11"
+                                            Click="ViewProfileButton_Click"/>
+                                </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

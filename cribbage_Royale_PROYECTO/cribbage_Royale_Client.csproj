@@ -124,6 +124,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Localization\FriendRequestMessages.cs" />
     <Compile Include="Localization\LanguageManager.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />
     <Compile Include="Mail\EmailSender.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Models\MatchPhase.cs" />
     <Compile Include="Models\MatchResultItem.cs" />
     <Compile Include="Models\PlayerItem.cs" />
+    <Compile Include="Models\PlayerSearchItem.cs" />
     <Compile Include="Models\PlayingCardItem.cs" />
     <Compile Include="Models\SessionKind.cs" />
     <Compile Include="Properties\Langs\Lang.Designer.cs">
@@ -150,6 +152,7 @@
     <Compile Include="ServiceAccess\FriendRequestsClient.cs" />
     <Compile Include="ServiceAccess\GameClientCallback.cs" />
     <Compile Include="ServiceAccess\GuestSignInResult.cs" />
+    <Compile Include="ServiceAccess\PlayerSearchResult.cs" />
     <Compile Include="ServiceAccess\PlayerSessionClient.cs" />
     <Compile Include="ServiceAccess\PresenceChangedEventArgs.cs" />
     <Compile Include="ServiceAccess\ScoreboardResult.cs" />

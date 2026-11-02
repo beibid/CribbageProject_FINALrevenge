@@ -2,14 +2,14 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using CribbageRoyale.Contracts.FaultContracts;
 using cribbage_Royale_DataAccess.DataAccess;
-using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_DataAccess.Models;
+using cribbage_Royale_PROYECTO.Localization;
+using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.ServiceAccess;
-using cribbage_Royale_PROYECTO.Views.Dialogs;
 using cribbage_Royale_PROYECTO.Session;
+using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO.Views
 {
@@ -119,35 +119,14 @@ namespace cribbage_Royale_PROYECTO.Views
             }
             else if (result.Reason == ServiceFailureReason.RequestRejected)
             {
-                MessageDialog.ShowWarning(Window.GetWindow(this), ResolveRejectionMessage(result.Failure.Value));
+                MessageDialog.ShowWarning(
+                    Window.GetWindow(this),
+                    FriendRequestMessages.ResolveRejection(result.Failure.Value));
             }
             else
             {
                 MessageDialog.ShowError(Window.GetWindow(this), Lang.AddFriend_RequestErrorMessage);
             }
-        }
-
-        private string ResolveRejectionMessage(FriendshipFailure failure)
-        {
-            string message;
-
-            switch (failure)
-            {
-                case FriendshipFailure.CannotTargetSelf:
-                    message = Lang.AddFriend_CannotAddYourselfMessage;
-                    break;
-                case FriendshipFailure.FriendshipAlreadyExists:
-                    message = Lang.AddFriend_AlreadyFriendsMessage;
-                    break;
-                case FriendshipFailure.RequestAlreadyPending:
-                    message = Lang.AddFriend_RequestAlreadySentMessage;
-                    break;
-                default:
-                    message = Lang.AddFriend_PlayerUnavailableMessage;
-                    break;
-            }
-
-            return message;
         }
 
         private void CancelRequestButton_Click(object sender, RoutedEventArgs e)

@@ -12,6 +12,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
     {
         private const string DefaultAvatar = "avatar_por_omision";
         private const string VerifiedAccountStatus = "VERIFICADA";
+        private const int MaximumSearchResults = 20;
         private const string FriendsQueryFailureMessage = "The friends list could not be queried.";
         private const string RequestCreationFailureMessage = "The friend request could not be saved.";
         private const string RequestResponseFailureMessage = "The response to the friend request could not be saved.";
@@ -19,6 +20,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
         private const string FriendRemovalFailureMessage = "The friendship could not be removed.";
         private const string RelationshipQueryFailureMessage =
             "The relationship between the accounts could not be queried.";
+        private const string PlayerSearchFailureMessage = "The players could not be searched.";
 
         public long CreateFriendRequest(int senderAccountId, int recipientAccountId)
         {
@@ -65,6 +67,27 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return Execute(
                 context => QueryFriendships(context, accountId).Keys.ToList(),
                 FriendsQueryFailureMessage);
+        }
+
+        public List<PlayerRecord> SearchPlayers(int searcherAccountId, string searchText)
+        {
+            return Execute(
+                context => QueryPlayers(context, searcherAccountId, searchText),
+                PlayerSearchFailureMessage);
+        }
+
+        public List<int> GetSentRequestRecipientIds(int accountId)
+        {
+            return Execute(
+                context => QuerySentRequestRecipientIds(context, accountId),
+                RelationshipQueryFailureMessage);
+        }
+
+        public List<int> GetReceivedRequestSenderIds(int accountId)
+        {
+            return Execute(
+                context => QueryReceivedRequestSenderIds(context, accountId),
+                RelationshipQueryFailureMessage);
         }
 
         public bool IsAccountAvailable(int accountId)
@@ -260,21 +283,87 @@ namespace cribbage_Royale_DataAccess.DataAccess
             List<usuario> accounts = context.usuario
                 .Where(account => friendIds.Contains(account.id_usuario))
                 .ToList();
-            List<perfil_jugador> profiles = context.perfil_jugador
-                .Where(profile => friendIds.Contains(profile.id_usuario))
-                .ToList();
+            List<perfil_jugador> profiles = QueryProfiles(context, friendIds);
 
             List<FriendRecord> friends = new List<FriendRecord>();
 
             foreach (usuario account in accounts)
             {
-                perfil_jugador profile = profiles.FirstOrDefault(record => record.id_usuario == account.id_usuario);
-                FriendRecord friend = BuildRecord(account, profile);
+                FriendRecord friend = new FriendRecord();
+                FillRecord(friend, account, profiles);
                 friend.FriendsSince = friendships[account.id_usuario];
                 friends.Add(friend);
             }
 
             return friends;
+        }
+
+        private List<PlayerRecord> QueryPlayers(CribbageEntities context, int searcherAccountId, string searchText)
+        {
+            List<int> blockedAccountIds = QueryBlockedCounterpartIds(context, searcherAccountId);
+
+            List<usuario> accounts = context.usuario
+                .Where(account => account.nombre_usuario.Contains(searchText))
+                .Where(account => account.estado_cuenta == VerifiedAccountStatus)
+                .Where(account => account.id_usuario != searcherAccountId)
+                .Where(account => !blockedAccountIds.Contains(account.id_usuario))
+                .OrderBy(account => account.nombre_usuario)
+                .Take(MaximumSearchResults)
+                .ToList();
+
+            List<int> accountIds = accounts.Select(account => account.id_usuario).ToList();
+            List<perfil_jugador> profiles = QueryProfiles(context, accountIds);
+
+            List<PlayerRecord> players = new List<PlayerRecord>();
+
+            foreach (usuario account in accounts)
+            {
+                PlayerRecord player = new PlayerRecord();
+                FillRecord(player, account, profiles);
+                players.Add(player);
+            }
+
+            return players;
+        }
+
+        private List<int> QueryBlockedCounterpartIds(CribbageEntities context, int accountId)
+        {
+            List<int> counterpartIds = context.bloqueo
+                .Where(block => block.id_usuario_que_bloquea == accountId)
+                .Select(block => block.id_usuario_bloqueado)
+                .ToList();
+
+            counterpartIds.AddRange(context.bloqueo
+                .Where(block => block.id_usuario_bloqueado == accountId)
+                .Select(block => block.id_usuario_que_bloquea)
+                .ToList());
+
+            return counterpartIds;
+        }
+
+        private List<int> QuerySentRequestRecipientIds(CribbageEntities context, int accountId)
+        {
+            return context.amistad
+                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
+                .Where(friendship => friendship.id_usuario_solicitante == accountId)
+                .Select(friendship => friendship.id_usuario_destinatario)
+                .ToList();
+        }
+
+        private List<int> QueryReceivedRequestSenderIds(CribbageEntities context, int accountId)
+        {
+            return context.amistad
+                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
+                .Where(friendship => friendship.id_usuario_destinatario == accountId)
+                .Select(friendship => friendship.id_usuario_solicitante)
+                .ToList();
+        }
+
+        private List<perfil_jugador> QueryProfiles(CribbageEntities context, List<int> accountIds)
+        {
+            return context.perfil_jugador
+                .Where(profile => accountIds.Contains(profile.id_usuario))
+                .ToList();
         }
 
         private Dictionary<int, DateTime?> QueryFriendships(CribbageEntities context, int accountId)
@@ -307,21 +396,20 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return friendId;
         }
 
-        private FriendRecord BuildRecord(usuario account, perfil_jugador profile)
+        private void FillRecord(PlayerRecord record, usuario account, List<perfil_jugador> profiles)
         {
-            FriendRecord friend = new FriendRecord();
-            friend.AccountId = account.id_usuario;
-            friend.UserName = account.nombre_usuario;
-            friend.DisplayName = account.nombre_usuario;
-            friend.HasProfileImage = false;
+            perfil_jugador profile = profiles.FirstOrDefault(candidate => candidate.id_usuario == account.id_usuario);
+
+            record.AccountId = account.id_usuario;
+            record.UserName = account.nombre_usuario;
+            record.DisplayName = account.nombre_usuario;
+            record.HasProfileImage = false;
 
             if (profile != null)
             {
-                friend.DisplayName = profile.nombre_mostrado;
-                friend.HasProfileImage = HasCustomAvatar(profile);
+                record.DisplayName = profile.nombre_mostrado;
+                record.HasProfileImage = HasCustomAvatar(profile);
             }
-
-            return friend;
         }
 
         private bool HasCustomAvatar(perfil_jugador profile)

@@ -79,6 +79,24 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Already your friend.
+        /// </summary>
+        public static string AddFriend_FriendStatus {
+            get {
+                return ResourceManager.GetString("AddFriend_FriendStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Use only letters, numbers and underscores, up to 16 characters..
+        /// </summary>
+        public static string AddFriend_InvalidSearchMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_InvalidSearchMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No players found with that name..
         /// </summary>
         public static string AddFriend_NoResultsMessage {
@@ -133,6 +151,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Sent you a request.
+        /// </summary>
+        public static string AddFriend_RequestReceivedStatus {
+            get {
+                return ResourceManager.GetString("AddFriend_RequestReceivedStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a We sent a friend request to {0}..
         /// </summary>
         public static string AddFriend_RequestSentMessage {
@@ -144,9 +171,27 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         /// <summary>
         ///   Busca una cadena traducida similar a Request sent.
         /// </summary>
+        public static string AddFriend_RequestSentStatus {
+            get {
+                return ResourceManager.GetString("AddFriend_RequestSentStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request sent.
+        /// </summary>
         public static string AddFriend_RequestSentTitle {
             get {
                 return ResourceManager.GetString("AddFriend_RequestSentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The search could not be completed. Try again later..
+        /// </summary>
+        public static string AddFriend_SearchErrorMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_SearchErrorMessage", resourceCulture);
             }
         }
         
@@ -174,6 +219,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string AddFriend_SendRequestButton {
             get {
                 return ResourceManager.GetString("AddFriend_SendRequestButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a View profile.
+        /// </summary>
+        public static string AddFriend_ViewProfileButton {
+            get {
+                return ResourceManager.GetString("AddFriend_ViewProfileButton", resourceCulture);
             }
         }
         
