@@ -11,15 +11,18 @@ namespace cribbage_Royale_DataAccess.DataAccess
     public class FriendshipRepository : IFriendshipRepository
     {
         private const string DefaultAvatar = "avatar_por_omision";
+        private const string VerifiedAccountStatus = "VERIFICADA";
         private const string FriendsQueryFailureMessage = "The friends list could not be queried.";
         private const string RequestCreationFailureMessage = "The friend request could not be saved.";
         private const string RequestResponseFailureMessage = "The response to the friend request could not be saved.";
         private const string RequestCancellationFailureMessage = "The friend request could not be cancelled.";
         private const string FriendRemovalFailureMessage = "The friendship could not be removed.";
+        private const string RelationshipQueryFailureMessage =
+            "The relationship between the accounts could not be queried.";
 
-        public void SendFriendRequest(int senderAccountId, int recipientAccountId)
+        public long CreateFriendRequest(int senderAccountId, int recipientAccountId)
         {
-            ExecuteWrite(
+            return Execute(
                 context => AddFriendRequest(context, senderAccountId, recipientAccountId),
                 RequestCreationFailureMessage);
         }
@@ -54,14 +57,40 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         public List<FriendRecord> GetFriends(int accountId)
         {
-            return ExecuteQuery(context => QueryFriends(context, accountId), FriendsQueryFailureMessage);
+            return Execute(context => QueryFriends(context, accountId), FriendsQueryFailureMessage);
         }
 
         public List<int> GetFriendIds(int accountId)
         {
-            return ExecuteQuery(
+            return Execute(
                 context => QueryFriendships(context, accountId).Keys.ToList(),
                 FriendsQueryFailureMessage);
+        }
+
+        public bool IsAccountAvailable(int accountId)
+        {
+            return Execute(context => IsVerifiedAccount(context, accountId), RelationshipQueryFailureMessage);
+        }
+
+        public bool AreFriends(int firstAccountId, int secondAccountId)
+        {
+            return Execute(
+                context => QueryAcceptedFriendships(context, firstAccountId, secondAccountId).Count > 0,
+                RelationshipQueryFailureMessage);
+        }
+
+        public bool HasPendingRequest(int firstAccountId, int secondAccountId)
+        {
+            return Execute(
+                context => HasPendingRequestInEitherDirection(context, firstAccountId, secondAccountId),
+                RelationshipQueryFailureMessage);
+        }
+
+        public bool HasBlock(int firstAccountId, int secondAccountId)
+        {
+            return Execute(
+                context => HasBlockInEitherDirection(context, firstAccountId, secondAccountId),
+                RelationshipQueryFailureMessage);
         }
 
         private void ExecuteWrite(Action<CribbageEntities> writeOperation, string failureMessage)
@@ -87,7 +116,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             }
         }
 
-        private TResult ExecuteQuery<TResult>(Func<CribbageEntities, TResult> query, string failureMessage)
+        private TResult Execute<TResult>(Func<CribbageEntities, TResult> operation, string failureMessage)
         {
             TResult result;
 
@@ -95,8 +124,12 @@ namespace cribbage_Royale_DataAccess.DataAccess
             {
                 using (CribbageEntities context = new CribbageEntities())
                 {
-                    result = query(context);
+                    result = operation(context);
                 }
+            }
+            catch (DbUpdateException updateException)
+            {
+                throw new DataAccessException(failureMessage, updateException);
             }
             catch (EntityException entityException)
             {
@@ -110,7 +143,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return result;
         }
 
-        private void AddFriendRequest(CribbageEntities context, int senderAccountId, int recipientAccountId)
+        private long AddFriendRequest(CribbageEntities context, int senderAccountId, int recipientAccountId)
         {
             amistad friendship = new amistad();
             friendship.id_usuario_solicitante = senderAccountId;
@@ -120,6 +153,8 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             context.amistad.Add(friendship);
             context.SaveChanges();
+
+            return friendship.id_amistad;
         }
 
         private void ResolveRequests(CribbageEntities context, List<amistad> requests, bool isAccepted)
@@ -184,6 +219,37 @@ namespace cribbage_Royale_DataAccess.DataAccess
                 .Where(friendship => friendship.id_usuario_solicitante == senderAccountId)
                 .Where(friendship => friendship.id_usuario_destinatario == recipientAccountId)
                 .ToList();
+        }
+
+        private bool IsVerifiedAccount(CribbageEntities context, int accountId)
+        {
+            return context.usuario
+                .Where(account => account.id_usuario == accountId)
+                .Any(account => account.estado_cuenta == VerifiedAccountStatus);
+        }
+
+        private bool HasPendingRequestInEitherDirection(
+            CribbageEntities context,
+            int firstAccountId,
+            int secondAccountId)
+        {
+            int pendingRequests = QueryPendingRequests(context, firstAccountId, secondAccountId).Count
+                + QueryPendingRequests(context, secondAccountId, firstAccountId).Count;
+
+            return pendingRequests > 0;
+        }
+
+        private bool HasBlockInEitherDirection(CribbageEntities context, int firstAccountId, int secondAccountId)
+        {
+            return HasBlockInDirection(context, firstAccountId, secondAccountId)
+                || HasBlockInDirection(context, secondAccountId, firstAccountId);
+        }
+
+        private bool HasBlockInDirection(CribbageEntities context, int blockingAccountId, int blockedAccountId)
+        {
+            return context.bloqueo
+                .Where(block => block.id_usuario_que_bloquea == blockingAccountId)
+                .Any(block => block.id_usuario_bloqueado == blockedAccountId);
         }
 
         private List<FriendRecord> QueryFriends(CribbageEntities context, int accountId)

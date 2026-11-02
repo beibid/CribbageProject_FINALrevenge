@@ -97,6 +97,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a This player cannot receive friend requests..
+        /// </summary>
+        public static string AddFriend_PlayerUnavailableMessage {
+            get {
+                return ResourceManager.GetString("AddFriend_PlayerUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You already sent a request to that player..
         /// </summary>
         public static string AddFriend_RequestAlreadySentMessage {
@@ -2367,6 +2376,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Login_UserNotFoundMessage {
             get {
                 return ResourceManager.GetString("Login_UserNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} sent you a friend request..
+        /// </summary>
+        public static string MainWindow_FriendRequestReceivedFormat {
+            get {
+                return ResourceManager.GetString("MainWindow_FriendRequestReceivedFormat", resourceCulture);
             }
         }
         

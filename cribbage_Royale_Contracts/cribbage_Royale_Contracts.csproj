@@ -47,9 +47,12 @@
     <Compile Include="DataContracts\AuthenticatedSession.cs" />
     <Compile Include="DataContracts\FriendSummary.cs" />
     <Compile Include="DataContracts\GuestSession.cs" />
+    <Compile Include="DataContracts\SocialEvent.cs" />
+    <Compile Include="DataContracts\SocialEventType.cs" />
     <Compile Include="FaultContracts\FriendshipFailure.cs" />
     <Compile Include="FaultContracts\FriendshipFault.cs" />
     <Compile Include="ServiceContracts\IFriendList.cs" />
+    <Compile Include="ServiceContracts\IFriendRequests.cs" />
     <Compile Include="ServiceContracts\IGameClientCallback.cs" />
     <Compile Include="ServiceContracts\IPlayerSession.cs" />
     <Compile Include="DataContracts\PresenceChange.cs" />

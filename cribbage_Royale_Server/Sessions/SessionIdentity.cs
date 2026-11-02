@@ -2,23 +2,14 @@
 {
     public class SessionIdentity
     {
-        private readonly int _accountId;
-        private readonly bool _isGuest;
-
         public SessionIdentity(int accountId, bool isGuest)
         {
-            _accountId = accountId;
-            _isGuest = isGuest;
+            AccountId = accountId;
+            IsGuest = isGuest;
         }
 
-        public int AccountId
-        {
-            get { return _accountId; }
-        }
+        public int AccountId { get; }
 
-        public bool IsGuest
-        {
-            get { return _isGuest; }
-        }
+        public bool IsGuest { get; }
     }
 }

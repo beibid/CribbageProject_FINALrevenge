@@ -16,6 +16,14 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         void PresenceChanged(PresenceChange presence);
 
         /// <summary>
+        /// Notifica un hecho social fuera de la partida, como una solicitud de amistad recibida.
+        /// </summary>
+        /// <param name="eventType">Tipo de hecho ocurrido.</param>
+        /// <param name="social">Detalle del hecho.</param>
+        [OperationContract(IsOneWay = true)]
+        void SocialEventOccurred(SocialEventType eventType, SocialEvent social);
+
+        /// <summary>
         /// Notifica que la sesión del destinatario dejó de ser válida.
         /// </summary>
         /// <param name="revocation">Aviso con el motivo de la revocación.</param>

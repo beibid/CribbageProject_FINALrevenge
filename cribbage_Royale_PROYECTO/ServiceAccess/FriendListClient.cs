@@ -11,15 +11,15 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
     public class FriendListClient
     {
         private const string EndpointName = "FriendListEndpoint";
-        private const int CloseTimeoutSeconds = 3;
         private const string FriendsQueryFailureMessage = "The friends list could not be loaded. Reason: {Reason}.";
-        private const string CloseFailureMessage = "The friends list channel could not be closed.";
 
         private readonly ILogger _logger;
+        private readonly ChannelCloser _channelCloser;
 
         public FriendListClient(ILogger logger)
         {
             _logger = logger;
+            _channelCloser = new ChannelCloser(logger);
         }
 
         public Task<FriendListResult> GetFriendsAsync(string sessionToken)
@@ -34,8 +34,8 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
 
             FriendListResult result = RequestFriends(channel, sessionToken);
 
-            ReleaseCommunicationObject((ICommunicationObject)channel, result.Succeeded);
-            ReleaseCommunicationObject(factory, result.Succeeded);
+            _channelCloser.Release((ICommunicationObject)channel, result.Succeeded);
+            _channelCloser.Release(factory, result.Succeeded);
 
             return result;
         }
@@ -99,36 +99,6 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
         private FriendListResult BuildFailedResult(ServiceFailureReason reason)
         {
             return new FriendListResult(reason, new FriendSummary[0]);
-        }
-
-        private void ReleaseCommunicationObject(ICommunicationObject communicationObject, bool callSucceeded)
-        {
-            if (callSucceeded && communicationObject.State != CommunicationState.Faulted)
-            {
-                CloseCommunicationObject(communicationObject);
-            }
-            else
-            {
-                communicationObject.Abort();
-            }
-        }
-
-        private void CloseCommunicationObject(ICommunicationObject communicationObject)
-        {
-            try
-            {
-                communicationObject.Close(TimeSpan.FromSeconds(CloseTimeoutSeconds));
-            }
-            catch (CommunicationException communicationException)
-            {
-                _logger.LogWarning(communicationException, CloseFailureMessage);
-                communicationObject.Abort();
-            }
-            catch (TimeoutException timeoutException)
-            {
-                _logger.LogWarning(timeoutException, CloseFailureMessage);
-                communicationObject.Abort();
-            }
         }
     }
 }

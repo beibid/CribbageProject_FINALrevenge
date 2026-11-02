@@ -1791,4 +1791,10 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="GuestAccess_ServerErrorMessage" xml:space="preserve">
     <value>El servidor no pudo iniciar tu sesión de invitado. Inténtalo más tarde.</value>
   </data>
+	<data name="AddFriend_PlayerUnavailableMessage" xml:space="preserve">
+    <value>Este jugador no puede recibir solicitudes de amistad.</value>
+  </data>
+	<data name="MainWindow_FriendRequestReceivedFormat" xml:space="preserve">
+    <value>{0} te envió una solicitud de amistad.</value>
+  </data>
 </root>

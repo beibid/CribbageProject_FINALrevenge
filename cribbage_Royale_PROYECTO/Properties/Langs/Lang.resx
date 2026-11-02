@@ -1791,4 +1791,10 @@ If you did not create this account, ignore this message.</value>
 	<data name="GuestAccess_ServerErrorMessage" xml:space="preserve">
     <value>The server could not start your guest session. Try again later.</value>
   </data>
+	<data name="AddFriend_PlayerUnavailableMessage" xml:space="preserve">
+    <value>This player cannot receive friend requests.</value>
+  </data>
+	<data name="MainWindow_FriendRequestReceivedFormat" xml:space="preserve">
+    <value>{0} sent you a friend request.</value>
+  </data>
 </root>

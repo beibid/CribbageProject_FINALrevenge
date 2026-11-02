@@ -28,6 +28,7 @@ namespace cribbage_Royale_PROYECTO
         private GameClientCallback _sessionCallback;
         private PlayerSessionClient _sessionClient;
         private FriendListClient _friendListClient;
+        private FriendRequestsClient _friendRequestsClient;
 
         public GameClientCallback SessionCallback
         {
@@ -44,6 +45,11 @@ namespace cribbage_Royale_PROYECTO
             get { return _friendListClient; }
         }
 
+        public FriendRequestsClient FriendRequestsClient
+        {
+            get { return _friendRequestsClient; }
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             _logger = ApplicationLogging.CreateLogger<App>();
@@ -53,6 +59,7 @@ namespace cribbage_Royale_PROYECTO
             LanguageManager.ApplyCulture(LanguageManager.DefaultCulture);
             CreateSessionClient();
             CreateFriendListClient();
+            CreateFriendRequestsClient();
             base.OnStartup(e);
             _logger.LogInformation(ApplicationStartedMessage);
         }
@@ -74,6 +81,11 @@ namespace cribbage_Royale_PROYECTO
         private void CreateFriendListClient()
         {
             _friendListClient = new FriendListClient(ApplicationLogging.CreateLogger<FriendListClient>());
+        }
+
+        private void CreateFriendRequestsClient()
+        {
+            _friendRequestsClient = new FriendRequestsClient(ApplicationLogging.CreateLogger<FriendRequestsClient>());
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

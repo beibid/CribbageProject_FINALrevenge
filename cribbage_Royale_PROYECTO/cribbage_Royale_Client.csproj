@@ -143,8 +143,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
+    <Compile Include="ServiceAccess\ChannelCloser.cs" />
     <Compile Include="ServiceAccess\FriendListClient.cs" />
     <Compile Include="ServiceAccess\FriendListResult.cs" />
+    <Compile Include="ServiceAccess\FriendRequestResult.cs" />
+    <Compile Include="ServiceAccess\FriendRequestsClient.cs" />
     <Compile Include="ServiceAccess\GameClientCallback.cs" />
     <Compile Include="ServiceAccess\GuestSignInResult.cs" />
     <Compile Include="ServiceAccess\PlayerSessionClient.cs" />
@@ -154,6 +157,7 @@
     <Compile Include="ServiceAccess\SessionRevokedEventArgs.cs" />
     <Compile Include="ServiceAccess\SessionTokenHeader.cs" />
     <Compile Include="ServiceAccess\SignInResult.cs" />
+    <Compile Include="ServiceAccess\SocialEventReceivedEventArgs.cs" />
     <Compile Include="ServiceAccess\StatisticsServiceClient.cs" />
     <Compile Include="Session\CurrentSession.cs" />
     <Compile Include="Views\AddFriendPage.xaml.cs">

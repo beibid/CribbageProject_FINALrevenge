@@ -18,19 +18,26 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
 
         public event EventHandler<PresenceChangedEventArgs> PresenceReceived;
 
+        public event EventHandler<SocialEventReceivedEventArgs> SocialEventReceived;
+
         public event EventHandler<SessionRevokedEventArgs> RevocationReceived;
 
         public void PresenceChanged(PresenceChange presence)
         {
-            _dispatcher.BeginInvoke(new Action(() => RaisePresence(presence)));
+            _dispatcher.BeginInvoke(new Action(() => OnPresenceReceived(presence)));
+        }
+
+        public void SocialEventOccurred(SocialEventType eventType, SocialEvent social)
+        {
+            _dispatcher.BeginInvoke(new Action(() => OnSocialEventReceived(eventType, social)));
         }
 
         public void SessionRevoked(SessionRevocation revocation)
         {
-            _dispatcher.BeginInvoke(new Action(() => RaiseRevocation(revocation)));
+            _dispatcher.BeginInvoke(new Action(() => OnRevocationReceived(revocation)));
         }
 
-        private void RaisePresence(PresenceChange presence)
+        private void OnPresenceReceived(PresenceChange presence)
         {
             EventHandler<PresenceChangedEventArgs> handler = PresenceReceived;
 
@@ -40,7 +47,17 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             }
         }
 
-        private void RaiseRevocation(SessionRevocation revocation)
+        private void OnSocialEventReceived(SocialEventType eventType, SocialEvent social)
+        {
+            EventHandler<SocialEventReceivedEventArgs> handler = SocialEventReceived;
+
+            if (handler != null)
+            {
+                handler(this, new SocialEventReceivedEventArgs(eventType, social));
+            }
+        }
+
+        private void OnRevocationReceived(SessionRevocation revocation)
         {
             EventHandler<SessionRevokedEventArgs> handler = RevocationReceived;
 
