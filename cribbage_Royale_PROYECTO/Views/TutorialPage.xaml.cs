@@ -39,7 +39,14 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StartMenu());
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+            else
+            {
+                NavigationService.Navigate(new StartMenu());
+            }
         }
     }
 }
