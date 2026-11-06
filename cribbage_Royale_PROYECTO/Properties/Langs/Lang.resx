@@ -1833,4 +1833,10 @@ If you did not create this account, ignore this message.</value>
 	<data name="MainWindow_FriendRequestRejectedFormat" xml:space="preserve">
     <value>{0} declined your friend request.</value>
   </data>
+	<data name="Friends_FriendshipNotFoundMessage" xml:space="preserve">
+    <value>This player is no longer in your friends list.</value>
+  </data>
+	<data name="Friends_RemoveErrorMessage" xml:space="preserve">
+    <value>The friend could not be removed. Try again later.</value>
+  </data>
 </root>

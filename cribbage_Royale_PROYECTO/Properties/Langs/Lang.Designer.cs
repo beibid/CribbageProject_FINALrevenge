@@ -1489,6 +1489,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a This player is no longer in your friends list..
+        /// </summary>
+        public static string Friends_FriendshipNotFoundMessage {
+            get {
+                return ResourceManager.GetString("Friends_FriendshipNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a My friends.
         /// </summary>
         public static string Friends_FriendsTabHeader {
@@ -1602,6 +1611,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Friends_RemoveConfirmationTitle {
             get {
                 return ResourceManager.GetString("Friends_RemoveConfirmationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The friend could not be removed. Try again later..
+        /// </summary>
+        public static string Friends_RemoveErrorMessage {
+            get {
+                return ResourceManager.GetString("Friends_RemoveErrorMessage", resourceCulture);
             }
         }
         

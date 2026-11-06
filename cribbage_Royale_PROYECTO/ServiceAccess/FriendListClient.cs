@@ -31,5 +31,20 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 channel => new PlayerSearchResult(ServiceFailureReason.None, null, channel.FindPlayers(searchText)),
                 (reason, failure) => new PlayerSearchResult(reason, failure, new PlayerSummary[0])));
         }
+
+        public Task<FriendshipOperationResult> RemoveFriendAsync(string sessionToken, int accountId)
+        {
+            return Task.Run(() => _invoker.Execute(
+                sessionToken,
+                channel => Remove(channel, accountId),
+                (reason, failure) => new FriendshipOperationResult(reason, failure)));
+        }
+
+        private FriendshipOperationResult Remove(IFriendList channel, int accountId)
+        {
+            channel.RemoveFriend(accountId);
+
+            return new FriendshipOperationResult(ServiceFailureReason.None, null);
+        }
     }
 }
