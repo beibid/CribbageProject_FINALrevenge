@@ -33,5 +33,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
         bool TryRejectFriendRequest(long requestId);
 
         bool TryCancelFriendRequest(long requestId);
+
+        bool TryRemoveFriend(int firstAccountId, int secondAccountId);
     }
 }

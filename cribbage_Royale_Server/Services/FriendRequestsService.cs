@@ -17,7 +17,6 @@ namespace CribbageRoyale.Server.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class FriendRequestsService : IFriendRequests
     {
-        private const int FirstRegisteredAccountId = 1;
         private const long FirstRequestId = 1;
         private const string SendFailureMessage =
             "The friend request could not be sent. CorrelationId: {CorrelationId}";
@@ -40,10 +39,11 @@ namespace CribbageRoyale.Server.Services
         public void SendFriendRequest(int accountId)
         {
             SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
+            FriendshipTargetRules.EnsureIsOtherAccount(caller.AccountId, accountId);
 
             try
             {
-                EnsureTargetIsValid(caller.AccountId, accountId);
+                EnsureTargetIsAvailable(accountId);
                 EnsureRelationshipAllowsRequest(caller.AccountId, accountId);
 
                 long requestId = _services.FriendshipRepository.CreateFriendRequest(caller.AccountId, accountId);
@@ -110,18 +110,8 @@ namespace CribbageRoyale.Server.Services
             return requests;
         }
 
-        private void EnsureTargetIsValid(int senderAccountId, int recipientAccountId)
+        private void EnsureTargetIsAvailable(int recipientAccountId)
         {
-            if (recipientAccountId < FirstRegisteredAccountId)
-            {
-                throw FriendshipFaultBuilder.Build(FriendshipFailure.InvalidAccountId);
-            }
-
-            if (recipientAccountId == senderAccountId)
-            {
-                throw FriendshipFaultBuilder.Build(FriendshipFailure.CannotTargetSelf);
-            }
-
             if (!_services.FriendshipRepository.IsAccountAvailable(recipientAccountId))
             {
                 throw FriendshipFaultBuilder.Build(FriendshipFailure.AccountUnavailable);
