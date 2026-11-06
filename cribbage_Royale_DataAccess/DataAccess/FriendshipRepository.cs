@@ -84,10 +84,13 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         public void RemoveFriend(int firstAccountId, int secondAccountId)
         {
-            ExecuteWrite(
-                context => RemoveFriendships(
-                    context,
-                    QueryAcceptedFriendships(context, firstAccountId, secondAccountId)),
+            TryRemoveFriend(firstAccountId, secondAccountId);
+        }
+
+        public bool TryRemoveFriend(int firstAccountId, int secondAccountId)
+        {
+            return Execute(
+                context => RemoveAcceptedFriendships(context, firstAccountId, secondAccountId),
                 FriendRemovalFailureMessage);
         }
 
@@ -255,6 +258,14 @@ namespace cribbage_Royale_DataAccess.DataAccess
             context.SaveChanges();
 
             return requests.Count > 0;
+        }
+
+        private bool RemoveAcceptedFriendships(CribbageEntities context, int firstAccountId, int secondAccountId)
+        {
+            List<amistad> friendships = QueryAcceptedFriendships(context, firstAccountId, secondAccountId);
+            RemoveFriendships(context, friendships);
+
+            return friendships.Count > 0;
         }
 
         private bool RemovePendingRequest(CribbageEntities context, long requestId)

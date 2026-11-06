@@ -103,14 +103,14 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private async Task SendFriendRequestAsync()
         {
-            FriendRequestResult result = await _friendRequestsClient.SendFriendRequestAsync(
+            FriendshipOperationResult result = await _friendRequestsClient.SendFriendRequestAsync(
                 CurrentSession.SessionToken,
                 _targetAccountId);
 
             ProcessSendResult(result);
         }
 
-        private void ProcessSendResult(FriendRequestResult result)
+        private void ProcessSendResult(FriendshipOperationResult result)
         {
             if (result.Succeeded)
             {

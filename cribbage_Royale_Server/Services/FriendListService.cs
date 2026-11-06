@@ -21,6 +21,8 @@ namespace CribbageRoyale.Server.Services
             "The friends list could not be returned. CorrelationId: {CorrelationId}";
         private const string PlayerSearchFailureMessage =
             "The player search could not be completed. CorrelationId: {CorrelationId}";
+        private const string FriendRemovalFailureMessage =
+            "The friendship could not be removed. CorrelationId: {CorrelationId}";
 
         private readonly FriendListServices _services;
         private readonly ILogger _logger;
@@ -68,6 +70,29 @@ namespace CribbageRoyale.Server.Services
             }
 
             return friends;
+        }
+
+        public void RemoveFriend(int accountId)
+        {
+            SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
+            FriendshipTargetRules.EnsureIsOtherAccount(caller.AccountId, accountId);
+
+            try
+            {
+                EnsureFriendshipWasRemoved(_services.FriendshipRepository.TryRemoveFriend(caller.AccountId, accountId));
+            }
+            catch (DataAccessException dataAccessException)
+            {
+                throw BuildServiceFault(dataAccessException, FriendRemovalFailureMessage);
+            }
+        }
+
+        private void EnsureFriendshipWasRemoved(bool wasRemoved)
+        {
+            if (!wasRemoved)
+            {
+                throw FriendshipFaultBuilder.Build(FriendshipFailure.FriendshipNotFound);
+            }
         }
 
         private void EnsureSearchTextIsValid(string searchText)

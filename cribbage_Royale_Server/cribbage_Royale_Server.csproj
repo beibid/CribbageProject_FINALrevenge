@@ -137,6 +137,7 @@
     <Compile Include="Services\FriendListServices.cs" />
     <Compile Include="Services\FriendRequestsService.cs" />
     <Compile Include="Services\FriendRequestsServices.cs" />
+    <Compile Include="Services\FriendshipTargetRules.cs" />
     <Compile Include="Services\PlayerSessionService.cs" />
     <Compile Include="Services\RelationshipSnapshot.cs" />
     <Compile Include="Services\StatisticsService.cs" />

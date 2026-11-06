@@ -20,7 +20,7 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 logger);
         }
 
-        public Task<FriendRequestResult> SendFriendRequestAsync(string sessionToken, int accountId)
+        public Task<FriendshipOperationResult> SendFriendRequestAsync(string sessionToken, int accountId)
         {
             return Task.Run(() => _invoker.Execute(
                 sessionToken,
@@ -28,7 +28,7 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 BuildFailedResult));
         }
 
-        public Task<FriendRequestResult> RespondToFriendRequestAsync(string sessionToken, long requestId, bool accepted)
+        public Task<FriendshipOperationResult> RespondToFriendRequestAsync(string sessionToken, long requestId, bool accepted)
         {
             return Task.Run(() => _invoker.Execute(
                 sessionToken,
@@ -36,7 +36,7 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 BuildFailedResult));
         }
 
-        public Task<FriendRequestResult> CancelFriendRequestAsync(string sessionToken, long requestId)
+        public Task<FriendshipOperationResult> CancelFriendRequestAsync(string sessionToken, long requestId)
         {
             return Task.Run(() => _invoker.Execute(
                 sessionToken,
@@ -54,35 +54,35 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 (reason, failure) => new PendingFriendRequestsResult(reason, new FriendRequest[0])));
         }
 
-        private FriendRequestResult Send(IFriendRequests channel, int accountId)
+        private FriendshipOperationResult Send(IFriendRequests channel, int accountId)
         {
             channel.SendFriendRequest(accountId);
 
             return BuildSucceededResult();
         }
 
-        private FriendRequestResult Respond(IFriendRequests channel, long requestId, bool accepted)
+        private FriendshipOperationResult Respond(IFriendRequests channel, long requestId, bool accepted)
         {
             channel.RespondToFriendRequest(requestId, accepted);
 
             return BuildSucceededResult();
         }
 
-        private FriendRequestResult Cancel(IFriendRequests channel, long requestId)
+        private FriendshipOperationResult Cancel(IFriendRequests channel, long requestId)
         {
             channel.CancelFriendRequest(requestId);
 
             return BuildSucceededResult();
         }
 
-        private FriendRequestResult BuildSucceededResult()
+        private FriendshipOperationResult BuildSucceededResult()
         {
-            return new FriendRequestResult(ServiceFailureReason.None, null);
+            return new FriendshipOperationResult(ServiceFailureReason.None, null);
         }
 
-        private FriendRequestResult BuildFailedResult(ServiceFailureReason reason, FriendshipFailure? failure)
+        private FriendshipOperationResult BuildFailedResult(ServiceFailureReason reason, FriendshipFailure? failure)
         {
-            return new FriendRequestResult(reason, failure);
+            return new FriendshipOperationResult(reason, failure);
         }
     }
 }

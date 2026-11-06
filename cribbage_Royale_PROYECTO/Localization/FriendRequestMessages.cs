@@ -20,6 +20,9 @@ namespace cribbage_Royale_PROYECTO.Localization
                 case FriendshipFailure.RequestAlreadyPending:
                     message = Lang.AddFriend_RequestAlreadySentMessage;
                     break;
+                case FriendshipFailure.FriendshipNotFound:
+                    message = Lang.Friends_FriendshipNotFoundMessage;
+                    break;
                 case FriendshipFailure.RequestUnavailable:
                 case FriendshipFailure.UnauthorizedRequest:
                     message = Lang.FriendRequests_RequestUnavailableMessage;

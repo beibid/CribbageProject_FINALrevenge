@@ -64,7 +64,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
             if (Confirm(Lang.Dialog_ConfirmCancelRequestMessageFormat, item.DisplayName))
             {
-                FriendRequestResult result = await RunWithListDisabledAsync(
+                FriendshipOperationResult result = await RunWithListDisabledAsync(
                     () => _friendRequestsClient.CancelFriendRequestAsync(
                         CurrentSession.SessionToken,
                         item.RequestId));
@@ -97,7 +97,7 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             if (Confirm(ResolveConfirmationFormat(accepted), item.DisplayName))
             {
-                FriendRequestResult result = await RunWithListDisabledAsync(
+                FriendshipOperationResult result = await RunWithListDisabledAsync(
                     () => _friendRequestsClient.RespondToFriendRequestAsync(
                         CurrentSession.SessionToken,
                         item.RequestId,
@@ -107,16 +107,16 @@ namespace cribbage_Royale_PROYECTO.Views
             }
         }
 
-        private async Task<FriendRequestResult> RunWithListDisabledAsync(Func<Task<FriendRequestResult>> operation)
+        private async Task<FriendshipOperationResult> RunWithListDisabledAsync(Func<Task<FriendshipOperationResult>> operation)
         {
             requestsListBox.IsEnabled = false;
-            FriendRequestResult result = await operation();
+            FriendshipOperationResult result = await operation();
             requestsListBox.IsEnabled = true;
 
             return result;
         }
 
-        private async Task ProcessResultAsync(FriendRequestResult result, string successMessage)
+        private async Task ProcessResultAsync(FriendshipOperationResult result, string successMessage)
         {
             if (result.Succeeded)
             {

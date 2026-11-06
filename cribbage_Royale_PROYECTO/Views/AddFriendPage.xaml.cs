@@ -116,7 +116,7 @@ namespace cribbage_Royale_PROYECTO.Views
         private async Task SendFriendRequestAsync(PlayerSearchItem item)
         {
             _operationInProgress = true;
-            FriendRequestResult result = await _friendRequestsClient.SendFriendRequestAsync(
+            FriendshipOperationResult result = await _friendRequestsClient.SendFriendRequestAsync(
                 CurrentSession.SessionToken,
                 item.AccountId);
             _operationInProgress = false;
@@ -124,7 +124,7 @@ namespace cribbage_Royale_PROYECTO.Views
             await ProcessSendResultAsync(result);
         }
 
-        private async Task ProcessSendResultAsync(FriendRequestResult result)
+        private async Task ProcessSendResultAsync(FriendshipOperationResult result)
         {
             if (result.Succeeded)
             {

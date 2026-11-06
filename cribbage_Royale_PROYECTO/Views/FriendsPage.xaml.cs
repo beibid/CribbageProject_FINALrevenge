@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CribbageRoyale.Contracts.DataContracts;
+using cribbage_Royale_PROYECTO.Localization;
 using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.ServiceAccess;
@@ -161,7 +162,48 @@ namespace cribbage_Royale_PROYECTO.Views
                 Lang.Friends_RequestsTabHeaderFormat,
                 pendingRequestCount);
         }
+        private async void RemoveFriendButton_Click(object sender, RoutedEventArgs e)
+        {
+            FriendItem item = (FriendItem)((FrameworkElement)sender).DataContext;
+            string confirmation = FormatMessage(Lang.Friends_RemoveConfirmationMessage, item.DisplayName);
 
+            if (MessageDialog.ShowConfirmation(Window.GetWindow(this), confirmation))
+            {
+                friendsListBox.IsEnabled = false;
+                FriendshipOperationResult result =
+                    await _friendListClient.RemoveFriendAsync(CurrentSession.SessionToken, item.AccountId);
+                friendsListBox.IsEnabled = true;
+
+                await ProcessRemovalResultAsync(result, item.DisplayName);
+            }
+        }
+
+        private async Task ProcessRemovalResultAsync(FriendshipOperationResult result, string displayName)
+        {
+            if (result.Succeeded)
+            {
+                MessageDialog.ShowSuccess(
+                    Window.GetWindow(this),
+                    FormatMessage(Lang.Friends_FriendRemovedMessage, displayName));
+            }
+            else if (result.Reason == ServiceFailureReason.RequestRejected)
+            {
+                MessageDialog.ShowWarning(
+                    Window.GetWindow(this),
+                    FriendRequestMessages.ResolveRejection(result.Failure.Value));
+            }
+            else
+            {
+                MessageDialog.ShowError(Window.GetWindow(this), Lang.Friends_RemoveErrorMessage);
+            }
+
+            await LoadFriendsAsync();
+        }
+
+        private string FormatMessage(string messageFormat, string displayName)
+        {
+            return string.Format(CultureInfo.CurrentCulture, messageFormat, displayName);
+        }
         private void AddFriendButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddFriendPage());
