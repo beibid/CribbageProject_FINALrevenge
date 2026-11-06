@@ -6,7 +6,8 @@
       xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
       mc:Ignorable="d"
       d:DesignHeight="800" d:DesignWidth="1280"
-      Title="FriendRequestsPage">
+      Title="FriendRequestsPage"
+      Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid Background="{StaticResource BackgroundBrush}" Margin="40,30">
         <Grid.RowDefinitions>
@@ -37,16 +38,25 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="4,8" Width="1000">
-                                <TextBlock Text="{Binding Status}"
+                                <TextBlock Text="{Binding StatusText}"
                                            Foreground="{StaticResource TextBrush}"
                                            FontSize="14" VerticalAlignment="Center"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                     <Button Content="{x:Static lang:Lang.FriendRequests_AcceptButton}"
                                             Style="{StaticResource SecondaryButton}" MinWidth="0"
-                                            Width="120" Height="28" FontSize="11" Margin="0,0,8,0"/>
+                                            Width="120" Height="28" FontSize="11" Margin="0,0,8,0"
+                                            Visibility="{Binding ResponseVisibility}"
+                                            Click="AcceptButton_Click"/>
                                     <Button Content="{x:Static lang:Lang.FriendRequests_DeclineButton}"
                                             Style="{StaticResource DangerOutlineButton}"
-                                            Width="120" Height="28" FontSize="11"/>
+                                            Width="120" Height="28" FontSize="11"
+                                            Visibility="{Binding ResponseVisibility}"
+                                            Click="DeclineButton_Click"/>
+                                    <Button Content="{x:Static lang:Lang.FriendRequests_CancelButton}"
+                                            Style="{StaticResource DangerOutlineButton}"
+                                            Width="120" Height="28" FontSize="11"
+                                            Visibility="{Binding CancelVisibility}"
+                                            Click="CancelRequestButton_Click"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>

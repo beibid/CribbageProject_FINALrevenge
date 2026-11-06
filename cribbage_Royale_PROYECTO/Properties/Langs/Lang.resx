@@ -1815,4 +1815,22 @@ If you did not create this account, ignore this message.</value>
 	<data name="AddFriend_RequestReceivedStatus" xml:space="preserve">
     <value>Sent you a request</value>
   </data>
+	<data name="FriendRequests_SentFormat" xml:space="preserve">
+    <value>You sent a request to {0}</value>
+  </data>
+	<data name="FriendRequests_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="FriendRequests_LoadingErrorMessage" xml:space="preserve">
+    <value>The requests could not be loaded. Try again later.</value>
+  </data>
+	<data name="FriendRequests_RequestUnavailableMessage" xml:space="preserve">
+    <value>This request is no longer available.</value>
+  </data>
+	<data name="MainWindow_FriendRequestAcceptedFormat" xml:space="preserve">
+    <value>{0} accepted your friend request.</value>
+  </data>
+	<data name="MainWindow_FriendRequestRejectedFormat" xml:space="preserve">
+    <value>{0} declined your friend request.</value>
+  </data>
 </root>

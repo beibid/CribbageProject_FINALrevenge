@@ -132,6 +132,7 @@
     <Compile Include="Mail\VerificationEmailSender.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
     <Compile Include="Models\FriendItem.cs" />
+    <Compile Include="Models\FriendRequestItem.cs" />
     <Compile Include="Models\MatchEndReason.cs" />
     <Compile Include="Models\MatchItem.cs" />
     <Compile Include="Models\MatchPhase.cs" />
@@ -150,8 +151,10 @@
     <Compile Include="ServiceAccess\FriendListResult.cs" />
     <Compile Include="ServiceAccess\FriendRequestResult.cs" />
     <Compile Include="ServiceAccess\FriendRequestsClient.cs" />
+    <Compile Include="ServiceAccess\FriendshipServiceInvoker.cs" />
     <Compile Include="ServiceAccess\GameClientCallback.cs" />
     <Compile Include="ServiceAccess\GuestSignInResult.cs" />
+    <Compile Include="ServiceAccess\PendingFriendRequestsResult.cs" />
     <Compile Include="ServiceAccess\PlayerSearchResult.cs" />
     <Compile Include="ServiceAccess\PlayerSessionClient.cs" />
     <Compile Include="ServiceAccess\PresenceChangedEventArgs.cs" />

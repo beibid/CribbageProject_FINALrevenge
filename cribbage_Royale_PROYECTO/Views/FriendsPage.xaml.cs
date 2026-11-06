@@ -18,6 +18,7 @@ namespace cribbage_Royale_PROYECTO.Views
         private const int NoPendingRequests = 0;
 
         private readonly FriendListClient _friendListClient;
+        private readonly FriendRequestsClient _friendRequestsClient;
         private readonly GameClientCallback _sessionCallback;
 
         private List<FriendSummary> _friends = new List<FriendSummary>();
@@ -28,20 +29,24 @@ namespace cribbage_Royale_PROYECTO.Views
 
             App application = (App)Application.Current;
             _friendListClient = application.FriendListClient;
+            _friendRequestsClient = application.FriendRequestsClient;
             _sessionCallback = application.SessionCallback;
 
-            ShowFriendRequestsButton();
+            ShowFriendRequestsButton(NoPendingRequests);
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _sessionCallback.PresenceReceived += SessionCallback_PresenceReceived;
+            _sessionCallback.SocialEventReceived += SessionCallback_SocialEventReceived;
             await LoadFriendsAsync();
+            await LoadPendingRequestCountAsync();
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             _sessionCallback.PresenceReceived -= SessionCallback_PresenceReceived;
+            _sessionCallback.SocialEventReceived -= SessionCallback_SocialEventReceived;
         }
 
         private async Task LoadFriendsAsync()
@@ -56,6 +61,34 @@ namespace cribbage_Royale_PROYECTO.Views
             else
             {
                 MessageDialog.ShowError(Window.GetWindow(this), Lang.Friends_LoadingErrorMessage);
+            }
+        }
+
+        private async Task LoadPendingRequestCountAsync()
+        {
+            PendingFriendRequestsResult result =
+                await _friendRequestsClient.GetPendingFriendRequestsAsync(CurrentSession.SessionToken);
+
+            if (result.Succeeded)
+            {
+                ShowFriendRequestsButton(CountReceivedRequests(result.Requests));
+            }
+        }
+
+        private int CountReceivedRequests(FriendRequest[] requests)
+        {
+            return requests.Count(request => request.Direction == RequestDirection.Received);
+        }
+
+        private async void SessionCallback_SocialEventReceived(object sender, SocialEventReceivedEventArgs e)
+        {
+            if (e.EventType == SocialEventType.FriendRequestAccepted)
+            {
+                await LoadFriendsAsync();
+            }
+            else if (e.EventType == SocialEventType.FriendRequestReceived)
+            {
+                await LoadPendingRequestCountAsync();
             }
         }
 
@@ -121,12 +154,12 @@ namespace cribbage_Royale_PROYECTO.Views
             return visibility;
         }
 
-        private void ShowFriendRequestsButton()
+        private void ShowFriendRequestsButton(int pendingRequestCount)
         {
             friendRequestsButton.Content = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Friends_RequestsTabHeaderFormat,
-                NoPendingRequests);
+                pendingRequestCount);
         }
 
         private void AddFriendButton_Click(object sender, RoutedEventArgs e)

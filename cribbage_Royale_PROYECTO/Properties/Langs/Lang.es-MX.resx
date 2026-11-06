@@ -1815,4 +1815,22 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
   <data name="AddFriend_RequestReceivedStatus" xml:space="preserve">
     <value>Te envió una solicitud</value>
   </data>
+	<data name="FriendRequests_SentFormat" xml:space="preserve">
+    <value>Enviaste una solicitud a {0}</value>
+  </data>
+	<data name="FriendRequests_CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+	<data name="FriendRequests_LoadingErrorMessage" xml:space="preserve">
+    <value>No se pudieron cargar las solicitudes. Inténtalo más tarde.</value>
+  </data>
+	<data name="FriendRequests_RequestUnavailableMessage" xml:space="preserve">
+    <value>Esta solicitud ya no está disponible.</value>
+  </data>
+	<data name="MainWindow_FriendRequestAcceptedFormat" xml:space="preserve">
+    <value>{0} aceptó tu solicitud de amistad.</value>
+  </data>
+	<data name="MainWindow_FriendRequestRejectedFormat" xml:space="preserve">
+    <value>{0} rechazó tu solicitud de amistad.</value>
+  </data>
 </root>
