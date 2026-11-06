@@ -126,6 +126,7 @@
     </ApplicationDefinition>
     <Compile Include="Localization\ChatMessages.cs" />
     <Compile Include="Localization\FriendRequestMessages.cs" />
+    <Compile Include="Localization\InvitationMessages.cs" />
     <Compile Include="Localization\LanguageManager.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />
     <Compile Include="Mail\EmailSender.cs" />
@@ -160,6 +161,10 @@
     <Compile Include="ServiceAccess\FriendRequestsClient.cs" />
     <Compile Include="ServiceAccess\GameClientCallback.cs" />
     <Compile Include="ServiceAccess\GuestSignInResult.cs" />
+    <Compile Include="ServiceAccess\InvitationResult.cs" />
+    <Compile Include="ServiceAccess\MatchInvitationClient.cs" />
+    <Compile Include="ServiceAccess\MatchInvitationEventArgs.cs" />
+    <Compile Include="ServiceAccess\MatchStartedEventArgs.cs" />
     <Compile Include="ServiceAccess\PendingFriendRequestsResult.cs" />
     <Compile Include="ServiceAccess\PlayerSearchResult.cs" />
     <Compile Include="ServiceAccess\PlayerSessionClient.cs" />

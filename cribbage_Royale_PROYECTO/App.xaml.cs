@@ -31,6 +31,7 @@ namespace cribbage_Royale_PROYECTO
         private FriendRequestsClient _friendRequestsClient;
         private FriendChatClient _friendChatClient;
         private ChatMessageStore _chatMessageStore;
+        private MatchInvitationClient _matchInvitationClient;
 
         public GameClientCallback SessionCallback
         {
@@ -62,6 +63,11 @@ namespace cribbage_Royale_PROYECTO
             get { return _chatMessageStore; }
         }
 
+        public MatchInvitationClient MatchInvitationClient
+        {
+            get { return _matchInvitationClient; }
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             _logger = ApplicationLogging.CreateLogger<App>();
@@ -73,6 +79,7 @@ namespace cribbage_Royale_PROYECTO
             CreateFriendListClient();
             CreateFriendRequestsClient();
             CreateFriendChatClient();
+            CreateMatchInvitationClient();
             base.OnStartup(e);
             _logger.LogInformation(ApplicationStartedMessage);
         }
@@ -106,6 +113,12 @@ namespace cribbage_Royale_PROYECTO
             _friendChatClient = new FriendChatClient(ApplicationLogging.CreateLogger<FriendChatClient>());
             _chatMessageStore = new ChatMessageStore();
             _sessionCallback.ChatMessageArrived += SessionCallback_ChatMessageArrived;
+        }
+
+        private void CreateMatchInvitationClient()
+        {
+            _matchInvitationClient = new MatchInvitationClient(
+                ApplicationLogging.CreateLogger<MatchInvitationClient>());
         }
 
         private void SessionCallback_ChatMessageArrived(object sender, ChatMessageReceivedEventArgs e)

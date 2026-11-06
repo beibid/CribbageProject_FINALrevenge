@@ -1863,4 +1863,16 @@ If you did not create this account, ignore this message.</value>
 	<data name="Friends_SelectFriendMessage" xml:space="preserve">
     <value>Select a friend from the list first.</value>
   </data>
+	<data name="Invitation_FriendshipNotFoundMessage" xml:space="preserve">
+    <value>You can only invite your friends.</value>
+  </data>
+	<data name="Invitation_ErrorMessage" xml:space="preserve">
+    <value>The invitation could not be processed.</value>
+  </data>
+	<data name="Friends_FriendshipNotFoundMessage" xml:space="preserve">
+    <value>That player is no longer your friend.</value>
+  </data>
+	<data name="Friends_RemoveErrorMessage" xml:space="preserve">
+    <value>The friend could not be removed. Try again later.</value>
+  </data>
 </root>

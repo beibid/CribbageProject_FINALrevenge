@@ -3,16 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:messages="clr-namespace:cribbage_Royale_PROYECTO.Views.Messages"
         Width="420" SizeToContent="Height" ResizeMode="NoResize"
-        WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
-    <StackPanel Margin="16">
-        <TextBlock x:Name="titleTextBlock" FontSize="20" FontWeight="Bold" Margin="0,0,0,12"/>
-        <messages:MessagePanel x:Name="messagePanel" Margin="0,0,0,8"/>
-        <TextBlock x:Name="invitationMessageTextBlock" TextWrapping="Wrap" Margin="0,0,0,16"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="goToMatchButton" Margin="0,0,8,0" Padding="12,4" Visibility="Collapsed"
-                    Click="GoToMatchButton_Click"/>
-            <Button x:Name="acceptButton" Margin="0,0,8,0" Padding="12,4" Click="AcceptButton_Click"/>
-            <Button x:Name="rejectButton" Padding="12,4" IsCancel="True" Click="RejectButton_Click"/>
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}">
+    <Border Background="{StaticResource PanelBrush}"
+            BorderBrush="{StaticResource GoldBrush}"
+            BorderThickness="1"
+            CornerRadius="8"
+            Margin="12">
+        <StackPanel Margin="16">
+            <TextBlock x:Name="titleTextBlock"
+                       Foreground="{StaticResource GoldBrush}"
+                       FontSize="20" FontWeight="Bold" Margin="0,0,0,12"/>
+            <messages:MessagePanel x:Name="messagePanel" Margin="0,0,0,8"/>
+            <TextBlock x:Name="invitationMessageTextBlock"
+                       Foreground="{StaticResource TextBrush}"
+                       FontSize="13" TextWrapping="Wrap" Margin="0,0,0,16"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="acceptButton"
+                        Style="{StaticResource SecondaryButton}" MinWidth="0"
+                        Width="120" Height="32" FontSize="12" Margin="0,0,8,0"
+                        Click="AcceptButton_Click"/>
+                <Button x:Name="rejectButton"
+                        Style="{StaticResource DangerOutlineButton}"
+                        Width="120" Height="32" FontSize="12"
+                        Click="RejectButton_Click"/>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </Border>
 </Window>

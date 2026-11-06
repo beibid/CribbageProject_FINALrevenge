@@ -10,5 +10,9 @@ namespace CribbageRoyale.Server.Projection
         SocialEvent BuildSocialEvent(SocialEventRecord record);
 
         ChatMessage BuildChatMessage(int senderAccountId, string text, DateTime sentAtUtc);
+
+        MatchInvitation BuildMatchInvitation(long invitationId, int senderAccountId, int recipientAccountId);
+
+        MatchStart BuildMatchStart(long matchId, int opponentAccountId, bool isHost);
     }
 }

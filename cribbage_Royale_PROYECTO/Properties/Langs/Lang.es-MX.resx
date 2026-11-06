@@ -1863,4 +1863,16 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="Friends_SelectFriendMessage" xml:space="preserve">
     <value>Primero selecciona un amigo de la lista.</value>
   </data>
+	<data name="Invitation_FriendshipNotFoundMessage" xml:space="preserve">
+    <value>Solo puedes invitar a tus amigos.</value>
+  </data>
+	<data name="Invitation_ErrorMessage" xml:space="preserve">
+    <value>No se pudo procesar la invitación.</value>
+  </data>
+	<data name="Friends_FriendshipNotFoundMessage" xml:space="preserve">
+    <value>Ese jugador ya no está en tu lista de amigos.</value>
+  </data>
+	<data name="Friends_RemoveErrorMessage" xml:space="preserve">
+    <value>No se pudo eliminar al amigo. Inténtalo más tarde.</value>
+  </data>
 </root>

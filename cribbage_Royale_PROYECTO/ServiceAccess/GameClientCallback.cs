@@ -22,6 +22,12 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
 
         public event EventHandler<ChatMessageReceivedEventArgs> ChatMessageArrived;
 
+        public event EventHandler<MatchInvitationEventArgs> InvitationArrived;
+
+        public event EventHandler<MatchInvitationEventArgs> InvitationWithdrawn;
+
+        public event EventHandler<MatchStartedEventArgs> MatchStartReceived;
+
         public event EventHandler<SessionRevokedEventArgs> RevocationReceived;
 
         public void PresenceChanged(PresenceChange presence)
@@ -37,6 +43,21 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
         public void ChatMessageReceived(ChatMessage message)
         {
             _dispatcher.BeginInvoke(new Action(() => OnChatMessageArrived(message)));
+        }
+
+        public void MatchInvitationReceived(MatchInvitation invitation)
+        {
+            _dispatcher.BeginInvoke(new Action(() => OnInvitationArrived(invitation)));
+        }
+
+        public void MatchInvitationDeclined(MatchInvitation invitation)
+        {
+            _dispatcher.BeginInvoke(new Action(() => OnInvitationWithdrawn(invitation)));
+        }
+
+        public void MatchStarted(MatchStart matchStart)
+        {
+            _dispatcher.BeginInvoke(new Action(() => OnMatchStartReceived(matchStart)));
         }
 
         public void SessionRevoked(SessionRevocation revocation)
@@ -71,6 +92,36 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             if (handler != null)
             {
                 handler(this, new ChatMessageReceivedEventArgs(message));
+            }
+        }
+
+        private void OnInvitationArrived(MatchInvitation invitation)
+        {
+            EventHandler<MatchInvitationEventArgs> handler = InvitationArrived;
+
+            if (handler != null)
+            {
+                handler(this, new MatchInvitationEventArgs(invitation));
+            }
+        }
+
+        private void OnInvitationWithdrawn(MatchInvitation invitation)
+        {
+            EventHandler<MatchInvitationEventArgs> handler = InvitationWithdrawn;
+
+            if (handler != null)
+            {
+                handler(this, new MatchInvitationEventArgs(invitation));
+            }
+        }
+
+        private void OnMatchStartReceived(MatchStart matchStart)
+        {
+            EventHandler<MatchStartedEventArgs> handler = MatchStartReceived;
+
+            if (handler != null)
+            {
+                handler(this, new MatchStartedEventArgs(matchStart));
             }
         }
 

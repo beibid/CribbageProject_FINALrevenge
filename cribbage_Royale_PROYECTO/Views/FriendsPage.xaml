@@ -69,7 +69,8 @@
                                             Click="ChatButton_Click"/>
                                     <Button Content="{x:Static lang:Lang.Friends_InviteToMatchButton}"
                                             Style="{StaticResource SecondaryButton}" MinWidth="0"
-                                            Width="140" Height="28" FontSize="11" Margin="0,0,8,0"/>
+                                            Width="140" Height="28" FontSize="11" Margin="0,0,8,0"
+                                            Click="InviteToMatchButton_Click"/>
                                     <Button Content="{x:Static lang:Lang.Friends_ViewProfileButton}"
                                             Style="{StaticResource SecondaryButton}" MinWidth="0"
                                             Width="110" Height="28" FontSize="11" Margin="0,0,8,0"/>

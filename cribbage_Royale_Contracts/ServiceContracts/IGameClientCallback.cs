@@ -31,6 +31,27 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         void ChatMessageReceived(ChatMessage message);
 
         /// <summary>
+        /// Avisa al jugador que un amigo lo invitó a una partida.
+        /// </summary>
+        /// <param name="invitation">Invitación recibida.</param>
+        [OperationContract(IsOneWay = true)]
+        void MatchInvitationReceived(MatchInvitation invitation);
+
+        /// <summary>
+        /// Avisa a quien invitó que su invitación fue rechazada o dejó de estar disponible.
+        /// </summary>
+        /// <param name="invitation">Invitación que ya no sigue en pie.</param>
+        [OperationContract(IsOneWay = true)]
+        void MatchInvitationDeclined(MatchInvitation invitation);
+
+        /// <summary>
+        /// Avisa al jugador que su partida comenzó y puede entrar a la mesa.
+        /// </summary>
+        /// <param name="matchStart">Datos de la partida que comienza.</param>
+        [OperationContract(IsOneWay = true)]
+        void MatchStarted(MatchStart matchStart);
+
+        /// <summary>
         /// Notifica que la sesión del destinatario dejó de ser válida.
         /// </summary>
         /// <param name="revocation">Aviso con el motivo de la revocación.</param>

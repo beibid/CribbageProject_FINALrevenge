@@ -45,6 +45,27 @@ namespace CribbageRoyale.Server.Projection
             return message;
         }
 
+        public MatchInvitation BuildMatchInvitation(long invitationId, int senderAccountId,
+            int recipientAccountId)
+        {
+            MatchInvitation invitation = new MatchInvitation();
+            invitation.InvitationId = invitationId;
+            invitation.Sender = ResolveAccount(senderAccountId);
+            invitation.Recipient = ResolveAccount(recipientAccountId);
+
+            return invitation;
+        }
+
+        public MatchStart BuildMatchStart(long matchId, int opponentAccountId, bool isHost)
+        {
+            MatchStart matchStart = new MatchStart();
+            matchStart.MatchId = matchId;
+            matchStart.Opponent = ResolveAccount(opponentAccountId);
+            matchStart.IsHost = isHost;
+
+            return matchStart;
+        }
+
         private AccountReference ResolveAccount(int accountId)
         {
             AccountReference account = _playerRegistry.Find(accountId);

@@ -113,6 +113,9 @@
     <Compile Include="Connections\ChatNotification.cs" />
     <Compile Include="Connections\FriendPresenceNotifier.cs" />
     <Compile Include="Connections\IPlayerChannel.cs" />
+    <Compile Include="Connections\MatchInvitationDeclinedNotification.cs" />
+    <Compile Include="Connections\MatchInvitationNotification.cs" />
+    <Compile Include="Connections\MatchStartedNotification.cs" />
     <Compile Include="Connections\Notification.cs" />
     <Compile Include="Connections\PlayerChannel.cs" />
     <Compile Include="Connections\PlayerConnectionChangedEventArgs.cs" />
@@ -120,9 +123,15 @@
     <Compile Include="Connections\SocialNotification.cs" />
     <Compile Include="Faults\ChatFaultBuilder.cs" />
     <Compile Include="Faults\FriendshipFaultBuilder.cs" />
+    <Compile Include="Faults\InvitationFaultBuilder.cs" />
     <Compile Include="Faults\ServiceFaultBuilder.cs" />
     <Compile Include="Hosting\InstanceProviderBehavior.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />
+    <Compile Include="Matches\MatchDisconnectionWatcher.cs" />
+    <Compile Include="Matches\MatchInvitationRegistry.cs" />
+    <Compile Include="Matches\MatchRoomRegistry.cs" />
+    <Compile Include="Matches\MatchWatcherServices.cs" />
+    <Compile Include="Matches\PendingInvitation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projection\IStateProjection.cs" />
     <Compile Include="Projection\RecordProjection.cs" />
@@ -138,6 +147,8 @@
     <Compile Include="Services\FriendRequestsService.cs" />
     <Compile Include="Services\FriendRequestsServices.cs" />
     <Compile Include="Services\FriendshipTargetRules.cs" />
+    <Compile Include="Services\MatchInvitationService.cs" />
+    <Compile Include="Services\MatchInvitationServices.cs" />
     <Compile Include="Services\PlayerSessionService.cs" />
     <Compile Include="Services\RelationshipSnapshot.cs" />
     <Compile Include="Services\StatisticsService.cs" />

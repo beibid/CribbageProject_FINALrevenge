@@ -1,27 +1,28 @@
-﻿using System;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
-using cribbage_Royale_DataAccess.DataAccess;
-using cribbage_Royale_PROYECTO.Models;
-using cribbage_Royale_DataAccess.Models;
+using CribbageRoyale.Contracts.DataContracts;
+using cribbage_Royale_PROYECTO.Localization;
 using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Session;
 
 namespace cribbage_Royale_PROYECTO.Views.Dialogs
 {
     public partial class MatchInvitationDialogWindow : Window
     {
-        private readonly long _invitationId;
-        private readonly InvitationRepository _invitationRepository = new InvitationRepository();
-        private int _recipientAccountId;
+        private readonly MatchInvitationClient _matchInvitationClient;
+        private readonly MatchInvitation _invitation;
 
-        public long CreatedMatchId { get; private set; }
-        public bool GoToMatchRequested { get; private set; }
-
-        public MatchInvitationDialogWindow(long invitationId)
+        public MatchInvitationDialogWindow(MatchInvitation invitation)
         {
             InitializeComponent();
-            _invitationId = invitationId;
+
+            _matchInvitationClient = ((App)Application.Current).MatchInvitationClient;
+            _invitation = invitation;
+
             ApplyLocalization();
+            ShowInvitation();
         }
 
         private void ApplyLocalization()
@@ -30,89 +31,63 @@ namespace cribbage_Royale_PROYECTO.Views.Dialogs
             titleTextBlock.Text = Lang.MatchInvite_TitleText;
             acceptButton.Content = Lang.MatchInvite_AcceptButton;
             rejectButton.Content = Lang.MatchInvite_RejectButton;
-            goToMatchButton.Content = Lang.MatchInvite_GoToMatchButton;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void ShowInvitation()
         {
-            _recipientAccountId = new UserRepository().GetUserId(CurrentSession.Username);
-
-            try
-            {
-                MatchInvitationSummary invitation = _invitationRepository.GetInvitation(_invitationId);
-                bool isAvailable = invitation != null
-                    && invitation.Status == InvitationStatus.Pending
-                    && invitation.RecipientAccountId == _recipientAccountId;
-
-                if (isAvailable)
-                {
-                    invitationMessageTextBlock.Text = string.Format(Lang.MatchInvite_InvitationMessage,
-                        invitation.SenderDisplayName);
-                }
-                else
-                {
-                    ShowUnavailableAndClose();
-                }
-            }
-            catch (Exception dataAccessException)
-            {
-                messagePanel.ShowError(Lang.Dialog_DatabaseAccessErrorMessage);
-                acceptButton.IsEnabled = false;
-            }
+            invitationMessageTextBlock.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                Lang.MatchInvite_InvitationMessage,
+                _invitation.Sender.DisplayName);
         }
 
-        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        private async void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                InvitationResponseResult response = _invitationRepository
-                    .AcceptInvitation(_invitationId, _recipientAccountId);
+            await RespondAsync(true);
+        }
 
-                if (response.Outcome == InvitationAcceptOutcome.Accepted)
-                {
-                    CreatedMatchId = response.MatchId;
-                    DialogResult = true;
-                }
-                else if (response.Outcome == InvitationAcceptOutcome.HasUnfinishedMatch)
-                {
-                    messagePanel.ShowWarning(Lang.MatchInvite_UnfinishedMatchMessage);
-                    acceptButton.IsEnabled = false;
-                    goToMatchButton.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    ShowUnavailableAndClose();
-                }
-            }
-            catch (Exception dataAccessException)
+        private async void RejectButton_Click(object sender, RoutedEventArgs e)
+        {
+            await RespondAsync(false);
+        }
+
+        private async Task RespondAsync(bool accepted)
+        {
+            acceptButton.IsEnabled = false;
+            rejectButton.IsEnabled = false;
+
+            InvitationResult result = await _matchInvitationClient.RespondAsync(
+                CurrentSession.SessionToken,
+                _invitation.InvitationId,
+                accepted);
+
+            ShowOutcome(result, accepted);
+        }
+
+        private void ShowOutcome(InvitationResult result, bool accepted)
+        {
+            if (result.Succeeded)
             {
-                messagePanel.ShowError(Lang.Dialog_DatabaseAccessErrorMessage);
+                DialogResult = accepted;
+            }
+            else
+            {
+                messagePanel.ShowError(ResolveError(result));
+                acceptButton.IsEnabled = true;
+                rejectButton.IsEnabled = true;
             }
         }
 
-        private void RejectButton_Click(object sender, RoutedEventArgs e)
+        private string ResolveError(InvitationResult result)
         {
-            try
-            {
-                _invitationRepository.RejectInvitation(_invitationId);
-                DialogResult = false;
-            }
-            catch (Exception dataAccessException)
-            {
-                messagePanel.ShowError(Lang.Dialog_DatabaseAccessErrorMessage);
-            }
-        }
+            string message = Lang.Invitation_ErrorMessage;
 
-        private void GoToMatchButton_Click(object sender, RoutedEventArgs e)
-        {
-            GoToMatchRequested = true;
-            DialogResult = false;
-        }
+            if (result.Failure.HasValue)
+            {
+                message = InvitationMessages.ResolveRejection(result.Failure.Value);
+            }
 
-        private void ShowUnavailableAndClose()
-        {
-            MessageDialog.ShowWarning(this, Lang.MatchInvite_UnavailableMessage);
-            Close();
+            return message;
         }
     }
 }

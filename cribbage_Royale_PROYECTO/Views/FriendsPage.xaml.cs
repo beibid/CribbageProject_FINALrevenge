@@ -20,6 +20,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private readonly FriendListClient _friendListClient;
         private readonly FriendRequestsClient _friendRequestsClient;
+        private readonly MatchInvitationClient _matchInvitationClient;
         private readonly GameClientCallback _sessionCallback;
 
         private List<FriendSummary> _friends = new List<FriendSummary>();
@@ -31,6 +32,7 @@ namespace cribbage_Royale_PROYECTO.Views
             App application = (App)Application.Current;
             _friendListClient = application.FriendListClient;
             _friendRequestsClient = application.FriendRequestsClient;
+            _matchInvitationClient = application.MatchInvitationClient;
             _sessionCallback = application.SessionCallback;
 
             ShowFriendRequestsButton(NoPendingRequests);
@@ -162,6 +164,7 @@ namespace cribbage_Royale_PROYECTO.Views
                 Lang.Friends_RequestsTabHeaderFormat,
                 pendingRequestCount);
         }
+
         private async void RemoveFriendButton_Click(object sender, RoutedEventArgs e)
         {
             FriendItem item = (FriendItem)((FrameworkElement)sender).DataContext;
@@ -204,6 +207,7 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             return string.Format(CultureInfo.CurrentCulture, messageFormat, displayName);
         }
+
         private void AddFriendButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddFriendPage());
@@ -219,6 +223,51 @@ namespace cribbage_Royale_PROYECTO.Views
             FriendItem friend = (FriendItem)((Button)sender).DataContext;
 
             NavigationService.Navigate(new ChatPage(friend.AccountId, friend.DisplayName));
+        }
+
+        private async void InviteToMatchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button inviteButton = (Button)sender;
+            FriendItem friend = (FriendItem)inviteButton.DataContext;
+
+            inviteButton.IsEnabled = false;
+            await InviteAsync(friend);
+            inviteButton.IsEnabled = true;
+        }
+
+        private async Task InviteAsync(FriendItem friend)
+        {
+            InvitationResult result = await _matchInvitationClient.SendInvitationAsync(
+                CurrentSession.SessionToken,
+                friend.AccountId);
+
+            ShowInvitationOutcome(result, friend.DisplayName);
+        }
+
+        private void ShowInvitationOutcome(InvitationResult result, string displayName)
+        {
+            if (result.Succeeded)
+            {
+                MessageDialog.ShowSuccess(
+                    Window.GetWindow(this),
+                    FormatMessage(Lang.Friends_InviteSentMessage, displayName));
+            }
+            else
+            {
+                MessageDialog.ShowError(Window.GetWindow(this), ResolveInvitationError(result));
+            }
+        }
+
+        private string ResolveInvitationError(InvitationResult result)
+        {
+            string message = Lang.Invitation_ErrorMessage;
+
+            if (result.Failure.HasValue)
+            {
+                message = InvitationMessages.ResolveRejection(result.Failure.Value);
+            }
+
+            return message;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

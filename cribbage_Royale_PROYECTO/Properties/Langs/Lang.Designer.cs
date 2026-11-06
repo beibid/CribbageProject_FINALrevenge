@@ -1570,7 +1570,7 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a This player is no longer in your friends list..
+        ///   Busca una cadena traducida similar a That player is no longer your friend..
         /// </summary>
         public static string Friends_FriendshipNotFoundMessage {
             get {
@@ -2205,6 +2205,24 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string GuestAccess_TimeoutMessage {
             get {
                 return ResourceManager.GetString("GuestAccess_TimeoutMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The invitation could not be processed..
+        /// </summary>
+        public static string Invitation_ErrorMessage {
+            get {
+                return ResourceManager.GetString("Invitation_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You can only invite your friends..
+        /// </summary>
+        public static string Invitation_FriendshipNotFoundMessage {
+            get {
+                return ResourceManager.GetString("Invitation_FriendshipNotFoundMessage", resourceCulture);
             }
         }
         

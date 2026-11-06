@@ -23,6 +23,9 @@ namespace cribbage_Royale_PROYECTO
             _sessionClient.ConnectionLost += SessionClient_ConnectionLost;
             ((App)Application.Current).SessionCallback.RevocationReceived += SessionCallback_RevocationReceived;
             ((App)Application.Current).SessionCallback.SocialEventReceived += SessionCallback_SocialEventReceived;
+            ((App)Application.Current).SessionCallback.InvitationArrived += SessionCallback_InvitationArrived;
+            ((App)Application.Current).SessionCallback.InvitationWithdrawn += SessionCallback_InvitationWithdrawn;
+            ((App)Application.Current).SessionCallback.MatchStartReceived += SessionCallback_MatchStartReceived;
             MainFrame.Navigate(new StartMenu());
         }
 
@@ -64,6 +67,47 @@ namespace cribbage_Royale_PROYECTO
             {
                 ShowSocialEvent(messageFormat, e.Social);
             }
+        }
+
+        private void SessionCallback_InvitationArrived(object sender, MatchInvitationEventArgs e)
+        {
+            if (!_sessionEnded)
+            {
+                ShowInvitation(e.Invitation);
+            }
+        }
+
+        private void SessionCallback_InvitationWithdrawn(object sender, MatchInvitationEventArgs e)
+        {
+            if (!_sessionEnded)
+            {
+                ShowInvitationWithdrawn(e.Invitation);
+            }
+        }
+
+        private void SessionCallback_MatchStartReceived(object sender, MatchStartedEventArgs e)
+        {
+            if (!_sessionEnded)
+            {
+                MainFrame.Navigate(new GamePage(e.MatchStart.Opponent.DisplayName));
+            }
+        }
+
+        private void ShowInvitation(MatchInvitation invitation)
+        {
+            MatchInvitationDialogWindow dialog = new MatchInvitationDialogWindow(invitation);
+            dialog.Owner = this;
+            dialog.ShowDialog();
+        }
+
+        private void ShowInvitationWithdrawn(MatchInvitation invitation)
+        {
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Lang.AwaitingInvite_RecipientRejectedMessage,
+                invitation.Recipient.DisplayName);
+
+            MessageDialog.ShowWarning(this, message);
         }
 
         private string ResolveSocialMessageFormat(SocialEventType eventType)
