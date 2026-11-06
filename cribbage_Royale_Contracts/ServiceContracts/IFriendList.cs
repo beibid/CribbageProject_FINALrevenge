@@ -42,5 +42,22 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         [FaultContract(typeof(SessionFault))]
         [FaultContract(typeof(ServiceFault))]
         FriendSummary[] GetFriends();
+
+
+        /// <summary>
+        /// Elimina la amistad entre quien llama y otra cuenta, para ambos. No notifica al amigo
+        /// eliminado.
+        /// </summary>
+        /// <param name="accountId">Cuenta del amigo que se elimina.</param>
+        /// <exception cref="FaultException{FriendshipFault}">La cuenta no es válida, es la propia o no existe
+        /// amistad vigente con ella.</exception>
+        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece a un
+        /// invitado.</exception>
+        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo eliminar la amistad.</exception>
+        [OperationContract]
+        [FaultContract(typeof(FriendshipFault))]
+        [FaultContract(typeof(SessionFault))]
+        [FaultContract(typeof(ServiceFault))]
+        void RemoveFriend(int accountId);
     }
 }

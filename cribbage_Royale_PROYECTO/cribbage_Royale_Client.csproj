@@ -149,7 +149,7 @@
     <Compile Include="ServiceAccess\ChannelCloser.cs" />
     <Compile Include="ServiceAccess\FriendListClient.cs" />
     <Compile Include="ServiceAccess\FriendListResult.cs" />
-    <Compile Include="ServiceAccess\FriendRequestResult.cs" />
+    <Compile Include="ServiceAccess\FriendshipOperationResult.cs" />
     <Compile Include="ServiceAccess\FriendRequestsClient.cs" />
     <Compile Include="ServiceAccess\FriendshipServiceInvoker.cs" />
     <Compile Include="ServiceAccess\GameClientCallback.cs" />

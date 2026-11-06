@@ -71,7 +71,8 @@
                                             Width="110" Height="28" FontSize="11" Margin="0,0,8,0"/>
                                     <Button Content="{x:Static lang:Lang.Friends_RemoveFriendButton}"
                                             Style="{StaticResource DangerOutlineButton}"
-                                            Width="130" Height="28" FontSize="11"/>
+                                            Width="130" Height="28" FontSize="11"
+                                            Click="RemoveFriendButton_Click"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
