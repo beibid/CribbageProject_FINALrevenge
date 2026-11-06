@@ -2,9 +2,9 @@
 
 namespace cribbage_Royale_PROYECTO.ServiceAccess
 {
-    public class FriendRequestResult
+    public class FriendshipOperationResult
     {
-        public FriendRequestResult(ServiceFailureReason reason, FriendshipFailure? failure)
+        public FriendshipOperationResult(ServiceFailureReason reason, FriendshipFailure? failure)
         {
             Reason = reason;
             Failure = failure;
