@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using cribbage_Royale_DataAccess.DataAccess;
@@ -8,6 +7,7 @@ using CribbageRoyale.Contracts.FaultContracts;
 using CribbageRoyale.Contracts.ServiceContracts;
 using CribbageRoyale.Exceptions;
 using CribbageRoyale.Server.Faults;
+using CribbageRoyale.Server.Projection;
 using CribbageRoyale.Server.Sessions;
 using Microsoft.Extensions.Logging;
 
@@ -93,7 +93,7 @@ namespace CribbageRoyale.Server.Services
             foreach (PlayerRecord record in records)
             {
                 PlayerSummary summary = new PlayerSummary();
-                summary.Account = BuildAccount(record);
+                summary.Account = RecordProjection.BuildAccount(record);
                 summary.HasProfileImage = record.HasProfileImage;
                 summary.Relationship = relationships.Resolve(record.AccountId);
                 summaries.Add(summary);
@@ -117,34 +117,12 @@ namespace CribbageRoyale.Server.Services
         private FriendSummary BuildFriendSummary(FriendRecord record)
         {
             FriendSummary summary = new FriendSummary();
-            summary.Account = BuildAccount(record);
+            summary.Account = RecordProjection.BuildAccount(record);
             summary.HasProfileImage = record.HasProfileImage;
             summary.IsOnline = _services.PlayerChannel.IsPlayerConnected(record.AccountId);
-            summary.FriendsSinceUtc = ResolveFriendsSinceUtc(record.FriendsSince);
+            summary.FriendsSinceUtc = RecordProjection.ToUtc(record.FriendsSince);
 
             return summary;
-        }
-
-        private AccountReference BuildAccount(PlayerRecord record)
-        {
-            AccountReference account = new AccountReference();
-            account.AccountId = record.AccountId;
-            account.UserName = record.UserName;
-            account.DisplayName = record.DisplayName;
-
-            return account;
-        }
-
-        private DateTime ResolveFriendsSinceUtc(DateTime? friendsSince)
-        {
-            DateTime friendsSinceUtc = DateTime.MinValue;
-
-            if (friendsSince.HasValue)
-            {
-                friendsSinceUtc = friendsSince.Value.ToUniversalTime();
-            }
-
-            return friendsSinceUtc;
         }
 
         private FaultException<ServiceFault> BuildServiceFault(DataAccessException dataAccessException, string message)

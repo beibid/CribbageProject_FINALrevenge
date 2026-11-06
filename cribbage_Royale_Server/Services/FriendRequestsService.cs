@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
+using cribbage_Royale_DataAccess.DataAccess;
 using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Contracts.FaultContracts;
 using CribbageRoyale.Contracts.ServiceContracts;
@@ -16,8 +18,15 @@ namespace CribbageRoyale.Server.Services
     public class FriendRequestsService : IFriendRequests
     {
         private const int FirstRegisteredAccountId = 1;
-        private const string RequestFailureMessage =
+        private const long FirstRequestId = 1;
+        private const string SendFailureMessage =
             "The friend request could not be sent. CorrelationId: {CorrelationId}";
+        private const string ResponseFailureMessage =
+            "The response to the friend request could not be saved. CorrelationId: {CorrelationId}";
+        private const string CancellationFailureMessage =
+            "The friend request could not be cancelled. CorrelationId: {CorrelationId}";
+        private const string PendingQueryFailureMessage =
+            "The pending friend requests could not be returned. CorrelationId: {CorrelationId}";
 
         private readonly FriendRequestsServices _services;
         private readonly ILogger _logger;
@@ -38,12 +47,67 @@ namespace CribbageRoyale.Server.Services
                 EnsureRelationshipAllowsRequest(caller.AccountId, accountId);
 
                 long requestId = _services.FriendshipRepository.CreateFriendRequest(caller.AccountId, accountId);
-                NotifyRecipient(caller.AccountId, accountId, requestId);
+                SocialEventRecord record = new SocialEventRecord(caller.AccountId, requestId, DateTime.UtcNow);
+                Notify(accountId, SocialEventType.FriendRequestReceived, record);
             }
             catch (DataAccessException dataAccessException)
             {
-                throw BuildServiceFault(dataAccessException);
+                throw BuildServiceFault(dataAccessException, SendFailureMessage);
             }
+        }
+
+        public void RespondToFriendRequest(long requestId, bool accepted)
+        {
+            SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
+
+            try
+            {
+                FriendRequestRecord request = RequirePendingRequest(requestId);
+                EnsureCallerIs(request.RecipientAccountId, caller.AccountId);
+
+                ApplyResponse(requestId, accepted);
+                NotifySender(request, accepted);
+            }
+            catch (DataAccessException dataAccessException)
+            {
+                throw BuildServiceFault(dataAccessException, ResponseFailureMessage);
+            }
+        }
+
+        public void CancelFriendRequest(long requestId)
+        {
+            SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
+
+            try
+            {
+                FriendRequestRecord request = RequirePendingRequest(requestId);
+                EnsureCallerIs(request.SenderAccountId, caller.AccountId);
+
+                EnsureRequestWasPending(_services.FriendshipRepository.TryCancelFriendRequest(requestId));
+            }
+            catch (DataAccessException dataAccessException)
+            {
+                throw BuildServiceFault(dataAccessException, CancellationFailureMessage);
+            }
+        }
+
+        public FriendRequest[] GetPendingFriendRequests()
+        {
+            SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
+            FriendRequest[] requests;
+
+            try
+            {
+                List<PendingFriendRequestRecord> records =
+                    _services.FriendshipRepository.GetPendingFriendRequests(caller.AccountId);
+                requests = BuildFriendRequests(records);
+            }
+            catch (DataAccessException dataAccessException)
+            {
+                throw BuildServiceFault(dataAccessException, PendingQueryFailureMessage);
+            }
+
+            return requests;
         }
 
         private void EnsureTargetIsValid(int senderAccountId, int recipientAccountId)
@@ -82,21 +146,122 @@ namespace CribbageRoyale.Server.Services
             }
         }
 
-        private void NotifyRecipient(int senderAccountId, int recipientAccountId, long requestId)
+        private FriendRequestRecord RequirePendingRequest(long requestId)
         {
-            SocialEventRecord record = new SocialEventRecord(senderAccountId, requestId, DateTime.UtcNow);
+            FriendRequestRecord request;
+
+            if (requestId < FirstRequestId
+                || !_services.FriendshipRepository.TryGetPendingRequest(requestId, out request))
+            {
+                throw FriendshipFaultBuilder.Build(FriendshipFailure.RequestUnavailable);
+            }
+
+            return request;
+        }
+
+        private void EnsureCallerIs(int authorizedAccountId, int callerAccountId)
+        {
+            if (authorizedAccountId != callerAccountId)
+            {
+                throw FriendshipFaultBuilder.Build(FriendshipFailure.UnauthorizedRequest);
+            }
+        }
+
+        private void ApplyResponse(long requestId, bool accepted)
+        {
+            bool wasPending;
+
+            if (accepted)
+            {
+                wasPending = _services.FriendshipRepository.TryAcceptFriendRequest(requestId);
+            }
+            else
+            {
+                wasPending = _services.FriendshipRepository.TryRejectFriendRequest(requestId);
+            }
+
+            EnsureRequestWasPending(wasPending);
+        }
+
+        private void EnsureRequestWasPending(bool wasPending)
+        {
+            if (!wasPending)
+            {
+                throw FriendshipFaultBuilder.Build(FriendshipFailure.RequestUnavailable);
+            }
+        }
+
+        private void NotifySender(FriendRequestRecord request, bool accepted)
+        {
+            SocialEventRecord record = new SocialEventRecord(
+                request.RecipientAccountId,
+                request.RequestId,
+                DateTime.UtcNow);
+
+            Notify(request.SenderAccountId, ResolveResponseEventType(accepted), record);
+        }
+
+        private SocialEventType ResolveResponseEventType(bool accepted)
+        {
+            SocialEventType eventType = SocialEventType.FriendRequestRejected;
+
+            if (accepted)
+            {
+                eventType = SocialEventType.FriendRequestAccepted;
+            }
+
+            return eventType;
+        }
+
+        private void Notify(int recipientAccountId, SocialEventType eventType, SocialEventRecord record)
+        {
             SocialEvent social = _services.StateProjection.BuildSocialEvent(record);
-            Notification notification = new SocialNotification(SocialEventType.FriendRequestReceived, social);
+            Notification notification = new SocialNotification(eventType, social);
 
             _services.PlayerChannel.TrySendNotification(recipientAccountId, notification);
         }
 
-        private FaultException<ServiceFault> BuildServiceFault(DataAccessException dataAccessException)
+        private FriendRequest[] BuildFriendRequests(List<PendingFriendRequestRecord> records)
+        {
+            List<FriendRequest> requests = new List<FriendRequest>();
+
+            foreach (PendingFriendRequestRecord record in records)
+            {
+                requests.Add(BuildFriendRequest(record));
+            }
+
+            return requests.ToArray();
+        }
+
+        private FriendRequest BuildFriendRequest(PendingFriendRequestRecord record)
+        {
+            FriendRequest request = new FriendRequest();
+            request.RequestId = record.RequestId;
+            request.Counterpart = RecordProjection.BuildAccount(record);
+            request.Direction = ResolveDirection(record.IsReceived);
+            request.CreatedAtUtc = RecordProjection.ToUtc(record.RequestedAt);
+
+            return request;
+        }
+
+        private RequestDirection ResolveDirection(bool isReceived)
+        {
+            RequestDirection direction = RequestDirection.Sent;
+
+            if (isReceived)
+            {
+                direction = RequestDirection.Received;
+            }
+
+            return direction;
+        }
+
+        private FaultException<ServiceFault> BuildServiceFault(DataAccessException dataAccessException, string message)
         {
             FaultException<ServiceFault> faultException =
                 ServiceFaultBuilder.Build(ServiceFaultCode.DataAccessFailure);
 
-            _logger.LogError(dataAccessException, RequestFailureMessage, faultException.Detail.CorrelationId);
+            _logger.LogError(dataAccessException, message, faultException.Detail.CorrelationId);
 
             return faultException;
         }

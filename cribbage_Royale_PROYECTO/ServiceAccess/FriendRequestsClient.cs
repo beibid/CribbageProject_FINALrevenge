@@ -1,6 +1,5 @@
-﻿using System;
-using System.ServiceModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Contracts.FaultContracts;
 using CribbageRoyale.Contracts.ServiceContracts;
 using Microsoft.Extensions.Logging;
@@ -10,88 +9,77 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
     public class FriendRequestsClient
     {
         private const string EndpointName = "FriendRequestsEndpoint";
-        private const string SendFailureMessage = "The friend request could not be sent. Reason: {Reason}.";
 
-        private readonly ILogger _logger;
-        private readonly ChannelCloser _channelCloser;
+        private readonly FriendshipServiceInvoker<IFriendRequests> _invoker;
 
         public FriendRequestsClient(ILogger logger)
         {
-            _logger = logger;
-            _channelCloser = new ChannelCloser(logger);
+            _invoker = new FriendshipServiceInvoker<IFriendRequests>(EndpointName, logger);
         }
 
         public Task<FriendRequestResult> SendFriendRequestAsync(string sessionToken, int accountId)
         {
-            return Task.Run(() => SendFriendRequest(sessionToken, accountId));
+            return Task.Run(() => _invoker.Execute(
+                sessionToken,
+                channel => Send(channel, accountId),
+                BuildFailedResult));
         }
 
-        private FriendRequestResult SendFriendRequest(string sessionToken, int accountId)
+        public Task<FriendRequestResult> RespondToFriendRequestAsync(string sessionToken, long requestId, bool accepted)
         {
-            ChannelFactory<IFriendRequests> factory = new ChannelFactory<IFriendRequests>(EndpointName);
-            IFriendRequests channel = factory.CreateChannel();
-
-            FriendRequestResult result = RequestSend(channel, sessionToken, accountId);
-
-            _channelCloser.Release((ICommunicationObject)channel, result.Succeeded);
-            _channelCloser.Release(factory, result.Succeeded);
-
-            return result;
+            return Task.Run(() => _invoker.Execute(
+                sessionToken,
+                channel => Respond(channel, requestId, accepted),
+                BuildFailedResult));
         }
 
-        private FriendRequestResult RequestSend(IFriendRequests channel, string sessionToken, int accountId)
+        public Task<FriendRequestResult> CancelFriendRequestAsync(string sessionToken, long requestId)
         {
-            FriendRequestResult result;
-
-            try
-            {
-                InvokeSend(channel, sessionToken, accountId);
-                result = new FriendRequestResult(ServiceFailureReason.None, null);
-            }
-            catch (FaultException<FriendshipFault> friendshipFaultException)
-            {
-                result = new FriendRequestResult(
-                    ServiceFailureReason.RequestRejected,
-                    friendshipFaultException.Detail.Reason);
-            }
-            catch (FaultException<SessionFault>)
-            {
-                result = new FriendRequestResult(ServiceFailureReason.SessionRejected, null);
-            }
-            catch (FaultException<ServiceFault> serviceFaultException)
-            {
-                result = RegisterFailure(ServiceFailureReason.ServerError, serviceFaultException);
-            }
-            catch (EndpointNotFoundException endpointNotFoundException)
-            {
-                result = RegisterFailure(ServiceFailureReason.ServerUnavailable, endpointNotFoundException);
-            }
-            catch (TimeoutException timeoutException)
-            {
-                result = RegisterFailure(ServiceFailureReason.Timeout, timeoutException);
-            }
-            catch (CommunicationException communicationException)
-            {
-                result = RegisterFailure(ServiceFailureReason.ServerUnavailable, communicationException);
-            }
-
-            return result;
+            return Task.Run(() => _invoker.Execute(
+                sessionToken,
+                channel => Cancel(channel, requestId),
+                BuildFailedResult));
         }
 
-        private void InvokeSend(IFriendRequests channel, string sessionToken, int accountId)
+        public Task<PendingFriendRequestsResult> GetPendingFriendRequestsAsync(string sessionToken)
         {
-            using (OperationContextScope scope = new OperationContextScope((IContextChannel)channel))
-            {
-                SessionTokenHeader.Attach(OperationContext.Current, sessionToken);
-                channel.SendFriendRequest(accountId);
-            }
+            return Task.Run(() => _invoker.Execute(
+                sessionToken,
+                channel => new PendingFriendRequestsResult(
+                    ServiceFailureReason.None,
+                    channel.GetPendingFriendRequests()),
+                (reason, failure) => new PendingFriendRequestsResult(reason, new FriendRequest[0])));
         }
 
-        private FriendRequestResult RegisterFailure(ServiceFailureReason reason, Exception exception)
+        private FriendRequestResult Send(IFriendRequests channel, int accountId)
         {
-            _logger.LogError(exception, SendFailureMessage, reason);
+            channel.SendFriendRequest(accountId);
 
-            return new FriendRequestResult(reason, null);
+            return BuildSucceededResult();
+        }
+
+        private FriendRequestResult Respond(IFriendRequests channel, long requestId, bool accepted)
+        {
+            channel.RespondToFriendRequest(requestId, accepted);
+
+            return BuildSucceededResult();
+        }
+
+        private FriendRequestResult Cancel(IFriendRequests channel, long requestId)
+        {
+            channel.CancelFriendRequest(requestId);
+
+            return BuildSucceededResult();
+        }
+
+        private FriendRequestResult BuildSucceededResult()
+        {
+            return new FriendRequestResult(ServiceFailureReason.None, null);
+        }
+
+        private FriendRequestResult BuildFailedResult(ServiceFailureReason reason, FriendshipFailure? failure)
+        {
+            return new FriendRequestResult(reason, failure);
         }
     }
 }

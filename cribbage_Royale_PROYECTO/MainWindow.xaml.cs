@@ -58,17 +58,42 @@ namespace cribbage_Royale_PROYECTO
 
         private void SessionCallback_SocialEventReceived(object sender, SocialEventReceivedEventArgs e)
         {
-            if (!_sessionEnded && e.EventType == SocialEventType.FriendRequestReceived)
+            string messageFormat = ResolveSocialMessageFormat(e.EventType);
+
+            if (!_sessionEnded && !string.IsNullOrEmpty(messageFormat))
             {
-                ShowFriendRequestReceived(e.Social);
+                ShowSocialEvent(messageFormat, e.Social);
             }
         }
 
-        private void ShowFriendRequestReceived(SocialEvent social)
+        private string ResolveSocialMessageFormat(SocialEventType eventType)
+        {
+            string messageFormat;
+
+            switch (eventType)
+            {
+                case SocialEventType.FriendRequestReceived:
+                    messageFormat = Lang.MainWindow_FriendRequestReceivedFormat;
+                    break;
+                case SocialEventType.FriendRequestAccepted:
+                    messageFormat = Lang.MainWindow_FriendRequestAcceptedFormat;
+                    break;
+                case SocialEventType.FriendRequestRejected:
+                    messageFormat = Lang.MainWindow_FriendRequestRejectedFormat;
+                    break;
+                default:
+                    messageFormat = string.Empty;
+                    break;
+            }
+
+            return messageFormat;
+        }
+
+        private void ShowSocialEvent(string messageFormat, SocialEvent social)
         {
             string message = string.Format(
                 CultureInfo.CurrentCulture,
-                Lang.MainWindow_FriendRequestReceivedFormat,
+                messageFormat,
                 social.Counterpart.DisplayName);
 
             MessageDialog.ShowWarning(this, message);

@@ -1345,6 +1345,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string FriendRequests_CancelButton {
+            get {
+                return ResourceManager.GetString("FriendRequests_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Decline.
         /// </summary>
         public static string FriendRequests_DeclineButton {
@@ -1381,6 +1390,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The requests could not be loaded. Try again later..
+        /// </summary>
+        public static string FriendRequests_LoadingErrorMessage {
+            get {
+                return ResourceManager.GetString("FriendRequests_LoadingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Friend requests.
         /// </summary>
         public static string FriendRequests_PageTitle {
@@ -1413,6 +1431,24 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string FriendRequests_ReceivedFormat {
             get {
                 return ResourceManager.GetString("FriendRequests_ReceivedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This request is no longer available..
+        /// </summary>
+        public static string FriendRequests_RequestUnavailableMessage {
+            get {
+                return ResourceManager.GetString("FriendRequests_RequestUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You sent a request to {0}.
+        /// </summary>
+        public static string FriendRequests_SentFormat {
+            get {
+                return ResourceManager.GetString("FriendRequests_SentFormat", resourceCulture);
             }
         }
         
@@ -2434,11 +2470,29 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a {0} accepted your friend request..
+        /// </summary>
+        public static string MainWindow_FriendRequestAcceptedFormat {
+            get {
+                return ResourceManager.GetString("MainWindow_FriendRequestAcceptedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a {0} sent you a friend request..
         /// </summary>
         public static string MainWindow_FriendRequestReceivedFormat {
             get {
                 return ResourceManager.GetString("MainWindow_FriendRequestReceivedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} declined your friend request..
+        /// </summary>
+        public static string MainWindow_FriendRequestRejectedFormat {
+            get {
+                return ResourceManager.GetString("MainWindow_FriendRequestRejectedFormat", resourceCulture);
             }
         }
         
