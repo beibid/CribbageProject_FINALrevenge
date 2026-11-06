@@ -113,6 +113,7 @@
     <Compile Include="DataAccess\BlockRepository.cs" />
     <Compile Include="DataAccess\CardInMatchState.cs" />
     <Compile Include="DataAccess\FriendRecord.cs" />
+    <Compile Include="DataAccess\FriendRequestRecord.cs" />
     <Compile Include="DataAccess\FriendshipRepository.cs" />
     <Compile Include="DataAccess\FriendshipStatus.cs" />
     <Compile Include="DataAccess\HandState.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="DataAccess\MatchRepository.cs" />
     <Compile Include="DataAccess\MatchStatus.cs" />
     <Compile Include="DataAccess\MatchTerminationReason.cs" />
+    <Compile Include="DataAccess\PendingFriendRequestRecord.cs" />
     <Compile Include="DataAccess\PlayerProfileRepository.cs" />
     <Compile Include="DataAccess\PlayerRecord.cs" />
     <Compile Include="DataAccess\RelationshipStatus.cs" />

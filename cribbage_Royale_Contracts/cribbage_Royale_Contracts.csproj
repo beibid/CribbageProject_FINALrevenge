@@ -45,10 +45,12 @@
   <ItemGroup>
     <Compile Include="DataContracts\AccountReference.cs" />
     <Compile Include="DataContracts\AuthenticatedSession.cs" />
+    <Compile Include="DataContracts\FriendRequest.cs" />
     <Compile Include="DataContracts\FriendSummary.cs" />
     <Compile Include="DataContracts\GuestSession.cs" />
     <Compile Include="DataContracts\PlayerSummary.cs" />
     <Compile Include="DataContracts\RelationshipKind.cs" />
+    <Compile Include="DataContracts\RequestDirection.cs" />
     <Compile Include="DataContracts\SocialEvent.cs" />
     <Compile Include="DataContracts\SocialEventType.cs" />
     <Compile Include="FaultContracts\FriendshipFailure.cs" />

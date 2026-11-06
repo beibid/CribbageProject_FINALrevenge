@@ -123,6 +123,7 @@
     <Compile Include="Logging\ApplicationLogging.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projection\IStateProjection.cs" />
+    <Compile Include="Projection\RecordProjection.cs" />
     <Compile Include="Projection\ScoreboardProjection.cs" />
     <Compile Include="Projection\SocialEventRecord.cs" />
     <Compile Include="Projection\StateProjection.cs" />

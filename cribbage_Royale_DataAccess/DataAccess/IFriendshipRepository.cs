@@ -14,6 +14,8 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         List<int> GetReceivedRequestSenderIds(int accountId);
 
+        List<PendingFriendRequestRecord> GetPendingFriendRequests(int accountId);
+
         bool IsAccountAvailable(int accountId);
 
         bool AreFriends(int firstAccountId, int secondAccountId);
@@ -22,6 +24,14 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         bool HasBlock(int firstAccountId, int secondAccountId);
 
+        bool TryGetPendingRequest(long requestId, out FriendRequestRecord request);
+
         long CreateFriendRequest(int senderAccountId, int recipientAccountId);
+
+        bool TryAcceptFriendRequest(long requestId);
+
+        bool TryRejectFriendRequest(long requestId);
+
+        bool TryCancelFriendRequest(long requestId);
     }
 }

@@ -21,12 +21,46 @@ namespace cribbage_Royale_DataAccess.DataAccess
         private const string RelationshipQueryFailureMessage =
             "The relationship between the accounts could not be queried.";
         private const string PlayerSearchFailureMessage = "The players could not be searched.";
+        private const string PendingRequestsQueryFailureMessage = "The pending friend requests could not be queried.";
 
         public long CreateFriendRequest(int senderAccountId, int recipientAccountId)
         {
             return Execute(
                 context => AddFriendRequest(context, senderAccountId, recipientAccountId),
                 RequestCreationFailureMessage);
+        }
+
+        public bool TryAcceptFriendRequest(long requestId)
+        {
+            return Execute(context => AcceptPendingRequest(context, requestId), RequestResponseFailureMessage);
+        }
+
+        public bool TryRejectFriendRequest(long requestId)
+        {
+            return Execute(context => RemovePendingRequest(context, requestId), RequestResponseFailureMessage);
+        }
+
+        public bool TryCancelFriendRequest(long requestId)
+        {
+            return Execute(context => RemovePendingRequest(context, requestId), RequestCancellationFailureMessage);
+        }
+
+        public bool TryGetPendingRequest(long requestId, out FriendRequestRecord request)
+        {
+            List<FriendRequestRecord> requests = Execute(
+                context => QueryPendingRequestRecords(context, requestId),
+                RelationshipQueryFailureMessage);
+
+            request = requests.FirstOrDefault();
+
+            return request != null;
+        }
+
+        public List<PendingFriendRequestRecord> GetPendingFriendRequests(int accountId)
+        {
+            return Execute(
+                context => QueryPendingRequestsOf(context, accountId),
+                PendingRequestsQueryFailureMessage);
         }
 
         public void RespondToFriendRequest(int recipientAccountId, int senderAccountId, bool isAccepted)
@@ -207,6 +241,113 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             context.amistad.RemoveRange(friendships);
             context.SaveChanges();
+        }
+
+        private bool AcceptPendingRequest(CribbageEntities context, long requestId)
+        {
+            List<amistad> requests = QueryPendingRequestById(context, requestId);
+
+            foreach (amistad request in requests)
+            {
+                AcceptRequest(request);
+            }
+
+            context.SaveChanges();
+
+            return requests.Count > 0;
+        }
+
+        private bool RemovePendingRequest(CribbageEntities context, long requestId)
+        {
+            List<amistad> requests = QueryPendingRequestById(context, requestId);
+            RemoveFriendships(context, requests);
+
+            return requests.Count > 0;
+        }
+
+        private List<amistad> QueryPendingRequestById(CribbageEntities context, long requestId)
+        {
+            return context.amistad
+                .Where(friendship => friendship.id_amistad == requestId)
+                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
+                .ToList();
+        }
+
+        private List<FriendRequestRecord> QueryPendingRequestRecords(CribbageEntities context, long requestId)
+        {
+            return QueryPendingRequestById(context, requestId)
+                .Select(request => BuildRequestRecord(request))
+                .ToList();
+        }
+
+        private FriendRequestRecord BuildRequestRecord(amistad request)
+        {
+            FriendRequestRecord record = new FriendRequestRecord();
+            record.RequestId = request.id_amistad;
+            record.SenderAccountId = request.id_usuario_solicitante;
+            record.RecipientAccountId = request.id_usuario_destinatario;
+
+            return record;
+        }
+
+        private List<PendingFriendRequestRecord> QueryPendingRequestsOf(CribbageEntities context, int accountId)
+        {
+            List<amistad> requests = QueryPendingRequestsInvolving(context, accountId);
+            List<int> counterpartIds = requests.Select(request => ResolveCounterpartId(request, accountId)).ToList();
+
+            Dictionary<int, usuario> accounts = context.usuario
+                .Where(account => counterpartIds.Contains(account.id_usuario))
+                .ToDictionary(account => account.id_usuario);
+            List<perfil_jugador> profiles = QueryProfiles(context, counterpartIds);
+
+            List<PendingFriendRequestRecord> records = new List<PendingFriendRequestRecord>();
+
+            foreach (amistad request in requests)
+            {
+                PendingFriendRequestRecord record = BuildPendingRecord(request, accountId);
+                usuario account;
+
+                if (accounts.TryGetValue(record.AccountId, out account))
+                {
+                    FillRecord(record, account, profiles);
+                    records.Add(record);
+                }
+            }
+
+            return records;
+        }
+
+        private List<amistad> QueryPendingRequestsInvolving(CribbageEntities context, int accountId)
+        {
+            return context.amistad
+                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
+                .Where(friendship => friendship.id_usuario_solicitante == accountId
+                    || friendship.id_usuario_destinatario == accountId)
+                .OrderByDescending(friendship => friendship.fecha_solicitud)
+                .ToList();
+        }
+
+        private PendingFriendRequestRecord BuildPendingRecord(amistad request, int accountId)
+        {
+            PendingFriendRequestRecord record = new PendingFriendRequestRecord();
+            record.RequestId = request.id_amistad;
+            record.AccountId = ResolveCounterpartId(request, accountId);
+            record.IsReceived = request.id_usuario_destinatario == accountId;
+            record.RequestedAt = request.fecha_solicitud;
+
+            return record;
+        }
+
+        private int ResolveCounterpartId(amistad request, int accountId)
+        {
+            int counterpartId = request.id_usuario_solicitante;
+
+            if (request.id_usuario_solicitante == accountId)
+            {
+                counterpartId = request.id_usuario_destinatario;
+            }
+
+            return counterpartId;
         }
 
         private List<amistad> QueryPendingRequests(
