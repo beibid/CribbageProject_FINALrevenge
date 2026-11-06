@@ -1,4 +1,5 @@
-﻿using CribbageRoyale.Contracts.DataContracts;
+﻿using System;
+using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Server.Sessions;
 
 namespace CribbageRoyale.Server.Projection
@@ -32,6 +33,16 @@ namespace CribbageRoyale.Server.Projection
             social.OccurredAtUtc = record.OccurredAtUtc;
 
             return social;
+        }
+
+        public ChatMessage BuildChatMessage(int senderAccountId, string text, DateTime sentAtUtc)
+        {
+            ChatMessage message = new ChatMessage();
+            message.Sender = ResolveAccount(senderAccountId);
+            message.Text = text;
+            message.SentAtUtc = sentAtUtc;
+
+            return message;
         }
 
         private AccountReference ResolveAccount(int accountId)

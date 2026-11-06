@@ -1,4 +1,5 @@
-﻿using CribbageRoyale.Contracts.DataContracts;
+﻿using System;
+using CribbageRoyale.Contracts.DataContracts;
 
 namespace CribbageRoyale.Server.Projection
 {
@@ -7,5 +8,7 @@ namespace CribbageRoyale.Server.Projection
         PresenceChange BuildPresenceChange(int accountId, bool isConnected);
 
         SocialEvent BuildSocialEvent(SocialEventRecord record);
+
+        ChatMessage BuildChatMessage(int senderAccountId, string text, DateTime sentAtUtc);
     }
 }

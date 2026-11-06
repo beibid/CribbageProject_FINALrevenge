@@ -736,6 +736,78 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Close.
+        /// </summary>
+        public static string Chat_CloseButton {
+            get {
+                return ResourceManager.GetString("Chat_CloseButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No messages yet..
+        /// </summary>
+        public static string Chat_EmptyConversationText {
+            get {
+                return ResourceManager.GetString("Chat_EmptyConversationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You can only chat with your friends..
+        /// </summary>
+        public static string Chat_FriendshipNotFoundMessage {
+            get {
+                return ResourceManager.GetString("Chat_FriendshipNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The message cannot be empty and must be shorter than 500 characters..
+        /// </summary>
+        public static string Chat_InvalidMessageTextMessage {
+            get {
+                return ResourceManager.GetString("Chat_InvalidMessageTextMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This friend is not connected right now..
+        /// </summary>
+        public static string Chat_RecipientUnavailableMessage {
+            get {
+                return ResourceManager.GetString("Chat_RecipientUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send.
+        /// </summary>
+        public static string Chat_SendButton {
+            get {
+                return ResourceManager.GetString("Chat_SendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The message could not be sent..
+        /// </summary>
+        public static string Chat_SendErrorMessage {
+            get {
+                return ResourceManager.GetString("Chat_SendErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Chat with {0}.
+        /// </summary>
+        public static string Chat_TitleFormat {
+            get {
+                return ResourceManager.GetString("Chat_TitleFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Back.
         /// </summary>
         public static string Common_BackButton {
@@ -1462,6 +1534,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Chat.
+        /// </summary>
+        public static string Friends_ChatButton {
+            get {
+                return ResourceManager.GetString("Friends_ChatButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You have not added any friends yet..
         /// </summary>
         public static string Friends_EmptyListMessage {
@@ -1629,6 +1710,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Friends_SearchHint {
             get {
                 return ResourceManager.GetString("Friends_SearchHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select a friend from the list first..
+        /// </summary>
+        public static string Friends_SelectFriendMessage {
+            get {
+                return ResourceManager.GetString("Friends_SelectFriendMessage", resourceCulture);
             }
         }
         

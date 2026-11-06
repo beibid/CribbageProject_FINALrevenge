@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CribbageRoyale.Contracts.DataContracts;
+using CribbageRoyale.Contracts.FaultContracts;
 using CribbageRoyale.Contracts.ServiceContracts;
 using Microsoft.Extensions.Logging;
 
@@ -9,11 +10,14 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
     {
         private const string EndpointName = "FriendListEndpoint";
 
-        private readonly FriendshipServiceInvoker<IFriendList> _invoker;
+        private readonly BusinessServiceInvoker<IFriendList, FriendshipFault, FriendshipFailure> _invoker;
 
         public FriendListClient(ILogger logger)
         {
-            _invoker = new FriendshipServiceInvoker<IFriendList>(EndpointName, logger);
+            _invoker = new BusinessServiceInvoker<IFriendList, FriendshipFault, FriendshipFailure>(
+                EndpointName,
+                fault => fault.Reason,
+                logger);
         }
 
         public Task<FriendListResult> GetFriendsAsync(string sessionToken)

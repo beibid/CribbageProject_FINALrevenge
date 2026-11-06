@@ -20,6 +20,8 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
 
         public event EventHandler<SocialEventReceivedEventArgs> SocialEventReceived;
 
+        public event EventHandler<ChatMessageReceivedEventArgs> ChatMessageArrived;
+
         public event EventHandler<SessionRevokedEventArgs> RevocationReceived;
 
         public void PresenceChanged(PresenceChange presence)
@@ -30,6 +32,11 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
         public void SocialEventOccurred(SocialEventType eventType, SocialEvent social)
         {
             _dispatcher.BeginInvoke(new Action(() => OnSocialEventReceived(eventType, social)));
+        }
+
+        public void ChatMessageReceived(ChatMessage message)
+        {
+            _dispatcher.BeginInvoke(new Action(() => OnChatMessageArrived(message)));
         }
 
         public void SessionRevoked(SessionRevocation revocation)
@@ -54,6 +61,16 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             if (handler != null)
             {
                 handler(this, new SocialEventReceivedEventArgs(eventType, social));
+            }
+        }
+
+        private void OnChatMessageArrived(ChatMessage message)
+        {
+            EventHandler<ChatMessageReceivedEventArgs> handler = ChatMessageArrived;
+
+            if (handler != null)
+            {
+                handler(this, new ChatMessageReceivedEventArgs(message));
             }
         }
 

@@ -10,11 +10,14 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
     {
         private const string EndpointName = "FriendRequestsEndpoint";
 
-        private readonly FriendshipServiceInvoker<IFriendRequests> _invoker;
+        private readonly BusinessServiceInvoker<IFriendRequests, FriendshipFault, FriendshipFailure> _invoker;
 
         public FriendRequestsClient(ILogger logger)
         {
-            _invoker = new FriendshipServiceInvoker<IFriendRequests>(EndpointName, logger);
+            _invoker = new BusinessServiceInvoker<IFriendRequests, FriendshipFault, FriendshipFailure>(
+                EndpointName,
+                fault => fault.Reason,
+                logger);
         }
 
         public Task<FriendRequestResult> SendFriendRequestAsync(string sessionToken, int accountId)

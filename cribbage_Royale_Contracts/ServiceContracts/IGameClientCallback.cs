@@ -24,6 +24,13 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         void SocialEventOccurred(SocialEventType eventType, SocialEvent social);
 
         /// <summary>
+        /// Notifica que un amigo envió un mensaje de chat al destinatario.
+        /// </summary>
+        /// <param name="message">Mensaje recibido.</param>
+        [OperationContract(IsOneWay = true)]
+        void ChatMessageReceived(ChatMessage message);
+
+        /// <summary>
         /// Notifica que la sesión del destinatario dejó de ser válida.
         /// </summary>
         /// <param name="revocation">Aviso con el motivo de la revocación.</param>

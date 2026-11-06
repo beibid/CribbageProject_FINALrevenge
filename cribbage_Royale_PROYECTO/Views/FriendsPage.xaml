@@ -63,6 +63,10 @@
                                                FontSize="12"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="{x:Static lang:Lang.Friends_ChatButton}"
+                                            Style="{StaticResource SecondaryButton}" MinWidth="0"
+                                            Width="120" Height="28" FontSize="11" Margin="0,0,8,0"
+                                            Click="ChatButton_Click"/>
                                     <Button Content="{x:Static lang:Lang.Friends_InviteToMatchButton}"
                                             Style="{StaticResource SecondaryButton}" MinWidth="0"
                                             Width="140" Height="28" FontSize="11" Margin="0,0,8,0"/>

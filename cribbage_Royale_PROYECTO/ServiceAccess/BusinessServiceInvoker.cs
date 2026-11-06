@@ -5,18 +5,21 @@ using Microsoft.Extensions.Logging;
 
 namespace cribbage_Royale_PROYECTO.ServiceAccess
 {
-    public class FriendshipServiceInvoker<TChannel>
+    public class BusinessServiceInvoker<TChannel, TFault, TFailure>
+        where TFailure : struct
     {
         private const string OperationFailureMessage =
             "The operation on {Endpoint} could not be completed. Reason: {Reason}.";
 
         private readonly string _endpointName;
+        private readonly Func<TFault, TFailure> _resolveFailure;
         private readonly ILogger _logger;
         private readonly ChannelCloser _channelCloser;
 
-        public FriendshipServiceInvoker(string endpointName, ILogger logger)
+        public BusinessServiceInvoker(string endpointName, Func<TFault, TFailure> resolveFailure, ILogger logger)
         {
             _endpointName = endpointName;
+            _resolveFailure = resolveFailure;
             _logger = logger;
             _channelCloser = new ChannelCloser(logger);
         }
@@ -24,7 +27,7 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
         public TResult Execute<TResult>(
             string sessionToken,
             Func<TChannel, TResult> operation,
-            Func<ServiceFailureReason, FriendshipFailure?, TResult> buildFailedResult)
+            Func<ServiceFailureReason, TFailure?, TResult> buildFailedResult)
         {
             ChannelFactory<TChannel> factory = new ChannelFactory<TChannel>(_endpointName);
             TChannel channel = factory.CreateChannel();
@@ -43,7 +46,7 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
 
         private TResult Request<TResult>(
             Func<TResult> invocation,
-            Func<ServiceFailureReason, FriendshipFailure?, TResult> buildFailedResult,
+            Func<ServiceFailureReason, TFailure?, TResult> buildFailedResult,
             out bool callSucceeded)
         {
             TResult result;
@@ -54,11 +57,11 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 result = invocation();
                 callSucceeded = true;
             }
-            catch (FaultException<FriendshipFault> friendshipFaultException)
+            catch (FaultException<TFault> businessFaultException)
             {
                 result = buildFailedResult(
                     ServiceFailureReason.RequestRejected,
-                    friendshipFaultException.Detail.Reason);
+                    _resolveFailure(businessFaultException.Detail));
             }
             catch (FaultException<SessionFault>)
             {

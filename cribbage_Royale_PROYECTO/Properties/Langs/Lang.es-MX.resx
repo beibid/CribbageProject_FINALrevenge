@@ -1833,4 +1833,34 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="MainWindow_FriendRequestRejectedFormat" xml:space="preserve">
     <value>{0} rechazó tu solicitud de amistad.</value>
   </data>
+	<data name="Chat_TitleFormat" xml:space="preserve">
+    <value>Conversación con {0}</value>
+  </data>
+	<data name="Chat_SendButton" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+	<data name="Chat_CloseButton" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+	<data name="Chat_EmptyConversationText" xml:space="preserve">
+    <value>Todavía no hay mensajes.</value>
+  </data>
+	<data name="Chat_FriendshipNotFoundMessage" xml:space="preserve">
+    <value>Solo puedes conversar con tus amigos.</value>
+  </data>
+	<data name="Chat_RecipientUnavailableMessage" xml:space="preserve">
+    <value>Este amigo no está conectado en este momento.</value>
+  </data>
+	<data name="Chat_InvalidMessageTextMessage" xml:space="preserve">
+    <value>El mensaje no puede estar vacío y debe tener menos de 500 caracteres.</value>
+  </data>
+	<data name="Chat_SendErrorMessage" xml:space="preserve">
+    <value>No se pudo enviar el mensaje.</value>
+  </data>
+	<data name="Friends_ChatButton" xml:space="preserve">
+    <value>Conversar</value>
+  </data>
+	<data name="Friends_SelectFriendMessage" xml:space="preserve">
+    <value>Primero selecciona un amigo de la lista.</value>
+  </data>
 </root>

@@ -124,6 +124,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Localization\ChatMessages.cs" />
     <Compile Include="Localization\FriendRequestMessages.cs" />
     <Compile Include="Localization\LanguageManager.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Mail\SanctionEmailSender.cs" />
     <Compile Include="Mail\VerificationEmailSender.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
+    <Compile Include="Models\ChatMessageItem.cs" />
     <Compile Include="Models\FriendItem.cs" />
     <Compile Include="Models\FriendRequestItem.cs" />
     <Compile Include="Models\MatchEndReason.cs" />
@@ -146,12 +148,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
+    <Compile Include="ServiceAccess\BusinessServiceInvoker.cs" />
     <Compile Include="ServiceAccess\ChannelCloser.cs" />
+    <Compile Include="ServiceAccess\ChatMessageReceivedEventArgs.cs" />
+    <Compile Include="ServiceAccess\ChatMessageResult.cs" />
+    <Compile Include="ServiceAccess\ChatMessageStore.cs" />
+    <Compile Include="ServiceAccess\FriendChatClient.cs" />
     <Compile Include="ServiceAccess\FriendListClient.cs" />
     <Compile Include="ServiceAccess\FriendListResult.cs" />
     <Compile Include="ServiceAccess\FriendRequestResult.cs" />
     <Compile Include="ServiceAccess\FriendRequestsClient.cs" />
-    <Compile Include="ServiceAccess\FriendshipServiceInvoker.cs" />
     <Compile Include="ServiceAccess\GameClientCallback.cs" />
     <Compile Include="ServiceAccess\GuestSignInResult.cs" />
     <Compile Include="ServiceAccess\PendingFriendRequestsResult.cs" />
@@ -180,6 +186,9 @@
     </Compile>
     <Compile Include="Views\ChangeEmailPage.xaml.cs">
       <DependentUpon>ChangeEmailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DeleteAccountPage.xaml.cs">
       <DependentUpon>DeleteAccountPage.xaml</DependentUpon>
@@ -312,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ChangeEmailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChatPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

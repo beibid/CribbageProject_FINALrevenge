@@ -172,6 +172,13 @@ namespace cribbage_Royale_PROYECTO.Views
             NavigationService.Navigate(new FriendRequestsPage());
         }
 
+        private void ChatButton_Click(object sender, RoutedEventArgs e)
+        {
+            FriendItem friend = (FriendItem)((Button)sender).DataContext;
+
+            NavigationService.Navigate(new ChatPage(friend.AccountId, friend.DisplayName));
+        }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Lobby());

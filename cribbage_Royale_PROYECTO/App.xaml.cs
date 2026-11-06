@@ -29,6 +29,8 @@ namespace cribbage_Royale_PROYECTO
         private PlayerSessionClient _sessionClient;
         private FriendListClient _friendListClient;
         private FriendRequestsClient _friendRequestsClient;
+        private FriendChatClient _friendChatClient;
+        private ChatMessageStore _chatMessageStore;
 
         public GameClientCallback SessionCallback
         {
@@ -50,6 +52,16 @@ namespace cribbage_Royale_PROYECTO
             get { return _friendRequestsClient; }
         }
 
+        public FriendChatClient FriendChatClient
+        {
+            get { return _friendChatClient; }
+        }
+
+        public ChatMessageStore ChatMessageStore
+        {
+            get { return _chatMessageStore; }
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             _logger = ApplicationLogging.CreateLogger<App>();
@@ -60,6 +72,7 @@ namespace cribbage_Royale_PROYECTO
             CreateSessionClient();
             CreateFriendListClient();
             CreateFriendRequestsClient();
+            CreateFriendChatClient();
             base.OnStartup(e);
             _logger.LogInformation(ApplicationStartedMessage);
         }
@@ -86,6 +99,18 @@ namespace cribbage_Royale_PROYECTO
         private void CreateFriendRequestsClient()
         {
             _friendRequestsClient = new FriendRequestsClient(ApplicationLogging.CreateLogger<FriendRequestsClient>());
+        }
+
+        private void CreateFriendChatClient()
+        {
+            _friendChatClient = new FriendChatClient(ApplicationLogging.CreateLogger<FriendChatClient>());
+            _chatMessageStore = new ChatMessageStore();
+            _sessionCallback.ChatMessageArrived += SessionCallback_ChatMessageArrived;
+        }
+
+        private void SessionCallback_ChatMessageArrived(object sender, ChatMessageReceivedEventArgs e)
+        {
+            _chatMessageStore.Add(e.Message.Sender.AccountId, e.Message);
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

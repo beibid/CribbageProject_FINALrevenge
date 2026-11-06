@@ -1833,4 +1833,34 @@ If you did not create this account, ignore this message.</value>
 	<data name="MainWindow_FriendRequestRejectedFormat" xml:space="preserve">
     <value>{0} declined your friend request.</value>
   </data>
+	<data name="Chat_TitleFormat" xml:space="preserve">
+    <value>Chat with {0}</value>
+  </data>
+	<data name="Chat_SendButton" xml:space="preserve">
+    <value>Send</value>
+  </data>
+	<data name="Chat_CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+	<data name="Chat_EmptyConversationText" xml:space="preserve">
+    <value>No messages yet.</value>
+  </data>
+	<data name="Chat_FriendshipNotFoundMessage" xml:space="preserve">
+    <value>You can only chat with your friends.</value>
+  </data>
+	<data name="Chat_RecipientUnavailableMessage" xml:space="preserve">
+    <value>This friend is not connected right now.</value>
+  </data>
+	<data name="Chat_InvalidMessageTextMessage" xml:space="preserve">
+    <value>The message cannot be empty and must be shorter than 500 characters.</value>
+  </data>
+	<data name="Chat_SendErrorMessage" xml:space="preserve">
+    <value>The message could not be sent.</value>
+  </data>
+	<data name="Friends_ChatButton" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+	<data name="Friends_SelectFriendMessage" xml:space="preserve">
+    <value>Select a friend from the list first.</value>
+  </data>
 </root>
