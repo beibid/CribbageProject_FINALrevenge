@@ -10,7 +10,6 @@ namespace CribbageRoyale.Server.Connections
     public class PlayerChannel : IPlayerChannel
     {
         private const int CloseTimeoutSeconds = 3;
-        private const string RevocationFailureMessage = "The session revocation could not be delivered.";
         private const string CloseFailureMessage = "The replaced callback channel could not be closed.";
         private const string NotificationFailureMessage = "The notification could not be delivered.";
 
@@ -64,7 +63,7 @@ namespace CribbageRoyale.Server.Connections
             return connected;
         }
 
-        public bool TrySendNotification(int accountId, Notification notification)
+        public bool TrySendNotification(int accountId, Action<IGameClientCallback> notification)
         {
             IGameClientCallback callback = FindCallback(accountId);
             bool sent = false;
@@ -150,18 +149,18 @@ namespace CribbageRoyale.Server.Connections
                 SessionRevocation revocation = new SessionRevocation();
                 revocation.Reason = SessionRevocationReason.SignedInElsewhere;
 
-                TryInvokeRevocation(replacedCallback, revocation);
+                TryDeliver(replacedCallback, callback => callback.SessionRevoked(revocation));
                 CloseCallback(replacedCallback);
             }
         }
 
-        private bool TryDeliver(IGameClientCallback callback, Notification notification)
+        private bool TryDeliver(IGameClientCallback callback, Action<IGameClientCallback> notification)
         {
             bool sent = false;
 
             try
             {
-                notification.Deliver(callback);
+                notification(callback);
                 sent = true;
             }
             catch (CommunicationException communicationException)
@@ -178,26 +177,6 @@ namespace CribbageRoyale.Server.Connections
             }
 
             return sent;
-        }
-
-        private void TryInvokeRevocation(IGameClientCallback callback, SessionRevocation revocation)
-        {
-            try
-            {
-                callback.SessionRevoked(revocation);
-            }
-            catch (CommunicationException communicationException)
-            {
-                _logger.LogWarning(communicationException, RevocationFailureMessage);
-            }
-            catch (TimeoutException timeoutException)
-            {
-                _logger.LogWarning(timeoutException, RevocationFailureMessage);
-            }
-            catch (ObjectDisposedException objectDisposedException)
-            {
-                _logger.LogWarning(objectDisposedException, RevocationFailureMessage);
-            }
         }
 
         private void CloseCallback(IGameClientCallback callback)

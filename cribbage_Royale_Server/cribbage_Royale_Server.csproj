@@ -110,17 +110,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connections\ChatNotification.cs" />
     <Compile Include="Connections\FriendPresenceNotifier.cs" />
     <Compile Include="Connections\IPlayerChannel.cs" />
-    <Compile Include="Connections\MatchInvitationDeclinedNotification.cs" />
-    <Compile Include="Connections\MatchInvitationNotification.cs" />
-    <Compile Include="Connections\MatchStartedNotification.cs" />
-    <Compile Include="Connections\Notification.cs" />
     <Compile Include="Connections\PlayerChannel.cs" />
     <Compile Include="Connections\PlayerConnectionChangedEventArgs.cs" />
-    <Compile Include="Connections\PresenceNotification.cs" />
-    <Compile Include="Connections\SocialNotification.cs" />
     <Compile Include="Faults\ChatFaultBuilder.cs" />
     <Compile Include="Faults\FriendshipFaultBuilder.cs" />
     <Compile Include="Faults\InvitationFaultBuilder.cs" />

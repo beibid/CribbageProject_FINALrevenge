@@ -206,9 +206,10 @@ namespace CribbageRoyale.Server.Services
         private void Notify(int recipientAccountId, SocialEventType eventType, SocialEventRecord record)
         {
             SocialEvent social = _services.StateProjection.BuildSocialEvent(record);
-            Notification notification = new SocialNotification(eventType, social);
 
-            _services.PlayerChannel.TrySendNotification(recipientAccountId, notification);
+            _services.PlayerChannel.TrySendNotification(
+                recipientAccountId,
+                callback => callback.SocialEventOccurred(eventType, social));
         }
 
         private FriendRequest[] BuildFriendRequests(List<PendingFriendRequestRecord> records)

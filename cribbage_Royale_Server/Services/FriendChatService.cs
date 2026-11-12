@@ -90,9 +90,11 @@ namespace CribbageRoyale.Server.Services
 
         private void Deliver(int recipientAccountId, ChatMessage message)
         {
-            Notification notification = new ChatNotification(message);
+            bool delivered = _services.PlayerChannel.TrySendNotification(
+                recipientAccountId,
+                callback => callback.ChatMessageReceived(message));
 
-            if (!_services.PlayerChannel.TrySendNotification(recipientAccountId, notification))
+            if (!delivered)
             {
                 throw ChatFaultBuilder.Build(ChatFailure.RecipientUnavailable);
             }
