@@ -70,7 +70,7 @@ namespace CribbageRoyale.Server.Matches
 
             _services.PlayerChannel.TrySendNotification(
                 ResolveCounterpart(invitation, goneAccountId),
-                new MatchInvitationDeclinedNotification(declined));
+                callback => callback.MatchInvitationDeclined(declined));
         }
 
         private int ResolveCounterpart(PendingInvitation invitation, int goneAccountId)

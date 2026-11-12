@@ -49,11 +49,10 @@ namespace CribbageRoyale.Server.Connections
             {
                 List<int> friendIds = _friendshipRepository.GetFriendIds(accountId);
                 PresenceChange presence = _stateProjection.BuildPresenceChange(accountId, isConnected);
-                Notification notification = new PresenceNotification(presence);
 
                 foreach (int friendId in friendIds)
                 {
-                    _playerChannel.TrySendNotification(friendId, notification);
+                    _playerChannel.TrySendNotification(friendId, callback => callback.PresenceChanged(presence));
                 }
             }
             catch (DataAccessException dataAccessException)

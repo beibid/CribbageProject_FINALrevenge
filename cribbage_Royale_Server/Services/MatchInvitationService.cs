@@ -140,8 +140,9 @@ namespace CribbageRoyale.Server.Services
 
         private void Deliver(int recipientAccountId, MatchInvitation invitation)
         {
-            Notification notification = new MatchInvitationNotification(invitation);
-            bool delivered = _services.PlayerChannel.TrySendNotification(recipientAccountId, notification);
+            bool delivered = _services.PlayerChannel.TrySendNotification(
+                recipientAccountId,
+                callback => callback.MatchInvitationReceived(invitation));
 
             if (!delivered)
             {
@@ -224,7 +225,9 @@ namespace CribbageRoyale.Server.Services
                 invitation.RecipientAccountId,
                 true);
 
-            Send(invitation.SenderAccountId, new MatchStartedNotification(matchStart));
+            _services.PlayerChannel.TrySendNotification(
+                invitation.SenderAccountId,
+                callback => callback.MatchStarted(matchStart));
         }
 
         private void NotifyGuest(PendingInvitation invitation, long matchId)
@@ -234,26 +237,27 @@ namespace CribbageRoyale.Server.Services
                 invitation.SenderAccountId,
                 false);
 
-            Send(invitation.RecipientAccountId, new MatchStartedNotification(matchStart));
+            _services.PlayerChannel.TrySendNotification(
+                invitation.RecipientAccountId,
+                callback => callback.MatchStarted(matchStart));
         }
 
         private void NotifyDeclined(PendingInvitation invitation)
         {
             MatchInvitation declined = BuildInvitation(invitation);
 
-            Send(invitation.SenderAccountId, new MatchInvitationDeclinedNotification(declined));
+            _services.PlayerChannel.TrySendNotification(
+                invitation.SenderAccountId,
+                callback => callback.MatchInvitationDeclined(declined));
         }
 
         private void NotifyWithdrawn(PendingInvitation invitation)
         {
             MatchInvitation withdrawn = BuildInvitation(invitation);
 
-            Send(invitation.RecipientAccountId, new MatchInvitationDeclinedNotification(withdrawn));
-        }
-
-        private void Send(int accountId, Notification notification)
-        {
-            _services.PlayerChannel.TrySendNotification(accountId, notification);
+            _services.PlayerChannel.TrySendNotification(
+                invitation.RecipientAccountId,
+                callback => callback.MatchInvitationDeclined(withdrawn));
         }
 
         private FaultException<ServiceFault> BuildServiceFault(
