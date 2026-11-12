@@ -12,8 +12,6 @@ namespace CribbageRoyale.Server.Sessions
 
         public IPlayerChannel PlayerChannel { get; set; }
 
-        public PlayerRegistry PlayerRegistry { get; set; }
-
         public LogInGate LogInGate { get; set; }
     }
 }

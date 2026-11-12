@@ -151,7 +151,6 @@ namespace CribbageRoyale.Server
             services.SessionTokens = new SessionTokenStore(new GuestAccountIds(), sessionLifetime);
             services.SessionLifetime = sessionLifetime;
             services.PlayerChannel = new PlayerChannel(ApplicationLogging.CreateLogger<PlayerChannel>());
-            services.PlayerRegistry = new PlayerRegistry();
             services.LogInGate = new LogInGate();
 
             return services;
@@ -163,7 +162,7 @@ namespace CribbageRoyale.Server
 
             FriendPresenceNotifier presenceNotifier = new FriendPresenceNotifier(
                 friendshipRepository,
-                new StateProjection(sessionServices.PlayerRegistry),
+                new StateProjection(sessionServices.PlayerChannel),
                 ApplicationLogging.CreateLogger<FriendPresenceNotifier>());
             presenceNotifier.Attach(sessionServices.PlayerChannel);
 
@@ -181,7 +180,7 @@ namespace CribbageRoyale.Server
             services.CallerSession = new CallerSession(sessionServices.SessionTokens);
             services.FriendshipRepository = new FriendshipRepository();
             services.PlayerChannel = sessionServices.PlayerChannel;
-            services.StateProjection = new StateProjection(sessionServices.PlayerRegistry);
+            services.StateProjection = new StateProjection(sessionServices.PlayerChannel);
 
             return services;
         }
@@ -192,7 +191,7 @@ namespace CribbageRoyale.Server
             services.CallerSession = new CallerSession(sessionServices.SessionTokens);
             services.FriendshipRepository = new FriendshipRepository();
             services.PlayerChannel = sessionServices.PlayerChannel;
-            services.StateProjection = new StateProjection(sessionServices.PlayerRegistry);
+            services.StateProjection = new StateProjection(sessionServices.PlayerChannel);
 
             return services;
         }
@@ -206,7 +205,7 @@ namespace CribbageRoyale.Server
             services.CallerSession = new CallerSession(sessionServices.SessionTokens);
             services.FriendshipRepository = new FriendshipRepository();
             services.PlayerChannel = sessionServices.PlayerChannel;
-            services.StateProjection = new StateProjection(sessionServices.PlayerRegistry);
+            services.StateProjection = new StateProjection(sessionServices.PlayerChannel);
             services.InvitationRegistry = _invitationRegistry;
             services.MatchRooms = _matchRooms;
 
@@ -217,7 +216,7 @@ namespace CribbageRoyale.Server
         {
             MatchWatcherServices services = new MatchWatcherServices();
             services.PlayerChannel = sessionServices.PlayerChannel;
-            services.StateProjection = new StateProjection(sessionServices.PlayerRegistry);
+            services.StateProjection = new StateProjection(sessionServices.PlayerChannel);
             services.Logger = ApplicationLogging.CreateLogger<MatchDisconnectionWatcher>();
 
             MatchDisconnectionWatcher watcher = new MatchDisconnectionWatcher(

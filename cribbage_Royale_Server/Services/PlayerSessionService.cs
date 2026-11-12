@@ -54,14 +54,7 @@ namespace CribbageRoyale.Server.Services
                 throw SessionFaultBuilder.Build(SessionFailure.InvalidGuestName);
             }
 
-            string guestName = GuestNames.Build(displayName);
-
-            if (_services.PlayerRegistry.IsDisplayNameInUse(guestName))
-            {
-                throw SessionFaultBuilder.Build(SessionFailure.GuestNameUnavailable);
-            }
-
-            return GrantGuestSession(guestName);
+            return GrantGuestSession(GuestNames.Build(displayName));
         }
 
         public void LogOut()
@@ -133,7 +126,15 @@ namespace CribbageRoyale.Server.Services
             account.AccountId = ResolveAccountId(token);
             account.DisplayName = guestName;
 
-            ActivateSession(account, token);
+            if (!_services.PlayerChannel.TryRegisterCurrentGuest(account))
+            {
+                _services.SessionTokens.RevokeToken(token);
+
+                throw SessionFaultBuilder.Build(SessionFailure.GuestNameUnavailable);
+            }
+
+            _currentAccount = account;
+            _currentToken = token;
 
             GuestSession session = new GuestSession();
             session.SessionToken = token;
@@ -164,19 +165,12 @@ namespace CribbageRoyale.Server.Services
                 _services.SessionTokens.RevokeAllTokens(account.AccountId);
                 token = _services.SessionTokens.IssueToken(account.AccountId);
 
-                ActivateSession(account, token);
+                _currentAccount = account;
+                _currentToken = token;
+                _services.PlayerChannel.RegisterCurrentPlayer(account);
             }
 
             return token;
-        }
-
-        private void ActivateSession(AccountReference account, string token)
-        {
-            _currentAccount = account;
-            _currentToken = token;
-            _services.PlayerRegistry.Register(account);
-
-            _services.PlayerChannel.RegisterCurrentPlayer(account.AccountId);
         }
 
         private void ReleaseCurrentSession()
@@ -185,7 +179,6 @@ namespace CribbageRoyale.Server.Services
             {
                 _services.SessionTokens.RevokeToken(_currentToken);
                 _services.PlayerChannel.RemovePlayer(_currentAccount.AccountId);
-                _services.PlayerRegistry.Remove(_currentAccount.AccountId);
 
                 _currentAccount = null;
                 _currentToken = null;

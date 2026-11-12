@@ -1,16 +1,17 @@
-﻿using System;
-using CribbageRoyale.Contracts.DataContracts;
-using CribbageRoyale.Server.Sessions;
+﻿using CribbageRoyale.Contracts.DataContracts;
+using CribbageRoyale.Server.Connections;
+using System;
+
 
 namespace CribbageRoyale.Server.Projection
 {
     public class StateProjection : IStateProjection
     {
-        private readonly PlayerRegistry _playerRegistry;
+        private readonly IPlayerChannel _playerChannel;
 
-        public StateProjection(PlayerRegistry playerRegistry)
+        public StateProjection(IPlayerChannel playerChannel)
         {
-            _playerRegistry = playerRegistry;
+            _playerChannel = playerChannel;
         }
 
         public PresenceChange BuildPresenceChange(int accountId, bool isConnected)
@@ -68,9 +69,9 @@ namespace CribbageRoyale.Server.Projection
 
         private AccountReference ResolveAccount(int accountId)
         {
-            AccountReference account = _playerRegistry.Find(accountId);
+            AccountReference account;
 
-            if (account == null)
+            if (!_playerChannel.TryFindAccount(accountId, out account))
             {
                 account = new AccountReference();
                 account.AccountId = accountId;

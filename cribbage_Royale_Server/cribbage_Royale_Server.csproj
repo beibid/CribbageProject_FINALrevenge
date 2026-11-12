@@ -110,6 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\ConnectedPlayer.cs" />
     <Compile Include="Connections\FriendPresenceNotifier.cs" />
     <Compile Include="Connections\IPlayerChannel.cs" />
     <Compile Include="Connections\PlayerChannel.cs" />
@@ -151,7 +152,6 @@
     <Compile Include="Sessions\IAuthenticator.cs" />
     <Compile Include="Sessions\ISessionTokens.cs" />
     <Compile Include="Sessions\LogInGate.cs" />
-    <Compile Include="Sessions\PlayerRegistry.cs" />
     <Compile Include="Sessions\SessionFaultBuilder.cs" />
     <Compile Include="Sessions\SessionIdentity.cs" />
     <Compile Include="Sessions\SessionLifetime.cs" />
