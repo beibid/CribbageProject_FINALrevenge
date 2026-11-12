@@ -85,6 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Projection\StateProjectionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FriendshipTargetRulesTests.cs" />
   </ItemGroup>
@@ -112,7 +113,6 @@
   <ItemGroup>
     <Folder Include="Connections\" />
     <Folder Include="Matches\" />
-    <Folder Include="Projection\" />
     <Folder Include="Sessions\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
