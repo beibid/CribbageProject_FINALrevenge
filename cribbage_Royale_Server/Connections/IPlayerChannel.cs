@@ -1,4 +1,5 @@
 ﻿using System;
+using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Contracts.ServiceContracts;
 
 namespace CribbageRoyale.Server.Connections
@@ -7,11 +8,15 @@ namespace CribbageRoyale.Server.Connections
     {
         event EventHandler<PlayerConnectionChangedEventArgs> PlayerConnectionChanged;
 
-        void RegisterCurrentPlayer(int accountId);
+        void RegisterCurrentPlayer(AccountReference account);
+
+        bool TryRegisterCurrentGuest(AccountReference account);
 
         void RemovePlayer(int accountId);
 
         bool IsPlayerConnected(int accountId);
+
+        bool TryFindAccount(int accountId, out AccountReference account);
 
         bool TrySendNotification(int accountId, Action<IGameClientCallback> notification);
     }
