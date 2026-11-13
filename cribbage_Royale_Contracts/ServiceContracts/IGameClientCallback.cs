@@ -52,6 +52,14 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         void MatchStarted(MatchStart matchStart);
 
         /// <summary>
+        /// Notifica que el estado de la partida cambió.
+        /// </summary>
+        /// <param name="eventType">Tipo de cambio ocurrido.</param>
+        /// <param name="state">Estado de la partida visto por quien recibe el aviso.</param>
+        [OperationContract(IsOneWay = true)]
+        void MatchStateChanged(MatchEventType eventType, MatchState state);
+
+        /// <summary>
         /// Notifica que la sesión del destinatario dejó de ser válida.
         /// </summary>
         /// <param name="revocation">Aviso con el motivo de la revocación.</param>

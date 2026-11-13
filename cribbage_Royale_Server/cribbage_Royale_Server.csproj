@@ -179,6 +179,10 @@
       <Project>{2e1f779a-5e40-468e-a457-ad861d63c8fa}</Project>
       <Name>cribbage_Royale_DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\cribbage_Royale_Rules\cribbage_Royale_Rules.csproj">
+      <Project>{fe1dece5-9316-43e3-80ed-b7352474aea0}</Project>
+      <Name>cribbage_Royale_Rules</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

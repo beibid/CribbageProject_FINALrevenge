@@ -55,7 +55,8 @@
                     <TextBlock x:Name="opponentNameTextBlock"
                                Foreground="{StaticResource TextBrush}"
                                FontSize="14" FontWeight="Bold" TextWrapping="Wrap"/>
-                    <Border Background="{StaticResource PanelBrush}" CornerRadius="10"
+                    <Border x:Name="hostBadgeBorder"
+                            Background="{StaticResource PanelBrush}" CornerRadius="10"
                             Padding="8,3" HorizontalAlignment="Left" Margin="0,6,0,0">
                         <TextBlock Text="{x:Static lang:Lang.Game_HostBadge}"
                                    Foreground="{StaticResource GoldBrush}" FontSize="11"/>

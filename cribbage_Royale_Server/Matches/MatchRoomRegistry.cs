@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using CribbageRoyale.Rules;
 
 namespace CribbageRoyale.Server.Matches
 {
     public class MatchRoomRegistry
     {
         private readonly Dictionary<int, long> _matchesByAccount = new Dictionary<int, long>();
+
+        private readonly Dictionary<long, CribbageMatch> _matches =
+            new Dictionary<long, CribbageMatch>();
 
         private readonly object _syncRoot = new object();
 
@@ -22,26 +26,41 @@ namespace CribbageRoyale.Server.Matches
             return inMatch;
         }
 
-        public long StartMatch(int firstAccountId, int secondAccountId)
+        public CribbageMatch StartMatch(int firstAccountId, int secondAccountId)
+        {
+            CribbageMatch match;
+
+            lock (_syncRoot)
+            {
+                _lastMatchId++;
+                match = new CribbageMatch(_lastMatchId, firstAccountId, secondAccountId);
+                _matches[_lastMatchId] = match;
+                _matchesByAccount[firstAccountId] = _lastMatchId;
+                _matchesByAccount[secondAccountId] = _lastMatchId;
+            }
+
+            return match;
+        }
+
+        public void RemovePlayer(int accountId)
         {
             long matchId;
 
             lock (_syncRoot)
             {
-                _lastMatchId++;
-                matchId = _lastMatchId;
-                _matchesByAccount[firstAccountId] = matchId;
-                _matchesByAccount[secondAccountId] = matchId;
+                if (_matchesByAccount.TryGetValue(accountId, out matchId))
+                {
+                    _matchesByAccount.Remove(accountId);
+                    RemoveMatchWhenEmpty(matchId);
+                }
             }
-
-            return matchId;
         }
 
-        public void RemovePlayer(int accountId)
+        private void RemoveMatchWhenEmpty(long matchId)
         {
-            lock (_syncRoot)
+            if (!_matchesByAccount.ContainsValue(matchId))
             {
-                _matchesByAccount.Remove(accountId);
+                _matches.Remove(matchId);
             }
         }
     }

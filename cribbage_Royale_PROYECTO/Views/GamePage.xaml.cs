@@ -3,121 +3,225 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using CribbageRoyale.Contracts.DataContracts;
 using cribbage_Royale_PROYECTO.Models;
-using cribbage_Royale_DataAccess.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO.Views
 {
     public partial class GamePage : Page
     {
-        private const MatchPhase CurrentPhase = MatchPhase.Discard;
-        private const bool PlayerIsDealer = true;
-
         private const int WinningScore = 61;
         private const int CardsToDiscard = 2;
         private const int HandSize = 6;
 
-        private const int SamplePlayerScore = 42;
-        private const int SampleOpponentScore = 38;
-        private const int SamplePlayerGain = 8;
-        private const int SampleOpponentGain = 8;
-        private const int SampleRemainingSeconds = 25;
-        private const int SampleRunningCount = 15;
+        private readonly MatchStart _matchStart;
+        private readonly GameClientCallback _sessionCallback;
 
-        private readonly string _opponentName;
-        private readonly List<PlayingCardItem> _playerHand;
+        private List<PlayingCardItem> _playerHand;
 
-        public GamePage(string opponentName = null)
+        public GamePage(MatchStart matchStart)
         {
             InitializeComponent();
-
-            _opponentName = string.IsNullOrWhiteSpace(opponentName)
-                ? Lang.Game_OpponentUnknown
-                : opponentName;
-
-            _playerHand = BuildPlayerHand();
-
-            ShowMatch();
-            ShowPhase();
+            _matchStart = matchStart;
+            _playerHand = new List<PlayingCardItem>();
+            _sessionCallback = ((App)Application.Current).SessionCallback;
+            _sessionCallback.MatchStateReceived += SessionCallback_MatchStateReceived;
+            Unloaded += GamePage_Unloaded;
+            ShowMatchHeader();
+            ShowEmptyTable();
         }
 
-        private void ShowMatch()
+        private void SessionCallback_MatchStateReceived(object sender, MatchStateChangedEventArgs e)
+        {
+            if (e.State.MatchId == _matchStart.MatchId)
+            {
+                ShowState(e.State);
+            }
+        }
+
+        private void GamePage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _sessionCallback.MatchStateReceived -= SessionCallback_MatchStateReceived;
+            Unloaded -= GamePage_Unloaded;
+        }
+
+        private void ShowMatchHeader()
         {
             opponentNameTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Game_OpponentFormat,
-                _opponentName);
+                ResolveOpponentName());
 
-            cribOwnerTextBlock.Text = PlayerIsDealer
-                ? Lang.Game_CribOwnerYou
-                : Lang.Game_CribOwnerOpponent;
-
-            opponentHandItemsControl.ItemsSource = BuildFaceDownHand();
-            playerHandItemsControl.ItemsSource = _playerHand;
-            starterCardContentControl.Content = BuildStarterCard();
-            playedCardsItemsControl.ItemsSource = BuildPlayedCards();
-
-            opponentTrackItemsControl.ItemsSource =
-                BuildTrack(SampleOpponentScore, SampleOpponentGain);
-            playerTrackItemsControl.ItemsSource =
-                BuildTrack(SamplePlayerScore, SamplePlayerGain);
+            hostBadgeBorder.Visibility = ResolveVisibility(_matchStart.IsHost);
+            cribOwnerTextBlock.Text = ResolveCribOwner();
 
             goalTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Game_GoalFormat,
                 WinningScore);
 
-            lastGainTextBlock.Text = string.Format(
-                CultureInfo.CurrentCulture,
-                Lang.Game_LastGainFormat,
-                SamplePlayerGain);
+            timeRemainingTextBlock.Text = string.Empty;
+            lastGainTextBlock.Text = string.Empty;
+        }
 
+        private void ShowEmptyTable()
+        {
+            opponentHandItemsControl.ItemsSource = BuildFaceDownHand(HandSize);
+            playerHandItemsControl.ItemsSource = _playerHand;
+            playedCardsItemsControl.ItemsSource = new List<PlayingCardItem>();
+            opponentTrackItemsControl.ItemsSource = BuildTrack(0);
+            playerTrackItemsControl.ItemsSource = BuildTrack(0);
+            ShowCutCard(null);
+            ShowScore(0, 0);
+            ShowRunningCount(0);
+            ShowPhase(MatchPhase.Discarding);
+        }
+
+        private void ShowState(MatchState state)
+        {
+            _playerHand = BuildCards(state.OwnHand);
+            playerHandItemsControl.ItemsSource = _playerHand;
+            opponentHandItemsControl.ItemsSource = BuildFaceDownHand(_playerHand.Count);
+            playedCardsItemsControl.ItemsSource = BuildCards(state.PlayedCards);
+            opponentTrackItemsControl.ItemsSource = BuildTrack(state.RivalScore);
+            playerTrackItemsControl.ItemsSource = BuildTrack(state.OwnScore);
+            ShowCutCard(state.CutCard);
+            ShowScore(state.OwnScore, state.RivalScore);
+            ShowRunningCount(state.PeggingCount);
+            ShowPhase(state.Phase);
+        }
+
+        private void ShowPhase(MatchPhase phase)
+        {
+            bool isDiscardPhase = phase == MatchPhase.Discarding;
+
+            discardPanel.Visibility = ResolveVisibility(isDiscardPhase);
+            playPanel.Visibility = ResolveVisibility(!isDiscardPhase);
+            discardButton.Visibility = ResolveVisibility(isDiscardPhase);
+
+            if (isDiscardPhase)
+            {
+                ShowDiscardTexts();
+            }
+            else
+            {
+                ShowPlayTexts();
+            }
+        }
+
+        private void ShowDiscardTexts()
+        {
+            phaseTitleTextBlock.Text = Lang.Game_PhaseDiscardTitle;
+            phaseFirstLineTextBlock.Text = Lang.Game_PhaseDiscardText1;
+            phaseSecondLineTextBlock.Text = Lang.Game_PhaseDiscardText2;
+        }
+
+        private void ShowPlayTexts()
+        {
+            phaseTitleTextBlock.Text = Lang.Game_PhasePlayTitle;
+            phaseFirstLineTextBlock.Text = Lang.Game_PhasePlayText1;
+            phaseSecondLineTextBlock.Text = Lang.Game_PhasePlayText2;
+        }
+
+        private void ShowCutCard(Card card)
+        {
+            PlayingCardItem item = new PlayingCardItem();
+
+            if (card != null)
+            {
+                item = BuildCard(card);
+            }
+
+            starterCardContentControl.Content = item;
+        }
+
+        private void ShowScore(int ownScore, int rivalScore)
+        {
             scoreTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Game_ScoreFormat,
-                SamplePlayerScore,
-                SampleOpponentScore,
+                ownScore,
+                rivalScore,
                 WinningScore);
+        }
 
-            timeRemainingTextBlock.Text = string.Format(
-                CultureInfo.CurrentCulture,
-                Lang.Game_TimeRemainingFormat,
-                SampleRemainingSeconds);
-
+        private void ShowRunningCount(int peggingCount)
+        {
             runningCountTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Game_RunningCountFormat,
-                SampleRunningCount);
+                peggingCount);
         }
 
-        private void ShowPhase()
+        private string ResolveOpponentName()
         {
-            bool isDiscardPhase = CurrentPhase == MatchPhase.Discard;
+            string name = Lang.Game_OpponentUnknown;
 
-            discardPanel.Visibility = isDiscardPhase ? Visibility.Visible : Visibility.Collapsed;
-            playPanel.Visibility = isDiscardPhase ? Visibility.Collapsed : Visibility.Visible;
-            discardButton.Visibility = isDiscardPhase ? Visibility.Visible : Visibility.Collapsed;
+            if (!string.IsNullOrWhiteSpace(_matchStart.Opponent.DisplayName))
+            {
+                name = _matchStart.Opponent.DisplayName;
+            }
 
-            phaseTitleTextBlock.Text = isDiscardPhase
-                ? Lang.Game_PhaseDiscardTitle
-                : Lang.Game_PhasePlayTitle;
-
-            phaseFirstLineTextBlock.Text = isDiscardPhase
-                ? Lang.Game_PhaseDiscardText1
-                : Lang.Game_PhasePlayText1;
-
-            phaseSecondLineTextBlock.Text = isDiscardPhase
-                ? Lang.Game_PhaseDiscardText2
-                : Lang.Game_PhasePlayText2;
+            return name;
         }
 
-        private List<PlayingCardItem> BuildFaceDownHand()
+        private string ResolveCribOwner()
+        {
+            string owner = Lang.Game_CribOwnerOpponent;
+
+            if (_matchStart.IsHost)
+            {
+                owner = Lang.Game_CribOwnerYou;
+            }
+
+            return owner;
+        }
+
+        private static Visibility ResolveVisibility(bool isVisible)
+        {
+            Visibility visibility = Visibility.Collapsed;
+
+            if (isVisible)
+            {
+                visibility = Visibility.Visible;
+            }
+
+            return visibility;
+        }
+
+        private static List<PlayingCardItem> BuildCards(List<Card> cards)
+        {
+            List<PlayingCardItem> items = new List<PlayingCardItem>();
+
+            if (cards != null)
+            {
+                foreach (Card card in cards)
+                {
+                    items.Add(BuildCard(card));
+                }
+            }
+
+            return items;
+        }
+
+        private static PlayingCardItem BuildCard(Card card)
+        {
+            PlayingCardItem item = new PlayingCardItem();
+            item.Rank = ResolveRank(card.Rank);
+            item.Suit = ResolveSuit(card.Suit);
+            item.IsRedSuit = IsRedSuit(card.Suit);
+
+            return item;
+        }
+
+        private static List<PlayingCardItem> BuildFaceDownHand(int count)
         {
             List<PlayingCardItem> cards = new List<PlayingCardItem>();
 
-            for (int index = 0; index < HandSize; index++)
+            for (int index = 0; index < count; index++)
             {
                 cards.Add(new PlayingCardItem());
             }
@@ -125,61 +229,90 @@ namespace cribbage_Royale_PROYECTO.Views
             return cards;
         }
 
-        private List<PlayingCardItem> BuildPlayerHand()
-        {
-            return new List<PlayingCardItem>
-            {
-                new PlayingCardItem { Rank = "J", Suit = "♥", IsRedSuit = true },
-                new PlayingCardItem { Rank = "2", Suit = "♠", IsRedSuit = false },
-                new PlayingCardItem { Rank = "3", Suit = "♦", IsRedSuit = true },
-                new PlayingCardItem { Rank = "10", Suit = "♦", IsRedSuit = true },
-                new PlayingCardItem { Rank = "K", Suit = "♠", IsRedSuit = false },
-                new PlayingCardItem { Rank = "5", Suit = "♠", IsRedSuit = false }
-            };
-        }
-
-        private PlayingCardItem BuildStarterCard()
-        {
-            return new PlayingCardItem { Rank = "9", Suit = "♥", IsRedSuit = true };
-        }
-
-        private List<PlayingCardItem> BuildPlayedCards()
-        {
-            return new List<PlayingCardItem>
-            {
-                new PlayingCardItem { Rank = "7", Suit = "♠", IsRedSuit = false },
-                new PlayingCardItem { Rank = "8", Suit = "♥", IsRedSuit = true }
-            };
-        }
-
-        private List<BoardHoleItem> BuildTrack(int score, int lastGain)
+        private static List<BoardHoleItem> BuildTrack(int score)
         {
             List<BoardHoleItem> holes = new List<BoardHoleItem>();
-            int previousScore = score - lastGain;
 
             for (int position = 1; position <= WinningScore; position++)
             {
-                holes.Add(new BoardHoleItem
-                {
-                    Position = position,
-                    HasPeg = position == score || position == previousScore
-                });
+                BoardHoleItem hole = new BoardHoleItem();
+                hole.Position = position;
+                hole.HasPeg = position == score;
+                holes.Add(hole);
             }
 
             return holes;
+        }
+
+        private static string ResolveRank(CardRank rank)
+        {
+            string text;
+
+            switch (rank)
+            {
+                case CardRank.Ace:
+                    text = "A";
+                    break;
+                case CardRank.Jack:
+                    text = "J";
+                    break;
+                case CardRank.Queen:
+                    text = "Q";
+                    break;
+                case CardRank.King:
+                    text = "K";
+                    break;
+                default:
+                    text = ((int)rank).ToString(CultureInfo.InvariantCulture);
+                    break;
+            }
+
+            return text;
+        }
+
+        private static string ResolveSuit(CardSuit suit)
+        {
+            string symbol;
+
+            switch (suit)
+            {
+                case CardSuit.Hearts:
+                    symbol = "\u2665";
+                    break;
+                case CardSuit.Diamonds:
+                    symbol = "\u2666";
+                    break;
+                case CardSuit.Clubs:
+                    symbol = "\u2663";
+                    break;
+                case CardSuit.Spades:
+                    symbol = "\u2660";
+                    break;
+                default:
+                    symbol = string.Empty;
+                    break;
+            }
+
+            return symbol;
+        }
+
+        private static bool IsRedSuit(CardSuit suit)
+        {
+            return suit == CardSuit.Hearts || suit == CardSuit.Diamonds;
         }
 
         private void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
             int selectedCards = _playerHand.Count(card => card.IsSelected);
 
-            if (selectedCards != CardsToDiscard)
+            if (selectedCards == CardsToDiscard)
+            {
+                matchMessagePanel.HidePanel();
+            }
+            else
             {
                 matchMessagePanel.ShowError(Lang.Game_SelectTwoCardsMessage);
-                return;
             }
-
-            matchMessagePanel.HidePanel();
         }
 
         private void RulesButton_Click(object sender, RoutedEventArgs e)

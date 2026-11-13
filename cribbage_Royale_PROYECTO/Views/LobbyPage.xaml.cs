@@ -55,6 +55,18 @@ namespace cribbage_Royale_PROYECTO.Views
             invitationBorder.Visibility = Visibility.Collapsed;
         }
 
+        private void NavigateToFriends()
+        {
+            if (CurrentSession.IsGuest())
+            {
+                ShowGuestRestriction();
+            }
+            else
+            {
+                NavigationService.Navigate(new FriendsPage());
+            }
+        }
+
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Settings());
@@ -72,7 +84,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new GamePage());
+            NavigateToFriends();
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
@@ -89,14 +101,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private void FriendsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentSession.IsGuest())
-            {
-                ShowGuestRestriction();
-            }
-            else
-            {
-                NavigationService.Navigate(new FriendsPage());
-            }
+            NavigateToFriends();
         }
     }
 }
