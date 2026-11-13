@@ -30,6 +30,7 @@ namespace CribbageRoyale.Server
         private static FriendRequestsServices _friendRequestsServices;
         private static FriendChatServices _friendChatServices;
         private static MatchInvitationServices _matchInvitationServices;
+        private static MatchPlayServices _matchPlayServices;
         private static MatchInvitationRegistry _invitationRegistry;
         private static MatchRoomRegistry _matchRooms;
 
@@ -53,6 +54,7 @@ namespace CribbageRoyale.Server
             ServiceHost friendRequestsHost = CreateFriendRequestsHost();
             ServiceHost friendChatHost = CreateFriendChatHost();
             ServiceHost matchInvitationHost = CreateMatchInvitationHost();
+            ServiceHost matchPlayHost = CreateMatchPlayHost();
 
             WatchDisconnections(_sessionServices);
 
@@ -64,9 +66,11 @@ namespace CribbageRoyale.Server
                 friendRequestsHost.Open();
                 friendChatHost.Open();
                 matchInvitationHost.Open();
+                matchPlayHost.Open();
                 logger.LogInformation(ServiceStartedLogMessage);
                 Console.WriteLine(ServiceStartedMessage);
                 Console.ReadLine();
+                matchPlayHost.Close();
                 matchInvitationHost.Close();
                 friendChatHost.Close();
                 friendRequestsHost.Close();
@@ -78,6 +82,7 @@ namespace CribbageRoyale.Server
             catch (AddressAlreadyInUseException addressAlreadyInUseException)
             {
                 logger.LogCritical(addressAlreadyInUseException, PortInUseMessage);
+                matchPlayHost.Abort();
                 matchInvitationHost.Abort();
                 friendChatHost.Abort();
                 friendRequestsHost.Abort();
@@ -138,6 +143,15 @@ namespace CribbageRoyale.Server
             _matchInvitationServices = CreateMatchInvitationServices(_sessionServices);
             ServiceHost host = new ServiceHost(typeof(MatchInvitationService));
             host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreateMatchInvitationService()));
+
+            return host;
+        }
+
+        private static ServiceHost CreateMatchPlayHost()
+        {
+            _matchPlayServices = CreateMatchPlayServices(_sessionServices);
+            ServiceHost host = new ServiceHost(typeof(MatchPlayService));
+            host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreateMatchPlayService()));
 
             return host;
         }
@@ -213,6 +227,17 @@ namespace CribbageRoyale.Server
             return services;
         }
 
+        private static MatchPlayServices CreateMatchPlayServices(SessionServices sessionServices)
+        {
+            MatchPlayServices services = new MatchPlayServices();
+            services.CallerSession = new CallerSession(sessionServices.SessionTokens);
+            services.PlayerChannel = sessionServices.PlayerChannel;
+            services.StateProjection = new StateProjection(sessionServices.PlayerRegistry);
+            services.MatchRooms = _matchRooms;
+
+            return services;
+        }
+
         private static void WatchDisconnections(SessionServices sessionServices)
         {
             MatchWatcherServices services = new MatchWatcherServices();
@@ -269,6 +294,13 @@ namespace CribbageRoyale.Server
             return new MatchInvitationService(
                 _matchInvitationServices,
                 ApplicationLogging.CreateLogger<MatchInvitationService>());
+        }
+
+        private static MatchPlayService CreateMatchPlayService()
+        {
+            return new MatchPlayService(
+                _matchPlayServices,
+                ApplicationLogging.CreateLogger<MatchPlayService>());
         }
     }
 }

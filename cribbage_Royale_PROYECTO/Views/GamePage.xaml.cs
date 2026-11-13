@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CribbageRoyale.Contracts.DataContracts;
 using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.ServiceAccess;
+using cribbage_Royale_PROYECTO.Session;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO.Views
@@ -19,15 +20,20 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private readonly MatchStart _matchStart;
         private readonly GameClientCallback _sessionCallback;
+        private readonly MatchPlayClient _matchPlayClient;
 
         private List<PlayingCardItem> _playerHand;
+        private List<Card> _ownCards;
+        private int _stateVersion;
 
         public GamePage(MatchStart matchStart)
         {
             InitializeComponent();
             _matchStart = matchStart;
             _playerHand = new List<PlayingCardItem>();
+            _ownCards = new List<Card>();
             _sessionCallback = ((App)Application.Current).SessionCallback;
+            _matchPlayClient = ((App)Application.Current).MatchPlayClient;
             _sessionCallback.MatchStateReceived += SessionCallback_MatchStateReceived;
             Unloaded += GamePage_Unloaded;
             ShowMatchHeader();
@@ -82,7 +88,9 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private void ShowState(MatchState state)
         {
-            _playerHand = BuildCards(state.OwnHand);
+            _stateVersion = state.StateVersion;
+            _ownCards = ResolveOwnCards(state);
+            _playerHand = BuildCards(_ownCards);
             playerHandItemsControl.ItemsSource = _playerHand;
             opponentHandItemsControl.ItemsSource = BuildFaceDownHand(_playerHand.Count);
             playedCardsItemsControl.ItemsSource = BuildCards(state.PlayedCards);
@@ -92,6 +100,7 @@ namespace cribbage_Royale_PROYECTO.Views
             ShowScore(state.OwnScore, state.RivalScore);
             ShowRunningCount(state.PeggingCount);
             ShowPhase(state.Phase);
+            discardButton.IsEnabled = _playerHand.Count == HandSize;
         }
 
         private void ShowPhase(MatchPhase phase)
@@ -178,6 +187,58 @@ namespace cribbage_Royale_PROYECTO.Views
             }
 
             return owner;
+        }
+
+        private List<Card> GetSelectedCards()
+        {
+            List<Card> selected = new List<Card>();
+
+            for (int index = 0; index < _playerHand.Count; index++)
+            {
+                if (_playerHand[index].IsSelected)
+                {
+                    selected.Add(_ownCards[index]);
+                }
+            }
+
+            return selected;
+        }
+
+        private CribDiscard BuildDiscard(List<Card> cards)
+        {
+            CribDiscard discard = new CribDiscard();
+            discard.MatchId = _matchStart.MatchId;
+            discard.Cards = cards;
+            discard.ExpectedStateVersion = _stateVersion;
+
+            return discard;
+        }
+
+        private async Task SendDiscardAsync(List<Card> cards)
+        {
+            discardButton.IsEnabled = false;
+
+            DiscardResult result = await _matchPlayClient.DiscardAsync(
+                CurrentSession.SessionToken,
+                BuildDiscard(cards));
+
+            if (!result.Succeeded)
+            {
+                discardButton.IsEnabled = true;
+                matchMessagePanel.ShowError(Lang.Application_UnexpectedErrorMessage);
+            }
+        }
+
+        private static List<Card> ResolveOwnCards(MatchState state)
+        {
+            List<Card> cards = new List<Card>();
+
+            if (state.OwnHand != null)
+            {
+                cards.AddRange(state.OwnHand);
+            }
+
+            return cards;
         }
 
         private static Visibility ResolveVisibility(bool isVisible)
@@ -301,13 +362,14 @@ namespace cribbage_Royale_PROYECTO.Views
             return suit == CardSuit.Hearts || suit == CardSuit.Diamonds;
         }
 
-        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        private async void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
-            int selectedCards = _playerHand.Count(card => card.IsSelected);
+            List<Card> selected = GetSelectedCards();
 
-            if (selectedCards == CardsToDiscard)
+            if (selected.Count == CardsToDiscard)
             {
                 matchMessagePanel.HidePanel();
+                await SendDiscardAsync(selected);
             }
             else
             {

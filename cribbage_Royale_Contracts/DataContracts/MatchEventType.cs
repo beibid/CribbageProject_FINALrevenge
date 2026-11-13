@@ -33,6 +33,9 @@ namespace CribbageRoyale.Contracts.DataContracts
         Resumed = 7,
 
         [EnumMember]
-        Finished = 8
+        Finished = 8,
+
+        [EnumMember]
+        CardsDiscarded = 9
     }
 }

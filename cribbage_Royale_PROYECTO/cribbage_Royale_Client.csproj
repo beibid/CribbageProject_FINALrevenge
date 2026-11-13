@@ -153,6 +153,7 @@
     <Compile Include="ServiceAccess\ChatMessageReceivedEventArgs.cs" />
     <Compile Include="ServiceAccess\ChatMessageResult.cs" />
     <Compile Include="ServiceAccess\ChatMessageStore.cs" />
+    <Compile Include="ServiceAccess\DiscardResult.cs" />
     <Compile Include="ServiceAccess\FriendChatClient.cs" />
     <Compile Include="ServiceAccess\FriendListClient.cs" />
     <Compile Include="ServiceAccess\FriendListResult.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="ServiceAccess\InvitationResult.cs" />
     <Compile Include="ServiceAccess\MatchInvitationClient.cs" />
     <Compile Include="ServiceAccess\MatchInvitationEventArgs.cs" />
+    <Compile Include="ServiceAccess\MatchPlayClient.cs" />
     <Compile Include="ServiceAccess\MatchStartedEventArgs.cs" />
     <Compile Include="ServiceAccess\MatchStateChangedEventArgs.cs" />
     <Compile Include="ServiceAccess\PendingFriendRequestsResult.cs" />

@@ -16,6 +16,7 @@ namespace CribbageRoyale.Rules
         private readonly Dictionary<int, int> _scores;
         private readonly List<int> _playersWhoDiscarded;
         private readonly List<Card> _crib;
+        private readonly object _syncRoot = new object();
 
         private MatchPhase _phase;
         private int _stateVersion;
@@ -69,26 +70,43 @@ namespace CribbageRoyale.Rules
         public List<Card> GetHand(int accountId)
         {
             List<Card> hand = new List<Card>();
-            if (_hands.ContainsKey(accountId))
+
+            lock (_syncRoot)
             {
-                hand.AddRange(_hands[accountId]);
+                if (_hands.ContainsKey(accountId))
+                {
+                    hand.AddRange(_hands[accountId]);
+                }
             }
+
             return hand;
         }
 
         public int GetScore(int accountId)
         {
             int score = 0;
-            if (_scores.ContainsKey(accountId))
+
+            lock (_syncRoot)
             {
-                score = _scores[accountId];
+                if (_scores.ContainsKey(accountId))
+                {
+                    score = _scores[accountId];
+                }
             }
+
             return score;
         }
 
         public bool HasDiscarded(int accountId)
         {
-            return _playersWhoDiscarded.Contains(accountId);
+            bool discarded;
+
+            lock (_syncRoot)
+            {
+                discarded = _playersWhoDiscarded.Contains(accountId);
+            }
+
+            return discarded;
         }
 
         public bool TryGetCutCard(out Card cutCard)
@@ -101,17 +119,22 @@ namespace CribbageRoyale.Rules
         {
             bool discarded = false;
             List<Card> taken;
-            if (CanDiscard(accountId, cards))
+
+            lock (_syncRoot)
             {
-                if (TryTakeFromHand(accountId, cards, out taken))
+                if (CanDiscard(accountId, cards))
                 {
-                    _crib.AddRange(taken);
-                    _playersWhoDiscarded.Add(accountId);
-                    RevealCutCardWhenReady();
-                    _stateVersion++;
-                    discarded = true;
+                    if (TryTakeFromHand(accountId, cards, out taken))
+                    {
+                        _crib.AddRange(taken);
+                        _playersWhoDiscarded.Add(accountId);
+                        RevealCutCardWhenReady();
+                        _stateVersion++;
+                        discarded = true;
+                    }
                 }
             }
+
             return discarded;
         }
 
@@ -130,7 +153,7 @@ namespace CribbageRoyale.Rules
             {
                 if (cards != null && cards.Count == CardsToDiscard)
                 {
-                    allowed = !HasDiscarded(accountId);
+                    allowed = !_playersWhoDiscarded.Contains(accountId);
                 }
             }
             return allowed;

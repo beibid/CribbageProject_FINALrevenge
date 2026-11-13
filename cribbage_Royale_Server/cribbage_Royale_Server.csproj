@@ -142,6 +142,8 @@
     <Compile Include="Services\FriendshipTargetRules.cs" />
     <Compile Include="Services\MatchInvitationService.cs" />
     <Compile Include="Services\MatchInvitationServices.cs" />
+    <Compile Include="Services\MatchPlayService.cs" />
+    <Compile Include="Services\MatchPlayServices.cs" />
     <Compile Include="Services\PlayerSessionService.cs" />
     <Compile Include="Services\RelationshipSnapshot.cs" />
     <Compile Include="Services\StatisticsService.cs" />

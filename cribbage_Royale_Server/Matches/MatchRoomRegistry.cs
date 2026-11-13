@@ -26,6 +26,18 @@ namespace CribbageRoyale.Server.Matches
             return inMatch;
         }
 
+        public bool TryGetMatch(long matchId, out CribbageMatch match)
+        {
+            bool found;
+
+            lock (_syncRoot)
+            {
+                found = _matches.TryGetValue(matchId, out match);
+            }
+
+            return found;
+        }
+
         public CribbageMatch StartMatch(int firstAccountId, int secondAccountId)
         {
             CribbageMatch match;
