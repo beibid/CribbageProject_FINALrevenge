@@ -4,81 +4,97 @@ using System.Runtime.Serialization;
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Estado de una partida visto por un jugador. El servidor arma uno
-    /// distinto para cada jugador y nunca incluye las cartas del rival,
-    /// el crib antes del conteo ni el mazo restante.
+    /// Match state as seen by one participant.
     /// </summary>
     [DataContract]
     public class MatchState
     {
         /// <summary>
-        /// Identificador de la partida.
+        /// Identifier of the match this state belongs to.
         /// </summary>
         [DataMember]
         public long MatchId { get; set; }
 
         /// <summary>
-        /// Número de versión del estado, usado para descartar acciones atrasadas.
+        /// Version of the state, incremented on every change.
         /// </summary>
         [DataMember]
         public int StateVersion { get; set; }
 
         /// <summary>
-        /// Etapa actual de la partida.
+        /// Current phase of the match.
         /// </summary>
         [DataMember]
         public MatchPhase Phase { get; set; }
 
         /// <summary>
-        /// Jugador rival.
+        /// Account of the opposing player.
         /// </summary>
         [DataMember]
         public AccountReference Rival { get; set; }
 
         /// <summary>
-        /// Cartas en la mano del jugador que recibe este estado.
+        /// Number of cards the opposing player holds.
+        /// </summary>
+        [DataMember]
+        public int RivalCardCount { get; set; }
+
+        /// <summary>
+        /// Cards held by the recipient of this state.
         /// </summary>
         [DataMember]
         public List<Card> OwnHand { get; set; }
 
         /// <summary>
-        /// Cartas jugadas en la ronda actual.
+        /// Cards already played during the pegging phase.
         /// </summary>
         [DataMember]
         public List<Card> PlayedCards { get; set; }
 
         /// <summary>
-        /// Cartas del crib. Permanece vacía hasta la etapa de conteo.
+        /// Cards of the crib, revealed only during the counting phase.
         /// </summary>
         [DataMember]
         public List<Card> CribCards { get; set; }
 
         /// <summary>
-        /// Carta de corte. Es nula mientras no se ha volteado.
+        /// Number of cards already placed in the crib.
+        /// </summary>
+        [DataMember]
+        public int CribCardCount { get; set; }
+
+        /// <summary>
+        /// Card cut after both players discarded.
         /// </summary>
         [DataMember]
         public Card CutCard { get; set; }
 
         /// <summary>
-        /// Puntos del jugador que recibe este estado.
+        /// Score of the recipient of this state.
         /// </summary>
         [DataMember]
         public int OwnScore { get; set; }
 
         /// <summary>
-        /// Puntos del rival.
+        /// Score of the opposing player.
         /// </summary>
         [DataMember]
         public int RivalScore { get; set; }
 
         /// <summary>
-        /// Identificador de la cuenta que reparte.
+        /// Account that owns the crib in the current hand.
         /// </summary>
         [DataMember]
         public int DealerAccountId { get; set; }
 
         /// <summary>
-        /// Suma de las cartas jugadas en la ronda actual.
+        /// Account whose turn it is to play.
+        /// </summary>
+        [DataMember]
+        public int TurnAccountId { get; set; }
+
+        /// <summary>
+        /// Running count of the pegging phase.
         /// </summary>
         [DataMember]
         public int PeggingCount { get; set; }

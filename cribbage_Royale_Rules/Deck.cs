@@ -8,11 +8,10 @@ namespace CribbageRoyale.Rules
     public class Deck
     {
         private const int TotalCards = 52;
-
-        private static readonly RNGCryptoServiceProvider RandomGenerator =
-            new RNGCryptoServiceProvider();
+        private const int RandomBufferLength = 4;
 
         private readonly List<Card> _cards;
+
         private int _nextCardIndex;
 
         public Deck()
@@ -30,6 +29,7 @@ namespace CribbageRoyale.Rules
         public List<Card> Deal(int count)
         {
             List<Card> dealt = new List<Card>();
+
             if (count > 0 && count <= RemainingCards)
             {
                 for (int position = 0; position < count; position++)
@@ -38,36 +38,36 @@ namespace CribbageRoyale.Rules
                     _nextCardIndex++;
                 }
             }
+
             return dealt;
         }
 
-        public bool TryCut(out Card cutCard)
+        public Card TakeCutCard()
         {
-            bool cut = false;
-            cutCard = null;
-            if (RemainingCards > 0)
-            {
-                cutCard = _cards[_nextCardIndex];
-                _nextCardIndex++;
-                cut = true;
-            }
-            return cut;
+            Card cutCard = _cards[_nextCardIndex];
+            _nextCardIndex++;
+
+            return cutCard;
         }
 
         private void Shuffle()
         {
-            for (int position = _cards.Count - 1; position > 0; position--)
+            using (RandomNumberGenerator generator = RandomNumberGenerator.Create())
             {
-                int swapIndex = NextIndex(position + 1);
-                Card temporary = _cards[position];
-                _cards[position] = _cards[swapIndex];
-                _cards[swapIndex] = temporary;
+                for (int position = _cards.Count - 1; position > 0; position--)
+                {
+                    int swapIndex = NextIndex(generator, position + 1);
+                    Card temporary = _cards[position];
+                    _cards[position] = _cards[swapIndex];
+                    _cards[swapIndex] = temporary;
+                }
             }
         }
 
         private static List<Card> BuildOrderedCards()
         {
             List<Card> cards = new List<Card>(TotalCards);
+
             foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
             {
                 foreach (CardRank rank in Enum.GetValues(typeof(CardRank)))
@@ -75,14 +75,17 @@ namespace CribbageRoyale.Rules
                     cards.Add(new Card { Rank = rank, Suit = suit });
                 }
             }
+
             return cards;
         }
 
-        private static int NextIndex(int exclusiveMaximum)
+        private static int NextIndex(RandomNumberGenerator generator, int exclusiveMaximum)
         {
-            byte[] buffer = new byte[4];
-            RandomGenerator.GetBytes(buffer);
-            int value = BitConverter.ToInt32(buffer, 0) & int.MaxValue;
+            byte[] randomBytes = new byte[RandomBufferLength];
+            generator.GetBytes(randomBytes);
+
+            int value = BitConverter.ToInt32(randomBytes, 0) & int.MaxValue;
+
             return value % exclusiveMaximum;
         }
     }

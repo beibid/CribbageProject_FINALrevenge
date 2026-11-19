@@ -2,9 +2,9 @@
 
 namespace cribbage_Royale_PROYECTO.ServiceAccess
 {
-    public class DiscardResult
+    public class MatchActionResult
     {
-        public DiscardResult(ServiceFailureReason reason, MatchFailure? failure)
+        public MatchActionResult(ServiceFailureReason reason, MatchFailure? failure)
         {
             Reason = reason;
             Failure = failure;

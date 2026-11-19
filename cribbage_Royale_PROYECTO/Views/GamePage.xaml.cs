@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using CribbageRoyale.Contracts.DataContracts;
 using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
@@ -24,6 +25,8 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private List<PlayingCardItem> _playerHand;
         private List<Card> _ownCards;
+        private MatchPhase _phase;
+        private bool _isOwnTurn;
         private int _stateVersion;
 
         public GamePage(MatchStart matchStart)
@@ -32,9 +35,12 @@ namespace cribbage_Royale_PROYECTO.Views
             _matchStart = matchStart;
             _playerHand = new List<PlayingCardItem>();
             _ownCards = new List<Card>();
+            _phase = MatchPhase.Discarding;
+            _isOwnTurn = false;
             _sessionCallback = ((App)Application.Current).SessionCallback;
             _matchPlayClient = ((App)Application.Current).MatchPlayClient;
             _sessionCallback.MatchStateReceived += SessionCallback_MatchStateReceived;
+            _sessionCallback.PresenceReceived += SessionCallback_PresenceReceived;
             Unloaded += GamePage_Unloaded;
             ShowMatchHeader();
             ShowEmptyTable();
@@ -48,9 +54,18 @@ namespace cribbage_Royale_PROYECTO.Views
             }
         }
 
+        private void SessionCallback_PresenceReceived(object sender, PresenceChangedEventArgs e)
+        {
+            if (e.Presence.Account.AccountId == _matchStart.Opponent.AccountId)
+            {
+                ShowRivalPresence(e.Presence.IsConnected);
+            }
+        }
+
         private void GamePage_Unloaded(object sender, RoutedEventArgs e)
         {
             _sessionCallback.MatchStateReceived -= SessionCallback_MatchStateReceived;
+            _sessionCallback.PresenceReceived -= SessionCallback_PresenceReceived;
             Unloaded -= GamePage_Unloaded;
         }
 
@@ -63,6 +78,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
             hostBadgeBorder.Visibility = ResolveVisibility(_matchStart.IsHost);
             cribOwnerTextBlock.Text = ResolveCribOwner();
+            ShowRivalPresence(true);
 
             goalTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
@@ -80,27 +96,80 @@ namespace cribbage_Royale_PROYECTO.Views
             playedCardsItemsControl.ItemsSource = new List<PlayingCardItem>();
             opponentTrackItemsControl.ItemsSource = BuildTrack(0);
             playerTrackItemsControl.ItemsSource = BuildTrack(0);
+            ShowHandAvailability();
+            ShowCrib(0);
             ShowCutCard(null);
             ShowScore(0, 0);
             ShowRunningCount(0);
+            ShowTurn();
             ShowPhase(MatchPhase.Discarding);
         }
 
         private void ShowState(MatchState state)
         {
             _stateVersion = state.StateVersion;
+            _phase = state.Phase;
+            _isOwnTurn = state.TurnAccountId != state.Rival.AccountId;
             _ownCards = ResolveOwnCards(state);
             _playerHand = BuildCards(_ownCards);
+            ShowHandAvailability();
             playerHandItemsControl.ItemsSource = _playerHand;
-            opponentHandItemsControl.ItemsSource = BuildFaceDownHand(_playerHand.Count);
+            opponentHandItemsControl.ItemsSource = BuildFaceDownHand(state.RivalCardCount);
             playedCardsItemsControl.ItemsSource = BuildCards(state.PlayedCards);
             opponentTrackItemsControl.ItemsSource = BuildTrack(state.RivalScore);
             playerTrackItemsControl.ItemsSource = BuildTrack(state.OwnScore);
+            ShowCrib(state.CribCardCount);
             ShowCutCard(state.CutCard);
             ShowScore(state.OwnScore, state.RivalScore);
             ShowRunningCount(state.PeggingCount);
+            ShowTurn();
             ShowPhase(state.Phase);
-            discardButton.IsEnabled = _playerHand.Count == HandSize;
+        }
+
+        private void ShowRivalPresence(bool isConnected)
+        {
+            rivalOnlinePanel.Visibility = ResolveVisibility(isConnected);
+            rivalOfflinePanel.Visibility = ResolveVisibility(!isConnected);
+        }
+
+        private void ShowTurn()
+        {
+            turnTextBlock.Text = Lang.Game_RivalTurn;
+
+            if (_isOwnTurn)
+            {
+                turnTextBlock.Text = Lang.Game_YourTurn;
+            }
+        }
+
+        private void ShowHandAvailability()
+        {
+            bool isHandEnabled = ResolveHandEnabled();
+
+            discardButton.IsEnabled = isHandEnabled;
+
+            foreach (PlayingCardItem card in _playerHand)
+            {
+                card.IsPlayable = isHandEnabled;
+            }
+        }
+
+        private bool ResolveHandEnabled()
+        {
+            bool isEnabled = _playerHand.Count == HandSize;
+
+            if (_phase == MatchPhase.Playing)
+            {
+                isEnabled = _isOwnTurn;
+            }
+
+            return isEnabled;
+        }
+
+        private void ShowCrib(int cardCount)
+        {
+            cribItemsControl.ItemsSource = BuildFaceDownHand(cardCount);
+            cribEmptyTextBlock.Visibility = ResolveVisibility(cardCount == 0);
         }
 
         private void ShowPhase(MatchPhase phase)
@@ -204,6 +273,19 @@ namespace cribbage_Royale_PROYECTO.Views
             return selected;
         }
 
+        private Card ResolveCardOf(PlayingCardItem item)
+        {
+            Card card = null;
+            int position = _playerHand.IndexOf(item);
+
+            if (position >= 0)
+            {
+                card = _ownCards[position];
+            }
+
+            return card;
+        }
+
         private CribDiscard BuildDiscard(List<Card> cards)
         {
             CribDiscard discard = new CribDiscard();
@@ -214,17 +296,39 @@ namespace cribbage_Royale_PROYECTO.Views
             return discard;
         }
 
+        private CardPlay BuildPlay(Card card)
+        {
+            CardPlay play = new CardPlay();
+            play.MatchId = _matchStart.MatchId;
+            play.Card = card;
+            play.ExpectedStateVersion = _stateVersion;
+
+            return play;
+        }
+
         private async Task SendDiscardAsync(List<Card> cards)
         {
             discardButton.IsEnabled = false;
 
-            DiscardResult result = await _matchPlayClient.DiscardAsync(
+            MatchActionResult result = await _matchPlayClient.DiscardAsync(
                 CurrentSession.SessionToken,
                 BuildDiscard(cards));
 
             if (!result.Succeeded)
             {
                 discardButton.IsEnabled = true;
+                matchMessagePanel.ShowError(Lang.Application_UnexpectedErrorMessage);
+            }
+        }
+
+        private async Task SendPlayAsync(Card card)
+        {
+            MatchActionResult result = await _matchPlayClient.PlayCardAsync(
+                CurrentSession.SessionToken,
+                BuildPlay(card));
+
+            if (!result.Succeeded)
+            {
                 matchMessagePanel.ShowError(Lang.Application_UnexpectedErrorMessage);
             }
         }
@@ -360,6 +464,18 @@ namespace cribbage_Royale_PROYECTO.Views
         private static bool IsRedSuit(CardSuit suit)
         {
             return suit == CardSuit.Hearts || suit == CardSuit.Diamonds;
+        }
+
+        private async void PlayerCard_Checked(object sender, RoutedEventArgs e)
+        {
+            ToggleButton button = (ToggleButton)sender;
+            PlayingCardItem item = (PlayingCardItem)button.DataContext;
+
+            if (_phase == MatchPhase.Playing)
+            {
+                item.IsSelected = false;
+                await SendPlayAsync(ResolveCardOf(item));
+            }
         }
 
         private async void DiscardButton_Click(object sender, RoutedEventArgs e)

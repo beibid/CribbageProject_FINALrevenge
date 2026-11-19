@@ -70,24 +70,26 @@ namespace CribbageRoyale.Server.Projection
 
         public MatchState BuildMatchState(CribbageMatch match, int accountId)
         {
-            Card cutCard;
             int rivalAccountId = match.GetOpponentId(accountId);
             MatchState state = new MatchState();
             state.MatchId = match.MatchId;
             state.StateVersion = match.StateVersion;
             state.Phase = match.Phase;
             state.Rival = ResolveAccount(rivalAccountId);
+            state.RivalCardCount = match.GetHand(rivalAccountId).Count;
             state.OwnHand = match.GetHand(accountId);
-            state.PlayedCards = new List<Card>();
+            state.PlayedCards = match.GetPlayedCards();
             state.CribCards = new List<Card>();
+            state.CribCardCount = match.CribCardCount;
             state.OwnScore = match.GetScore(accountId);
             state.RivalScore = match.GetScore(rivalAccountId);
             state.DealerAccountId = match.DealerAccountId;
-            state.PeggingCount = 0;
+            state.TurnAccountId = match.TurnAccountId;
+            state.PeggingCount = match.PeggingCount;
 
-            if (match.TryGetCutCard(out cutCard))
+            if (match.HasCutCard)
             {
-                state.CutCard = cutCard;
+                state.CutCard = match.CutCard;
             }
 
             return state;

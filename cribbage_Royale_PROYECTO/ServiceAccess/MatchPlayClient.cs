@@ -20,7 +20,7 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 logger);
         }
 
-        public Task<DiscardResult> DiscardAsync(string sessionToken, CribDiscard discard)
+        public Task<MatchActionResult> DiscardAsync(string sessionToken, CribDiscard discard)
         {
             return Task.Run(() => _invoker.Execute(
                 sessionToken,
@@ -28,16 +28,31 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 BuildFailedResult));
         }
 
-        private DiscardResult Discard(IMatchPlay channel, CribDiscard discard)
+        public Task<MatchActionResult> PlayCardAsync(string sessionToken, CardPlay play)
+        {
+            return Task.Run(() => _invoker.Execute(
+                sessionToken,
+                channel => Play(channel, play),
+                BuildFailedResult));
+        }
+
+        private MatchActionResult Discard(IMatchPlay channel, CribDiscard discard)
         {
             channel.DiscardToCrib(discard);
 
-            return new DiscardResult(ServiceFailureReason.None, null);
+            return new MatchActionResult(ServiceFailureReason.None, null);
         }
 
-        private DiscardResult BuildFailedResult(ServiceFailureReason reason, MatchFailure? failure)
+        private MatchActionResult Play(IMatchPlay channel, CardPlay play)
         {
-            return new DiscardResult(reason, failure);
+            channel.PlayCard(play);
+
+            return new MatchActionResult(ServiceFailureReason.None, null);
+        }
+
+        private MatchActionResult BuildFailedResult(ServiceFailureReason reason, MatchFailure? failure)
+        {
+            return new MatchActionResult(reason, failure);
         }
     }
 }

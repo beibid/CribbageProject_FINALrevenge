@@ -4,65 +4,65 @@ using CribbageRoyale.Contracts.DataContracts;
 namespace CribbageRoyale.Contracts.ServiceContracts
 {
     /// <summary>
-    /// Operaciones que el servidor invoca sobre el cliente para notificarle cambios.
+    /// Operations the server invokes on the client to notify it of changes.
     /// </summary>
     public interface IGameClientCallback
     {
         /// <summary>
-        /// Notifica que un jugador se conectó o se desconectó.
+        /// Notifies that a player connected or disconnected.
         /// </summary>
-        /// <param name="presence">Cambio de presencia ocurrido.</param>
+        /// <param name="presence">Presence change that occurred.</param>
         [OperationContract(IsOneWay = true)]
         void PresenceChanged(PresenceChange presence);
 
         /// <summary>
-        /// Notifica un hecho social fuera de la partida, como una solicitud de amistad recibida.
+        /// Notifies a social event outside the match, such as a friend request received.
         /// </summary>
-        /// <param name="eventType">Tipo de hecho ocurrido.</param>
-        /// <param name="social">Detalle del hecho.</param>
+        /// <param name="eventType">Type of event that occurred.</param>
+        /// <param name="social">Details of the event.</param>
         [OperationContract(IsOneWay = true)]
         void SocialEventOccurred(SocialEventType eventType, SocialEvent social);
 
         /// <summary>
-        /// Notifica que un amigo envió un mensaje de chat al destinatario.
+        /// Notifies that a friend sent a chat message to the recipient.
         /// </summary>
-        /// <param name="message">Mensaje recibido.</param>
+        /// <param name="message">Message received.</param>
         [OperationContract(IsOneWay = true)]
         void ChatMessageReceived(ChatMessage message);
 
         /// <summary>
-        /// Avisa al jugador que un amigo lo invitó a una partida.
+        /// Tells the player that a friend invited them to a match.
         /// </summary>
-        /// <param name="invitation">Invitación recibida.</param>
+        /// <param name="invitation">Invitation received.</param>
         [OperationContract(IsOneWay = true)]
         void MatchInvitationReceived(MatchInvitation invitation);
 
         /// <summary>
-        /// Avisa a quien invitó que su invitación fue rechazada o dejó de estar disponible.
+        /// Tells the sender that their invitation was declined or is no longer available.
         /// </summary>
-        /// <param name="invitation">Invitación que ya no sigue en pie.</param>
+        /// <param name="invitation">Invitation that is no longer standing.</param>
         [OperationContract(IsOneWay = true)]
         void MatchInvitationDeclined(MatchInvitation invitation);
 
         /// <summary>
-        /// Avisa al jugador que su partida comenzó y puede entrar a la mesa.
+        /// Tells the player that their match started and they can enter the table.
         /// </summary>
-        /// <param name="matchStart">Datos de la partida que comienza.</param>
+        /// <param name="matchStart">Data of the match that is starting.</param>
         [OperationContract(IsOneWay = true)]
         void MatchStarted(MatchStart matchStart);
 
         /// <summary>
-        /// Notifica que el estado de la partida cambió.
+        /// Notifies that the match state changed.
         /// </summary>
-        /// <param name="eventType">Tipo de cambio ocurrido.</param>
-        /// <param name="state">Estado de la partida visto por quien recibe el aviso.</param>
+        /// <param name="eventType">Type of change that occurred.</param>
+        /// <param name="state">Match state as seen by the recipient.</param>
         [OperationContract(IsOneWay = true)]
         void MatchStateChanged(MatchEventType eventType, MatchState state);
 
         /// <summary>
-        /// Notifica que la sesión del destinatario dejó de ser válida.
+        /// Notifies that the recipient's session is no longer valid.
         /// </summary>
-        /// <param name="revocation">Aviso con el motivo de la revocación.</param>
+        /// <param name="revocation">Notice with the reason for the revocation.</param>
         [OperationContract(IsOneWay = true)]
         void SessionRevoked(SessionRevocation revocation);
     }

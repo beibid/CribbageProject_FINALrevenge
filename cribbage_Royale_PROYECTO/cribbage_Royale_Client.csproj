@@ -153,7 +153,7 @@
     <Compile Include="ServiceAccess\ChatMessageReceivedEventArgs.cs" />
     <Compile Include="ServiceAccess\ChatMessageResult.cs" />
     <Compile Include="ServiceAccess\ChatMessageStore.cs" />
-    <Compile Include="ServiceAccess\DiscardResult.cs" />
+    <Compile Include="ServiceAccess\MatchActionResult.cs" />
     <Compile Include="ServiceAccess\FriendChatClient.cs" />
     <Compile Include="ServiceAccess\FriendListClient.cs" />
     <Compile Include="ServiceAccess\FriendListResult.cs" />

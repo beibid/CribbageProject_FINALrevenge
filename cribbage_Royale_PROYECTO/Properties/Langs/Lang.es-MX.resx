@@ -1875,4 +1875,16 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="Friends_RemoveErrorMessage" xml:space="preserve">
     <value>No se pudo eliminar al amigo. Inténtalo más tarde.</value>
   </data>
+	<data name="Game_RivalOnline" xml:space="preserve">
+    <value>En línea</value>
+  </data>
+	<data name="Game_RivalOffline" xml:space="preserve">
+    <value>Sin conexión</value>
+  </data>
+	<data name="Game_YourTurn" xml:space="preserve">
+    <value>Tu turno</value>
+  </data>
+	<data name="Game_RivalTurn" xml:space="preserve">
+    <value>Turno del rival</value>
+  </data>
 </root>

@@ -3,33 +3,45 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Motivos por los que el servidor rechaza una acción dentro de una partida.
+    /// Reasons why a match operation can be rejected.
     /// </summary>
     [DataContract]
     public enum MatchFailure
     {
         /// <summary>
-        /// No existe una partida en curso con ese identificador.
+        /// The match does not exist.
         /// </summary>
         [EnumMember]
-        MatchNotFound,
+        MatchNotFound = 0,
 
         /// <summary>
-        /// Quien llama no es uno de los dos jugadores de la partida.
+        /// The caller does not belong to the match.
         /// </summary>
         [EnumMember]
-        NotAParticipant,
+        NotAParticipant = 1,
 
         /// <summary>
-        /// La partida no está en la etapa que permite esta acción.
+        /// The match is not in a phase that allows the operation.
         /// </summary>
         [EnumMember]
-        MatchNotInProgress,
+        MatchNotInProgress = 2,
 
         /// <summary>
-        /// El descarte no es válido: no son dos cartas o no están en la mano.
+        /// The discarded cards are not valid.
         /// </summary>
         [EnumMember]
-        InvalidDiscard
+        InvalidDiscard = 3,
+
+        /// <summary>
+        /// It is not the caller's turn to play.
+        /// </summary>
+        [EnumMember]
+        NotYourTurn = 4,
+
+        /// <summary>
+        /// The played card is not valid for the current count.
+        /// </summary>
+        [EnumMember]
+        InvalidPlay = 5
     }
 }

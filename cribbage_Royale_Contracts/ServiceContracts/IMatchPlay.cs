@@ -5,18 +5,27 @@ using CribbageRoyale.Contracts.FaultContracts;
 namespace CribbageRoyale.Contracts.ServiceContracts
 {
     /// <summary>
-    /// Operaciones que un jugador invoca durante una partida en curso.
+    /// Operations a player performs during a match.
     /// </summary>
     [ServiceContract]
     public interface IMatchPlay
     {
         /// <summary>
-        /// Envía dos cartas de la mano del jugador al crib del repartidor.
+        /// Sends two cards from the caller's hand to the crib.
         /// </summary>
-        /// <param name="discard">Cartas a descartar y versión del estado conocida.</param>
+        /// <param name="discard">Cards the caller wants to discard.</param>
         [OperationContract]
         [FaultContract(typeof(MatchFault))]
         [FaultContract(typeof(SessionFault))]
         void DiscardToCrib(CribDiscard discard);
+
+        /// <summary>
+        /// Puts one card from the caller's hand on the table.
+        /// </summary>
+        /// <param name="play">Card the caller wants to play.</param>
+        [OperationContract]
+        [FaultContract(typeof(MatchFault))]
+        [FaultContract(typeof(SessionFault))]
+        void PlayCard(CardPlay play);
     }
 }

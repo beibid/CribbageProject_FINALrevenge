@@ -2011,6 +2011,33 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Offline.
+        /// </summary>
+        public static string Game_RivalOffline {
+            get {
+                return ResourceManager.GetString("Game_RivalOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Online.
+        /// </summary>
+        public static string Game_RivalOnline {
+            get {
+                return ResourceManager.GetString("Game_RivalOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rival&apos;s turn.
+        /// </summary>
+        public static string Game_RivalTurn {
+            get {
+                return ResourceManager.GetString("Game_RivalTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Rules.
         /// </summary>
         public static string Game_RulesButton {
@@ -2070,6 +2097,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Game_YouLabel {
             get {
                 return ResourceManager.GetString("Game_YouLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your turn.
+        /// </summary>
+        public static string Game_YourTurn {
+            get {
+                return ResourceManager.GetString("Game_YourTurn", resourceCulture);
             }
         }
         

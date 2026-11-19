@@ -46,6 +46,7 @@
     <Compile Include="DataContracts\AccountReference.cs" />
     <Compile Include="DataContracts\AuthenticatedSession.cs" />
     <Compile Include="DataContracts\Card.cs" />
+    <Compile Include="DataContracts\CardPlay.cs" />
     <Compile Include="DataContracts\CardRank.cs" />
     <Compile Include="DataContracts\CardSuit.cs" />
     <Compile Include="DataContracts\CribDiscard.cs" />

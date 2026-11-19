@@ -7,19 +7,25 @@ namespace CribbageRoyale.Rules
     {
         private const int CardsPerPlayer = 6;
         private const int CardsToDiscard = 2;
+        private const int CardsPerPlay = 1;
         private const int CribSize = 4;
+        private const int MaximumCount = 31;
+        private const int FaceCardValue = 10;
 
         private readonly Deck _deck;
         private readonly int _firstAccountId;
         private readonly int _secondAccountId;
-        private readonly Dictionary<int, List<Card>> _hands;
-        private readonly Dictionary<int, int> _scores;
+        private readonly Dictionary<int, List<Card>> _handsByAccountId;
+        private readonly Dictionary<int, int> _scoresByAccountId;
         private readonly List<int> _playersWhoDiscarded;
         private readonly List<Card> _crib;
+        private readonly List<Card> _playedCards;
         private readonly object _syncRoot = new object();
 
         private MatchPhase _phase;
         private int _stateVersion;
+        private int _turnAccountId;
+        private int _peggingCount;
         private Card _cutCard;
 
         public CribbageMatch(long matchId, int firstAccountId, int secondAccountId)
@@ -29,12 +35,15 @@ namespace CribbageRoyale.Rules
             _firstAccountId = firstAccountId;
             _secondAccountId = secondAccountId;
             _deck = new Deck();
-            _hands = new Dictionary<int, List<Card>>();
-            _scores = new Dictionary<int, int>();
+            _handsByAccountId = new Dictionary<int, List<Card>>();
+            _scoresByAccountId = new Dictionary<int, int>();
             _playersWhoDiscarded = new List<int>();
             _crib = new List<Card>();
+            _playedCards = new List<Card>();
             _phase = MatchPhase.Discarding;
             _stateVersion = 1;
+            _turnAccountId = 0;
+            _peggingCount = 0;
             DealHands();
         }
 
@@ -52,6 +61,41 @@ namespace CribbageRoyale.Rules
             get { return _phase; }
         }
 
+        public int TurnAccountId
+        {
+            get { return _turnAccountId; }
+        }
+
+        public int PeggingCount
+        {
+            get { return _peggingCount; }
+        }
+
+        public bool HasCutCard
+        {
+            get { return _cutCard != null; }
+        }
+
+        public Card CutCard
+        {
+            get { return _cutCard; }
+        }
+
+        public int CribCardCount
+        {
+            get
+            {
+                int count;
+
+                lock (_syncRoot)
+                {
+                    count = _crib.Count;
+                }
+
+                return count;
+            }
+        }
+
         public bool IsParticipant(int accountId)
         {
             return accountId == _firstAccountId || accountId == _secondAccountId;
@@ -60,10 +104,12 @@ namespace CribbageRoyale.Rules
         public int GetOpponentId(int accountId)
         {
             int opponentId = _firstAccountId;
+
             if (accountId == _firstAccountId)
             {
                 opponentId = _secondAccountId;
             }
+
             return opponentId;
         }
 
@@ -73,13 +119,25 @@ namespace CribbageRoyale.Rules
 
             lock (_syncRoot)
             {
-                if (_hands.ContainsKey(accountId))
+                if (_handsByAccountId.ContainsKey(accountId))
                 {
-                    hand.AddRange(_hands[accountId]);
+                    hand.AddRange(_handsByAccountId[accountId]);
                 }
             }
 
             return hand;
+        }
+
+        public List<Card> GetPlayedCards()
+        {
+            List<Card> played = new List<Card>();
+
+            lock (_syncRoot)
+            {
+                played.AddRange(_playedCards);
+            }
+
+            return played;
         }
 
         public int GetScore(int accountId)
@@ -88,9 +146,9 @@ namespace CribbageRoyale.Rules
 
             lock (_syncRoot)
             {
-                if (_scores.ContainsKey(accountId))
+                if (_scoresByAccountId.ContainsKey(accountId))
                 {
-                    score = _scores[accountId];
+                    score = _scoresByAccountId[accountId];
                 }
             }
 
@@ -99,103 +157,229 @@ namespace CribbageRoyale.Rules
 
         public bool HasDiscarded(int accountId)
         {
-            bool discarded;
+            bool hasDiscarded;
 
             lock (_syncRoot)
             {
-                discarded = _playersWhoDiscarded.Contains(accountId);
+                hasDiscarded = _playersWhoDiscarded.Contains(accountId);
             }
 
-            return discarded;
+            return hasDiscarded;
         }
 
-        public bool TryGetCutCard(out Card cutCard)
+        public bool AcceptDiscard(int accountId, List<Card> cards)
         {
-            cutCard = _cutCard;
-            return _cutCard != null;
-        }
-
-        public bool TryDiscard(int accountId, List<Card> cards)
-        {
-            bool discarded = false;
-            List<Card> taken;
+            bool isAccepted = false;
 
             lock (_syncRoot)
             {
-                if (CanDiscard(accountId, cards))
+                if (IsDiscardAllowed(accountId, cards))
                 {
-                    if (TryTakeFromHand(accountId, cards, out taken))
-                    {
-                        _crib.AddRange(taken);
-                        _playersWhoDiscarded.Add(accountId);
-                        RevealCutCardWhenReady();
-                        _stateVersion++;
-                        discarded = true;
-                    }
+                    isAccepted = MoveToCrib(accountId, cards);
                 }
             }
 
-            return discarded;
+            return isAccepted;
+        }
+
+        public bool AcceptPlay(int accountId, Card card)
+        {
+            bool isAccepted = false;
+
+            lock (_syncRoot)
+            {
+                if (IsPlayAllowed(accountId, card))
+                {
+                    isAccepted = PlayFromHand(accountId, card);
+                }
+            }
+
+            return isAccepted;
         }
 
         private void DealHands()
         {
-            _hands[_firstAccountId] = _deck.Deal(CardsPerPlayer);
-            _hands[_secondAccountId] = _deck.Deal(CardsPerPlayer);
-            _scores[_firstAccountId] = 0;
-            _scores[_secondAccountId] = 0;
+            _handsByAccountId[_firstAccountId] = _deck.Deal(CardsPerPlayer);
+            _handsByAccountId[_secondAccountId] = _deck.Deal(CardsPerPlayer);
+            _scoresByAccountId[_firstAccountId] = 0;
+            _scoresByAccountId[_secondAccountId] = 0;
         }
 
-        private bool CanDiscard(int accountId, List<Card> cards)
+        private bool IsDiscardAllowed(int accountId, List<Card> cards)
         {
-            bool allowed = false;
+            bool isAllowed = false;
+
             if (_phase == MatchPhase.Discarding && IsParticipant(accountId))
             {
                 if (cards != null && cards.Count == CardsToDiscard)
                 {
-                    allowed = !_playersWhoDiscarded.Contains(accountId);
+                    isAllowed = !_playersWhoDiscarded.Contains(accountId);
                 }
             }
-            return allowed;
+
+            return isAllowed;
         }
 
-        private bool TryTakeFromHand(int accountId, List<Card> cards, out List<Card> taken)
+        private bool IsPlayAllowed(int accountId, Card card)
         {
-            List<Card> remaining = new List<Card>(_hands[accountId]);
-            taken = new List<Card>();
+            bool isAllowed = false;
+
+            if (_phase == MatchPhase.Playing && accountId == _turnAccountId)
+            {
+                if (card != null)
+                {
+                    isAllowed = _peggingCount + GetCardValue(card.Rank) <= MaximumCount;
+                }
+            }
+
+            return isAllowed;
+        }
+
+        private bool MoveToCrib(int accountId, List<Card> cards)
+        {
+            bool isMoved = false;
+            List<Card> taken = TakeFromHand(accountId, cards);
+
+            if (taken.Count == CardsToDiscard)
+            {
+                _crib.AddRange(taken);
+                _playersWhoDiscarded.Add(accountId);
+                RevealCutCardWhenReady();
+                _stateVersion++;
+                isMoved = true;
+            }
+
+            return isMoved;
+        }
+
+        private bool PlayFromHand(int accountId, Card card)
+        {
+            bool isPlayed = false;
+            List<Card> requested = new List<Card>();
+            requested.Add(card);
+
+            List<Card> taken = TakeFromHand(accountId, requested);
+
+            if (taken.Count == CardsPerPlay)
+            {
+                _playedCards.Add(taken[0]);
+                _peggingCount += GetCardValue(taken[0].Rank);
+                ContinueOrFinishPlay();
+                _stateVersion++;
+                isPlayed = true;
+            }
+
+            return isPlayed;
+        }
+
+        private void ContinueOrFinishPlay()
+        {
+            if (AreHandsEmpty())
+            {
+                _phase = MatchPhase.Counting;
+            }
+            else
+            {
+                AdvanceTurn();
+            }
+        }
+
+        private void AdvanceTurn()
+        {
+            int rivalAccountId = GetOpponentId(_turnAccountId);
+
+            if (HasPlayableCard(rivalAccountId))
+            {
+                _turnAccountId = rivalAccountId;
+            }
+            else if (!HasPlayableCard(_turnAccountId))
+            {
+                StartNewCount(rivalAccountId);
+            }
+        }
+
+        private void StartNewCount(int nextAccountId)
+        {
+            _playedCards.Clear();
+            _peggingCount = 0;
+            _turnAccountId = nextAccountId;
+        }
+
+        private bool HasPlayableCard(int accountId)
+        {
+            bool hasPlayable = false;
+
+            foreach (Card card in _handsByAccountId[accountId])
+            {
+                if (_peggingCount + GetCardValue(card.Rank) <= MaximumCount)
+                {
+                    hasPlayable = true;
+                }
+            }
+
+            return hasPlayable;
+        }
+
+        private bool AreHandsEmpty()
+        {
+            return _handsByAccountId[_firstAccountId].Count == 0
+                && _handsByAccountId[_secondAccountId].Count == 0;
+        }
+
+        private List<Card> TakeFromHand(int accountId, List<Card> cards)
+        {
+            List<Card> remaining = new List<Card>(_handsByAccountId[accountId]);
+            List<Card> taken = new List<Card>();
+
             foreach (Card card in cards)
             {
                 int position = FindCard(remaining, card);
+
                 if (position >= 0)
                 {
                     taken.Add(remaining[position]);
                     remaining.RemoveAt(position);
                 }
             }
-            bool complete = taken.Count == cards.Count;
-            if (complete)
+
+            if (taken.Count == cards.Count)
             {
-                _hands[accountId] = remaining;
+                _handsByAccountId[accountId] = remaining;
             }
-            return complete;
+            else
+            {
+                taken.Clear();
+            }
+
+            return taken;
         }
 
         private void RevealCutCardWhenReady()
         {
-            Card cut;
             if (_crib.Count == CribSize)
             {
-                if (_deck.TryCut(out cut))
-                {
-                    _cutCard = cut;
-                    _phase = MatchPhase.Playing;
-                }
+                _cutCard = _deck.TakeCutCard();
+                _turnAccountId = GetOpponentId(DealerAccountId);
+                _phase = MatchPhase.Playing;
             }
+        }
+
+        private static int GetCardValue(CardRank rank)
+        {
+            int value = (int)rank;
+
+            if (value > FaceCardValue)
+            {
+                value = FaceCardValue;
+            }
+
+            return value;
         }
 
         private static int FindCard(List<Card> cards, Card wanted)
         {
             int found = -1;
+
             for (int position = 0; position < cards.Count; position++)
             {
                 if (found < 0 && IsSameCard(cards[position], wanted))
@@ -203,6 +387,7 @@ namespace CribbageRoyale.Rules
                     found = position;
                 }
             }
+
             return found;
         }
 
