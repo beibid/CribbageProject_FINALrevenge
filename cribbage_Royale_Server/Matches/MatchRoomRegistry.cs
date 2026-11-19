@@ -54,6 +54,16 @@ namespace CribbageRoyale.Server.Matches
             return match;
         }
 
+        public void CloseMatch(long matchId, int firstAccountId, int secondAccountId)
+        {
+            lock (_syncRoot)
+            {
+                _matchesByAccount.Remove(firstAccountId);
+                _matchesByAccount.Remove(secondAccountId);
+                _matches.Remove(matchId);
+            }
+        }
+
         public void RemovePlayer(int accountId)
         {
             long matchId;

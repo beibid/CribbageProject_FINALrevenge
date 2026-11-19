@@ -2101,11 +2101,29 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You lost.
+        /// </summary>
+        public static string Game_YouLost {
+            get {
+                return ResourceManager.GetString("Game_YouLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Your turn.
         /// </summary>
         public static string Game_YourTurn {
             get {
                 return ResourceManager.GetString("Game_YourTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You won.
+        /// </summary>
+        public static string Game_YouWon {
+            get {
+                return ResourceManager.GetString("Game_YouWon", resourceCulture);
             }
         }
         

@@ -27,6 +27,7 @@ namespace cribbage_Royale_PROYECTO.Views
         private List<Card> _ownCards;
         private MatchPhase _phase;
         private bool _isOwnTurn;
+        private bool _isWinner;
         private int _stateVersion;
 
         public GamePage(MatchStart matchStart)
@@ -37,6 +38,7 @@ namespace cribbage_Royale_PROYECTO.Views
             _ownCards = new List<Card>();
             _phase = MatchPhase.Discarding;
             _isOwnTurn = false;
+            _isWinner = false;
             _sessionCallback = ((App)Application.Current).SessionCallback;
             _matchPlayClient = ((App)Application.Current).MatchPlayClient;
             _sessionCallback.MatchStateReceived += SessionCallback_MatchStateReceived;
@@ -110,6 +112,7 @@ namespace cribbage_Royale_PROYECTO.Views
             _stateVersion = state.StateVersion;
             _phase = state.Phase;
             _isOwnTurn = state.TurnAccountId != state.Rival.AccountId;
+            _isWinner = state.OwnScore >= WinningScore;
             _ownCards = ResolveOwnCards(state);
             _playerHand = BuildCards(_ownCards);
             ShowHandAvailability();
@@ -136,10 +139,26 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             turnTextBlock.Text = Lang.Game_RivalTurn;
 
-            if (_isOwnTurn)
+            if (_phase == MatchPhase.Finished)
+            {
+                turnTextBlock.Text = ResolveOutcomeText();
+            }
+            else if (_isOwnTurn)
             {
                 turnTextBlock.Text = Lang.Game_YourTurn;
             }
+        }
+
+        private string ResolveOutcomeText()
+        {
+            string text = Lang.Game_YouLost;
+
+            if (_isWinner)
+            {
+                text = Lang.Game_YouWon;
+            }
+
+            return text;
         }
 
         private void ShowHandAvailability()

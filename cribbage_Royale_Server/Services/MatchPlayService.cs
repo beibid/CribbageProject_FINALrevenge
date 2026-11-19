@@ -43,6 +43,7 @@ namespace CribbageRoyale.Server.Services
             EnsureCallerTurn(match, caller.AccountId);
             Play(match, caller.AccountId, play.Card);
             SendStateToBoth(match, caller.AccountId, MatchEventType.RivalPlayed);
+            CloseWhenFinished(match, caller.AccountId);
         }
 
         private CribbageMatch RequireMatch(long matchId, int accountId)
@@ -99,6 +100,17 @@ namespace CribbageRoyale.Server.Services
             if (!match.AcceptPlay(accountId, card))
             {
                 throw BuildMatchFault(MatchFailure.InvalidPlay, match.MatchId);
+            }
+        }
+
+        private void CloseWhenFinished(CribbageMatch match, int accountId)
+        {
+            if (match.Phase == MatchPhase.Finished)
+            {
+                _services.MatchRooms.CloseMatch(
+                    match.MatchId,
+                    accountId,
+                    match.GetOpponentId(accountId));
             }
         }
 

@@ -11,6 +11,9 @@ namespace CribbageRoyale.Rules
         private const int CribSize = 4;
         private const int MaximumCount = 31;
         private const int FaceCardValue = 10;
+        private const int WinningScore = 61;
+        private const int GoPoints = 1;
+        private const int HisHeelsPoints = 2;
 
         private readonly Deck _deck;
         private readonly int _firstAccountId;
@@ -264,6 +267,7 @@ namespace CribbageRoyale.Rules
             {
                 _playedCards.Add(taken[0]);
                 _peggingCount += GetCardValue(taken[0].Rank);
+                AddScore(accountId, PlayScorer.ScorePlay(_playedCards, _peggingCount));
                 ContinueOrFinishPlay();
                 _stateVersion++;
                 isPlayed = true;
@@ -274,13 +278,17 @@ namespace CribbageRoyale.Rules
 
         private void ContinueOrFinishPlay()
         {
-            if (AreHandsEmpty())
+            if (_phase == MatchPhase.Playing)
             {
-                _phase = MatchPhase.Counting;
-            }
-            else
-            {
-                AdvanceTurn();
+                if (AreHandsEmpty())
+                {
+                    _phase = MatchPhase.Counting;
+                    AwardGo(_turnAccountId);
+                }
+                else
+                {
+                    AdvanceTurn();
+                }
             }
         }
 
@@ -294,7 +302,35 @@ namespace CribbageRoyale.Rules
             }
             else if (!HasPlayableCard(_turnAccountId))
             {
+                AwardGo(_turnAccountId);
                 StartNewCount(rivalAccountId);
+            }
+        }
+
+        private void AwardGo(int accountId)
+        {
+            if (_peggingCount < MaximumCount)
+            {
+                AddScore(accountId, GoPoints);
+            }
+        }
+
+        private void AwardHisHeels()
+        {
+            if (_cutCard.Rank == CardRank.Jack)
+            {
+                AddScore(DealerAccountId, HisHeelsPoints);
+            }
+        }
+
+        private void AddScore(int accountId, int points)
+        {
+            _scoresByAccountId[accountId] += points;
+
+            if (_scoresByAccountId[accountId] >= WinningScore)
+            {
+                _scoresByAccountId[accountId] = WinningScore;
+                _phase = MatchPhase.Finished;
             }
         }
 
@@ -361,6 +397,7 @@ namespace CribbageRoyale.Rules
                 _cutCard = _deck.TakeCutCard();
                 _turnAccountId = GetOpponentId(DealerAccountId);
                 _phase = MatchPhase.Playing;
+                AwardHisHeels();
             }
         }
 

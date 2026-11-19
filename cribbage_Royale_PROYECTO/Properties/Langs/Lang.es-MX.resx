@@ -1887,4 +1887,10 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="Game_RivalTurn" xml:space="preserve">
     <value>Turno del rival</value>
   </data>
+	<data name="Game_YouWon" xml:space="preserve">
+    <value>Ganaste</value>
+  </data>
+	<data name="Game_YouLost" xml:space="preserve">
+    <value>Perdiste</value>
+  </data>
 </root>
