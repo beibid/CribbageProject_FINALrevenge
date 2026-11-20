@@ -1896,4 +1896,7 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="Game_BackToLobbyButton" xml:space="preserve">
     <value>Volver al lobby</value>
   </data>
+	<data name="Game_RivalDisconnectedMessage" xml:space="preserve">
+  <value>Tu rival se desconectó. Ganaste por abandono.</value>
+</data>
 </root>

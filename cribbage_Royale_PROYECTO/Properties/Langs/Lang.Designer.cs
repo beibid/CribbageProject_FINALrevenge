@@ -2020,6 +2020,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Your opponent disconnected. You win by abandonment..
+        /// </summary>
+        public static string Game_RivalDisconnectedMessage {
+            get {
+                return ResourceManager.GetString("Game_RivalDisconnectedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Offline.
         /// </summary>
         public static string Game_RivalOffline {
