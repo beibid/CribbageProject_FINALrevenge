@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using CribbageRoyale.Contracts.DataContracts;
-using CribbageRoyale.Exceptions;
+using CribbageRoyale.Rules;
 using CribbageRoyale.Server.Connections;
-using CribbageRoyale.Server.Projection;
 using Microsoft.Extensions.Logging;
 
 namespace CribbageRoyale.Server.Matches
 {
     public class MatchDisconnectionWatcher
     {
-        private const string CleanupFailureMessage =
-            "The pending invitations of a disconnected player could not be cleaned up.";
+        private const string PlayerDisconnectedMessage =
+            "Player {AccountId} disconnected from match {MatchId}. The rival wins by abandonment.";
 
         private readonly MatchInvitationRegistry _invitationRegistry;
         private readonly MatchRoomRegistry _matchRooms;
@@ -34,9 +33,36 @@ namespace CribbageRoyale.Server.Matches
         {
             if (!e.IsOnline)
             {
-                _matchRooms.RemovePlayer(e.AccountId);
+                EndMatchOf(e.AccountId);
                 DropInvitations(e.AccountId);
             }
+        }
+
+        private void EndMatchOf(int accountId)
+        {
+            CribbageMatch match;
+
+            if (_matchRooms.FindMatchOf(accountId, out match))
+            {
+                int rivalAccountId = match.GetOpponentId(accountId);
+
+                if (match.AbandonBy(accountId))
+                {
+                    _services.Logger.LogWarning(PlayerDisconnectedMessage, accountId, match.MatchId);
+                    NotifyRival(match, rivalAccountId);
+                }
+
+                _matchRooms.CloseMatch(match.MatchId, accountId, rivalAccountId);
+            }
+        }
+
+        private void NotifyRival(CribbageMatch match, int rivalAccountId)
+        {
+            MatchState state = _services.StateProjection.BuildMatchState(match, rivalAccountId);
+
+            _services.PlayerChannel.TrySendNotification(
+                rivalAccountId,
+                callback => callback.MatchStateChanged(MatchEventType.RivalDisconnected, state));
         }
 
         private void DropInvitations(int accountId)
@@ -45,19 +71,7 @@ namespace CribbageRoyale.Server.Matches
 
             foreach (PendingInvitation invitation in dropped)
             {
-                TryNotifyCounterpart(invitation, accountId);
-            }
-        }
-
-        private void TryNotifyCounterpart(PendingInvitation invitation, int goneAccountId)
-        {
-            try
-            {
-                NotifyCounterpart(invitation, goneAccountId);
-            }
-            catch (DataAccessException dataAccessException)
-            {
-                _services.Logger.LogWarning(dataAccessException, CleanupFailureMessage);
+                NotifyCounterpart(invitation, accountId);
             }
         }
 

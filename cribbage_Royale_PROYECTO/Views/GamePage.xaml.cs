@@ -57,6 +57,7 @@ namespace cribbage_Royale_PROYECTO.Views
             if (e.State.MatchId == _matchStart.MatchId)
             {
                 ShowState(e.State);
+                ShowMatchEndNotice(e.EventType);
             }
         }
 
@@ -140,6 +141,19 @@ namespace cribbage_Royale_PROYECTO.Views
             rivalOfflinePanel.Visibility = ResolveVisibility(!isConnected);
         }
 
+        private void ShowMatchEndNotice(MatchEventType eventType)
+        {
+            if (eventType == MatchEventType.RivalDisconnected)
+            {
+                ShowRivalPresence(false);
+                matchMessagePanel.ShowError(Lang.Game_RivalDisconnectedMessage);
+            }
+            else if (eventType == MatchEventType.RivalAbandoned)
+            {
+                matchMessagePanel.ShowError(Lang.Game_RivalAbandonedMessage);
+            }
+        }
+
         private void ShowCribOwner(MatchState state)
         {
             cribOwnerTextBlock.Text = Lang.Game_CribOwnerOpponent;
@@ -195,6 +209,10 @@ namespace cribbage_Royale_PROYECTO.Views
             if (_phase == MatchPhase.Playing)
             {
                 isEnabled = _isOwnTurn;
+            }
+            else if (_phase == MatchPhase.Finished)
+            {
+                isEnabled = false;
             }
 
             return isEnabled;

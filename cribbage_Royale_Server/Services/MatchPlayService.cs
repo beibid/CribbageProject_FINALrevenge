@@ -14,6 +14,8 @@ namespace CribbageRoyale.Server.Services
     {
         private const string OperationRejectedMessage =
             "A match operation was rejected. Reason: {Reason}. MatchId: {MatchId}";
+        private const string MatchAbandonedMessage =
+            "Player {AccountId} abandoned match {MatchId}.";
 
         private readonly MatchPlayServices _services;
         private readonly ILogger _logger;
@@ -51,8 +53,16 @@ namespace CribbageRoyale.Server.Services
             SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
             CribbageMatch match = RequireMatch(matchId, caller.AccountId);
 
-            match.AbandonBy(caller.AccountId);
-            SendStateToBoth(match, caller.AccountId, MatchEventType.Finished);
+            if (match.AbandonBy(caller.AccountId))
+            {
+                _logger.LogInformation(MatchAbandonedMessage, caller.AccountId, matchId);
+
+                SendState(
+                    match,
+                    match.GetOpponentId(caller.AccountId),
+                    MatchEventType.RivalAbandoned);
+            }
+
             CloseWhenFinished(match, caller.AccountId);
         }
 
