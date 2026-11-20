@@ -1,5 +1,6 @@
 ﻿using System;
 using CribbageRoyale.Contracts.DataContracts;
+using CribbageRoyale.Rules;
 
 namespace CribbageRoyale.Server.Projection
 {
@@ -14,5 +15,7 @@ namespace CribbageRoyale.Server.Projection
         MatchInvitation BuildMatchInvitation(long invitationId, int senderAccountId, int recipientAccountId);
 
         MatchStart BuildMatchStart(long matchId, int opponentAccountId, bool isHost);
+
+        MatchState BuildMatchState(CribbageMatch match, int accountId);
     }
 }

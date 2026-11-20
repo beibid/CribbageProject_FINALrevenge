@@ -45,8 +45,16 @@
   <ItemGroup>
     <Compile Include="DataContracts\AccountReference.cs" />
     <Compile Include="DataContracts\AuthenticatedSession.cs" />
+    <Compile Include="DataContracts\Card.cs" />
+    <Compile Include="DataContracts\CardPlay.cs" />
+    <Compile Include="DataContracts\CardRank.cs" />
+    <Compile Include="DataContracts\CardSuit.cs" />
+    <Compile Include="DataContracts\CribDiscard.cs" />
+    <Compile Include="DataContracts\MatchEventType.cs" />
     <Compile Include="DataContracts\MatchInvitation.cs" />
+    <Compile Include="DataContracts\MatchPhase.cs" />
     <Compile Include="DataContracts\MatchStart.cs" />
+    <Compile Include="DataContracts\MatchState.cs" />
     <Compile Include="FaultContracts\ChatFailure.cs" />
     <Compile Include="DataContracts\ChatMessage.cs" />
     <Compile Include="DataContracts\FriendRequest.cs" />
@@ -62,11 +70,14 @@
     <Compile Include="FaultContracts\FriendshipFault.cs" />
     <Compile Include="FaultContracts\InvitationFailure.cs" />
     <Compile Include="FaultContracts\InvitationFault.cs" />
+    <Compile Include="FaultContracts\MatchFailure.cs" />
+    <Compile Include="FaultContracts\MatchFault.cs" />
     <Compile Include="ServiceContracts\IFriendChat.cs" />
     <Compile Include="ServiceContracts\IFriendList.cs" />
     <Compile Include="ServiceContracts\IFriendRequests.cs" />
     <Compile Include="ServiceContracts\IGameClientCallback.cs" />
     <Compile Include="ServiceContracts\IMatchInvitation.cs" />
+    <Compile Include="ServiceContracts\IMatchPlay.cs" />
     <Compile Include="ServiceContracts\IPlayerSession.cs" />
     <Compile Include="DataContracts\PresenceChange.cs" />
     <Compile Include="DataContracts\PresenceScope.cs" />

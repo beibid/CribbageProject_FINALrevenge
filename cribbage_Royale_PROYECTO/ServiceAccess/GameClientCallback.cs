@@ -1,8 +1,9 @@
-﻿using System;
-using System.ServiceModel;
-using System.Windows.Threading;
+﻿using cribbage_Royale_DataAccess.DataAccess;
 using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Contracts.ServiceContracts;
+using System;
+using System.ServiceModel;
+using System.Windows.Threading;
 
 namespace cribbage_Royale_PROYECTO.ServiceAccess
 {
@@ -27,6 +28,8 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
         public event EventHandler<MatchInvitationEventArgs> InvitationWithdrawn;
 
         public event EventHandler<MatchStartedEventArgs> MatchStartReceived;
+
+        public event EventHandler<MatchStateChangedEventArgs> MatchStateReceived;
 
         public event EventHandler<SessionRevokedEventArgs> RevocationReceived;
 
@@ -58,6 +61,11 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
         public void MatchStarted(MatchStart matchStart)
         {
             _dispatcher.BeginInvoke(new Action(() => OnMatchStartReceived(matchStart)));
+        }
+
+        public void MatchStateChanged(MatchEventType eventType, MatchState state)
+        {
+            _dispatcher.BeginInvoke(new Action(() => OnMatchStateReceived(eventType, state)));
         }
 
         public void SessionRevoked(SessionRevocation revocation)
@@ -122,6 +130,16 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
             if (handler != null)
             {
                 handler(this, new MatchStartedEventArgs(matchStart));
+            }
+        }
+
+        private void OnMatchStateReceived(MatchEventType eventType, MatchState state)
+        {
+            EventHandler<MatchStateChangedEventArgs> handler = MatchStateReceived;
+
+            if (handler != null)
+            {
+                handler(this, new MatchStateChangedEventArgs(eventType, state));
             }
         }
 

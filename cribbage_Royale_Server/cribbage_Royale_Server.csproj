@@ -143,6 +143,8 @@
     <Compile Include="Services\FriendshipTargetRules.cs" />
     <Compile Include="Services\MatchInvitationService.cs" />
     <Compile Include="Services\MatchInvitationServices.cs" />
+    <Compile Include="Services\MatchPlayService.cs" />
+    <Compile Include="Services\MatchPlayServices.cs" />
     <Compile Include="Services\PlayerSessionService.cs" />
     <Compile Include="Services\RelationshipSnapshot.cs" />
     <Compile Include="Services\StatisticsService.cs" />
@@ -178,6 +180,10 @@
     <ProjectReference Include="..\cribbage_Royale_DataAccess\cribbage_Royale_DataAccess.csproj">
       <Project>{2e1f779a-5e40-468e-a457-ad861d63c8fa}</Project>
       <Name>cribbage_Royale_DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\cribbage_Royale_Rules\cribbage_Royale_Rules.csproj">
+      <Project>{fe1dece5-9316-43e3-80ed-b7352474aea0}</Project>
+      <Name>cribbage_Royale_Rules</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

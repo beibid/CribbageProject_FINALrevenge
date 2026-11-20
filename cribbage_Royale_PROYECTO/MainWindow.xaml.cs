@@ -89,7 +89,7 @@ namespace cribbage_Royale_PROYECTO
         {
             if (!_sessionEnded)
             {
-                MainFrame.Navigate(new GamePage(e.MatchStart.Opponent.DisplayName));
+                MainFrame.Navigate(new GamePage(e.MatchStart));
             }
         }
 

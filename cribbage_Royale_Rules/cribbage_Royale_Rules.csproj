@@ -41,7 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CribbageMatch.cs" />
+    <Compile Include="Deck.cs" />
+    <Compile Include="HandScorer.cs" />
+    <Compile Include="PlayScorer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cribbage_Royale_Contracts\cribbage_Royale_Contracts.csproj">
+      <Project>{5568171d-f908-4f13-9c43-2c6d5aa9bcde}</Project>
+      <Name>cribbage_Royale_Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Contracts.FaultContracts;
 using CribbageRoyale.Contracts.ServiceContracts;
 using CribbageRoyale.Exceptions;
+using CribbageRoyale.Rules;
 using CribbageRoyale.Server.Connections;
 using CribbageRoyale.Server.Faults;
 using CribbageRoyale.Server.Matches;
@@ -210,12 +211,23 @@ namespace CribbageRoyale.Server.Services
 
         private void StartMatch(PendingInvitation invitation)
         {
-            long matchId = _services.MatchRooms.StartMatch(
+            CribbageMatch match = _services.MatchRooms.StartMatch(
                 invitation.SenderAccountId,
                 invitation.RecipientAccountId);
 
-            NotifyHost(invitation, matchId);
-            NotifyGuest(invitation, matchId);
+            NotifyHost(invitation, match.MatchId);
+            NotifyGuest(invitation, match.MatchId);
+            SendMatchState(match, invitation.SenderAccountId);
+            SendMatchState(match, invitation.RecipientAccountId);
+        }
+
+        private void SendMatchState(CribbageMatch match, int accountId)
+        {
+            MatchState state = _services.StateProjection.BuildMatchState(match, accountId);
+
+            _services.PlayerChannel.TrySendNotification(
+                accountId,
+                callback => callback.MatchStateChanged(MatchEventType.HandDealt, state));
         }
 
         private void NotifyHost(PendingInvitation invitation, long matchId)

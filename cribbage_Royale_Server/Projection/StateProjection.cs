@@ -1,7 +1,8 @@
-﻿using CribbageRoyale.Contracts.DataContracts;
+﻿using System;
+using System.Collections.Generic;
+using CribbageRoyale.Contracts.DataContracts;
+using CribbageRoyale.Rules;
 using CribbageRoyale.Server.Connections;
-using System;
-
 
 namespace CribbageRoyale.Server.Projection
 {
@@ -65,6 +66,34 @@ namespace CribbageRoyale.Server.Projection
             matchStart.IsHost = isHost;
 
             return matchStart;
+        }
+
+        public MatchState BuildMatchState(CribbageMatch match, int accountId)
+        {
+            int rivalAccountId = match.GetOpponentId(accountId);
+            MatchState state = new MatchState();
+            state.MatchId = match.MatchId;
+            state.StateVersion = match.StateVersion;
+            state.Phase = match.Phase;
+            state.Rival = ResolveAccount(rivalAccountId);
+            state.RivalCardCount = match.GetHand(rivalAccountId).Count;
+            state.OwnHand = match.GetHand(accountId);
+            state.PlayedCards = match.GetPlayedCards();
+            state.CribCards = new List<Card>();
+            state.CribCardCount = match.CribCardCount;
+            state.OwnScore = match.GetScore(accountId);
+            state.RivalScore = match.GetScore(rivalAccountId);
+            state.DealerAccountId = match.DealerAccountId;
+            state.TurnAccountId = match.TurnAccountId;
+            state.WinnerAccountId = match.WinnerAccountId;
+            state.PeggingCount = match.PeggingCount;
+
+            if (match.HasCutCard)
+            {
+                state.CutCard = match.CutCard;
+            }
+
+            return state;
         }
 
         private AccountReference ResolveAccount(int accountId)
