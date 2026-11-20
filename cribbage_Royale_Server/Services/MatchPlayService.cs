@@ -46,6 +46,16 @@ namespace CribbageRoyale.Server.Services
             CloseWhenFinished(match, caller.AccountId);
         }
 
+        public void AbandonMatch(long matchId)
+        {
+            SessionIdentity caller = _services.CallerSession.RequireRegisteredAccount();
+            CribbageMatch match = RequireMatch(matchId, caller.AccountId);
+
+            match.AbandonBy(caller.AccountId);
+            SendStateToBoth(match, caller.AccountId, MatchEventType.Finished);
+            CloseWhenFinished(match, caller.AccountId);
+        }
+
         private CribbageMatch RequireMatch(long matchId, int accountId)
         {
             CribbageMatch match;

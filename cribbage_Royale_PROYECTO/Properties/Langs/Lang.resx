@@ -1893,4 +1893,7 @@ If you did not create this account, ignore this message.</value>
 	<data name="Game_YouLost" xml:space="preserve">
     <value>You lost</value>
   </data>
+	<data name="Game_BackToLobbyButton" xml:space="preserve">
+    <value>Back to lobby</value>
+  </data>
 </root>

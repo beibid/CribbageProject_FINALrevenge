@@ -15,17 +15,20 @@ namespace CribbageRoyale.Rules
         private const int GoPoints = 1;
         private const int HisHeelsPoints = 2;
 
-        private readonly Deck _deck;
         private readonly int _firstAccountId;
         private readonly int _secondAccountId;
         private readonly Dictionary<int, List<Card>> _handsByAccountId;
+        private readonly Dictionary<int, List<Card>> _countingHandsByAccountId;
         private readonly Dictionary<int, int> _scoresByAccountId;
         private readonly List<int> _playersWhoDiscarded;
         private readonly List<Card> _crib;
         private readonly List<Card> _playedCards;
         private readonly object _syncRoot = new object();
 
+        private Deck _deck;
         private MatchPhase _phase;
+        private int _dealerAccountId;
+        private int _winnerAccountId;
         private int _stateVersion;
         private int _turnAccountId;
         private int _peggingCount;
@@ -34,15 +37,19 @@ namespace CribbageRoyale.Rules
         public CribbageMatch(long matchId, int firstAccountId, int secondAccountId)
         {
             MatchId = matchId;
-            DealerAccountId = firstAccountId;
             _firstAccountId = firstAccountId;
             _secondAccountId = secondAccountId;
+            _dealerAccountId = firstAccountId;
+            _winnerAccountId = 0;
             _deck = new Deck();
             _handsByAccountId = new Dictionary<int, List<Card>>();
+            _countingHandsByAccountId = new Dictionary<int, List<Card>>();
             _scoresByAccountId = new Dictionary<int, int>();
             _playersWhoDiscarded = new List<int>();
             _crib = new List<Card>();
             _playedCards = new List<Card>();
+            _scoresByAccountId[firstAccountId] = 0;
+            _scoresByAccountId[secondAccountId] = 0;
             _phase = MatchPhase.Discarding;
             _stateVersion = 1;
             _turnAccountId = 0;
@@ -52,7 +59,15 @@ namespace CribbageRoyale.Rules
 
         public long MatchId { get; }
 
-        public int DealerAccountId { get; }
+        public int DealerAccountId
+        {
+            get { return _dealerAccountId; }
+        }
+
+        public int WinnerAccountId
+        {
+            get { return _winnerAccountId; }
+        }
 
         public int StateVersion
         {
@@ -200,12 +215,23 @@ namespace CribbageRoyale.Rules
             return isAccepted;
         }
 
+        public void AbandonBy(int accountId)
+        {
+            lock (_syncRoot)
+            {
+                if (_phase != MatchPhase.Finished)
+                {
+                    _winnerAccountId = GetOpponentId(accountId);
+                    _phase = MatchPhase.Finished;
+                    _stateVersion++;
+                }
+            }
+        }
+
         private void DealHands()
         {
             _handsByAccountId[_firstAccountId] = _deck.Deal(CardsPerPlayer);
             _handsByAccountId[_secondAccountId] = _deck.Deal(CardsPerPlayer);
-            _scoresByAccountId[_firstAccountId] = 0;
-            _scoresByAccountId[_secondAccountId] = 0;
         }
 
         private bool IsDiscardAllowed(int accountId, List<Card> cards)
@@ -282,14 +308,56 @@ namespace CribbageRoyale.Rules
             {
                 if (AreHandsEmpty())
                 {
-                    _phase = MatchPhase.Counting;
                     AwardGo(_turnAccountId);
+                    CountHands();
                 }
                 else
                 {
                     AdvanceTurn();
                 }
             }
+        }
+
+        private void CountHands()
+        {
+            int nonDealerAccountId = GetOpponentId(_dealerAccountId);
+
+            _phase = MatchPhase.Counting;
+            CountFor(nonDealerAccountId, _countingHandsByAccountId[nonDealerAccountId], false);
+            CountFor(_dealerAccountId, _countingHandsByAccountId[_dealerAccountId], false);
+            CountFor(_dealerAccountId, _crib, true);
+            StartNextHandWhenNotFinished();
+        }
+
+        private void CountFor(int accountId, List<Card> cards, bool isCrib)
+        {
+            if (_phase != MatchPhase.Finished)
+            {
+                AddScore(accountId, HandScorer.ScoreHand(cards, _cutCard, isCrib));
+            }
+        }
+
+        private void StartNextHandWhenNotFinished()
+        {
+            if (_phase != MatchPhase.Finished)
+            {
+                StartNextHand();
+            }
+        }
+
+        private void StartNextHand()
+        {
+            _dealerAccountId = GetOpponentId(_dealerAccountId);
+            _deck = new Deck();
+            _crib.Clear();
+            _playedCards.Clear();
+            _playersWhoDiscarded.Clear();
+            _countingHandsByAccountId.Clear();
+            _cutCard = null;
+            _peggingCount = 0;
+            _turnAccountId = 0;
+            _phase = MatchPhase.Discarding;
+            DealHands();
         }
 
         private void AdvanceTurn()
@@ -319,7 +387,7 @@ namespace CribbageRoyale.Rules
         {
             if (_cutCard.Rank == CardRank.Jack)
             {
-                AddScore(DealerAccountId, HisHeelsPoints);
+                AddScore(_dealerAccountId, HisHeelsPoints);
             }
         }
 
@@ -330,6 +398,7 @@ namespace CribbageRoyale.Rules
             if (_scoresByAccountId[accountId] >= WinningScore)
             {
                 _scoresByAccountId[accountId] = WinningScore;
+                _winnerAccountId = accountId;
                 _phase = MatchPhase.Finished;
             }
         }
@@ -338,7 +407,19 @@ namespace CribbageRoyale.Rules
         {
             _playedCards.Clear();
             _peggingCount = 0;
-            _turnAccountId = nextAccountId;
+            _turnAccountId = ResolveNextPlayer(nextAccountId);
+        }
+
+        private int ResolveNextPlayer(int preferredAccountId)
+        {
+            int accountId = preferredAccountId;
+
+            if (_handsByAccountId[preferredAccountId].Count == 0)
+            {
+                accountId = GetOpponentId(preferredAccountId);
+            }
+
+            return accountId;
         }
 
         private bool HasPlayableCard(int accountId)
@@ -395,10 +476,20 @@ namespace CribbageRoyale.Rules
             if (_crib.Count == CribSize)
             {
                 _cutCard = _deck.TakeCutCard();
-                _turnAccountId = GetOpponentId(DealerAccountId);
+                SaveCountingHands();
+                _turnAccountId = GetOpponentId(_dealerAccountId);
                 _phase = MatchPhase.Playing;
                 AwardHisHeels();
             }
+        }
+
+        private void SaveCountingHands()
+        {
+            _countingHandsByAccountId[_firstAccountId] =
+                new List<Card>(_handsByAccountId[_firstAccountId]);
+
+            _countingHandsByAccountId[_secondAccountId] =
+                new List<Card>(_handsByAccountId[_secondAccountId]);
         }
 
         private static int GetCardValue(CardRank rank)

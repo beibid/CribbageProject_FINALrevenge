@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CribbageMatch.cs" />
     <Compile Include="Deck.cs" />
+    <Compile Include="HandScorer.cs" />
     <Compile Include="PlayScorer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

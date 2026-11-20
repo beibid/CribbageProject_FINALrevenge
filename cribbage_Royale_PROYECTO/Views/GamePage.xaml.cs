@@ -18,6 +18,8 @@ namespace cribbage_Royale_PROYECTO.Views
         private const int WinningScore = 61;
         private const int CardsToDiscard = 2;
         private const int HandSize = 6;
+        private const int MaximumCount = 31;
+        private const int FaceCardValue = 10;
 
         private readonly MatchStart _matchStart;
         private readonly GameClientCallback _sessionCallback;
@@ -28,6 +30,7 @@ namespace cribbage_Royale_PROYECTO.Views
         private MatchPhase _phase;
         private bool _isOwnTurn;
         private bool _isWinner;
+        private int _peggingCount;
         private int _stateVersion;
 
         public GamePage(MatchStart matchStart)
@@ -39,6 +42,7 @@ namespace cribbage_Royale_PROYECTO.Views
             _phase = MatchPhase.Discarding;
             _isOwnTurn = false;
             _isWinner = false;
+            _peggingCount = 0;
             _sessionCallback = ((App)Application.Current).SessionCallback;
             _matchPlayClient = ((App)Application.Current).MatchPlayClient;
             _sessionCallback.MatchStateReceived += SessionCallback_MatchStateReceived;
@@ -79,7 +83,6 @@ namespace cribbage_Royale_PROYECTO.Views
                 ResolveOpponentName());
 
             hostBadgeBorder.Visibility = ResolveVisibility(_matchStart.IsHost);
-            cribOwnerTextBlock.Text = ResolveCribOwner();
             ShowRivalPresence(true);
 
             goalTextBlock.Text = string.Format(
@@ -111,8 +114,9 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             _stateVersion = state.StateVersion;
             _phase = state.Phase;
+            _peggingCount = state.PeggingCount;
             _isOwnTurn = state.TurnAccountId != state.Rival.AccountId;
-            _isWinner = state.OwnScore >= WinningScore;
+            _isWinner = IsOwnVictory(state);
             _ownCards = ResolveOwnCards(state);
             _playerHand = BuildCards(_ownCards);
             ShowHandAvailability();
@@ -122,6 +126,7 @@ namespace cribbage_Royale_PROYECTO.Views
             opponentTrackItemsControl.ItemsSource = BuildTrack(state.RivalScore);
             playerTrackItemsControl.ItemsSource = BuildTrack(state.OwnScore);
             ShowCrib(state.CribCardCount);
+            ShowCribOwner(state);
             ShowCutCard(state.CutCard);
             ShowScore(state.OwnScore, state.RivalScore);
             ShowRunningCount(state.PeggingCount);
@@ -133,6 +138,16 @@ namespace cribbage_Royale_PROYECTO.Views
         {
             rivalOnlinePanel.Visibility = ResolveVisibility(isConnected);
             rivalOfflinePanel.Visibility = ResolveVisibility(!isConnected);
+        }
+
+        private void ShowCribOwner(MatchState state)
+        {
+            cribOwnerTextBlock.Text = Lang.Game_CribOwnerOpponent;
+
+            if (state.DealerAccountId != state.Rival.AccountId)
+            {
+                cribOwnerTextBlock.Text = Lang.Game_CribOwnerYou;
+            }
         }
 
         private void ShowTurn()
@@ -167,9 +182,9 @@ namespace cribbage_Royale_PROYECTO.Views
 
             discardButton.IsEnabled = isHandEnabled;
 
-            foreach (PlayingCardItem card in _playerHand)
+            for (int index = 0; index < _playerHand.Count; index++)
             {
-                card.IsPlayable = isHandEnabled;
+                _playerHand[index].IsPlayable = isHandEnabled && IsCardAllowed(_ownCards[index]);
             }
         }
 
@@ -185,6 +200,18 @@ namespace cribbage_Royale_PROYECTO.Views
             return isEnabled;
         }
 
+        private bool IsCardAllowed(Card card)
+        {
+            bool isAllowed = true;
+
+            if (_phase == MatchPhase.Playing)
+            {
+                isAllowed = _peggingCount + GetCardValue(card.Rank) <= MaximumCount;
+            }
+
+            return isAllowed;
+        }
+
         private void ShowCrib(int cardCount)
         {
             cribItemsControl.ItemsSource = BuildFaceDownHand(cardCount);
@@ -198,6 +225,7 @@ namespace cribbage_Royale_PROYECTO.Views
             discardPanel.Visibility = ResolveVisibility(isDiscardPhase);
             playPanel.Visibility = ResolveVisibility(!isDiscardPhase);
             discardButton.Visibility = ResolveVisibility(isDiscardPhase);
+            leaveMatchButton.Content = ResolveLeaveButtonText(phase);
 
             if (isDiscardPhase)
             {
@@ -263,18 +291,6 @@ namespace cribbage_Royale_PROYECTO.Views
             }
 
             return name;
-        }
-
-        private string ResolveCribOwner()
-        {
-            string owner = Lang.Game_CribOwnerOpponent;
-
-            if (_matchStart.IsHost)
-            {
-                owner = Lang.Game_CribOwnerYou;
-            }
-
-            return owner;
         }
 
         private List<Card> GetSelectedCards()
@@ -350,6 +366,54 @@ namespace cribbage_Royale_PROYECTO.Views
             {
                 matchMessagePanel.ShowError(Lang.Application_UnexpectedErrorMessage);
             }
+        }
+
+        private async Task AbandonAndLeaveAsync()
+        {
+            bool isConfirmed = MessageDialog.ShowConfirmation(
+                Window.GetWindow(this),
+                Lang.Game_LeaveConfirmationMessage);
+
+            if (isConfirmed)
+            {
+                leaveMatchButton.IsEnabled = false;
+
+                await _matchPlayClient.AbandonAsync(
+                    CurrentSession.SessionToken,
+                    _matchStart.MatchId);
+
+                NavigationService.Navigate(new Lobby());
+            }
+        }
+
+        private static string ResolveLeaveButtonText(MatchPhase phase)
+        {
+            string text = Lang.Game_LeaveButton;
+
+            if (phase == MatchPhase.Finished)
+            {
+                text = Lang.Game_BackToLobbyButton;
+            }
+
+            return text;
+        }
+
+        private static int GetCardValue(CardRank rank)
+        {
+            int value = (int)rank;
+
+            if (value > FaceCardValue)
+            {
+                value = FaceCardValue;
+            }
+
+            return value;
+        }
+
+        private static bool IsOwnVictory(MatchState state)
+        {
+            return state.WinnerAccountId != 0
+                && state.WinnerAccountId != state.Rival.AccountId;
         }
 
         private static List<Card> ResolveOwnCards(MatchState state)
@@ -512,21 +576,21 @@ namespace cribbage_Royale_PROYECTO.Views
             }
         }
 
-        private void RulesButton_Click(object sender, RoutedEventArgs e)
+        private async void LeaveMatchButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Tutorial());
-        }
-
-        private void LeaveMatchButton_Click(object sender, RoutedEventArgs e)
-        {
-            bool isConfirmed = MessageDialog.ShowConfirmation(
-                Window.GetWindow(this),
-                Lang.Game_LeaveConfirmationMessage);
-
-            if (isConfirmed)
+            if (_phase == MatchPhase.Finished)
             {
                 NavigationService.Navigate(new Lobby());
             }
+            else
+            {
+                await AbandonAndLeaveAsync();
+            }
+        }
+
+        private void RulesButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Tutorial());
         }
     }
 }

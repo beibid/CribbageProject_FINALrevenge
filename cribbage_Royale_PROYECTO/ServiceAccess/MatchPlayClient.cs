@@ -36,6 +36,14 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
                 BuildFailedResult));
         }
 
+        public Task<MatchActionResult> AbandonAsync(string sessionToken, long matchId)
+        {
+            return Task.Run(() => _invoker.Execute(
+                sessionToken,
+                channel => Abandon(channel, matchId),
+                BuildFailedResult));
+        }
+
         private MatchActionResult Discard(IMatchPlay channel, CribDiscard discard)
         {
             channel.DiscardToCrib(discard);
@@ -46,6 +54,13 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
         private MatchActionResult Play(IMatchPlay channel, CardPlay play)
         {
             channel.PlayCard(play);
+
+            return new MatchActionResult(ServiceFailureReason.None, null);
+        }
+
+        private MatchActionResult Abandon(IMatchPlay channel, long matchId)
+        {
+            channel.AbandonMatch(matchId);
 
             return new MatchActionResult(ServiceFailureReason.None, null);
         }

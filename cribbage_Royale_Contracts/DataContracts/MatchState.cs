@@ -94,6 +94,12 @@ namespace CribbageRoyale.Contracts.DataContracts
         public int TurnAccountId { get; set; }
 
         /// <summary>
+        /// Account that won the match, or zero while the match is running.
+        /// </summary>
+        [DataMember]
+        public int WinnerAccountId { get; set; }
+
+        /// <summary>
         /// Running count of the pegging phase.
         /// </summary>
         [DataMember]

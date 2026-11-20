@@ -85,6 +85,7 @@ namespace CribbageRoyale.Server.Projection
             state.RivalScore = match.GetScore(rivalAccountId);
             state.DealerAccountId = match.DealerAccountId;
             state.TurnAccountId = match.TurnAccountId;
+            state.WinnerAccountId = match.WinnerAccountId;
             state.PeggingCount = match.PeggingCount;
 
             if (match.HasCutCard)

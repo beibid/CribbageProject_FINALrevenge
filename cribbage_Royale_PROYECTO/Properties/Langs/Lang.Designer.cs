@@ -1759,6 +1759,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Back to lobby.
+        /// </summary>
+        public static string Game_BackToLobbyButton {
+            get {
+                return ResourceManager.GetString("Game_BackToLobbyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Opponent.
         /// </summary>
         public static string Game_BoardOpponentRow {

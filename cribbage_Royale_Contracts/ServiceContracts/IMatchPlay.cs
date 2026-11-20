@@ -27,5 +27,14 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         [FaultContract(typeof(MatchFault))]
         [FaultContract(typeof(SessionFault))]
         void PlayCard(CardPlay play);
+
+        /// <summary>
+        /// Gives up the match, handing the victory to the opponent.
+        /// </summary>
+        /// <param name="matchId">Identifier of the match being given up.</param>
+        [OperationContract]
+        [FaultContract(typeof(MatchFault))]
+        [FaultContract(typeof(SessionFault))]
+        void AbandonMatch(long matchId);
     }
 }
