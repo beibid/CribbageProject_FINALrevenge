@@ -38,6 +38,23 @@ namespace CribbageRoyale.Server.Matches
             return found;
         }
 
+        public bool FindMatchOf(int accountId, out CribbageMatch match)
+        {
+            bool found = false;
+            long matchId;
+            match = null;
+
+            lock (_syncRoot)
+            {
+                if (_matchesByAccount.TryGetValue(accountId, out matchId))
+                {
+                    found = _matches.TryGetValue(matchId, out match);
+                }
+            }
+
+            return found;
+        }
+
         public CribbageMatch StartMatch(int firstAccountId, int secondAccountId)
         {
             CribbageMatch match;
@@ -60,28 +77,6 @@ namespace CribbageRoyale.Server.Matches
             {
                 _matchesByAccount.Remove(firstAccountId);
                 _matchesByAccount.Remove(secondAccountId);
-                _matches.Remove(matchId);
-            }
-        }
-
-        public void RemovePlayer(int accountId)
-        {
-            long matchId;
-
-            lock (_syncRoot)
-            {
-                if (_matchesByAccount.TryGetValue(accountId, out matchId))
-                {
-                    _matchesByAccount.Remove(accountId);
-                    RemoveMatchWhenEmpty(matchId);
-                }
-            }
-        }
-
-        private void RemoveMatchWhenEmpty(long matchId)
-        {
-            if (!_matchesByAccount.ContainsValue(matchId))
-            {
                 _matches.Remove(matchId);
             }
         }

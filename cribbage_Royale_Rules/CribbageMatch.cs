@@ -215,8 +215,10 @@ namespace CribbageRoyale.Rules
             return isAccepted;
         }
 
-        public void AbandonBy(int accountId)
+        public bool AbandonBy(int accountId)
         {
+            bool isAbandoned = false;
+
             lock (_syncRoot)
             {
                 if (_phase != MatchPhase.Finished)
@@ -224,8 +226,11 @@ namespace CribbageRoyale.Rules
                     _winnerAccountId = GetOpponentId(accountId);
                     _phase = MatchPhase.Finished;
                     _stateVersion++;
+                    isAbandoned = true;
                 }
             }
+
+            return isAbandoned;
         }
 
         private void DealHands()
