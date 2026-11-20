@@ -72,6 +72,12 @@ namespace CribbageRoyale.Contracts.DataContracts
         /// The rival disconnected and the match ended by abandonment.
         /// </summary>
         [EnumMember]
-        RivalDisconnected = 10
+        RivalDisconnected = 10,
+
+        /// <summary>
+        /// The rival left the match and the match ended by abandonment.
+        /// </summary>
+        [EnumMember]
+        RivalAbandoned = 11
     }
 }

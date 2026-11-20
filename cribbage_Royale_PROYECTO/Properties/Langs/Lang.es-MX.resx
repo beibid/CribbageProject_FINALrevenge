@@ -1899,4 +1899,7 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
 	<data name="Game_RivalDisconnectedMessage" xml:space="preserve">
   <value>Tu rival se desconectó. Ganaste por abandono.</value>
 </data>
+	<data name="Game_RivalAbandonedMessage" xml:space="preserve">
+  <value>Tu rival abandonó la partida. Ganaste.</value>
+</data>
 </root>
