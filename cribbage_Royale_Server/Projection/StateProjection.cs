@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using CribbageRoyale.Contracts.DataContracts;
 using CribbageRoyale.Rules;
-using CribbageRoyale.Server.Sessions;
+using CribbageRoyale.Server.Connections;
 
 namespace CribbageRoyale.Server.Projection
 {
     public class StateProjection : IStateProjection
     {
-        private readonly PlayerRegistry _playerRegistry;
+        private readonly IPlayerChannel _playerChannel;
 
-        public StateProjection(PlayerRegistry playerRegistry)
+        public StateProjection(IPlayerChannel playerChannel)
         {
-            _playerRegistry = playerRegistry;
+            _playerChannel = playerChannel;
         }
 
         public PresenceChange BuildPresenceChange(int accountId, bool isConnected)
@@ -85,28 +85,4 @@ namespace CribbageRoyale.Server.Projection
             state.RivalScore = match.GetScore(rivalAccountId);
             state.DealerAccountId = match.DealerAccountId;
             state.TurnAccountId = match.TurnAccountId;
-            state.WinnerAccountId = match.WinnerAccountId;
-            state.PeggingCount = match.PeggingCount;
-
-            if (match.HasCutCard)
-            {
-                state.CutCard = match.CutCard;
-            }
-
-            return state;
-        }
-
-        private AccountReference ResolveAccount(int accountId)
-        {
-            AccountReference account = _playerRegistry.Find(accountId);
-
-            if (account == null)
-            {
-                account = new AccountReference();
-                account.AccountId = accountId;
-            }
-
-            return account;
-        }
-    }
-}
+            state.WinnerAccountId =
