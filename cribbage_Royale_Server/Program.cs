@@ -231,7 +231,7 @@ namespace CribbageRoyale.Server
             MatchPlayServices services = new MatchPlayServices();
             services.CallerSession = new CallerSession(sessionServices.SessionTokens);
             services.PlayerChannel = sessionServices.PlayerChannel;
-            services.StateProjection = new StateProjection(sessionServices.PlayerRegistry);
+            services.StateProjection = new StateProjection(sessionServices.PlayerChannel);
             services.MatchRooms = _matchRooms;
 
             return services;

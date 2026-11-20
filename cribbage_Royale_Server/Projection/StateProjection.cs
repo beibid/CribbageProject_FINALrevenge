@@ -85,4 +85,28 @@ namespace CribbageRoyale.Server.Projection
             state.RivalScore = match.GetScore(rivalAccountId);
             state.DealerAccountId = match.DealerAccountId;
             state.TurnAccountId = match.TurnAccountId;
-            state.WinnerAccountId =
+            state.WinnerAccountId = match.WinnerAccountId;
+            state.PeggingCount = match.PeggingCount;
+
+            if (match.HasCutCard)
+            {
+                state.CutCard = match.CutCard;
+            }
+
+            return state;
+        }
+
+        private AccountReference ResolveAccount(int accountId)
+        {
+            AccountReference account;
+
+            if (!_playerChannel.TryFindAccount(accountId, out account))
+            {
+                account = new AccountReference();
+                account.AccountId = accountId;
+            }
+
+            return account;
+        }
+    }
+}
