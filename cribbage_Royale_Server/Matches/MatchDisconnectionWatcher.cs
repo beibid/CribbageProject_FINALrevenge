@@ -8,8 +8,7 @@ namespace CribbageRoyale.Server.Matches
 {
     public class MatchDisconnectionWatcher
     {
-        private const string PlayerDisconnectedMessage =
-            "Player {AccountId} disconnected from match {MatchId}. The rival wins by abandonment.";
+        
 
         private readonly MatchInvitationRegistry _invitationRegistry;
         private readonly MatchRoomRegistry _matchRooms;
@@ -48,7 +47,10 @@ namespace CribbageRoyale.Server.Matches
 
                 if (match.AbandonBy(accountId))
                 {
-                    _services.Logger.LogWarning(PlayerDisconnectedMessage, accountId, match.MatchId);
+                    _services.Logger.LogWarning(
+                        "Player {AccountId} disconnected from match {MatchId}. The rival wins by abandonment.",
+                         accountId,
+                         match.MatchId);
                     NotifyRival(match, rivalAccountId);
                 }
 

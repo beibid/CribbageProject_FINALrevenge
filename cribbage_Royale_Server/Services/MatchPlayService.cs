@@ -12,10 +12,6 @@ namespace CribbageRoyale.Server.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class MatchPlayService : IMatchPlay
     {
-        private const string OperationRejectedMessage =
-            "A match operation was rejected. Reason: {Reason}. MatchId: {MatchId}";
-        private const string MatchAbandonedMessage =
-            "Player {AccountId} abandoned match {MatchId}.";
 
         private readonly MatchPlayServices _services;
         private readonly ILogger _logger;
@@ -55,7 +51,10 @@ namespace CribbageRoyale.Server.Services
 
             if (match.AbandonBy(caller.AccountId))
             {
-                _logger.LogInformation(MatchAbandonedMessage, caller.AccountId, matchId);
+                _logger.LogInformation(
+                    "Player {AccountId} abandoned match {MatchId}.",
+                     caller.AccountId,
+                     matchId);
 
                 SendState(
                     match,
@@ -154,7 +153,10 @@ namespace CribbageRoyale.Server.Services
             MatchFault fault = new MatchFault();
             fault.Reason = reason;
 
-            _logger.LogWarning(OperationRejectedMessage, reason, matchId);
+            _logger.LogInformation(
+                "A match operation was rejected for match {MatchId}. Reason: {Reason}.",
+                 matchId,
+                 reason);
 
             return new FaultException<MatchFault>(fault, reason.ToString());
         }
