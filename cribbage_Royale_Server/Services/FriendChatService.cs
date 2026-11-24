@@ -37,11 +37,12 @@ namespace CribbageRoyale.Server.Services
             {
                 EnsureTargetIsValid(caller.AccountId, accountId);
                 EnsureMessageTextIsValid(text);
+                string censoredText = ChatCensor.Censor(text);
                 EnsureRelationshipAllowsChat(caller.AccountId, accountId);
 
                 message = _services.StateProjection.BuildChatMessage(
                     caller.AccountId,
-                    text,
+                    censoredText,
                     DateTime.UtcNow);
 
                 Deliver(accountId, message);
