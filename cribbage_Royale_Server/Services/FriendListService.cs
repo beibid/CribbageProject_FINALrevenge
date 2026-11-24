@@ -18,11 +18,11 @@ namespace CribbageRoyale.Server.Services
     {
         private const string SearchTextPattern = @"^[A-Za-z0-9_]{1,16}$";
         private const string FriendsQueryFailureMessage =
-            "The friends list could not be returned. CorrelationId: {CorrelationId}";
+            "The friends list could not be returned. CorrelationId: {CorrelationId}.";
         private const string PlayerSearchFailureMessage =
-            "The player search could not be completed. CorrelationId: {CorrelationId}";
+            "The player search could not be completed. CorrelationId: {CorrelationId}.";
         private const string FriendRemovalFailureMessage =
-            "The friendship could not be removed. CorrelationId: {CorrelationId}";
+            "The friendship could not be removed. CorrelationId: {CorrelationId}.";
 
         private readonly FriendListServices _services;
         private readonly ILogger _logger;

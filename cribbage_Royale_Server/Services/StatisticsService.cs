@@ -15,9 +15,6 @@ namespace CribbageRoyale.Server.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class StatisticsService : IStatistics
     {
-        private const string ScoreboardQueryFailureMessage =
-            "The player statistics view could not be queried. CorrelationId: {CorrelationId}";
-
         private readonly IScoreboardRepository _scoreboardRepository;
         private readonly ScoreboardProjection _scoreboardProjection;
         private readonly ILogger _logger;
@@ -54,7 +51,10 @@ namespace CribbageRoyale.Server.Services
             FaultException<ServiceFault> faultException =
                 ServiceFaultBuilder.Build(ServiceFaultCode.DataAccessFailure);
 
-            _logger.LogError(dataAccessException, ScoreboardQueryFailureMessage, faultException.Detail.CorrelationId);
+            _logger.LogError(
+                dataAccessException,
+                "The player statistics view could not be queried. CorrelationId: {CorrelationId}.",
+                faultException.Detail.CorrelationId);
 
             return faultException;
         }

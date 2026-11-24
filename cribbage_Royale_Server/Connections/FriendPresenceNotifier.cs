@@ -10,8 +10,6 @@ namespace CribbageRoyale.Server.Connections
     public class FriendPresenceNotifier
     {
         private const int FirstRegisteredAccountId = 1;
-        private const string NotificationFailureMessage =
-            "The friends of account {AccountId} could not be notified of its presence.";
 
         private readonly IFriendshipRepository _friendshipRepository;
         private readonly IStateProjection _stateProjection;
@@ -57,7 +55,10 @@ namespace CribbageRoyale.Server.Connections
             }
             catch (DataAccessException dataAccessException)
             {
-                _logger.LogError(dataAccessException, NotificationFailureMessage, accountId);
+                _logger.LogError(
+                    dataAccessException,
+                    "The friends of account {AccountId} could not be notified of its presence.",
+                    accountId);
             }
         }
     }
