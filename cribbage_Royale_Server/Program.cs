@@ -19,10 +19,6 @@ namespace CribbageRoyale.Server
         private const string PortInUseMessage =
             "The port is already in use. Close the other instance of the server and try again.";
 
-        private const string ServiceStartedLogMessage = "The server started.";
-
-        private const string ServiceStoppedLogMessage = "The server stopped.";
-
         private const int SessionLifetimeHours = 10;
 
         private static SessionServices _sessionServices;
@@ -67,7 +63,8 @@ namespace CribbageRoyale.Server
                 friendChatHost.Open();
                 matchInvitationHost.Open();
                 matchPlayHost.Open();
-                logger.LogInformation(ServiceStartedLogMessage);
+                logger.LogInformation(
+                    "The server started.");
                 Console.WriteLine(ServiceStartedMessage);
                 Console.ReadLine();
                 matchPlayHost.Close();
@@ -77,7 +74,8 @@ namespace CribbageRoyale.Server
                 friendListHost.Close();
                 sessionHost.Close();
                 statisticsHost.Close();
-                logger.LogInformation(ServiceStoppedLogMessage);
+                logger.LogInformation(
+                    "The server stopped.");
             }
             catch (AddressAlreadyInUseException addressAlreadyInUseException)
             {

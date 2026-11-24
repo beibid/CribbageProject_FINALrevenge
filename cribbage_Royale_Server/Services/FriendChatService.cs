@@ -17,7 +17,7 @@ namespace CribbageRoyale.Server.Services
         private const int FirstRegisteredAccountId = 1;
         private const int MaximumMessageLength = 500;
         private const string DeliveryFailureMessage =
-            "The chat message could not be delivered. CorrelationId: {CorrelationId}";
+            "The chat message could not be delivered. CorrelationId: {CorrelationId}.";
 
         private readonly FriendChatServices _services;
         private readonly ILogger _logger;

@@ -17,7 +17,7 @@ namespace CribbageRoyale.Server.Services
     {
         private const int FirstRegisteredAccountId = 1;
         private const string InvitationFailureMessage =
-            "The match invitation could not be processed. CorrelationId: {CorrelationId}";
+            "The match invitation could not be processed. CorrelationId: {CorrelationId}.";
 
         private readonly MatchInvitationServices _services;
         private readonly ILogger _logger;
