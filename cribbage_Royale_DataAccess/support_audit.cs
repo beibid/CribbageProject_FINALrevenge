@@ -12,17 +12,17 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class bitacora_evento
+    public partial class support_audit
     {
-        public long id_evento { get; set; }
-        public Nullable<int> id_usuario { get; set; }
-        public Nullable<long> id_partida { get; set; }
-        public string tipo_evento { get; set; }
-        public string descripcion { get; set; }
-        public string identificador_operacion { get; set; }
-        public System.DateTime fecha_evento { get; set; }
+        public long support_audit_id { get; set; }
+        public int support_account_id { get; set; }
+        public Nullable<long> report_id { get; set; }
+        public Nullable<long> match_id { get; set; }
+        public string action { get; set; }
+        public System.DateTime accessed_at { get; set; }
     
-        public virtual partida partida { get; set; }
-        public virtual usuario usuario { get; set; }
+        public virtual account account { get; set; }
+        public virtual match match { get; set; }
+        public virtual report report { get; set; }
     }
 }

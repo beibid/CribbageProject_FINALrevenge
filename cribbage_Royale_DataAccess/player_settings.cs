@@ -12,18 +12,16 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class puntuacion
+    public partial class player_settings
     {
-        public long id_puntuacion { get; set; }
-        public long id_manga { get; set; }
-        public long id_participante { get; set; }
-        public string fase_puntuacion { get; set; }
-        public string tipo_puntuacion { get; set; }
-        public byte puntos { get; set; }
-        public short orden_acreditacion { get; set; }
-        public System.DateTime fecha_acreditacion { get; set; }
+        public int account_id { get; set; }
+        public byte music_volume { get; set; }
+        public byte effects_volume { get; set; }
+        public string language { get; set; }
+        public string color_blind_mode { get; set; }
+        public bool should_show_animations { get; set; }
+        public bool should_notify_requests { get; set; }
     
-        public virtual manga manga { get; set; }
-        public virtual participante_partida participante_partida { get; set; }
+        public virtual account account { get; set; }
     }
 }

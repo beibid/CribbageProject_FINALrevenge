@@ -12,14 +12,14 @@ namespace cribbage_Royale_DataAccess.DataAccess
             string existingFolio;
             using (CribbageEntities context = new CribbageEntities())
             {
-                reporte existingReport = context.reporte.FirstOrDefault(currentReport => currentReport.id_usuario_reportante == reporterAccountId && currentReport.id_usuario_reportado == reportedAccountId && currentReport.id_partida == matchId);
+                report existingReport = context.report.FirstOrDefault(currentReport => currentReport.reporter_account_id == reporterAccountId && currentReport.reported_account_id == reportedAccountId && currentReport.match_id == matchId);
                 if (existingReport == null)
                 {
                     existingFolio = null;
                 }
                 else
                 {
-                    existingFolio = existingReport.folio;
+                    existingFolio = existingReport.reference_code;
                 }
             }
             return existingFolio;
@@ -31,16 +31,16 @@ namespace cribbage_Royale_DataAccess.DataAccess
             using (CribbageEntities context = new CribbageEntities())
             {
                 generatedFolio = GenerateFolio();
-                reporte newReport = new reporte();
-                newReport.folio = generatedFolio;
-                newReport.id_usuario_reportante = reporterAccountId;
-                newReport.id_usuario_reportado = reportedAccountId;
-                newReport.id_partida = matchId;
-                newReport.motivo = reason;
-                newReport.comentario = comment;
-                newReport.fecha_reporte = DateTime.Now;
-                newReport.estado = ReportStatus.Pending;
-                context.reporte.Add(newReport);
+                report newReport = new report();
+                newReport.reference_code = generatedFolio;
+                newReport.reporter_account_id = reporterAccountId;
+                newReport.reported_account_id = reportedAccountId;
+                newReport.match_id = matchId;
+                newReport.reason = reason;
+                newReport.comment = comment;
+                newReport.reported_at = DateTime.Now;
+                newReport.report_status = ReportStatus.Pending;
+                context.report.Add(newReport);
                 context.SaveChanges();
             }
             return generatedFolio;

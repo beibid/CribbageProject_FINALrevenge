@@ -12,16 +12,10 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class sesion
+    public partial class friend_view
     {
-        public long id_sesion { get; set; }
-        public int id_usuario { get; set; }
-        public string testigo { get; set; }
-        public string dispositivo { get; set; }
-        public System.DateTime fecha_emision { get; set; }
-        public System.DateTime fecha_expiracion { get; set; }
-        public Nullable<System.DateTime> fecha_revocacion { get; set; }
-    
-        public virtual usuario usuario { get; set; }
+        public int account_id { get; set; }
+        public int friend_account_id { get; set; }
+        public Nullable<System.DateTime> responded_at { get; set; }
     }
 }

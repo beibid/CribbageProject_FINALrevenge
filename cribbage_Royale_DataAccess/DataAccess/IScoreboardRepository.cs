@@ -5,6 +5,6 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public interface IScoreboardRepository
     {
-        List<vista_estadisticas_jugador> GetRanking();
+        List<player_statistics_view> GetRanking();
     }
 }

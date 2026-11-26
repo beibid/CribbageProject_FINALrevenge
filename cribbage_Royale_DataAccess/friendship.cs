@@ -12,16 +12,16 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class vista_estadisticas_jugador
+    public partial class friendship
     {
-        public int id_usuario { get; set; }
-        public string nombre_usuario { get; set; }
-        public string nombre_mostrado { get; set; }
-        public short nivel_habilidad { get; set; }
-        public int partidas_jugadas { get; set; }
-        public int victorias { get; set; }
-        public int derrotas { get; set; }
-        public short racha_actual { get; set; }
-        public Nullable<decimal> porcentaje_victorias { get; set; }
+        public long friendship_id { get; set; }
+        public int requester_account_id { get; set; }
+        public int addressee_account_id { get; set; }
+        public string status { get; set; }
+        public System.DateTime requested_at { get; set; }
+        public Nullable<System.DateTime> responded_at { get; set; }
+    
+        public virtual account account { get; set; }
+        public virtual account account1 { get; set; }
     }
 }

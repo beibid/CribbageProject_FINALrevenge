@@ -12,26 +12,26 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class carta
+    public partial class card
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public carta()
+        public card()
         {
-            this.carta_en_manga = new HashSet<carta_en_manga>();
-            this.jugada_pegging = new HashSet<jugada_pegging>();
-            this.manga = new HashSet<manga>();
+            this.pegging_play = new HashSet<pegging_play>();
+            this.round_card = new HashSet<round_card>();
+            this.round = new HashSet<round>();
         }
     
-        public byte id_carta { get; set; }
-        public string palo { get; set; }
-        public byte valor { get; set; }
-        public int puntaje { get; set; }
+        public byte card_id { get; set; }
+        public string suit { get; set; }
+        public byte rank_value { get; set; }
+        public int point_value { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<carta_en_manga> carta_en_manga { get; set; }
+        public virtual ICollection<pegging_play> pegging_play { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<jugada_pegging> jugada_pegging { get; set; }
+        public virtual ICollection<round_card> round_card { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<manga> manga { get; set; }
+        public virtual ICollection<round> round { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public static class MatchStatus
     {
-        public const string InProgress = "EN_CURSO";
-        public const string Concluded = "CONCLUIDA";
+        public const string InProgress = "IN_PROGRESS";
+        public const string Concluded = "COMPLETED";
     }
 }

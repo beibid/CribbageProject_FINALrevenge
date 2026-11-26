@@ -12,10 +12,18 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class vista_suspension_vigente
+    public partial class match_invitation
     {
-        public int id_usuario { get; set; }
-        public string motivo { get; set; }
-        public Nullable<System.DateTime> fecha_fin { get; set; }
+        public long match_invitation_id { get; set; }
+        public int sender_account_id { get; set; }
+        public int recipient_account_id { get; set; }
+        public string status { get; set; }
+        public System.DateTime sent_at { get; set; }
+        public System.DateTime expires_at { get; set; }
+        public Nullable<long> match_id { get; set; }
+    
+        public virtual account account { get; set; }
+        public virtual account account1 { get; set; }
+        public virtual match match { get; set; }
     }
 }

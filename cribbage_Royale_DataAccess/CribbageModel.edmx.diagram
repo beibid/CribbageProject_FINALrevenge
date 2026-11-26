@@ -4,69 +4,69 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d3902218e91941dca93e3ae13aa4d31f" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="CribbageModel.ajustes_jugador" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.amistad" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.auditoria_soporte" Width="1.5" PointX="5.25" PointY="34.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.bitacora_evento" Width="1.5" PointX="8.25" PointY="34.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.bloqueo" Width="1.5" PointX="3" PointY="28.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.carta" Width="1.5" PointX="5.25" PointY="26.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.carta_en_manga" Width="1.5" PointX="7.5" PointY="30.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.codigo_verificacion" Width="1.5" PointX="3" PointY="31.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.invitacion_partida" Width="1.5" PointX="5.25" PointY="38.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.jugada_pegging" Width="1.5" PointX="10.5" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.manga" Width="1.5" PointX="10.5" PointY="36.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.participante_partida" Width="1.5" PointX="5.25" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.partida" Width="1.5" PointX="3" PointY="43.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.perfil_jugador" Width="1.5" PointX="3" PointY="48" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.puntuacion" Width="1.5" PointX="12.75" PointY="36.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.reporte" Width="1.5" PointX="8.25" PointY="38.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.sancion" Width="1.5" PointX="13.5" PointY="31.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.sesion" Width="1.5" PointX="3" PointY="51.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CribbageModel.usuario" Width="1.5" PointX="0.75" PointY="24" IsExpanded="true" />
-        <AssociationConnector Association="CribbageModel.fk_ajustes_jugador_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_amistad_destinatario" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_amistad_solicitante" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_auditoria_soporte_partida" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_auditoria_soporte_reporte" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_auditoria_soporte_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_bitacora_partida" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_bitacora_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_bloqueo_bloqueado" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_bloqueo_que_bloquea" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_carta_en_manga_carta" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_jugada_carta" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_manga_carta_volteada" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_carta_en_manga_manga" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_carta_en_manga_participante" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_codigo_verificacion_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_invitacion_destinatario" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_invitacion_emisor" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_invitacion_partida" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_jugada_manga" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_jugada_participante" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_manga_en_turno" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_manga_partida" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_manga_repartidor" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_puntuacion_manga" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_participante_partida" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_participante_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_puntuacion_participante" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_partida_ganador" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_reporte_partida" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_perfil_jugador_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_reporte_reportado" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_reporte_reportante" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_reporte_soporte" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_sancion_reporte" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_sancion_sancionado" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_sancion_soporte" ManuallyRouted="false" />
-        <AssociationConnector Association="CribbageModel.fk_sesion_usuario" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CribbageModel.vista_amigos" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CribbageModel.vista_crib" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CribbageModel.vista_estadisticas_jugador" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CribbageModel.vista_marcador_partida" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CribbageModel.vista_suspension_vigente" Width="1.5" PointX="4.75" PointY="0.75" />
+      <Diagram DiagramId="ac152479c71d4fd2b96223b30e71ab5a" Name="Diagram1">
+        <EntityTypeShape EntityType="CribbageModel.account" Width="1.5" PointX="0.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.card" Width="1.5" PointX="5.25" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.event_log" Width="1.5" PointX="5.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.friendship" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.match" Width="1.5" PointX="3" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.match_invitation" Width="1.5" PointX="5.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.match_participant" Width="1.5" PointX="5.25" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.pegging_play" Width="1.5" PointX="7.5" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.player_profile" Width="1.5" PointX="3" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.player_settings" Width="1.5" PointX="3" PointY="38" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.report" Width="1.5" PointX="8.25" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.round" Width="1.5" PointX="10.5" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.round_card" Width="1.5" PointX="12.75" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.sanction" Width="1.5" PointX="10.5" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.score_entry" Width="1.5" PointX="15.75" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.session" Width="1.5" PointX="3" PointY="41.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.support_audit" Width="1.5" PointX="10.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.user_block" Width="1.5" PointX="3" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.verification_code" Width="1.5" PointX="3" PointY="47.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.active_suspension_view" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.crib_view" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.friend_view" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.match_scoreboard_view" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CribbageModel.player_statistics_view" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CribbageModel.fk_event_log_account" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_friendship_addressee" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_friendship_requester" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_match_invitation_recipient" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_match_invitation_sender" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_match_participant_account" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_match_winner" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_player_profile_account" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_player_settings_account" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_report_reported" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_report_reporter" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_report_support" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_sanction_sanctioned" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_sanction_support" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_session_account" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_support_audit_account" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_user_block_blocked" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_user_block_blocker" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_verification_code_account" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_pegging_play_card" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_round_card_card" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_round_starter_card" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_event_log_match" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_match_invitation_match" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_match_participant_match" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_report_match" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_round_match" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_support_audit_match" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_pegging_play_participant" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_round_card_owner" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_round_dealer" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_round_turn" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_score_entry_participant" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_pegging_play_round" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_sanction_report" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_support_audit_report" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_round_card_round" ManuallyRouted="false" />
+        <AssociationConnector Association="CribbageModel.fk_score_entry_round" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

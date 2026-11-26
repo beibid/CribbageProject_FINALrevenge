@@ -8,7 +8,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public static class MatchOrigin
     {
-        public const string Matchmaking = "EMPAREJAMIENTO";
-        public const string Invitation = "INVITACION";
+        public const string Matchmaking = "MATCHMAKING";
+        public const string Invitation = "INVITATION";
     }
 }

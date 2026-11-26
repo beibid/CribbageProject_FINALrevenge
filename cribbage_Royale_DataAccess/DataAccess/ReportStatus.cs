@@ -2,7 +2,7 @@
 {
     public static class ReportStatus
     {
-        public const string Pending = "PENDIENTE";
-        public const string Reviewed = "REVISADO";
+        public const string Pending = "PENDING";
+        public const string Reviewed = "REVIEWED";
     }
 }

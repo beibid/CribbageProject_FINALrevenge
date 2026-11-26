@@ -2,10 +2,10 @@
 {
     public static class CardTextFormatter
     {
-        private const string HeartsSuit = "CORAZONES";
-        private const string DiamondsSuit = "DIAMANTES";
-        private const string ClubsSuit = "TREBOLES";
-        private const string SpadesSuit = "PICAS";
+        private const string HeartsSuit = "HEARTS";
+        private const string DiamondsSuit = "DIAMONDS";
+        private const string ClubsSuit = "CLUBS";
+        private const string SpadesSuit = "SPADES";
 
         public static string Format(string suit, byte value)
         {

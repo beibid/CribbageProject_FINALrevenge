@@ -13,17 +13,17 @@ namespace cribbage_Royale_DataAccess.DataAccess
             List<PendingReportSummary> pendingReports;
             using (CribbageEntities context = new CribbageEntities())
             {
-                pendingReports = context.reporte
-                    .Where(currentReport => currentReport.estado == ReportStatus.Pending)
+                pendingReports = context.report
+                    .Where(currentReport => currentReport.report_status == ReportStatus.Pending)
                     .Select(currentReport => new PendingReportSummary
                     {
-                        ReportId = (int)currentReport.id_reporte,
-                        ReporterUsername = currentReport.usuario1.nombre_usuario,
-                        ReportedAccountId = (int)currentReport.id_usuario_reportado,
-                        ReportedUsername = currentReport.usuario2.nombre_usuario,
-                        Reason = currentReport.motivo,
-                        SubmittedDate = currentReport.fecha_reporte,
-                        MatchId = (int?)currentReport.id_partida
+                        ReportId = (int)currentReport.report_id,
+                        ReporterUsername = currentReport.account1.username,
+                        ReportedAccountId = (int)currentReport.reported_account_id,
+                        ReportedUsername = currentReport.account.username,
+                        Reason = currentReport.reason,
+                        SubmittedDate = currentReport.reported_at,
+                        MatchId = (int?)currentReport.match_id
                     })
                     .ToList();
             }
@@ -36,14 +36,14 @@ namespace cribbage_Royale_DataAccess.DataAccess
             using (CribbageEntities context = new CribbageEntities())
             {
                 DateTime now = DateTime.Now;
-                suspendedAccounts = context.sancion
-                    .Where(currentSanction => currentSanction.tipo == SanctionType.Suspension && currentSanction.fecha_revocacion == null && currentSanction.fecha_fin > now)
+                suspendedAccounts = context.sanction
+                    .Where(currentSanction => currentSanction.sanction_type == SanctionType.Suspension && currentSanction.revoked_at == null && currentSanction.ends_at > now)
                     .Select(currentSanction => new SuspendedAccountSummary
                     {
-                        AccountId = currentSanction.id_usuario_sancionado,
-                        Username = currentSanction.usuario.nombre_usuario,
-                        SuspensionReason = currentSanction.motivo,
-                        SuspensionEndDate = currentSanction.fecha_fin.Value
+                        AccountId = currentSanction.sanctioned_account_id,
+                        Username = currentSanction.account.username,
+                        SuspensionReason = currentSanction.reason,
+                        SuspensionEndDate = currentSanction.ends_at.Value
                     })
                     .ToList();
             }
@@ -55,7 +55,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             AccountSanctionStatus sanctionStatus;
             using (CribbageEntities context = new CribbageEntities())
             {
-                sancion activeSanction = FindActiveSuspension(context, accountId);
+                sanction activeSanction = FindActiveSuspension(context, accountId);
                 sanctionStatus = new AccountSanctionStatus();
                 if (activeSanction == null)
                 {
@@ -64,8 +64,8 @@ namespace cribbage_Royale_DataAccess.DataAccess
                 else
                 {
                     sanctionStatus.IsCurrentlySuspended = true;
-                    sanctionStatus.SuspensionEndDate = activeSanction.fecha_fin;
-                    sanctionStatus.SuspensionReason = activeSanction.motivo;
+                    sanctionStatus.SuspensionEndDate = activeSanction.ends_at;
+                    sanctionStatus.SuspensionReason = activeSanction.reason;
                 }
             }
             return sanctionStatus;
@@ -75,21 +75,21 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             using (CribbageEntities context = new CribbageEntities())
             {
-                sancion newSanction = new sancion();
-                newSanction.id_usuario_sancionado = accountId;
-                newSanction.id_usuario_soporte = supportAccountId;
-                newSanction.id_reporte = reportId;
-                newSanction.tipo = SanctionType.Suspension;
-                newSanction.motivo = reason;
-                newSanction.fecha_inicio = DateTime.Now;
-                newSanction.fecha_fin = suspensionEndDate;
-                context.sancion.Add(newSanction);
+                sanction newSanction = new sanction();
+                newSanction.sanctioned_account_id = accountId;
+                newSanction.support_account_id = supportAccountId;
+                newSanction.report_id = reportId;
+                newSanction.sanction_type = SanctionType.Suspension;
+                newSanction.reason = reason;
+                newSanction.starts_at = DateTime.Now;
+                newSanction.ends_at = suspensionEndDate;
+                context.sanction.Add(newSanction);
 
-                usuario sanctionedUser = context.usuario.First(currentUser => currentUser.id_usuario == accountId);
-                sanctionedUser.estado_cuenta = AccountStatus.Suspended;
+                account sanctionedUser = context.account.First(currentUser => currentUser.account_id == accountId);
+                sanctionedUser.account_status = AccountStatus.Suspended;
 
                 RemoveActiveSessions(context, accountId);
-                AddSystemLogEvent(context, accountId, "SUSPENSION_APLICADA", reason);
+                AddSystemLogEvent(context, accountId, "SUSPENSION_APPLIED", reason);
                 context.SaveChanges();
             }
         }
@@ -98,11 +98,11 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             using (CribbageEntities context = new CribbageEntities())
             {
-                sancion activeSanction = FindActiveSuspension(context, accountId);
-                activeSanction.motivo = reason;
-                activeSanction.fecha_fin = suspensionEndDate;
-                activeSanction.id_usuario_soporte = supportAccountId;
-                AddSystemLogEvent(context, accountId, "SUSPENSION_MODIFICADA", reason);
+                sanction activeSanction = FindActiveSuspension(context, accountId);
+                activeSanction.reason = reason;
+                activeSanction.ends_at = suspensionEndDate;
+                activeSanction.support_account_id = supportAccountId;
+                AddSystemLogEvent(context, accountId, "SUSPENSION_MODIFIED", reason);
                 context.SaveChanges();
             }
         }
@@ -111,42 +111,42 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             using (CribbageEntities context = new CribbageEntities())
             {
-                sancion activeSanction = FindActiveSuspension(context, accountId);
-                activeSanction.fecha_revocacion = DateTime.Now;
-                activeSanction.id_usuario_soporte = supportAccountId;
+                sanction activeSanction = FindActiveSuspension(context, accountId);
+                activeSanction.revoked_at = DateTime.Now;
+                activeSanction.support_account_id = supportAccountId;
 
-                usuario reactivatedUser = context.usuario.First(currentUser => currentUser.id_usuario == accountId);
-                reactivatedUser.estado_cuenta = AccountStatus.Verified;
+                account reactivatedUser = context.account.First(currentUser => currentUser.account_id == accountId);
+                reactivatedUser.account_status = AccountStatus.Verified;
 
-                AddSystemLogEvent(context, accountId, "CUENTA_REACTIVADA", string.Empty);
+                AddSystemLogEvent(context, accountId, "ACCOUNT_REACTIVATED", string.Empty);
                 context.SaveChanges();
             }
         }
 
-        private sancion FindActiveSuspension(CribbageEntities context, int accountId)
+        private sanction FindActiveSuspension(CribbageEntities context, int accountId)
         {
             DateTime now = DateTime.Now;
-            sancion activeSanction = context.sancion.FirstOrDefault(currentSanction => currentSanction.id_usuario_sancionado == accountId && currentSanction.tipo == SanctionType.Suspension && currentSanction.fecha_revocacion == null && currentSanction.fecha_fin > now);
+            sanction activeSanction = context.sanction.FirstOrDefault(currentSanction => currentSanction.sanctioned_account_id == accountId && currentSanction.sanction_type == SanctionType.Suspension && currentSanction.revoked_at == null && currentSanction.ends_at > now);
             return activeSanction;
         }
 
         private void RemoveActiveSessions(CribbageEntities context, int accountId)
         {
-            List<sesion> activeSessions = context.sesion.Where(currentSession => currentSession.id_usuario == accountId).ToList();
-            foreach (sesion currentSession in activeSessions)
+            List<session> activeSessions = context.session.Where(currentSession => currentSession.account_id == accountId).ToList();
+            foreach (session currentSession in activeSessions)
             {
-                context.sesion.Remove(currentSession);
+                context.session.Remove(currentSession);
             }
         }
 
         private void AddSystemLogEvent(CribbageEntities context, int accountId, string eventType, string description)
         {
-            bitacora_evento newEvent = new bitacora_evento();
-            newEvent.id_usuario = accountId;
-            newEvent.tipo_evento = eventType;
-            newEvent.descripcion = description;
-            newEvent.fecha_evento = DateTime.Now;
-            context.bitacora_evento.Add(newEvent);
+            event_log newEvent = new event_log();
+            newEvent.account_id = accountId;
+            newEvent.event_type = eventType;
+            newEvent.description = description;
+            newEvent.logged_at = DateTime.Now;
+            context.event_log.Add(newEvent);
         }
     }
 }

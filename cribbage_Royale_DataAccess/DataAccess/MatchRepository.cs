@@ -7,7 +7,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public class MatchRepository
     {
-        private const string AbandonmentEventType = "ABANDONO_PARTIDA";
+        private const string AbandonmentEventType = "MATCH_ABANDONMENT";
 
         public MatchInformationSummary GetMatchInformation(long matchId, int viewerAccountId)
         {
@@ -15,13 +15,13 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                List<participante_partida> participants = context.participante_partida
-                    .Where(currentParticipant => currentParticipant.id_partida == matchId)
+                List<match_participant> participants = context.match_participant
+                    .Where(currentParticipant => currentParticipant.match_id == matchId)
                     .ToList();
-                participante_partida viewer = participants
-                    .FirstOrDefault(currentParticipant => currentParticipant.id_usuario == viewerAccountId);
-                participante_partida opponent = participants
-                    .FirstOrDefault(currentParticipant => currentParticipant.id_usuario != viewerAccountId);
+                match_participant viewer = participants
+                    .FirstOrDefault(currentParticipant => currentParticipant.account_id == viewerAccountId);
+                match_participant opponent = participants
+                    .FirstOrDefault(currentParticipant => currentParticipant.account_id != viewerAccountId);
 
                 if (viewer != null && opponent != null)
                 {
@@ -38,13 +38,13 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                long matchId = (from participant in context.participante_partida
-                                join currentMatch in context.partida
-                                    on participant.id_partida equals currentMatch.id_partida
-                                where participant.id_usuario == accountId
-                                    && currentMatch.estado_partida == MatchStatus.InProgress
-                                orderby currentMatch.fecha_inicio descending
-                                select currentMatch.id_partida).FirstOrDefault();
+                long matchId = (from participant in context.match_participant
+                                join currentMatch in context.match
+                                    on participant.match_id equals currentMatch.match_id
+                                where participant.account_id == accountId
+                                    && currentMatch.match_status == MatchStatus.InProgress
+                                orderby currentMatch.started_at descending
+                                select currentMatch.match_id).FirstOrDefault();
 
                 if (matchId != 0)
                 {
@@ -56,12 +56,12 @@ namespace cribbage_Royale_DataAccess.DataAccess
         }
         public static bool HasUnfinishedMatchInContext(CribbageEntities context, int accountId)
         {
-            return (from participant in context.participante_partida
-                    join currentMatch in context.partida
-                        on participant.id_partida equals currentMatch.id_partida
-                    where participant.id_usuario == accountId
-                        && currentMatch.estado_partida == MatchStatus.InProgress
-                    select participant.id_participante).Any();
+            return (from participant in context.match_participant
+                    join currentMatch in context.match
+                        on participant.match_id equals currentMatch.match_id
+                    where participant.account_id == accountId
+                        && currentMatch.match_status == MatchStatus.InProgress
+                    select participant.match_participant_id).Any();
         }
         public bool MarkParticipantConnected(long matchId, int accountId)
         {
@@ -69,13 +69,13 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                participante_partida participant = context.participante_partida
-                    .FirstOrDefault(currentParticipant => currentParticipant.id_partida == matchId
-                        && currentParticipant.id_usuario == accountId);
+                match_participant participant = context.match_participant
+                    .FirstOrDefault(currentParticipant => currentParticipant.match_id == matchId
+                        && currentParticipant.account_id == accountId);
 
                 if (participant != null)
                 {
-                    participant.esta_conectado = true;
+                    participant.is_connected = true;
                     context.SaveChanges();
                     updated = true;
                 }
@@ -90,31 +90,31 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                partida currentMatch = context.partida
-                    .FirstOrDefault(matchRow => matchRow.id_partida == matchId);
-                participante_partida opponent = context.participante_partida
-                    .FirstOrDefault(currentParticipant => currentParticipant.id_partida == matchId
-                        && currentParticipant.id_usuario != accountId);
-                bool isParticipant = context.participante_partida
-                    .Any(currentParticipant => currentParticipant.id_partida == matchId
-                        && currentParticipant.id_usuario == accountId);
+                match currentMatch = context.match
+                    .FirstOrDefault(matchRow => matchRow.match_id == matchId);
+                match_participant opponent = context.match_participant
+                    .FirstOrDefault(currentParticipant => currentParticipant.match_id == matchId
+                        && currentParticipant.account_id != accountId);
+                bool isParticipant = context.match_participant
+                    .Any(currentParticipant => currentParticipant.match_id == matchId
+                        && currentParticipant.account_id == accountId);
 
                 if (currentMatch != null && opponent != null && isParticipant
-                    && currentMatch.estado_partida == MatchStatus.InProgress)
+                    && currentMatch.match_status == MatchStatus.InProgress)
                 {
                     DateTime now = DateTime.Now;
-                    currentMatch.estado_partida = MatchStatus.Concluded;
-                    currentMatch.motivo_termino = MatchTerminationReason.Abandonment;
-                    currentMatch.fecha_fin = now;
-                    currentMatch.id_usuario_ganador = opponent.id_usuario;
+                    currentMatch.match_status = MatchStatus.Concluded;
+                    currentMatch.end_reason = MatchTerminationReason.Abandonment;
+                    currentMatch.ended_at = now;
+                    currentMatch.winner_account_id = opponent.account_id;
 
-                    bitacora_evento abandonmentEvent = new bitacora_evento();
-                    abandonmentEvent.id_usuario = accountId;
-                    abandonmentEvent.id_partida = matchId;
-                    abandonmentEvent.tipo_evento = AbandonmentEventType;
-                    abandonmentEvent.descripcion = MatchTerminationReason.Abandonment;
-                    abandonmentEvent.fecha_evento = now;
-                    context.bitacora_evento.Add(abandonmentEvent);
+                    event_log abandonmentEvent = new event_log();
+                    abandonmentEvent.account_id = accountId;
+                    abandonmentEvent.match_id = matchId;
+                    abandonmentEvent.event_type = AbandonmentEventType;
+                    abandonmentEvent.description = MatchTerminationReason.Abandonment;
+                    abandonmentEvent.logged_at = now;
+                    context.event_log.Add(abandonmentEvent);
 
                     context.SaveChanges();
                     outcome = AbandonmentOutcome.Registered;
@@ -125,94 +125,94 @@ namespace cribbage_Royale_DataAccess.DataAccess
         }
 
         private MatchInformationSummary BuildMatchInformation(CribbageEntities context,
-            participante_partida viewer, participante_partida opponent)
+            match_participant viewer, match_participant opponent)
         {
             MatchInformationSummary summary = new MatchInformationSummary();
-            long matchId = viewer.id_partida;
-            int opponentAccountId = opponent.id_usuario;
+            long matchId = viewer.match_id;
+            int opponentAccountId = opponent.account_id;
 
-            perfil_jugador opponentProfile = context.perfil_jugador
-                .FirstOrDefault(profile => profile.id_usuario == opponentAccountId);
+            player_profile opponentProfile = context.player_profile
+                .FirstOrDefault(profile => profile.account_id == opponentAccountId);
 
             summary.MatchId = matchId;
             summary.OpponentAccountId = opponentAccountId;
-            summary.OpponentConnected = opponent.esta_conectado;
+            summary.OpponentConnected = opponent.is_connected;
 
             if (opponentProfile != null)
             {
-                summary.OpponentDisplayName = opponentProfile.nombre_mostrado;
-                summary.OpponentSkillLevel = opponentProfile.nivel_habilidad;
+                summary.OpponentDisplayName = opponentProfile.display_name;
+                summary.OpponentSkillLevel = opponentProfile.skill_level;
             }
 
-            List<long> handIds = context.manga
-                .Where(hand => hand.id_partida == matchId)
-                .Select(hand => hand.id_manga)
+            List<long> handIds = context.round
+                .Where(hand => hand.match_id == matchId)
+                .Select(hand => hand.round_id)
                 .ToList();
 
-            summary.ViewerScore = GetScore(context, handIds, viewer.id_participante);
-            summary.OpponentScore = GetScore(context, handIds, opponent.id_participante);
+            summary.ViewerScore = GetScore(context, handIds, viewer.match_participant_id);
+            summary.OpponentScore = GetScore(context, handIds, opponent.match_participant_id);
 
-            manga currentHand = context.manga
-                .Where(hand => hand.id_partida == matchId)
-                .OrderByDescending(hand => hand.numero_manga)
+            round currentHand = context.round
+                .Where(hand => hand.match_id == matchId)
+                .OrderByDescending(hand => hand.round_number)
                 .FirstOrDefault();
 
             if (currentHand != null)
             {
                 FillCurrentHandInformation(context, summary, currentHand);
-                summary.OpponentRemainingCards = CountCardsInHand(context, currentHand.id_manga,
-                    opponent.id_participante);
+                summary.OpponentRemainingCards = CountCardsInHand(context, currentHand.round_id,
+                    opponent.match_participant_id);
             }
 
             return summary;
         }
 
         private void FillCurrentHandInformation(CribbageEntities context, MatchInformationSummary summary,
-            manga currentHand)
+            round currentHand)
         {
-            long dealerParticipantId = currentHand.id_participante_repartidor;
+            long dealerParticipantId = currentHand.dealer_participant_id;
 
-            summary.HandNumber = currentHand.numero_manga;
-            summary.RunningCount = currentHand.conteo_actual;
-            summary.TurnDeadline = currentHand.fecha_fin_turno;
+            summary.HandNumber = currentHand.round_number;
+            summary.RunningCount = currentHand.current_count;
+            summary.TurnDeadline = currentHand.turn_ends_at;
 
-            participante_partida dealer = context.participante_partida
-                .FirstOrDefault(currentParticipant => currentParticipant.id_participante == dealerParticipantId);
+            match_participant dealer = context.match_participant
+                .FirstOrDefault(currentParticipant => currentParticipant.match_participant_id == dealerParticipantId);
 
             if (dealer != null)
             {
-                summary.DealerDisplayName = GetDisplayName(context, dealer.id_usuario);
+                summary.DealerDisplayName = GetDisplayName(context, dealer.account_id);
             }
 
-            if (currentHand.id_carta_volteada.HasValue)
+            if (currentHand.starter_card_id.HasValue)
             {
-                byte cutCardId = currentHand.id_carta_volteada.Value;
-                carta cutCard = context.carta.FirstOrDefault(currentCard => currentCard.id_carta == cutCardId);
+                byte cutCardId = currentHand.starter_card_id.Value;
+                card cutCard = context.card.FirstOrDefault(currentCard => currentCard.card_id == cutCardId);
 
                 if (cutCard != null)
                 {
-                    summary.CutCardText = CardTextFormatter.Format(cutCard.palo, cutCard.valor);
+                    summary.CutCardText = CardTextFormatter.Format(cutCard.suit, cutCard.rank_value);
                 }
             }
         }
 
         private int CountCardsInHand(CribbageEntities context, long handId, long participantId)
         {
-            return context.carta_en_manga
-                .Count(cardInHand => cardInHand.id_manga == handId
-                    && cardInHand.id_participante_origen == participantId
-                    && cardInHand.estado == CardInMatchState.InHand);
+            return context.round_card
+                .Count(cardInHand => cardInHand.round_id == handId
+                    && cardInHand.owner_participant_id == participantId
+                    && cardInHand.card_status == CardInMatchState.InHand);
         }
 
         private string GetDisplayName(CribbageEntities context, int accountId)
         {
             string displayName = string.Empty;
-            perfil_jugador profile = context.perfil_jugador
-                .FirstOrDefault(currentProfile => currentProfile.id_usuario == accountId);
+            player_profile profile = context.player_profile
+                .FirstOrDefault(currentProfile => currentProfile.account_id == accountId);
 
             if (profile != null)
             {
-                displayName = profile.nombre_mostrado;
+                displayName = profile.display_name;
             }
 
             return displayName;
@@ -223,23 +223,23 @@ namespace cribbage_Royale_DataAccess.DataAccess
             UnfinishedMatchSummary summary = new UnfinishedMatchSummary();
             summary.MatchId = matchId;
 
-            participante_partida viewer = context.participante_partida
-                .FirstOrDefault(currentParticipant => currentParticipant.id_partida == matchId
-                    && currentParticipant.id_usuario == accountId);
-            participante_partida opponent = context.participante_partida
-                .FirstOrDefault(currentParticipant => currentParticipant.id_partida == matchId
-                    && currentParticipant.id_usuario != accountId);
+            match_participant viewer = context.match_participant
+                .FirstOrDefault(currentParticipant => currentParticipant.match_id == matchId
+                    && currentParticipant.account_id == accountId);
+            match_participant opponent = context.match_participant
+                .FirstOrDefault(currentParticipant => currentParticipant.match_id == matchId
+                    && currentParticipant.account_id != accountId);
 
             if (viewer != null && opponent != null)
             {
-                List<long> handIds = context.manga
-                    .Where(hand => hand.id_partida == matchId)
-                    .Select(hand => hand.id_manga)
+                List<long> handIds = context.round
+                    .Where(hand => hand.match_id == matchId)
+                    .Select(hand => hand.round_id)
                     .ToList();
 
-                summary.ViewerScore = GetScore(context, handIds, viewer.id_participante);
-                summary.OpponentScore = GetScore(context, handIds, opponent.id_participante);
-                summary.OpponentDisplayName = GetDisplayName(context, opponent.id_usuario);
+                summary.ViewerScore = GetScore(context, handIds, viewer.match_participant_id);
+                summary.OpponentScore = GetScore(context, handIds, opponent.match_participant_id);
+                summary.OpponentDisplayName = GetDisplayName(context, opponent.account_id);
             }
 
             return summary;
@@ -247,9 +247,9 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         private int GetScore(CribbageEntities context, List<long> handIds, long participantId)
         {
-            int? total = context.puntuacion
-                .Where(score => handIds.Contains(score.id_manga) && score.id_participante == participantId)
-                .Sum(score => (int?)score.puntos);
+            int? total = context.score_entry
+                .Where(score => handIds.Contains(score.round_id) && score.match_participant_id == participantId)
+                .Sum(score => (int?)score.points);
 
             return total.GetValueOrDefault();
         }

@@ -12,16 +12,12 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class ajustes_jugador
+    public partial class crib_view
     {
-        public int id_usuario { get; set; }
-        public byte volumen_musica { get; set; }
-        public byte volumen_efectos { get; set; }
-        public string idioma { get; set; }
-        public string modo_daltonismo { get; set; }
-        public bool mostrar_animaciones { get; set; }
-        public bool notificaciones_solicitudes { get; set; }
-    
-        public virtual usuario usuario { get; set; }
+        public long round_id { get; set; }
+        public long owner_participant_id { get; set; }
+        public byte card_id { get; set; }
+        public string suit { get; set; }
+        public byte rank_value { get; set; }
     }
 }

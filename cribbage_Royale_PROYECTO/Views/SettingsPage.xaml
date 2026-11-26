@@ -47,7 +47,7 @@
                                Style="{StaticResource SettingsLabel}"/>
                     <ComboBox x:Name="colorBlindModeComboBox" Style="{StaticResource DarkComboBox}"
                               SelectedIndex="0" Margin="0,0,0,20">
-                        <ComboBoxItem Content="{x:Static lang:Lang.Settings_ColorBlindOff}" Tag="DESACTIVADO"/>
+                        <ComboBoxItem Content="{x:Static lang:Lang.Settings_ColorBlindOff}" Tag="DISABLED"/>
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_Protanopia}" Tag="PROTANOPIA"/>
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_Deuteranopia}" Tag="DEUTERANOPIA"/>
                         <ComboBoxItem Content="{x:Static lang:Lang.Settings_Tritanopia}" Tag="TRITANOPIA"/>

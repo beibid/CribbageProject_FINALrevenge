@@ -21,16 +21,16 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
                 if (result.Outcome == InvitationCreationOutcome.Created)
                 {
-                    invitacion_partida newInvitation = new invitacion_partida();
-                    newInvitation.id_usuario_emisor = senderAccountId;
-                    newInvitation.id_usuario_destinatario = recipientAccountId;
-                    newInvitation.estado = InvitationStatus.Pending;
-                    newInvitation.fecha_envio = now;
-                    newInvitation.fecha_expiracion = now.AddSeconds(InvitationLifetimeSeconds);
-                    context.invitacion_partida.Add(newInvitation);
+                    match_invitation newInvitation = new match_invitation();
+                    newInvitation.sender_account_id = senderAccountId;
+                    newInvitation.recipient_account_id = recipientAccountId;
+                    newInvitation.status = InvitationStatus.Pending;
+                    newInvitation.sent_at = now;
+                    newInvitation.expires_at = now.AddSeconds(InvitationLifetimeSeconds);
+                    context.match_invitation.Add(newInvitation);
                     context.SaveChanges();
 
-                    result.InvitationId = newInvitation.id_invitacion;
+                    result.InvitationId = newInvitation.match_invitation_id;
                 }
             }
 
@@ -43,33 +43,33 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                invitacion_partida invitation = context.invitacion_partida
-                    .FirstOrDefault(currentInvitation => currentInvitation.id_invitacion == invitationId);
+                match_invitation invitation = context.match_invitation
+                    .FirstOrDefault(currentInvitation => currentInvitation.match_invitation_id == invitationId);
 
                 if (invitation != null)
                 {
-                    int senderAccountId = invitation.id_usuario_emisor;
-                    perfil_jugador senderProfile = context.perfil_jugador
-                        .FirstOrDefault(profile => profile.id_usuario == senderAccountId);
+                    int senderAccountId = invitation.sender_account_id;
+                    player_profile senderProfile = context.player_profile
+                        .FirstOrDefault(profile => profile.account_id == senderAccountId);
 
                     summary = new MatchInvitationSummary();
-                    summary.InvitationId = invitation.id_invitacion;
+                    summary.InvitationId = invitation.match_invitation_id;
                     summary.SenderAccountId = senderAccountId;
-                    summary.RecipientAccountId = invitation.id_usuario_destinatario;
-                    summary.ExpirationDate = invitation.fecha_expiracion;
-                    summary.MatchId = invitation.id_partida;
-                    summary.Status = invitation.estado;
+                    summary.RecipientAccountId = invitation.recipient_account_id;
+                    summary.ExpirationDate = invitation.expires_at;
+                    summary.MatchId = invitation.match_id;
+                    summary.Status = invitation.status;
 
-                    if (invitation.estado == InvitationStatus.Pending
-                        && invitation.fecha_expiracion <= DateTime.Now)
+                    if (invitation.status == InvitationStatus.Pending
+                        && invitation.expires_at <= DateTime.Now)
                     {
                         summary.Status = InvitationStatus.Expired;
                     }
 
                     if (senderProfile != null)
                     {
-                        summary.SenderDisplayName = senderProfile.nombre_mostrado;
-                        summary.SenderSkillLevel = senderProfile.nivel_habilidad;
+                        summary.SenderDisplayName = senderProfile.display_name;
+                        summary.SenderSkillLevel = senderProfile.skill_level;
                     }
                 }
             }
@@ -84,14 +84,14 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                invitacion_partida invitation = context.invitacion_partida
-                    .FirstOrDefault(currentInvitation => currentInvitation.id_invitacion == invitationId);
+                match_invitation invitation = context.match_invitation
+                    .FirstOrDefault(currentInvitation => currentInvitation.match_invitation_id == invitationId);
 
                 bool isAvailable = invitation != null
-                    && invitation.estado == InvitationStatus.Pending
-                    && invitation.fecha_expiracion > DateTime.Now
-                    && invitation.id_usuario_destinatario == recipientAccountId
-                    && !MatchRepository.HasUnfinishedMatchInContext(context, invitation.id_usuario_emisor);
+                    && invitation.status == InvitationStatus.Pending
+                    && invitation.expires_at > DateTime.Now
+                    && invitation.recipient_account_id == recipientAccountId
+                    && !MatchRepository.HasUnfinishedMatchInContext(context, invitation.sender_account_id);
 
                 if (isAvailable && MatchRepository.HasUnfinishedMatchInContext(context, recipientAccountId))
                 {
@@ -127,15 +127,15 @@ namespace cribbage_Royale_DataAccess.DataAccess
             string outcome = InvitationCreationOutcome.Created;
             DateTime now = DateTime.Now;
 
-            bool recipientIsOnline = context.sesion
-                .Any(currentSession => currentSession.id_usuario == recipientAccountId
-                    && currentSession.fecha_revocacion == null
-                    && currentSession.fecha_expiracion > now);
-            bool alreadyInvited = context.invitacion_partida
-                .Any(currentInvitation => currentInvitation.id_usuario_emisor == senderAccountId
-                    && currentInvitation.id_usuario_destinatario == recipientAccountId
-                    && currentInvitation.estado == InvitationStatus.Pending
-                    && currentInvitation.fecha_expiracion > now);
+            bool recipientIsOnline = context.session
+                .Any(currentSession => currentSession.account_id == recipientAccountId
+                    && currentSession.revoked_at == null
+                    && currentSession.expires_at > now);
+            bool alreadyInvited = context.match_invitation
+                .Any(currentInvitation => currentInvitation.sender_account_id == senderAccountId
+                    && currentInvitation.recipient_account_id == recipientAccountId
+                    && currentInvitation.status == InvitationStatus.Pending
+                    && currentInvitation.expires_at > now);
 
             if (MatchRepository.HasUnfinishedMatchInContext(context, senderAccountId))
             {
@@ -157,7 +157,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return outcome;
         }
 
-        private long CreateMatchFromInvitation(CribbageEntities context, invitacion_partida invitation)
+        private long CreateMatchFromInvitation(CribbageEntities context, match_invitation invitation)
         {
             long matchId = 0;
 
@@ -165,45 +165,45 @@ namespace cribbage_Royale_DataAccess.DataAccess
             {
                 DateTime now = DateTime.Now;
 
-                partida newMatch = new partida();
-                newMatch.estado_partida = MatchStatus.InProgress;
-                newMatch.origen = MatchOrigin.Invitation;
-                newMatch.fecha_inicio = now;
-                context.partida.Add(newMatch);
+                match newMatch = new match();
+                newMatch.match_status = MatchStatus.InProgress;
+                newMatch.origin = MatchOrigin.Invitation;
+                newMatch.started_at = now;
+                context.match.Add(newMatch);
                 context.SaveChanges();
 
-                participante_partida senderParticipant = new participante_partida();
-                senderParticipant.id_partida = newMatch.id_partida;
-                senderParticipant.id_usuario = invitation.id_usuario_emisor;
-                participante_partida recipientParticipant = new participante_partida();
-                recipientParticipant.id_partida = newMatch.id_partida;
-                recipientParticipant.id_usuario = invitation.id_usuario_destinatario;
-                context.participante_partida.Add(senderParticipant);
-                context.participante_partida.Add(recipientParticipant);
+                match_participant senderParticipant = new match_participant();
+                senderParticipant.match_id = newMatch.match_id;
+                senderParticipant.account_id = invitation.sender_account_id;
+                match_participant recipientParticipant = new match_participant();
+                recipientParticipant.match_id = newMatch.match_id;
+                recipientParticipant.account_id = invitation.recipient_account_id;
+                context.match_participant.Add(senderParticipant);
+                context.match_participant.Add(recipientParticipant);
                 context.SaveChanges();
 
                 Random randomGenerator = new Random();
-                participante_partida dealer = senderParticipant;
+                match_participant dealer = senderParticipant;
 
                 if (randomGenerator.Next(2) == 1)
                 {
                     dealer = recipientParticipant;
                 }
 
-                manga firstHand = new manga();
-                firstHand.id_partida = newMatch.id_partida;
-                firstHand.numero_manga = FirstHandNumber;
-                firstHand.id_participante_repartidor = dealer.id_participante;
-                firstHand.estado_actual = HandState.Dealing;
-                firstHand.fecha_inicio = now;
-                context.manga.Add(firstHand);
+                round firstHand = new round();
+                firstHand.match_id = newMatch.match_id;
+                firstHand.round_number = FirstHandNumber;
+                firstHand.dealer_participant_id = dealer.match_participant_id;
+                firstHand.round_status = HandState.Dealing;
+                firstHand.started_at = now;
+                context.round.Add(firstHand);
 
-                invitation.estado = InvitationStatus.Accepted;
-                invitation.id_partida = newMatch.id_partida;
+                invitation.status = InvitationStatus.Accepted;
+                invitation.match_id = newMatch.match_id;
                 context.SaveChanges();
 
                 transaction.Commit();
-                matchId = newMatch.id_partida;
+                matchId = newMatch.match_id;
             }
 
             return matchId;
@@ -215,12 +215,12 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                invitacion_partida invitation = context.invitacion_partida
-                    .FirstOrDefault(currentInvitation => currentInvitation.id_invitacion == invitationId);
+                match_invitation invitation = context.match_invitation
+                    .FirstOrDefault(currentInvitation => currentInvitation.match_invitation_id == invitationId);
 
-                if (invitation != null && invitation.estado == InvitationStatus.Pending)
+                if (invitation != null && invitation.status == InvitationStatus.Pending)
                 {
-                    invitation.estado = newStatus;
+                    invitation.status = newStatus;
                     context.SaveChanges();
                     updated = true;
                 }

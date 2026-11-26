@@ -12,10 +12,14 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class vista_amigos
+    public partial class user_block
     {
-        public int id_usuario { get; set; }
-        public int id_usuario_amigo { get; set; }
-        public Nullable<System.DateTime> fecha_respuesta { get; set; }
+        public long user_block_id { get; set; }
+        public int blocker_account_id { get; set; }
+        public int blocked_account_id { get; set; }
+        public System.DateTime blocked_at { get; set; }
+    
+        public virtual account account { get; set; }
+        public virtual account account1 { get; set; }
     }
 }

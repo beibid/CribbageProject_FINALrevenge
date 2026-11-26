@@ -10,8 +10,8 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public class FriendshipRepository : IFriendshipRepository
     {
-        private const string DefaultAvatar = "avatar_por_omision";
-        private const string VerifiedAccountStatus = "VERIFICADA";
+        private const string DefaultAvatar = "default_avatar";
+        private const string VerifiedAccountStatus = "VERIFIED";
         private const int MaximumSearchResults = 20;
         private const string FriendsQueryFailureMessage = "The friends list could not be queried.";
         private const string RequestCreationFailureMessage = "The friend request could not be saved.";
@@ -205,21 +205,21 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         private long AddFriendRequest(CribbageEntities context, int senderAccountId, int recipientAccountId)
         {
-            amistad friendship = new amistad();
-            friendship.id_usuario_solicitante = senderAccountId;
-            friendship.id_usuario_destinatario = recipientAccountId;
-            friendship.estado = FriendshipStatus.Pending;
-            friendship.fecha_solicitud = DateTime.Now;
+            friendship friendship = new friendship();
+            friendship.requester_account_id = senderAccountId;
+            friendship.addressee_account_id = recipientAccountId;
+            friendship.status = FriendshipStatus.Pending;
+            friendship.requested_at = DateTime.Now;
 
-            context.amistad.Add(friendship);
+            context.friendship.Add(friendship);
             context.SaveChanges();
 
-            return friendship.id_amistad;
+            return friendship.friendship_id;
         }
 
-        private void ResolveRequests(CribbageEntities context, List<amistad> requests, bool isAccepted)
+        private void ResolveRequests(CribbageEntities context, List<friendship> requests, bool isAccepted)
         {
-            foreach (amistad request in requests)
+            foreach (friendship request in requests)
             {
                 if (isAccepted)
                 {
@@ -227,30 +227,30 @@ namespace cribbage_Royale_DataAccess.DataAccess
                 }
                 else
                 {
-                    context.amistad.Remove(request);
+                    context.friendship.Remove(request);
                 }
             }
 
             context.SaveChanges();
         }
 
-        private void AcceptRequest(amistad request)
+        private void AcceptRequest(friendship request)
         {
-            request.estado = FriendshipStatus.Accepted;
-            request.fecha_respuesta = DateTime.Now;
+            request.status = FriendshipStatus.Accepted;
+            request.responded_at = DateTime.Now;
         }
 
-        private void RemoveFriendships(CribbageEntities context, List<amistad> friendships)
+        private void RemoveFriendships(CribbageEntities context, List<friendship> friendships)
         {
-            context.amistad.RemoveRange(friendships);
+            context.friendship.RemoveRange(friendships);
             context.SaveChanges();
         }
 
         private bool AcceptPendingRequest(CribbageEntities context, long requestId)
         {
-            List<amistad> requests = QueryPendingRequestById(context, requestId);
+            List<friendship> requests = QueryPendingRequestById(context, requestId);
 
-            foreach (amistad request in requests)
+            foreach (friendship request in requests)
             {
                 AcceptRequest(request);
             }
@@ -262,7 +262,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         private bool RemoveAcceptedFriendships(CribbageEntities context, int firstAccountId, int secondAccountId)
         {
-            List<amistad> friendships = QueryAcceptedFriendships(context, firstAccountId, secondAccountId);
+            List<friendship> friendships = QueryAcceptedFriendships(context, firstAccountId, secondAccountId);
             RemoveFriendships(context, friendships);
 
             return friendships.Count > 0;
@@ -270,17 +270,17 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         private bool RemovePendingRequest(CribbageEntities context, long requestId)
         {
-            List<amistad> requests = QueryPendingRequestById(context, requestId);
+            List<friendship> requests = QueryPendingRequestById(context, requestId);
             RemoveFriendships(context, requests);
 
             return requests.Count > 0;
         }
 
-        private List<amistad> QueryPendingRequestById(CribbageEntities context, long requestId)
+        private List<friendship> QueryPendingRequestById(CribbageEntities context, long requestId)
         {
-            return context.amistad
-                .Where(friendship => friendship.id_amistad == requestId)
-                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
+            return context.friendship
+                .Where(friendship => friendship.friendship_id == requestId)
+                .Where(friendship => friendship.status == FriendshipStatus.Pending)
                 .ToList();
         }
 
@@ -291,32 +291,32 @@ namespace cribbage_Royale_DataAccess.DataAccess
                 .ToList();
         }
 
-        private FriendRequestRecord BuildRequestRecord(amistad request)
+        private FriendRequestRecord BuildRequestRecord(friendship request)
         {
             FriendRequestRecord record = new FriendRequestRecord();
-            record.RequestId = request.id_amistad;
-            record.SenderAccountId = request.id_usuario_solicitante;
-            record.RecipientAccountId = request.id_usuario_destinatario;
+            record.RequestId = request.friendship_id;
+            record.SenderAccountId = request.requester_account_id;
+            record.RecipientAccountId = request.addressee_account_id;
 
             return record;
         }
 
         private List<PendingFriendRequestRecord> QueryPendingRequestsOf(CribbageEntities context, int accountId)
         {
-            List<amistad> requests = QueryPendingRequestsInvolving(context, accountId);
+            List<friendship> requests = QueryPendingRequestsInvolving(context, accountId);
             List<int> counterpartIds = requests.Select(request => ResolveCounterpartId(request, accountId)).ToList();
 
-            Dictionary<int, usuario> accounts = context.usuario
-                .Where(account => counterpartIds.Contains(account.id_usuario))
-                .ToDictionary(account => account.id_usuario);
-            List<perfil_jugador> profiles = QueryProfiles(context, counterpartIds);
+            Dictionary<int, account> accounts = context.account
+                .Where(account => counterpartIds.Contains(account.account_id))
+                .ToDictionary(account => account.account_id);
+            List<player_profile> profiles = QueryProfiles(context, counterpartIds);
 
             List<PendingFriendRequestRecord> records = new List<PendingFriendRequestRecord>();
 
-            foreach (amistad request in requests)
+            foreach (friendship request in requests)
             {
                 PendingFriendRequestRecord record = BuildPendingRecord(request, accountId);
-                usuario account;
+                account account;
 
                 if (accounts.TryGetValue(record.AccountId, out account))
                 {
@@ -328,79 +328,79 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return records;
         }
 
-        private List<amistad> QueryPendingRequestsInvolving(CribbageEntities context, int accountId)
+        private List<friendship> QueryPendingRequestsInvolving(CribbageEntities context, int accountId)
         {
-            return context.amistad
-                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
-                .Where(friendship => friendship.id_usuario_solicitante == accountId
-                    || friendship.id_usuario_destinatario == accountId)
-                .OrderByDescending(friendship => friendship.fecha_solicitud)
+            return context.friendship
+                .Where(friendship => friendship.status == FriendshipStatus.Pending)
+                .Where(friendship => friendship.requester_account_id == accountId
+                    || friendship.addressee_account_id == accountId)
+                .OrderByDescending(friendship => friendship.requested_at)
                 .ToList();
         }
 
-        private PendingFriendRequestRecord BuildPendingRecord(amistad request, int accountId)
+        private PendingFriendRequestRecord BuildPendingRecord(friendship request, int accountId)
         {
             PendingFriendRequestRecord record = new PendingFriendRequestRecord();
-            record.RequestId = request.id_amistad;
+            record.RequestId = request.friendship_id;
             record.AccountId = ResolveCounterpartId(request, accountId);
-            record.IsReceived = request.id_usuario_destinatario == accountId;
-            record.RequestedAt = request.fecha_solicitud;
+            record.IsReceived = request.addressee_account_id == accountId;
+            record.RequestedAt = request.requested_at;
 
             return record;
         }
 
-        private int ResolveCounterpartId(amistad request, int accountId)
+        private int ResolveCounterpartId(friendship request, int accountId)
         {
-            int counterpartId = request.id_usuario_solicitante;
+            int counterpartId = request.requester_account_id;
 
-            if (request.id_usuario_solicitante == accountId)
+            if (request.requester_account_id == accountId)
             {
-                counterpartId = request.id_usuario_destinatario;
+                counterpartId = request.addressee_account_id;
             }
 
             return counterpartId;
         }
 
-        private List<amistad> QueryPendingRequests(
+        private List<friendship> QueryPendingRequests(
             CribbageEntities context,
             int senderAccountId,
             int recipientAccountId)
         {
-            return context.amistad
-                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
-                .Where(friendship => friendship.id_usuario_solicitante == senderAccountId)
-                .Where(friendship => friendship.id_usuario_destinatario == recipientAccountId)
+            return context.friendship
+                .Where(friendship => friendship.status == FriendshipStatus.Pending)
+                .Where(friendship => friendship.requester_account_id == senderAccountId)
+                .Where(friendship => friendship.addressee_account_id == recipientAccountId)
                 .ToList();
         }
 
-        private List<amistad> QueryAcceptedFriendships(
+        private List<friendship> QueryAcceptedFriendships(
             CribbageEntities context,
             int firstAccountId,
             int secondAccountId)
         {
-            List<amistad> friendships = QueryAcceptedInDirection(context, firstAccountId, secondAccountId);
+            List<friendship> friendships = QueryAcceptedInDirection(context, firstAccountId, secondAccountId);
             friendships.AddRange(QueryAcceptedInDirection(context, secondAccountId, firstAccountId));
 
             return friendships;
         }
 
-        private List<amistad> QueryAcceptedInDirection(
+        private List<friendship> QueryAcceptedInDirection(
             CribbageEntities context,
             int senderAccountId,
             int recipientAccountId)
         {
-            return context.amistad
-                .Where(friendship => friendship.estado == FriendshipStatus.Accepted)
-                .Where(friendship => friendship.id_usuario_solicitante == senderAccountId)
-                .Where(friendship => friendship.id_usuario_destinatario == recipientAccountId)
+            return context.friendship
+                .Where(friendship => friendship.status == FriendshipStatus.Accepted)
+                .Where(friendship => friendship.requester_account_id == senderAccountId)
+                .Where(friendship => friendship.addressee_account_id == recipientAccountId)
                 .ToList();
         }
 
         private bool IsVerifiedAccount(CribbageEntities context, int accountId)
         {
-            return context.usuario
-                .Where(account => account.id_usuario == accountId)
-                .Any(account => account.estado_cuenta == VerifiedAccountStatus);
+            return context.account
+                .Where(account => account.account_id == accountId)
+                .Any(account => account.account_status == VerifiedAccountStatus);
         }
 
         private bool HasPendingRequestInEitherDirection(
@@ -422,9 +422,9 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         private bool HasBlockInDirection(CribbageEntities context, int blockingAccountId, int blockedAccountId)
         {
-            return context.bloqueo
-                .Where(block => block.id_usuario_que_bloquea == blockingAccountId)
-                .Any(block => block.id_usuario_bloqueado == blockedAccountId);
+            return context.user_block
+                .Where(block => block.blocker_account_id == blockingAccountId)
+                .Any(block => block.blocked_account_id == blockedAccountId);
         }
 
         private List<FriendRecord> QueryFriends(CribbageEntities context, int accountId)
@@ -432,18 +432,18 @@ namespace cribbage_Royale_DataAccess.DataAccess
             Dictionary<int, DateTime?> friendships = QueryFriendships(context, accountId);
             List<int> friendIds = friendships.Keys.ToList();
 
-            List<usuario> accounts = context.usuario
-                .Where(account => friendIds.Contains(account.id_usuario))
+            List<account> accounts = context.account
+                .Where(account => friendIds.Contains(account.account_id))
                 .ToList();
-            List<perfil_jugador> profiles = QueryProfiles(context, friendIds);
+            List<player_profile> profiles = QueryProfiles(context, friendIds);
 
             List<FriendRecord> friends = new List<FriendRecord>();
 
-            foreach (usuario account in accounts)
+            foreach (account account in accounts)
             {
                 FriendRecord friend = new FriendRecord();
                 FillRecord(friend, account, profiles);
-                friend.FriendsSince = friendships[account.id_usuario];
+                friend.FriendsSince = friendships[account.account_id];
                 friends.Add(friend);
             }
 
@@ -454,21 +454,21 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             List<int> blockedAccountIds = QueryBlockedCounterpartIds(context, searcherAccountId);
 
-            List<usuario> accounts = context.usuario
-                .Where(account => account.nombre_usuario.Contains(searchText))
-                .Where(account => account.estado_cuenta == VerifiedAccountStatus)
-                .Where(account => account.id_usuario != searcherAccountId)
-                .Where(account => !blockedAccountIds.Contains(account.id_usuario))
-                .OrderBy(account => account.nombre_usuario)
+            List<account> accounts = context.account
+                .Where(account => account.username.Contains(searchText))
+                .Where(account => account.account_status == VerifiedAccountStatus)
+                .Where(account => account.account_id != searcherAccountId)
+                .Where(account => !blockedAccountIds.Contains(account.account_id))
+                .OrderBy(account => account.username)
                 .Take(MaximumSearchResults)
                 .ToList();
 
-            List<int> accountIds = accounts.Select(account => account.id_usuario).ToList();
-            List<perfil_jugador> profiles = QueryProfiles(context, accountIds);
+            List<int> accountIds = accounts.Select(account => account.account_id).ToList();
+            List<player_profile> profiles = QueryProfiles(context, accountIds);
 
             List<PlayerRecord> players = new List<PlayerRecord>();
 
-            foreach (usuario account in accounts)
+            foreach (account account in accounts)
             {
                 PlayerRecord player = new PlayerRecord();
                 FillRecord(player, account, profiles);
@@ -480,14 +480,14 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         private List<int> QueryBlockedCounterpartIds(CribbageEntities context, int accountId)
         {
-            List<int> counterpartIds = context.bloqueo
-                .Where(block => block.id_usuario_que_bloquea == accountId)
-                .Select(block => block.id_usuario_bloqueado)
+            List<int> counterpartIds = context.user_block
+                .Where(block => block.blocker_account_id == accountId)
+                .Select(block => block.blocked_account_id)
                 .ToList();
 
-            counterpartIds.AddRange(context.bloqueo
-                .Where(block => block.id_usuario_bloqueado == accountId)
-                .Select(block => block.id_usuario_que_bloquea)
+            counterpartIds.AddRange(context.user_block
+                .Where(block => block.blocked_account_id == accountId)
+                .Select(block => block.blocker_account_id)
                 .ToList());
 
             return counterpartIds;
@@ -495,40 +495,40 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         private List<int> QuerySentRequestRecipientIds(CribbageEntities context, int accountId)
         {
-            return context.amistad
-                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
-                .Where(friendship => friendship.id_usuario_solicitante == accountId)
-                .Select(friendship => friendship.id_usuario_destinatario)
+            return context.friendship
+                .Where(friendship => friendship.status == FriendshipStatus.Pending)
+                .Where(friendship => friendship.requester_account_id == accountId)
+                .Select(friendship => friendship.addressee_account_id)
                 .ToList();
         }
 
         private List<int> QueryReceivedRequestSenderIds(CribbageEntities context, int accountId)
         {
-            return context.amistad
-                .Where(friendship => friendship.estado == FriendshipStatus.Pending)
-                .Where(friendship => friendship.id_usuario_destinatario == accountId)
-                .Select(friendship => friendship.id_usuario_solicitante)
+            return context.friendship
+                .Where(friendship => friendship.status == FriendshipStatus.Pending)
+                .Where(friendship => friendship.addressee_account_id == accountId)
+                .Select(friendship => friendship.requester_account_id)
                 .ToList();
         }
 
-        private List<perfil_jugador> QueryProfiles(CribbageEntities context, List<int> accountIds)
+        private List<player_profile> QueryProfiles(CribbageEntities context, List<int> accountIds)
         {
-            return context.perfil_jugador
-                .Where(profile => accountIds.Contains(profile.id_usuario))
+            return context.player_profile
+                .Where(profile => accountIds.Contains(profile.account_id))
                 .ToList();
         }
 
         private Dictionary<int, DateTime?> QueryFriendships(CribbageEntities context, int accountId)
         {
-            List<vista_amigos> rows = context.vista_amigos
-                .Where(friendship => friendship.id_usuario == accountId || friendship.id_usuario_amigo == accountId)
+            List<friend_view> rows = context.friend_view
+                .Where(friendship => friendship.account_id == accountId || friendship.friend_account_id == accountId)
                 .ToList();
 
             Dictionary<int, DateTime?> friendships = new Dictionary<int, DateTime?>();
 
-            foreach (vista_amigos row in rows)
+            foreach (friend_view row in rows)
             {
-                friendships[ResolveFriendId(row, accountId)] = row.fecha_respuesta;
+                friendships[ResolveFriendId(row, accountId)] = row.responded_at;
             }
 
             friendships.Remove(accountId);
@@ -536,35 +536,35 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return friendships;
         }
 
-        private int ResolveFriendId(vista_amigos friendship, int accountId)
+        private int ResolveFriendId(friend_view friendship, int accountId)
         {
-            int friendId = friendship.id_usuario;
+            int friendId = friendship.account_id;
 
-            if (friendship.id_usuario == accountId)
+            if (friendship.account_id == accountId)
             {
-                friendId = friendship.id_usuario_amigo;
+                friendId = friendship.friend_account_id;
             }
 
             return friendId;
         }
 
-        private void FillRecord(PlayerRecord record, usuario account, List<perfil_jugador> profiles)
+        private void FillRecord(PlayerRecord record, account account, List<player_profile> profiles)
         {
-            perfil_jugador profile = profiles.FirstOrDefault(candidate => candidate.id_usuario == account.id_usuario);
+            player_profile profile = profiles.FirstOrDefault(candidate => candidate.account_id == account.account_id);
 
-            record.AccountId = account.id_usuario;
-            record.UserName = account.nombre_usuario;
-            record.DisplayName = account.nombre_usuario;
+            record.AccountId = account.account_id;
+            record.UserName = account.username;
+            record.DisplayName = account.username;
             record.HasProfileImage = false;
 
             if (profile != null)
             {
-                record.DisplayName = profile.nombre_mostrado;
+                record.DisplayName = profile.display_name;
                 record.HasProfileImage = HasCustomAvatar(profile);
             }
         }
 
-        private bool HasCustomAvatar(perfil_jugador profile)
+        private bool HasCustomAvatar(player_profile profile)
         {
             return !string.IsNullOrEmpty(profile.avatar) && profile.avatar != DefaultAvatar;
         }

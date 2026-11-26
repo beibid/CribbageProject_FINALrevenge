@@ -12,19 +12,16 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class perfil_jugador
+    public partial class session
     {
-        public int id_usuario { get; set; }
-        public string nombre_mostrado { get; set; }
-        public string biografia { get; set; }
-        public string avatar { get; set; }
-        public bool tutorial_completado { get; set; }
-        public short nivel_habilidad { get; set; }
-        public int partidas_jugadas { get; set; }
-        public int victorias { get; set; }
-        public int derrotas { get; set; }
-        public short racha_actual { get; set; }
+        public long session_id { get; set; }
+        public int account_id { get; set; }
+        public string token { get; set; }
+        public string device { get; set; }
+        public System.DateTime issued_at { get; set; }
+        public System.DateTime expires_at { get; set; }
+        public Nullable<System.DateTime> revoked_at { get; set; }
     
-        public virtual usuario usuario { get; set; }
+        public virtual account account { get; set; }
     }
 }

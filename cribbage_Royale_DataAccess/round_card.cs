@@ -12,12 +12,15 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class vista_marcador_partida
+    public partial class round_card
     {
-        public long id_partida { get; set; }
-        public long id_participante { get; set; }
-        public int id_usuario { get; set; }
-        public byte posicion_tablero { get; set; }
-        public Nullable<int> puntos_acreditados { get; set; }
+        public long round_id { get; set; }
+        public byte card_id { get; set; }
+        public long owner_participant_id { get; set; }
+        public string card_status { get; set; }
+    
+        public virtual card card { get; set; }
+        public virtual match_participant match_participant { get; set; }
+        public virtual round round { get; set; }
     }
 }

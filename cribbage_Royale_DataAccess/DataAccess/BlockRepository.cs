@@ -14,20 +14,20 @@ namespace cribbage_Royale_DataAccess.DataAccess
             List<BlockedPlayerSummary> blockedPlayers = new List<BlockedPlayerSummary>();
             using (CribbageEntities context = new CribbageEntities())
             {
-                List<bloqueo> blockEntities = context.bloqueo
-                    .Where(blockRow => blockRow.id_usuario_que_bloquea == accountId)
-                    .OrderByDescending(blockRow => blockRow.fecha_bloqueo)
+                List<user_block> blockEntities = context.user_block
+                    .Where(blockRow => blockRow.blocker_account_id == accountId)
+                    .OrderByDescending(blockRow => blockRow.blocked_at)
                     .Take(BlockedPlayerListLimit)
                     .ToList();
-                foreach (bloqueo blockEntity in blockEntities)
+                foreach (user_block blockEntity in blockEntities)
                 {
-                    usuario blockedUserEntity = context.usuario.First(userRow => userRow.id_usuario == blockEntity.id_usuario_bloqueado);
-                    perfil_jugador blockedProfileEntity = context.perfil_jugador.First(profileRow => profileRow.id_usuario == blockEntity.id_usuario_bloqueado);
+                    account blockedUserEntity = context.account.First(userRow => userRow.account_id == blockEntity.blocked_account_id);
+                    player_profile blockedProfileEntity = context.player_profile.First(profileRow => profileRow.account_id == blockEntity.blocked_account_id);
                     BlockedPlayerSummary summary = new BlockedPlayerSummary();
-                    summary.AccountId = blockedUserEntity.id_usuario;
-                    summary.DisplayName = blockedProfileEntity.nombre_mostrado;
-                    summary.Username = blockedUserEntity.nombre_usuario;
-                    summary.BlockDate = blockEntity.fecha_bloqueo;
+                    summary.AccountId = blockedUserEntity.account_id;
+                    summary.DisplayName = blockedProfileEntity.display_name;
+                    summary.Username = blockedUserEntity.username;
+                    summary.BlockDate = blockEntity.blocked_at;
                     blockedPlayers.Add(summary);
                 }
             }
@@ -38,9 +38,9 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             using (CribbageEntities context = new CribbageEntities())
             {
-                bloqueo blockEntity = context.bloqueo.First(blockRow =>
-                    blockRow.id_usuario_que_bloquea == accountId && blockRow.id_usuario_bloqueado == blockedAccountId);
-                context.bloqueo.Remove(blockEntity);
+                user_block blockEntity = context.user_block.First(blockRow =>
+                    blockRow.blocker_account_id == accountId && blockRow.blocked_account_id == blockedAccountId);
+                context.user_block.Remove(blockEntity);
                 context.SaveChanges();
             }
         }
@@ -48,15 +48,15 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             using (CribbageEntities context = new CribbageEntities())
             {
-                bloqueo existingBlock = context.bloqueo.FirstOrDefault(currentBlock => currentBlock.id_usuario_que_bloquea == accountId && currentBlock.id_usuario_bloqueado == blockedAccountId);
+                user_block existingBlock = context.user_block.FirstOrDefault(currentBlock => currentBlock.blocker_account_id == accountId && currentBlock.blocked_account_id == blockedAccountId);
 
                 if (existingBlock == null)
                 {
-                    bloqueo newBlock = new bloqueo();
-                    newBlock.id_usuario_que_bloquea = accountId;
-                    newBlock.id_usuario_bloqueado = blockedAccountId;
-                    newBlock.fecha_bloqueo = DateTime.Now;
-                    context.bloqueo.Add(newBlock);
+                    user_block newBlock = new user_block();
+                    newBlock.blocker_account_id = accountId;
+                    newBlock.blocked_account_id = blockedAccountId;
+                    newBlock.blocked_at = DateTime.Now;
+                    context.user_block.Add(newBlock);
                     context.SaveChanges();
                 }
             }

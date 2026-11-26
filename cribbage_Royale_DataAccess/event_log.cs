@@ -12,12 +12,17 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class vista_crib
+    public partial class event_log
     {
-        public long id_manga { get; set; }
-        public long id_participante_dueno { get; set; }
-        public byte id_carta { get; set; }
-        public string palo { get; set; }
-        public byte valor { get; set; }
+        public long event_log_id { get; set; }
+        public Nullable<int> account_id { get; set; }
+        public Nullable<long> match_id { get; set; }
+        public string event_type { get; set; }
+        public string description { get; set; }
+        public string operation_id { get; set; }
+        public System.DateTime logged_at { get; set; }
+    
+        public virtual account account { get; set; }
+        public virtual match match { get; set; }
     }
 }

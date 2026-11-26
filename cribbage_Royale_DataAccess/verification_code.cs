@@ -12,14 +12,17 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class bloqueo
+    public partial class verification_code
     {
-        public long id_bloqueo { get; set; }
-        public int id_usuario_que_bloquea { get; set; }
-        public int id_usuario_bloqueado { get; set; }
-        public System.DateTime fecha_bloqueo { get; set; }
+        public long verification_code_id { get; set; }
+        public int account_id { get; set; }
+        public string code_type { get; set; }
+        public string code_value { get; set; }
+        public string target_email { get; set; }
+        public System.DateTime created_at { get; set; }
+        public System.DateTime expires_at { get; set; }
+        public Nullable<System.DateTime> used_at { get; set; }
     
-        public virtual usuario usuario { get; set; }
-        public virtual usuario usuario1 { get; set; }
+        public virtual account account { get; set; }
     }
 }
