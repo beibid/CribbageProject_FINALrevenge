@@ -3,67 +3,67 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Motivos por los que el servidor rechaza una operación de invitación a partida.
+    /// Reasons the server rejects a match invitation operation.
     /// </summary>
     [DataContract]
     public enum InvitationFailure
     {
         /// <summary>
-        /// El identificador de cuenta no corresponde a una cuenta registrada.
+        /// The account identifier does not match a registered account.
         /// </summary>
         [EnumMember]
         InvalidAccountId,
 
         /// <summary>
-        /// Quien llama intentó invitarse a sí mismo.
+        /// The caller attempted to invite their own account.
         /// </summary>
         [EnumMember]
         CannotInviteSelf,
 
         /// <summary>
-        /// No existe amistad aceptada entre las dos cuentas.
+        /// There is no accepted friendship between the two accounts.
         /// </summary>
         [EnumMember]
         FriendshipNotFound,
 
         /// <summary>
-        /// Existe un bloqueo en alguno de los dos sentidos.
+        /// A block exists in either direction.
         /// </summary>
         [EnumMember]
         BlockedRelationship,
 
         /// <summary>
-        /// La cuenta invitada no está conectada.
+        /// The invited account is not connected.
         /// </summary>
         [EnumMember]
         RecipientUnavailable,
 
         /// <summary>
-        /// La cuenta invitada ya se encuentra en una partida.
+        /// The invited account is already in a match.
         /// </summary>
         [EnumMember]
         RecipientBusy,
 
         /// <summary>
-        /// Quien llama ya se encuentra en una partida.
+        /// The caller is already in a match.
         /// </summary>
         [EnumMember]
         CallerBusy,
 
         /// <summary>
-        /// Ya existe una invitación pendiente entre las dos cuentas.
+        /// A pending invitation already exists between the two accounts.
         /// </summary>
         [EnumMember]
         InvitationAlreadySent,
 
         /// <summary>
-        /// La invitación no existe o ya fue atendida.
+        /// The invitation does not exist or has already been handled.
         /// </summary>
         [EnumMember]
         InvitationNotFound,
 
         /// <summary>
-        /// Quien llama no es el destinatario de la invitación.
+        /// The caller is not the recipient of the invitation.
         /// </summary>
         [EnumMember]
         InvitationNotOwned

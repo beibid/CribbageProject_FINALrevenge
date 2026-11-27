@@ -4,25 +4,25 @@ using System.Runtime.Serialization;
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Mensaje de chat enviado entre dos amigos.
+    /// Chat message sent between two friends.
     /// </summary>
     [DataContract]
     public class ChatMessage
     {
         /// <summary>
-        /// Cuenta que escribió el mensaje.
+        /// Account that wrote the message.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Sender { get; set; }
 
         /// <summary>
-        /// Texto del mensaje, ya validado por el servidor.
+        /// Message text, already validated by the server.
         /// </summary>
         [DataMember(IsRequired = true)]
         public string Text { get; set; }
 
         /// <summary>
-        /// Instante en que el servidor recibió el mensaje.
+        /// Instant at which the server received the message.
         /// </summary>
         [DataMember(IsRequired = true)]
         public DateTime SentAtUtc { get; set; }

@@ -3,7 +3,7 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Tipo de cambio ocurrido en una partida.
+    /// Kind of change that occurred in a match.
     /// </summary>
     [DataContract]
     public enum MatchEventType

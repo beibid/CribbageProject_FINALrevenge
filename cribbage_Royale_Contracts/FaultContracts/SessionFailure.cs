@@ -3,62 +3,62 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Motivos por los que el servidor rechaza el inicio o el cierre de una sesión, o una operación
-    /// que exige una sesión válida.
+    /// Reasons the server rejects signing in, signing out, or an operation that requires a valid
+    /// session.
     /// </summary>
     [DataContract]
     public enum SessionFailure
     {
         /// <summary>
-        /// El nombre de usuario, el correo o la contraseña no coinciden.
+        /// The username, email or password does not match.
         /// </summary>
         [EnumMember]
         InvalidCredentials,
 
         /// <summary>
-        /// La cuenta existe pero aún no ha sido verificada.
+        /// The account exists but has not been verified yet.
         /// </summary>
         [EnumMember]
         AccountNotVerified,
 
         /// <summary>
-        /// La cuenta se encuentra suspendida.
+        /// The account is suspended.
         /// </summary>
         [EnumMember]
         AccountSuspended,
 
         /// <summary>
-        /// La cuenta fue eliminada.
+        /// The account was deleted.
         /// </summary>
         [EnumMember]
         AccountDeleted,
 
         /// <summary>
-        /// El encabezado del testigo de sesión está ausente o vacío.
+        /// The session token header is missing or empty.
         /// </summary>
         [EnumMember]
         MissingSessionToken,
 
         /// <summary>
-        /// El testigo de sesión no es válido o ya fue revocado.
+        /// The session token is invalid or has been revoked.
         /// </summary>
         [EnumMember]
         InvalidSession,
 
         /// <summary>
-        /// La operación exige una cuenta registrada y la sesión es de invitado.
+        /// The operation requires a registered account and the session belongs to a guest.
         /// </summary>
         [EnumMember]
         GuestNotAllowed,
 
         /// <summary>
-        /// El nombre propuesto por el invitado no cumple el formato permitido.
+        /// The name proposed by the guest has an invalid format.
         /// </summary>
         [EnumMember]
         InvalidGuestName,
 
         /// <summary>
-        /// El nombre propuesto por el invitado ya está en uso.
+        /// The name proposed by the guest is already in use.
         /// </summary>
         [EnumMember]
         GuestNameUnavailable

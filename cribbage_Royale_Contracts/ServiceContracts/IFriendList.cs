@@ -5,23 +5,23 @@ using CribbageRoyale.Contracts.FaultContracts;
 namespace CribbageRoyale.Contracts.ServiceContracts
 {
     /// <summary>
-    /// Búsqueda de jugadores y lista de amigos con su presencia. Exige una sesión de cuenta registrada,
-    /// enviada en el encabezado SessionToken.
+    /// Player search and friend list with presence. Requires a registered account session, sent in
+    /// the SessionToken header.
     /// </summary>
     [ServiceContract]
     public interface IFriendList
     {
         /// <summary>
-        /// Busca jugadores por nombre de usuario. Omite a quien llama y a las cuentas con las que existe
-        /// un bloqueo en cualquier sentido.
+        /// Searches players by username. Excludes the caller and any account with a block in either
+        /// direction.
         /// </summary>
-        /// <param name="searchText">Texto que debe aparecer en el nombre de usuario.</param>
-        /// <returns>Los jugadores encontrados; un arreglo vacío si no hay coincidencias.</returns>
-        /// <exception cref="FaultException{FriendshipFault}">El texto de búsqueda está vacío o no cumple el
-        /// formato.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece a un
-        /// invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo completar la búsqueda.</exception>
+        /// <param name="searchText">Text that must appear in the username.</param>
+        /// <returns>The players found; an empty array if there are no matches.</returns>
+        /// <exception cref="FaultException{FriendshipFault}">The search text is empty or has an invalid
+        /// format.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs to a
+        /// guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not complete the search.</exception>
         [OperationContract]
         [FaultContract(typeof(FriendshipFault))]
         [FaultContract(typeof(SessionFault))]
@@ -29,14 +29,14 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         PlayerSummary[] FindPlayers(string searchText);
 
         /// <summary>
-        /// Obtiene los amigos de quien llama, con la presencia conocida por el servidor al consultar.
+        /// Gets the caller's friends, with the presence known to the server at query time.
         /// </summary>
-        /// <returns>Los amigos de quien llama; un arreglo vacío si no tiene ninguno.</returns>
-        /// <exception cref="FaultException{FriendshipFault}">La operación fue rechazada por una regla de
-        /// amistades.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece a un
-        /// invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo completar la consulta.</exception>
+        /// <returns>The caller's friends; an empty array if there are none.</returns>
+        /// <exception cref="FaultException{FriendshipFault}">The operation was rejected by a friendship
+        /// rule.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs to a
+        /// guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not complete the query.</exception>
         [OperationContract]
         [FaultContract(typeof(FriendshipFault))]
         [FaultContract(typeof(SessionFault))]
@@ -45,15 +45,15 @@ namespace CribbageRoyale.Contracts.ServiceContracts
 
 
         /// <summary>
-        /// Elimina la amistad entre quien llama y otra cuenta, para ambos. No notifica al amigo
-        /// eliminado.
+        /// Removes the friendship between the caller and another account, for both sides. The removed
+        /// friend is not notified.
         /// </summary>
-        /// <param name="accountId">Cuenta del amigo que se elimina.</param>
-        /// <exception cref="FaultException{FriendshipFault}">La cuenta no es válida, es la propia o no existe
-        /// amistad vigente con ella.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece a un
-        /// invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo eliminar la amistad.</exception>
+        /// <param name="accountId">Account of the friend to remove.</param>
+        /// <exception cref="FaultException{FriendshipFault}">The account is invalid, is the caller's own, or
+        /// has no active friendship with the caller.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs to a
+        /// guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not remove the friendship.</exception>
         [OperationContract]
         [FaultContract(typeof(FriendshipFault))]
         [FaultContract(typeof(SessionFault))]

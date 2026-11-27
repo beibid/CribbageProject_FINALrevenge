@@ -3,13 +3,13 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Falla de negocio ocurrida al enviar un mensaje de chat.
+    /// Business fault raised while sending a chat message.
     /// </summary>
     [DataContract]
     public class ChatFault
     {
         /// <summary>
-        /// Motivo por el cual el envío fue rechazado.
+        /// Reason the message was rejected.
         /// </summary>
         [DataMember(IsRequired = true)]
         public ChatFailure Reason { get; set; }

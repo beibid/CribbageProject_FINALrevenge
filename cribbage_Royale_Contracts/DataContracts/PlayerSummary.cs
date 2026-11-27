@@ -3,25 +3,25 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Jugador encontrado en una búsqueda.
+    /// Player returned by a search.
     /// </summary>
     [DataContract]
     public class PlayerSummary
     {
         /// <summary>
-        /// Identidad pública del jugador.
+        /// Public identity of the player.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Account { get; set; }
 
         /// <summary>
-        /// Indica si el jugador tiene una foto de perfil propia.
+        /// Whether the player has a custom profile picture.
         /// </summary>
         [DataMember(IsRequired = true)]
         public bool HasProfileImage { get; set; }
 
         /// <summary>
-        /// Relación del jugador con quien buscó.
+        /// Relationship between the player and the caller who searched.
         /// </summary>
         [DataMember(IsRequired = true)]
         public RelationshipKind Relationship { get; set; }

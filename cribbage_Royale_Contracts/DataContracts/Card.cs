@@ -3,20 +3,20 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Carta de la baraja inglesa. Es el único tipo de carta del sistema:
-    /// se usa tanto en los contratos como en el proyecto de reglas.
+    /// Card from a standard 52-card deck. It is the only card type in the system and is shared by the
+    /// contracts and the rules project.
     /// </summary>
     [DataContract]
     public class Card
     {
         /// <summary>
-        /// Rango de la carta.
+        /// Rank of the card.
         /// </summary>
         [DataMember]
         public CardRank Rank { get; set; }
 
         /// <summary>
-        /// Palo de la carta.
+        /// Suit of the card.
         /// </summary>
         [DataMember]
         public CardSuit Suit { get; set; }

@@ -3,7 +3,7 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Palo de una carta.
+    /// Suit of a card.
     /// </summary>
     [DataContract]
     public enum CardSuit

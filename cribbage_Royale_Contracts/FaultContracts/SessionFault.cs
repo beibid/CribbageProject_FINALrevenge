@@ -3,13 +3,13 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Falla de negocio ocurrida al abrir o cerrar una sesión de jugador.
+    /// Business fault raised while opening or closing a player session.
     /// </summary>
     [DataContract]
     public class SessionFault
     {
         /// <summary>
-        /// Motivo por el cual la operación de sesión fue rechazada.
+        /// Reason the session operation was rejected.
         /// </summary>
         [DataMember(IsRequired = true)]
         public SessionFailure Failure { get; set; }

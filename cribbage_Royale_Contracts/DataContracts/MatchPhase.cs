@@ -3,7 +3,7 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Etapa en la que se encuentra una partida.
+    /// Current stage of a match.
     /// </summary>
     [DataContract]
     public enum MatchPhase

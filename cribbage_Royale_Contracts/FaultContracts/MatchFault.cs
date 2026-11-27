@@ -3,13 +3,13 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Falla de negocio devuelta por el servicio de juego.
+    /// Business fault returned by the match play service.
     /// </summary>
     [DataContract]
     public class MatchFault
     {
         /// <summary>
-        /// Motivo por el que se rechazó la operación.
+        /// Reason the operation was rejected.
         /// </summary>
         [DataMember(IsRequired = true)]
         public MatchFailure Reason { get; set; }

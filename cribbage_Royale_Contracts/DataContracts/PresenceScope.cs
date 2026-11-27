@@ -3,19 +3,19 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Ámbito al que corresponde un cambio de presencia.
+    /// Scope of a presence change.
     /// </summary>
     [DataContract]
     public enum PresenceScope
     {
         /// <summary>
-        /// El cambio corresponde al rival de la partida en curso.
+        /// The change concerns the opponent in the current match.
         /// </summary>
         [EnumMember]
         Rival,
 
         /// <summary>
-        /// El cambio corresponde a un amigo del destinatario.
+        /// The change concerns a friend of the recipient.
         /// </summary>
         [EnumMember]
         Friend

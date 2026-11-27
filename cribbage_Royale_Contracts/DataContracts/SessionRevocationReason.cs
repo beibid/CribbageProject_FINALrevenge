@@ -3,25 +3,25 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Motivo por el cual el servidor dio por terminada una sesión.
+    /// Reason the server terminated a session.
     /// </summary>
     [DataContract]
     public enum SessionRevocationReason
     {
         /// <summary>
-        /// La misma cuenta inició sesión desde otro cliente.
+        /// The same account signed in from another client.
         /// </summary>
         [EnumMember]
         SignedInElsewhere,
 
         /// <summary>
-        /// La cuenta fue suspendida mientras la sesión estaba abierta.
+        /// The account was suspended while the session was open.
         /// </summary>
         [EnumMember]
         AccountSuspended,
 
         /// <summary>
-        /// La sesión alcanzó su tiempo máximo de vigencia.
+        /// The session reached its maximum lifetime.
         /// </summary>
         [EnumMember]
         SessionExpired

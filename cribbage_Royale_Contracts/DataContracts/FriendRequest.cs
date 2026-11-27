@@ -4,31 +4,31 @@ using System.Runtime.Serialization;
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Solicitud de amistad pendiente.
+    /// Pending friend request.
     /// </summary>
     [DataContract]
     public class FriendRequest
     {
         /// <summary>
-        /// Identificador estable de la solicitud.
+        /// Stable identifier of the request.
         /// </summary>
         [DataMember(IsRequired = true)]
         public long RequestId { get; set; }
 
         /// <summary>
-        /// La otra cuenta involucrada.
+        /// The other account involved.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Counterpart { get; set; }
 
         /// <summary>
-        /// Recibida o enviada, desde el punto de vista de quien consulta.
+        /// Received or sent, from the point of view of the caller.
         /// </summary>
         [DataMember(IsRequired = true)]
         public RequestDirection Direction { get; set; }
 
         /// <summary>
-        /// Instante en UTC en que el servidor registró la solicitud.
+        /// UTC instant at which the server recorded the request.
         /// </summary>
         [DataMember(IsRequired = true)]
         public DateTime CreatedAtUtc { get; set; }

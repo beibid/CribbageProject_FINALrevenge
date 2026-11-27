@@ -3,19 +3,19 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Sentido de una solicitud desde el punto de vista de quien consulta.
+    /// Direction of a request from the point of view of the caller.
     /// </summary>
     [DataContract]
     public enum RequestDirection
     {
         /// <summary>
-        /// Quien consulta es el destinatario de la solicitud.
+        /// The caller is the recipient of the request.
         /// </summary>
         [EnumMember]
         Received,
 
         /// <summary>
-        /// Quien consulta es el remitente de la solicitud.
+        /// The caller is the sender of the request.
         /// </summary>
         [EnumMember]
         Sent

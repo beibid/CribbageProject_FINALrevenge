@@ -3,25 +3,25 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Invitación a partida entre dos amigos, con las dos cuentas involucradas.
+    /// Match invitation between two friends, with both accounts involved.
     /// </summary>
     [DataContract]
     public class MatchInvitation
     {
         /// <summary>
-        /// Identificador que el servidor asignó a la invitación.
+        /// Identifier assigned to the invitation by the server.
         /// </summary>
         [DataMember(IsRequired = true)]
         public long InvitationId { get; set; }
 
         /// <summary>
-        /// Cuenta que envió la invitación.
+        /// Account that sent the invitation.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Sender { get; set; }
 
         /// <summary>
-        /// Cuenta que recibió la invitación.
+        /// Account that received the invitation.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Recipient { get; set; }
