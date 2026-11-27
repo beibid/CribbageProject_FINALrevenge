@@ -44,12 +44,6 @@
             <PasswordBox x:Name="confirmPasswordBox" Style="{StaticResource FormPasswordBox}"
                          MaxLength="64"/>
 
-            <CheckBox x:Name="termsCheckBox"
-                      Content="{x:Static lang:Lang.Register_TermsCheckBox}"
-                      Foreground="{StaticResource TextBrush}"
-                      FontSize="12"
-                      Margin="0,16,0,0"/>
-
             <Button x:Name="registerButton" Content="{x:Static lang:Lang.Register_RegisterButton}"
                     Style="{StaticResource PrimaryButton}" MinWidth="0" Margin="0,20,0,6"
                     Click="RegisterButton_Click"/>

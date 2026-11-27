@@ -6,7 +6,8 @@
       xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
       mc:Ignorable="d"
       d:DesignHeight="800" d:DesignWidth="1280"
-      Title="{x:Static lang:Lang.Lobby_Title}">
+      Title="{x:Static lang:Lang.Lobby_Title}"
+      Loaded="Page_Loaded">
 
     <Grid Background="{StaticResource BackgroundBrush}" Margin="40,30">
         <Grid.RowDefinitions>
@@ -18,7 +19,7 @@
 
         <Grid>
             <StackPanel Orientation="Horizontal">
-                <Ellipse Width="44" Height="44" Fill="{StaticResource GoldBrush}"/>
+                <Ellipse x:Name="avatarEllipse" Width="44" Height="44" Fill="{StaticResource GoldBrush}"/>
                 <StackPanel VerticalAlignment="Center" Margin="12,0,0,0">
                     <TextBlock x:Name="playerNameTextBlock" Foreground="{StaticResource TextBrush}"
                                FontSize="16" FontWeight="Bold"/>
@@ -71,8 +72,8 @@
                                Foreground="{StaticResource MutedTextBrush}" FontSize="13"
                                HorizontalAlignment="Center" Margin="0,6,0,24"/>
                     <Button x:Name="playButton" Content="{x:Static lang:Lang.Lobby_PlayButton}"
-                               Style="{StaticResource PrimaryButton}" MinWidth="0" Width="200"
-                               Click="PlayButton_Click"/>
+                            Style="{StaticResource PrimaryButton}" MinWidth="0" Width="200"
+                            Click="PlayButton_Click"/>
                 </StackPanel>
 
                 <Border Grid.Column="2" Background="{StaticResource CardFaceBrush}" Width="80" Height="112" CornerRadius="6">

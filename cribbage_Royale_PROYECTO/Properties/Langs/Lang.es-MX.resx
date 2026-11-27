@@ -264,9 +264,6 @@
 	<data name="Register_ConfirmPasswordLabel" xml:space="preserve">
     <value>Confirmar contraseña</value>
   </data>
-	<data name="Register_TermsCheckBox" xml:space="preserve">
-    <value>Acepto los términos y condiciones</value>
-  </data>
 	<data name="Register_RegisterButton" xml:space="preserve">
     <value>REGISTRARSE</value>
   </data>
@@ -1324,7 +1321,7 @@
     <value>Cancelar</value>
   </data>
 	<data name="Register_EmptyFieldsMessage" xml:space="preserve">
-    <value>Por favor llene todos los campos y acepte los términos y condiciones</value>
+    <value>Por favor llene todos los campos</value>
   </data>
 	<data name="Register_InvalidUsernameMessage" xml:space="preserve">
     <value>El nombre de usuario debe tener entre 3 y 16 caracteres y solo puede contener letras, números y guion bajo</value>

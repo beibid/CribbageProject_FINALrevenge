@@ -3766,7 +3766,7 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Please fill in all the fields and accept the terms and conditions.
+        ///   Busca una cadena traducida similar a Please fill in all the fields.
         /// </summary>
         public static string Register_EmptyFieldsMessage {
             get {
@@ -3843,15 +3843,6 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Register_SuccessMessage {
             get {
                 return ResourceManager.GetString("Register_SuccessMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a I accept the terms and conditions.
-        /// </summary>
-        public static string Register_TermsCheckBox {
-            get {
-                return ResourceManager.GetString("Register_TermsCheckBox", resourceCulture);
             }
         }
         
