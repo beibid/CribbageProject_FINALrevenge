@@ -1276,6 +1276,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Display name.
+        /// </summary>
+        public static string EditProfile_DisplayNameLabel {
+            get {
+                return ResourceManager.GetString("EditProfile_DisplayNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Changing your email requires a new verification..
         /// </summary>
         public static string EditProfile_EmailChangeWarning {
@@ -1290,6 +1299,24 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string EditProfile_EmailHint {
             get {
                 return ResourceManager.GetString("EditProfile_EmailHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Images|*.jpg;*.jpeg;*.png;*.bmp.
+        /// </summary>
+        public static string EditProfile_ImageFileFilter {
+            get {
+                return ResourceManager.GetString("EditProfile_ImageFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The image could not be opened. Choose another image..
+        /// </summary>
+        public static string EditProfile_ImageLoadErrorMessage {
+            get {
+                return ResourceManager.GetString("EditProfile_ImageLoadErrorMessage", resourceCulture);
             }
         }
         
@@ -3289,6 +3316,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Current streak.
+        /// </summary>
+        public static string Profile_CurrentStreakLabel {
+            get {
+                return ResourceManager.GetString("Profile_CurrentStreakLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Delete account.
         /// </summary>
         public static string Profile_DeleteAccountButton {
@@ -3312,6 +3348,33 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Profile_EmailFormat {
             get {
                 return ResourceManager.GetString("Profile_EmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The display name must have between 1 and 20 characters..
+        /// </summary>
+        public static string Profile_InvalidDisplayNameMessage {
+            get {
+                return ResourceManager.GetString("Profile_InvalidDisplayNameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The image could not be saved. Choose another image..
+        /// </summary>
+        public static string Profile_InvalidImageMessage {
+            get {
+                return ResourceManager.GetString("Profile_InvalidImageMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The new password must have between 8 and 64 characters, with at least one letter and one number..
+        /// </summary>
+        public static string Profile_InvalidPasswordMessage {
+            get {
+                return ResourceManager.GetString("Profile_InvalidPasswordMessage", resourceCulture);
             }
         }
         
@@ -3397,6 +3460,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The server could not be reached. Try again in a moment..
+        /// </summary>
+        public static string Profile_ServerUnavailableMessage {
+            get {
+                return ResourceManager.GetString("Profile_ServerUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Statistics.
         /// </summary>
         public static string Profile_StatisticsTitle {
@@ -3420,6 +3492,15 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         public static string Profile_WinRateLabel {
             get {
                 return ResourceManager.GetString("Profile_WinRateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The current password is incorrect..
+        /// </summary>
+        public static string Profile_WrongPasswordMessage {
+            get {
+                return ResourceManager.GetString("Profile_WrongPasswordMessage", resourceCulture);
             }
         }
         

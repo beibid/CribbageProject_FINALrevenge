@@ -22,6 +22,7 @@ namespace cribbage_Royale_PROYECTO
         private ChatMessageStore _chatMessageStore;
         private MatchInvitationClient _matchInvitationClient;
         private MatchPlayClient _matchPlayClient;
+        private PlayerProfileClient _playerProfileClient;
 
         public GameClientCallback SessionCallback
         {
@@ -63,6 +64,11 @@ namespace cribbage_Royale_PROYECTO
             get { return _matchPlayClient; }
         }
 
+        public PlayerProfileClient PlayerProfileClient
+        {
+            get { return _playerProfileClient; }
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             _logger = ApplicationLogging.CreateLogger<App>();
@@ -76,6 +82,7 @@ namespace cribbage_Royale_PROYECTO
             CreateFriendChatClient();
             CreateMatchInvitationClient();
             CreateMatchPlayClient();
+            CreatePlayerProfileClient();
             base.OnStartup(e);
             _logger.LogInformation(
                 "The application started.");
@@ -122,6 +129,12 @@ namespace cribbage_Royale_PROYECTO
         {
             _matchPlayClient = new MatchPlayClient(
                 ApplicationLogging.CreateLogger<MatchPlayClient>());
+        }
+
+        private void CreatePlayerProfileClient()
+        {
+            _playerProfileClient = new PlayerProfileClient(
+                ApplicationLogging.CreateLogger<PlayerProfileClient>());
         }
 
         private void SessionCallback_ChatMessageArrived(object sender, ChatMessageReceivedEventArgs e)
