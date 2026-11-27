@@ -1897,7 +1897,7 @@ Si usted no creó esta cuenta, ignore este mensaje.</value>
     <value>Volver al lobby</value>
   </data>
 	<data name="Game_RivalDisconnectedMessage" xml:space="preserve">
-  <value>Tu rival se desconectó. Ganaste por abandono.</value>
+  <value>Tu rival se desconectó. Esperando 30 segundos a que regrese.</value>
 </data>
 	<data name="Game_RivalAbandonedMessage" xml:space="preserve">
   <value>Tu rival abandonó la partida. Ganaste.</value>

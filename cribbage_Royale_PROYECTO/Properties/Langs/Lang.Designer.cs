@@ -2029,7 +2029,7 @@ namespace cribbage_Royale_PROYECTO.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Your opponent disconnected. You win by abandonment..
+        ///   Busca una cadena traducida similar a Your opponent disconnected. Waiting 30 seconds for them to return..
         /// </summary>
         public static string Game_RivalDisconnectedMessage {
             get {
