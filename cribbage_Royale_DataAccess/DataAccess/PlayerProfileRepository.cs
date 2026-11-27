@@ -11,16 +11,16 @@ namespace cribbage_Royale_DataAccess.DataAccess
             PublicProfileSummary summary = new PublicProfileSummary();
             using (CribbageEntities context = new CribbageEntities())
             {
-                usuario targetUserEntity = context.usuario.First(userRow => userRow.id_usuario == targetAccountId);
-                perfil_jugador targetProfileEntity = context.perfil_jugador.First(profileRow => profileRow.id_usuario == targetAccountId);
+                account targetUserEntity = context.account.First(userRow => userRow.account_id == targetAccountId);
+                player_profile targetProfileEntity = context.player_profile.First(profileRow => profileRow.account_id == targetAccountId);
                 summary.AccountId = targetAccountId;
-                summary.DisplayName = targetProfileEntity.nombre_mostrado;
-                summary.Username = targetUserEntity.nombre_usuario;
-                summary.RegistrationDate = targetUserEntity.fecha_registro;
-                summary.MatchesPlayed = targetProfileEntity.partidas_jugadas;
-                summary.Wins = targetProfileEntity.victorias;
-                summary.WinPercentage = CalculateWinPercentage(targetProfileEntity.partidas_jugadas, targetProfileEntity.victorias);
-                summary.SkillLevel = targetProfileEntity.nivel_habilidad;
+                summary.DisplayName = targetProfileEntity.display_name;
+                summary.Username = targetUserEntity.username;
+                summary.RegistrationDate = targetUserEntity.registered_at;
+                summary.MatchesPlayed = targetProfileEntity.matches_played;
+                summary.Wins = targetProfileEntity.wins;
+                summary.WinPercentage = CalculateWinPercentage(targetProfileEntity.matches_played, targetProfileEntity.wins);
+                summary.SkillLevel = targetProfileEntity.skill_level;
                 summary.RelationshipStatus = DetermineRelationshipStatus(context, viewerAccountId, targetAccountId);
             }
             return summary;
@@ -43,11 +43,11 @@ namespace cribbage_Royale_DataAccess.DataAccess
         private string DetermineRelationshipStatus(CribbageEntities context, int viewerAccountId, int targetAccountId)
         {
             string relationshipStatus;
-            bloqueo blockEntity = context.bloqueo.FirstOrDefault(blockRow =>
-                blockRow.id_usuario_que_bloquea == viewerAccountId && blockRow.id_usuario_bloqueado == targetAccountId);
-            amistad friendshipEntity = context.amistad.FirstOrDefault(friendRow =>
-                (friendRow.id_usuario_solicitante == viewerAccountId && friendRow.id_usuario_destinatario == targetAccountId)
-                || (friendRow.id_usuario_solicitante == targetAccountId && friendRow.id_usuario_destinatario == viewerAccountId));
+            user_block blockEntity = context.user_block.FirstOrDefault(blockRow =>
+                blockRow.blocker_account_id == viewerAccountId && blockRow.blocked_account_id == targetAccountId);
+            friendship friendshipEntity = context.friendship.FirstOrDefault(friendRow =>
+                (friendRow.requester_account_id == viewerAccountId && friendRow.addressee_account_id == targetAccountId)
+                || (friendRow.requester_account_id == targetAccountId && friendRow.addressee_account_id == viewerAccountId));
             if (blockEntity != null)
             {
                 relationshipStatus = RelationshipStatus.Blocked;
@@ -56,15 +56,15 @@ namespace cribbage_Royale_DataAccess.DataAccess
             {
                 relationshipStatus = RelationshipStatus.None;
             }
-            else if (friendshipEntity.estado == FriendshipStatus.Accepted)
+            else if (friendshipEntity.status == FriendshipStatus.Accepted)
             {
                 relationshipStatus = RelationshipStatus.Friend;
             }
-            else if (friendshipEntity.estado == FriendshipStatus.Pending && friendshipEntity.id_usuario_solicitante == viewerAccountId)
+            else if (friendshipEntity.status == FriendshipStatus.Pending && friendshipEntity.requester_account_id == viewerAccountId)
             {
                 relationshipStatus = RelationshipStatus.RequestSent;
             }
-            else if (friendshipEntity.estado == FriendshipStatus.Pending && friendshipEntity.id_usuario_solicitante == targetAccountId)
+            else if (friendshipEntity.status == FriendshipStatus.Pending && friendshipEntity.requester_account_id == targetAccountId)
             {
                 relationshipStatus = RelationshipStatus.RequestReceived;
             }

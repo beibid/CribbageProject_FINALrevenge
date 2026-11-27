@@ -12,11 +12,11 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public class VerificationCodeRepository
     {
-        public const string AccountVerificationPurpose = "VERIFICACION_CUENTA";
-        public const string PasswordResetPurpose = "RESTABLECIMIENTO_CONTRASENA";
-        public const string EmailChangePurpose = "CAMBIO_CORREO";
+        public const string AccountVerificationPurpose = "ACCOUNT_VERIFICATION";
+        public const string PasswordResetPurpose = "PASSWORD_RESET";
+        public const string EmailChangePurpose = "EMAIL_CHANGE";
 
-        private const string VerifiedAccountStatus = "VERIFICADA";
+        private const string VerifiedAccountStatus = "VERIFIED";
         private const int CodeValidityHours = 24;
         private const int RandomByteCount = 4;
         private const int CodeUpperBound = 1000000;
@@ -72,17 +72,17 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                codigo_verificacion verificationCode = new codigo_verificacion
+                verification_code verificationCode = new verification_code
                 {
-                    id_usuario = userId,
-                    tipo = purpose,
-                    valor_codigo = ComputeHash(code),
-                    correo_destino = email,
-                    fecha_creacion = DateTime.Now,
-                    fecha_expiracion = DateTime.Now.AddHours(CodeValidityHours)
+                    account_id = userId,
+                    code_type = purpose,
+                    code_value = ComputeHash(code),
+                    target_email = email,
+                    created_at = DateTime.Now,
+                    expires_at = DateTime.Now.AddHours(CodeValidityHours)
                 };
 
-                context.codigo_verificacion.Add(verificationCode);
+                context.verification_code.Add(verificationCode);
                 context.SaveChanges();
             }
 
@@ -95,13 +95,13 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                usuario account = context.usuario.FirstOrDefault(user => user.correo == email);
+                account account = context.account.FirstOrDefault(user => user.email == email);
 
                 if (account == null)
                 {
                     outcome = CodeValidationOutcome.InvalidCode;
                 }
-                else if (account.estado_cuenta == VerifiedAccountStatus)
+                else if (account.account_status == VerifiedAccountStatus)
                 {
                     outcome = CodeValidationOutcome.AccountAlreadyVerified;
                 }
@@ -115,24 +115,24 @@ namespace cribbage_Royale_DataAccess.DataAccess
         }
 
         private CodeValidationOutcome EvaluateStoredCode(
-            CribbageEntities context, usuario account, string code)
+            CribbageEntities context, account account, string code)
         {
             CodeValidationOutcome outcome;
             string hashedCode = ComputeHash(code);
 
-            codigo_verificacion storedCode = context.codigo_verificacion
-                .Where(item => item.id_usuario == account.id_usuario
-                    && item.tipo == AccountVerificationPurpose
-                    && item.valor_codigo == hashedCode
-                    && item.fecha_uso == null)
-                .OrderByDescending(item => item.fecha_creacion)
+            verification_code storedCode = context.verification_code
+                .Where(item => item.account_id == account.account_id
+                    && item.code_type == AccountVerificationPurpose
+                    && item.code_value == hashedCode
+                    && item.used_at == null)
+                .OrderByDescending(item => item.created_at)
                 .FirstOrDefault();
 
             if (storedCode == null)
             {
                 outcome = CodeValidationOutcome.InvalidCode;
             }
-            else if (storedCode.fecha_expiracion < DateTime.Now)
+            else if (storedCode.expires_at < DateTime.Now)
             {
                 outcome = CodeValidationOutcome.ExpiredCode;
             }
@@ -146,10 +146,10 @@ namespace cribbage_Royale_DataAccess.DataAccess
         }
 
         private void ActivateAccount(
-            CribbageEntities context, usuario account, codigo_verificacion storedCode)
+            CribbageEntities context, account account, verification_code storedCode)
         {
-            storedCode.fecha_uso = DateTime.Now;
-            account.estado_cuenta = VerifiedAccountStatus;
+            storedCode.used_at = DateTime.Now;
+            account.account_status = VerifiedAccountStatus;
             context.SaveChanges();
         }
 

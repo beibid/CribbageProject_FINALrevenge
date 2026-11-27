@@ -12,16 +12,18 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class amistad
+    public partial class score_entry
     {
-        public long id_amistad { get; set; }
-        public int id_usuario_solicitante { get; set; }
-        public int id_usuario_destinatario { get; set; }
-        public string estado { get; set; }
-        public System.DateTime fecha_solicitud { get; set; }
-        public Nullable<System.DateTime> fecha_respuesta { get; set; }
+        public long score_entry_id { get; set; }
+        public long round_id { get; set; }
+        public long match_participant_id { get; set; }
+        public string scoring_phase { get; set; }
+        public string scoring_type { get; set; }
+        public byte points { get; set; }
+        public short credit_order { get; set; }
+        public System.DateTime credited_at { get; set; }
     
-        public virtual usuario usuario { get; set; }
-        public virtual usuario usuario1 { get; set; }
+        public virtual match_participant match_participant { get; set; }
+        public virtual round round { get; set; }
     }
 }

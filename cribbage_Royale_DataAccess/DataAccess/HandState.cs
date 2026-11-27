@@ -8,6 +8,6 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public static class HandState
     {
-        public const string Dealing = "REPARTIENDO";
+        public const string Dealing = "DEALING";
     }
 }

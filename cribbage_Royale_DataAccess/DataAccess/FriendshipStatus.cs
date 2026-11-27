@@ -2,8 +2,8 @@
 {
     public static class FriendshipStatus
     {
-        public const string Pending = "PENDIENTE";
-        public const string Accepted = "ACEPTADA";
-        public const string Rejected = "RECHAZADA";
+        public const string Pending = "PENDING";
+        public const string Accepted = "ACCEPTED";
+        public const string Rejected = "REJECTED";
     }
 }

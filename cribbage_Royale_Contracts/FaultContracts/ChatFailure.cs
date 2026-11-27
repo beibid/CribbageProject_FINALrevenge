@@ -3,43 +3,43 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Motivos por los que el servidor rechaza el envío de un mensaje de chat.
+    /// Reasons the server rejects sending a chat message.
     /// </summary>
     [DataContract]
     public enum ChatFailure
     {
         /// <summary>
-        /// El identificador de cuenta no es positivo.
+        /// The account identifier is not positive.
         /// </summary>
         [EnumMember]
         InvalidAccountId,
 
         /// <summary>
-        /// El mensaje está dirigido a la propia cuenta.
+        /// The message is addressed to the caller's own account.
         /// </summary>
         [EnumMember]
         CannotTargetSelf,
 
         /// <summary>
-        /// No existe una amistad vigente entre las cuentas.
+        /// There is no active friendship between the accounts.
         /// </summary>
         [EnumMember]
         FriendshipNotFound,
 
         /// <summary>
-        /// Existe un bloqueo entre las cuentas.
+        /// A block exists between the accounts.
         /// </summary>
         [EnumMember]
         BlockedRelationship,
 
         /// <summary>
-        /// El destinatario no está conectado y el mensaje no se conserva.
+        /// The recipient is not connected and the message is not stored.
         /// </summary>
         [EnumMember]
         RecipientUnavailable,
 
         /// <summary>
-        /// El texto está vacío o excede el máximo permitido.
+        /// The text is empty or exceeds the maximum allowed length.
         /// </summary>
         [EnumMember]
         InvalidMessageText

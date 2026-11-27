@@ -5,24 +5,24 @@ using CribbageRoyale.Contracts.FaultContracts;
 namespace CribbageRoyale.Contracts.ServiceContracts
 {
     /// <summary>
-    /// Invitaciones a partida entre amigos. Exige una sesión de cuenta registrada,
-    /// enviada en el encabezado SessionToken.
+    /// Match invitations between friends. Requires a registered account session, sent in the
+    /// SessionToken header.
     /// </summary>
     [ServiceContract]
     public interface IMatchInvitation
     {
         /// <summary>
-        /// Invita a un amigo conectado a jugar una partida. El invitado recibe el aviso
-        /// por su canal de notificaciones.
+        /// Invites a connected friend to play a match. The invited player is notified through their
+        /// notification channel.
         /// </summary>
-        /// <param name="accountId">Cuenta del amigo a invitar.</param>
-        /// <returns>La invitación creada, con el identificador asignado por el servidor.</returns>
-        /// <exception cref="FaultException{InvitationFault}">La invitación fue rechazada por una
-        /// regla de invitaciones.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece
-        /// a un invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo registrar la
-        /// invitación.</exception>
+        /// <param name="accountId">Account of the friend to invite.</param>
+        /// <returns>The created invitation, with the identifier assigned by the server.</returns>
+        /// <exception cref="FaultException{InvitationFault}">The invitation was rejected by an
+        /// invitation rule.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs
+        /// to a guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not record the
+        /// invitation.</exception>
         [OperationContract]
         [FaultContract(typeof(InvitationFault))]
         [FaultContract(typeof(SessionFault))]
@@ -30,17 +30,17 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         MatchInvitation SendInvitation(int accountId);
 
         /// <summary>
-        /// Acepta o rechaza una invitación recibida. Si se acepta, ambos jugadores reciben el
-        /// aviso de inicio de partida por su canal de notificaciones.
+        /// Accepts or rejects a received invitation. If accepted, both players receive the match start
+        /// notice through their notification channel.
         /// </summary>
-        /// <param name="invitationId">Invitación a responder.</param>
-        /// <param name="accepted">Verdadero para aceptar, falso para rechazar.</param>
-        /// <exception cref="FaultException{InvitationFault}">La invitación no existe, ya fue
-        /// atendida o no pertenece a quien llama.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece
-        /// a un invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo registrar la
-        /// respuesta.</exception>
+        /// <param name="invitationId">Invitation to answer.</param>
+        /// <param name="accepted">True to accept; false to reject.</param>
+        /// <exception cref="FaultException{InvitationFault}">The invitation does not exist, has
+        /// already been handled, or does not belong to the caller.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs
+        /// to a guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not record the
+        /// response.</exception>
         [OperationContract]
         [FaultContract(typeof(InvitationFault))]
         [FaultContract(typeof(SessionFault))]
@@ -48,15 +48,15 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         void RespondToInvitation(long invitationId, bool accepted);
 
         /// <summary>
-        /// Retira una invitación que quien llama envió y que sigue sin respuesta.
+        /// Withdraws an invitation the caller sent that has not been answered yet.
         /// </summary>
-        /// <param name="invitationId">Invitación a retirar.</param>
-        /// <exception cref="FaultException{InvitationFault}">La invitación no existe, ya fue
-        /// atendida o no pertenece a quien llama.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece
-        /// a un invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo retirar la
-        /// invitación.</exception>
+        /// <param name="invitationId">Invitation to withdraw.</param>
+        /// <exception cref="FaultException{InvitationFault}">The invitation does not exist, has
+        /// already been handled, or does not belong to the caller.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs
+        /// to a guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not withdraw the
+        /// invitation.</exception>
         [OperationContract]
         [FaultContract(typeof(InvitationFault))]
         [FaultContract(typeof(SessionFault))]

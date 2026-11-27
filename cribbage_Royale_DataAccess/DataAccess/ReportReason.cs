@@ -2,8 +2,8 @@
 {
     public static class ReportReason
     {
-        public const string Misconduct = "CONDUCTA_INDEBIDA";
-        public const string Cheating = "SOSPECHA_DE_TRAMPA";
-        public const string OffensiveName = "NOMBRE_OFENSIVO";
+        public const string Misconduct = "MISCONDUCT";
+        public const string Cheating = "SUSPECTED_CHEATING";
+        public const string OffensiveName = "OFFENSIVE_NAME";
     }
 }

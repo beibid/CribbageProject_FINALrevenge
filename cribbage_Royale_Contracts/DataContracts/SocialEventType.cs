@@ -3,49 +3,49 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Tipo de hecho social que el servidor notifica fuera de la partida.
+    /// Kind of social event the server notifies outside of a match.
     /// </summary>
     [DataContract]
     public enum SocialEventType
     {
         /// <summary>
-        /// El destinatario recibió una solicitud de amistad.
+        /// The recipient received a friend request.
         /// </summary>
         [EnumMember]
         FriendRequestReceived,
 
         /// <summary>
-        /// Una solicitud de amistad enviada por el destinatario fue aceptada.
+        /// A friend request sent by the recipient was accepted.
         /// </summary>
         [EnumMember]
         FriendRequestAccepted,
 
         /// <summary>
-        /// Una solicitud de amistad enviada por el destinatario fue rechazada.
+        /// A friend request sent by the recipient was rejected.
         /// </summary>
         [EnumMember]
         FriendRequestRejected,
 
         /// <summary>
-        /// El destinatario recibió una invitación a partida.
+        /// The recipient received a match invitation.
         /// </summary>
         [EnumMember]
         InvitationReceived,
 
         /// <summary>
-        /// Una invitación enviada por el destinatario fue aceptada.
+        /// An invitation sent by the recipient was accepted.
         /// </summary>
         [EnumMember]
         InvitationAccepted,
 
         /// <summary>
-        /// Una invitación enviada por el destinatario fue rechazada.
+        /// An invitation sent by the recipient was rejected.
         /// </summary>
         [EnumMember]
         InvitationRejected,
 
         /// <summary>
-        /// Una invitación enviada por el destinatario venció sin respuesta.
+        /// An invitation sent by the recipient expired without a response.
         /// </summary>
         [EnumMember]
         InvitationExpired

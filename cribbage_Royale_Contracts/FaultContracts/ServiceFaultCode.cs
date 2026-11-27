@@ -3,25 +3,25 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Códigos de falla técnica que puede transportar <see cref="ServiceFault"/>.
+    /// Technical fault codes carried by <see cref="ServiceFault"/>.
     /// </summary>
     [DataContract]
     public enum ServiceFaultCode
     {
         /// <summary>
-        /// La operación falló al leer o escribir en la base de datos.
+        /// The operation failed while reading from or writing to the database.
         /// </summary>
         [EnumMember]
         DataAccessFailure,
 
         /// <summary>
-        /// La operación no pudo entregar un correo electrónico.
+        /// The operation could not deliver an email.
         /// </summary>
         [EnumMember]
         MailDeliveryFailure,
 
         /// <summary>
-        /// La operación falló por una condición no prevista dentro del servidor.
+        /// The operation failed due to an unexpected condition inside the server.
         /// </summary>
         [EnumMember]
         InternalFailure

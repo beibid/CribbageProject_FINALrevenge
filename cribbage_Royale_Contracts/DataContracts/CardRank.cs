@@ -3,8 +3,8 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Rango de una carta. El valor numérico corresponde al orden de la carta
-    /// dentro del palo y se usa para formar escaleras.
+    /// Rank of a card. The numeric value is the position of the card within its suit and is used to
+    /// form runs.
     /// </summary>
     [DataContract]
     public enum CardRank

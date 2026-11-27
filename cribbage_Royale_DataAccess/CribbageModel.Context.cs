@@ -25,29 +25,29 @@ namespace cribbage_Royale_DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ajustes_jugador> ajustes_jugador { get; set; }
-        public virtual DbSet<amistad> amistad { get; set; }
-        public virtual DbSet<auditoria_soporte> auditoria_soporte { get; set; }
-        public virtual DbSet<bitacora_evento> bitacora_evento { get; set; }
-        public virtual DbSet<bloqueo> bloqueo { get; set; }
-        public virtual DbSet<carta> carta { get; set; }
-        public virtual DbSet<carta_en_manga> carta_en_manga { get; set; }
-        public virtual DbSet<codigo_verificacion> codigo_verificacion { get; set; }
-        public virtual DbSet<invitacion_partida> invitacion_partida { get; set; }
-        public virtual DbSet<jugada_pegging> jugada_pegging { get; set; }
-        public virtual DbSet<manga> manga { get; set; }
-        public virtual DbSet<participante_partida> participante_partida { get; set; }
-        public virtual DbSet<partida> partida { get; set; }
-        public virtual DbSet<perfil_jugador> perfil_jugador { get; set; }
-        public virtual DbSet<puntuacion> puntuacion { get; set; }
-        public virtual DbSet<reporte> reporte { get; set; }
-        public virtual DbSet<sancion> sancion { get; set; }
-        public virtual DbSet<sesion> sesion { get; set; }
-        public virtual DbSet<usuario> usuario { get; set; }
-        public virtual DbSet<vista_amigos> vista_amigos { get; set; }
-        public virtual DbSet<vista_crib> vista_crib { get; set; }
-        public virtual DbSet<vista_estadisticas_jugador> vista_estadisticas_jugador { get; set; }
-        public virtual DbSet<vista_marcador_partida> vista_marcador_partida { get; set; }
-        public virtual DbSet<vista_suspension_vigente> vista_suspension_vigente { get; set; }
+        public virtual DbSet<account> account { get; set; }
+        public virtual DbSet<card> card { get; set; }
+        public virtual DbSet<event_log> event_log { get; set; }
+        public virtual DbSet<friendship> friendship { get; set; }
+        public virtual DbSet<match> match { get; set; }
+        public virtual DbSet<match_invitation> match_invitation { get; set; }
+        public virtual DbSet<match_participant> match_participant { get; set; }
+        public virtual DbSet<pegging_play> pegging_play { get; set; }
+        public virtual DbSet<player_profile> player_profile { get; set; }
+        public virtual DbSet<player_settings> player_settings { get; set; }
+        public virtual DbSet<report> report { get; set; }
+        public virtual DbSet<round> round { get; set; }
+        public virtual DbSet<round_card> round_card { get; set; }
+        public virtual DbSet<sanction> sanction { get; set; }
+        public virtual DbSet<score_entry> score_entry { get; set; }
+        public virtual DbSet<session> session { get; set; }
+        public virtual DbSet<support_audit> support_audit { get; set; }
+        public virtual DbSet<user_block> user_block { get; set; }
+        public virtual DbSet<verification_code> verification_code { get; set; }
+        public virtual DbSet<active_suspension_view> active_suspension_view { get; set; }
+        public virtual DbSet<crib_view> crib_view { get; set; }
+        public virtual DbSet<friend_view> friend_view { get; set; }
+        public virtual DbSet<match_scoreboard_view> match_scoreboard_view { get; set; }
+        public virtual DbSet<player_statistics_view> player_statistics_view { get; set; }
     }
 }

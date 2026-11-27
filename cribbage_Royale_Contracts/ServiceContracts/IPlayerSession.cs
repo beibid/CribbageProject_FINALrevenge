@@ -5,34 +5,34 @@ using CribbageRoyale.Contracts.FaultContracts;
 namespace CribbageRoyale.Contracts.ServiceContracts
 {
     /// <summary>
-    /// Permite a un jugador abrir y cerrar su sesión en el servidor.
+    /// Lets a player open and close a session on the server.
     /// </summary>
     [ServiceContract(CallbackContract = typeof(IGameClientCallback), SessionMode = SessionMode.Required)]
     public interface IPlayerSession
     {
         /// <summary>
-        /// Abre una sesión para un jugador registrado.
+        /// Opens a session for a registered player.
         /// </summary>
-        /// <param name="userNameOrEmail">Nombre de usuario o correo del jugador.</param>
-        /// <param name="password">Contraseña del jugador.</param>
-        /// <returns>Sesión concedida al jugador.</returns>
+        /// <param name="userNameOrEmail">Username or email of the player.</param>
+        /// <param name="password">Password of the player.</param>
+        /// <returns>Session granted to the player.</returns>
         [OperationContract]
         [FaultContract(typeof(SessionFault))]
         [FaultContract(typeof(ServiceFault))]
         AuthenticatedSession LogIn(string userNameOrEmail, string password);
 
         /// <summary>
-        /// Abre una sesión temporal para un jugador sin cuenta registrada.
+        /// Opens a temporary session for a player without a registered account.
         /// </summary>
-        /// <param name="displayName">Nombre con el que el invitado quiere mostrarse.</param>
-        /// <returns>Sesión temporal concedida al invitado.</returns>
+        /// <param name="displayName">Display name the guest wants to use.</param>
+        /// <returns>Temporary session granted to the guest.</returns>
         [OperationContract]
         [FaultContract(typeof(SessionFault))]
         [FaultContract(typeof(ServiceFault))]
         GuestSession LogInAsGuest(string displayName);
 
         /// <summary>
-        /// Cierra la sesión abierta por el cliente que invoca la operación.
+        /// Closes the session opened by the calling client.
         /// </summary>
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]

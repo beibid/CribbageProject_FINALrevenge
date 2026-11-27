@@ -3,37 +3,37 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Relación entre quien consulta y otra cuenta.
+    /// Relationship between the caller and another account.
     /// </summary>
     [DataContract]
     public enum RelationshipKind
     {
         /// <summary>
-        /// No existe ninguna relación entre las cuentas.
+        /// There is no relationship between the accounts.
         /// </summary>
         [EnumMember]
         None,
 
         /// <summary>
-        /// Las cuentas son amigas.
+        /// The accounts are friends.
         /// </summary>
         [EnumMember]
         Friend,
 
         /// <summary>
-        /// Quien consulta envió una solicitud que sigue pendiente.
+        /// The caller sent a request that is still pending.
         /// </summary>
         [EnumMember]
         RequestSent,
 
         /// <summary>
-        /// Quien consulta recibió una solicitud que sigue pendiente.
+        /// The caller received a request that is still pending.
         /// </summary>
         [EnumMember]
         RequestReceived,
 
         /// <summary>
-        /// Existe un bloqueo entre las cuentas.
+        /// A block exists between the accounts.
         /// </summary>
         [EnumMember]
         Blocked

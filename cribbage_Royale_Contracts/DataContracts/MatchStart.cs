@@ -3,25 +3,25 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Aviso de que una partida comenzó, con los datos que cada jugador necesita para entrar.
+    /// Notice that a match has started, with the data each player needs to join it.
     /// </summary>
     [DataContract]
     public class MatchStart
     {
         /// <summary>
-        /// Identificador que el servidor asignó a la partida.
+        /// Identifier assigned to the match by the server.
         /// </summary>
         [DataMember(IsRequired = true)]
         public long MatchId { get; set; }
 
         /// <summary>
-        /// El otro jugador de la mesa, visto desde quien recibe el aviso.
+        /// The other player at the table, from the point of view of the recipient.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Opponent { get; set; }
 
         /// <summary>
-        /// Indica si quien recibe el aviso es el anfitrión de la partida.
+        /// Whether the recipient is the host of the match.
         /// </summary>
         [DataMember(IsRequired = true)]
         public bool IsHost { get; set; }

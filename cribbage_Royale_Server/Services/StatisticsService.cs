@@ -35,7 +35,7 @@ namespace CribbageRoyale.Server.Services
 
             try
             {
-                List<vista_estadisticas_jugador> ranking = _scoreboardRepository.GetRanking();
+                List<player_statistics_view> ranking = _scoreboardRepository.GetRanking();
                 scoreboardEntries = _scoreboardProjection.BuildScoreboard(ranking);
             }
             catch (DataAccessException dataAccessException)

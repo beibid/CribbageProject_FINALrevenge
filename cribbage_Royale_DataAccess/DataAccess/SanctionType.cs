@@ -2,7 +2,7 @@
 {
     public static class SanctionType
     {
-        public const string Warning = "ADVERTENCIA";
+        public const string Warning = "WARNING";
         public const string Suspension = "SUSPENSION";
     }
 }

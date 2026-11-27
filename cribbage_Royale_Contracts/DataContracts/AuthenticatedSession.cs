@@ -4,51 +4,51 @@ using System.Runtime.Serialization;
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Datos privados de la sesión de un jugador registrado, entregados solo a su titular.
+    /// Private session data of a registered player, returned only to the account owner.
     /// </summary>
     [DataContract]
     public class AuthenticatedSession
     {
         /// <summary>
-        /// Testigo opaco emitido por el servidor; el cliente lo envía en el encabezado SessionToken
-        /// de cada operación posterior.
+        /// Opaque token issued by the server. The client sends it in the SessionToken header of every
+        /// subsequent operation.
         /// </summary>
         [DataMember(IsRequired = true)]
         public string SessionToken { get; set; }
 
         /// <summary>
-        /// Identidad pública de la cuenta a la que pertenece la sesión.
+        /// Public identity of the account that owns the session.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Account { get; set; }
 
         /// <summary>
-        /// Correo electrónico de la cuenta, devuelto únicamente a su titular.
+        /// Email address of the account, returned only to the account owner.
         /// </summary>
         [DataMember(IsRequired = true)]
         public string EmailAddress { get; set; }
 
         /// <summary>
-        /// Código del idioma preferido del jugador, por ejemplo es-MX.
+        /// Preferred locale code of the player, for example es-MX.
         /// </summary>
         [DataMember(IsRequired = true)]
         public string PreferredLocaleCode { get; set; }
 
         /// <summary>
-        /// Instante en UTC en que caduca la sesión.
+        /// UTC instant at which the session expires.
         /// </summary>
         [DataMember(IsRequired = true)]
         public DateTime ExpiresAtUtc { get; set; }
 
         /// <summary>
-        /// Indica si la cuenta pertenece al equipo de soporte; el cliente decide con esto si ofrece
-        /// el panel de soporte.
+        /// Whether the account belongs to the support team. The client uses it to decide whether to
+        /// show the support panel.
         /// </summary>
         [DataMember(IsRequired = true)]
         public bool IsSupportAccount { get; set; }
 
         /// <summary>
-        /// Partida sin concluir que se ofrece reanudar; nulo si no hay.
+        /// Unfinished match offered for resumption, or null if there is none.
         /// </summary>
         [DataMember]
         public long? UnfinishedMatchId { get; set; }

@@ -9,7 +9,7 @@ namespace CribbageRoyale.Server.Projection
     {
         private const decimal WinRateWithoutMatches = 0m;
 
-        public List<ScoreboardEntry> BuildScoreboard(List<vista_estadisticas_jugador> records)
+        public List<ScoreboardEntry> BuildScoreboard(List<player_statistics_view> records)
         {
             if (records == null)
             {
@@ -18,7 +18,7 @@ namespace CribbageRoyale.Server.Projection
 
             List<ScoreboardEntry> entries = new List<ScoreboardEntry>();
 
-            foreach (vista_estadisticas_jugador record in records)
+            foreach (player_statistics_view record in records)
             {
                 entries.Add(BuildEntry(record));
             }
@@ -26,17 +26,17 @@ namespace CribbageRoyale.Server.Projection
             return entries;
         }
 
-        private ScoreboardEntry BuildEntry(vista_estadisticas_jugador record)
+        private ScoreboardEntry BuildEntry(player_statistics_view record)
         {
             return new ScoreboardEntry
             {
-                UserName = record.nombre_usuario,
-                DisplayName = record.nombre_mostrado,
-                SkillLevel = record.nivel_habilidad,
-                MatchesPlayed = record.partidas_jugadas,
-                Wins = record.victorias,
-                Losses = record.derrotas,
-                WinRate = record.porcentaje_victorias ?? WinRateWithoutMatches
+                UserName = record.username,
+                DisplayName = record.display_name,
+                SkillLevel = record.skill_level,
+                MatchesPlayed = record.matches_played,
+                Wins = record.wins,
+                Losses = record.losses,
+                WinRate = record.win_percentage ?? WinRateWithoutMatches
             };
         }
     }

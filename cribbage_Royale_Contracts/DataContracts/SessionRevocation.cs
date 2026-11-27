@@ -3,13 +3,13 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Aviso de que la sesión del destinatario dejó de ser válida.
+    /// Notice that the recipient's session is no longer valid.
     /// </summary>
     [DataContract]
     public class SessionRevocation
     {
         /// <summary>
-        /// Motivo por el cual se revocó la sesión.
+        /// Reason the session was revoked.
         /// </summary>
         [DataMember(IsRequired = true)]
         public SessionRevocationReason Reason { get; set; }

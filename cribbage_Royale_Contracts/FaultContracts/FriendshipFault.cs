@@ -3,13 +3,13 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Falla de negocio ocurrida en una operación de amistades, búsquedas o bloqueos.
+    /// Business fault raised by a friendship, search or block operation.
     /// </summary>
     [DataContract]
     public class FriendshipFault
     {
         /// <summary>
-        /// Motivo por el cual la operación fue rechazada.
+        /// Reason the operation was rejected.
         /// </summary>
         [DataMember(IsRequired = true)]
         public FriendshipFailure Reason { get; set; }

@@ -3,67 +3,67 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Motivos por los que el servidor rechaza una operación de amistades, búsquedas o bloqueos.
+    /// Reasons the server rejects a friendship, search or block operation.
     /// </summary>
     [DataContract]
     public enum FriendshipFailure
     {
         /// <summary>
-        /// El identificador de cuenta no es positivo.
+        /// The account identifier is not positive.
         /// </summary>
         [EnumMember]
         InvalidAccountId,
 
         /// <summary>
-        /// La otra cuenta no existe o no está activa.
+        /// The other account does not exist or is not active.
         /// </summary>
         [EnumMember]
         AccountUnavailable,
 
         /// <summary>
-        /// La operación está dirigida a la propia cuenta.
+        /// The operation targets the caller's own account.
         /// </summary>
         [EnumMember]
         CannotTargetSelf,
 
         /// <summary>
-        /// Ya existe una amistad aceptada.
+        /// An accepted friendship already exists.
         /// </summary>
         [EnumMember]
         FriendshipAlreadyExists,
 
         /// <summary>
-        /// No existe una amistad vigente entre las cuentas.
+        /// There is no active friendship between the accounts.
         /// </summary>
         [EnumMember]
         FriendshipNotFound,
 
         /// <summary>
-        /// Hay una solicitud pendiente en alguno de los dos sentidos.
+        /// A request is already pending in either direction.
         /// </summary>
         [EnumMember]
         RequestAlreadyPending,
 
         /// <summary>
-        /// La solicitud no existe o ya no está pendiente.
+        /// The request does not exist or is no longer pending.
         /// </summary>
         [EnumMember]
         RequestUnavailable,
 
         /// <summary>
-        /// La cuenta no es la que puede responder o cancelar esa solicitud.
+        /// The caller is not allowed to respond to or cancel the request.
         /// </summary>
         [EnumMember]
         UnauthorizedRequest,
 
         /// <summary>
-        /// Existe un bloqueo entre las cuentas.
+        /// A block exists between the accounts.
         /// </summary>
         [EnumMember]
         BlockedRelationship,
 
         /// <summary>
-        /// El texto de búsqueda está vacío o no cumple el formato.
+        /// The search text is empty or has an invalid format.
         /// </summary>
         [EnumMember]
         InvalidSearchText

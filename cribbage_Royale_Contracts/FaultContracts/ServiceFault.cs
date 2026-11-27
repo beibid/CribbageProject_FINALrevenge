@@ -3,19 +3,19 @@
 namespace CribbageRoyale.Contracts.FaultContracts
 {
     /// <summary>
-    /// Falla técnica del servidor que no corresponde a ninguna regla de negocio.
+    /// Technical server fault that does not correspond to any business rule.
     /// </summary>
     [DataContract]
     public class ServiceFault
     {
         /// <summary>
-        /// Código que indica el origen técnico de la falla.
+        /// Code that identifies the technical source of the fault.
         /// </summary>
         [DataMember(IsRequired = true)]
         public ServiceFaultCode Code { get; set; }
 
         /// <summary>
-        /// Identificador que permite ubicar el registro correspondiente en la bitácora del servidor.
+        /// Identifier used to locate the matching entry in the server log.
         /// </summary>
         [DataMember(IsRequired = true)]
         public string CorrelationId { get; set; }

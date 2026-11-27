@@ -12,17 +12,17 @@ namespace cribbage_Royale_DataAccess.DataAccess
     {
         private const string RankingQueryFailureMessage = "The player ranking could not be queried.";
 
-        public List<vista_estadisticas_jugador> GetRanking()
+        public List<player_statistics_view> GetRanking()
         {
-            List<vista_estadisticas_jugador> ranking;
+            List<player_statistics_view> ranking;
 
             try
             {
                 using (CribbageEntities context = new CribbageEntities())
                 {
-                    ranking = context.vista_estadisticas_jugador
-                        .OrderByDescending(record => record.nivel_habilidad)
-                        .ThenByDescending(record => record.victorias)
+                    ranking = context.player_statistics_view
+                        .OrderByDescending(record => record.skill_level)
+                        .ThenByDescending(record => record.wins)
                         .ToList();
                 }
             }

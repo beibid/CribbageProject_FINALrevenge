@@ -8,9 +8,9 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public static class AccountStatus
     {
-        public const string PendingVerification = "PENDIENTE_VERIFICACION";
-        public const string Verified = "VERIFICADA";
-        public const string Suspended = "SUSPENDIDA";
-        public const string Deleted = "ELIMINADA";
+        public const string PendingVerification = "PENDING_VERIFICATION";
+        public const string Verified = "VERIFIED";
+        public const string Suspended = "SUSPENDED";
+        public const string Deleted = "DELETED";
     }
 }

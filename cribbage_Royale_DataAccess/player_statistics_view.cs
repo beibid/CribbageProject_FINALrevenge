@@ -12,15 +12,16 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class carta_en_manga
+    public partial class player_statistics_view
     {
-        public long id_manga { get; set; }
-        public byte id_carta { get; set; }
-        public long id_participante_origen { get; set; }
-        public string estado { get; set; }
-    
-        public virtual carta carta { get; set; }
-        public virtual manga manga { get; set; }
-        public virtual participante_partida participante_partida { get; set; }
+        public int account_id { get; set; }
+        public string username { get; set; }
+        public string display_name { get; set; }
+        public short skill_level { get; set; }
+        public int matches_played { get; set; }
+        public int wins { get; set; }
+        public int losses { get; set; }
+        public short current_streak { get; set; }
+        public Nullable<decimal> win_percentage { get; set; }
     }
 }

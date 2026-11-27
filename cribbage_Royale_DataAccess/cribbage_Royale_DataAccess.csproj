@@ -69,28 +69,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ajustes_jugador.cs">
+    <Compile Include="account.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="amistad.cs">
+    <Compile Include="active_suspension_view.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="auditoria_soporte.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bitacora_evento.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bloqueo.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="carta.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="carta_en_manga.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="codigo_verificacion.cs">
+    <Compile Include="card.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CribbageModel.Context.cs">
@@ -107,6 +92,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CribbageModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="crib_view.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\AbandonmentOutcome.cs" />
     <Compile Include="DataAccess\AccountStatus.cs" />
@@ -141,13 +129,25 @@
     <Compile Include="DataAccess\UserCredentials.cs" />
     <Compile Include="DataAccess\UserRepository.cs" />
     <Compile Include="DataAccess\VerificationCodeRepository.cs" />
-    <Compile Include="invitacion_partida.cs">
+    <Compile Include="event_log.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="jugada_pegging.cs">
+    <Compile Include="friendship.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="manga.cs">
+    <Compile Include="friend_view.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="match.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="match_invitation.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="match_participant.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="match_scoreboard_view.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountSanctionStatus.cs" />
@@ -169,60 +169,69 @@
     <Compile Include="Models\SuspensionDurationOption.cs" />
     <Compile Include="Models\UnfinishedMatchSummary.cs" />
     <Compile Include="Models\VerificationNotice.cs" />
-    <Compile Include="participante_partida.cs">
+    <Compile Include="pegging_play.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="partida.cs">
+    <Compile Include="player_profile.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="perfil_jugador.cs">
+    <Compile Include="player_settings.cs">
+      <DependentUpon>CribbageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="player_statistics_view.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="puntuacion.cs">
+    <Compile Include="report.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="reporte.cs">
+    <Compile Include="round.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sancion.cs">
+    <Compile Include="round_card.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sesion.cs">
+    <Compile Include="sanction.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="usuario.cs">
+    <Compile Include="score_entry.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="vista_amigos.cs">
+    <Compile Include="session.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="vista_crib.cs">
+    <Compile Include="support_audit.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="vista_estadisticas_jugador.cs">
+    <Compile Include="user_block.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="vista_marcador_partida.cs">
-      <DependentUpon>CribbageModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vista_suspension_vigente.cs">
+    <Compile Include="verification_code.cs">
       <DependentUpon>CribbageModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ConnectionStrings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <EntityDeploy Include="CribbageModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CribbageModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ConnectionStrings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="CribbageModel.edmx.diagram">
       <DependentUpon>CribbageModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CribbageRoyale.Exceptions\CribbageRoyale.Exceptions.csproj">
+      <Project>{4f2c05f1-68be-42dc-8039-847a14a3d268}</Project>
+      <Name>CribbageRoyale.Exceptions</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CribbageModel.Context.tt">
@@ -235,15 +244,6 @@
       <DependentUpon>CribbageModel.edmx</DependentUpon>
       <LastGenOutput>CribbageModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CribbageRoyale.Exceptions\CribbageRoyale.Exceptions.csproj">
-      <Project>{4f2c05f1-68be-42dc-8039-847a14a3d268}</Project>
-      <Name>CribbageRoyale.Exceptions</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

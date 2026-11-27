@@ -12,40 +12,40 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class partida
+    public partial class match
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public partida()
+        public match()
         {
-            this.auditoria_soporte = new HashSet<auditoria_soporte>();
-            this.bitacora_evento = new HashSet<bitacora_evento>();
-            this.invitacion_partida = new HashSet<invitacion_partida>();
-            this.manga = new HashSet<manga>();
-            this.participante_partida = new HashSet<participante_partida>();
-            this.reporte = new HashSet<reporte>();
+            this.event_log = new HashSet<event_log>();
+            this.match_invitation = new HashSet<match_invitation>();
+            this.match_participant = new HashSet<match_participant>();
+            this.report = new HashSet<report>();
+            this.round = new HashSet<round>();
+            this.support_audit = new HashSet<support_audit>();
         }
     
-        public long id_partida { get; set; }
-        public string estado_partida { get; set; }
-        public string motivo_termino { get; set; }
-        public string origen { get; set; }
-        public System.DateTime fecha_inicio { get; set; }
-        public Nullable<System.DateTime> fecha_fin { get; set; }
-        public Nullable<int> id_usuario_ganador { get; set; }
-        public short segundos_por_turno { get; set; }
+        public long match_id { get; set; }
+        public string match_status { get; set; }
+        public string end_reason { get; set; }
+        public string origin { get; set; }
+        public System.DateTime started_at { get; set; }
+        public Nullable<System.DateTime> ended_at { get; set; }
+        public Nullable<int> winner_account_id { get; set; }
+        public short seconds_per_turn { get; set; }
     
+        public virtual account account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<auditoria_soporte> auditoria_soporte { get; set; }
+        public virtual ICollection<event_log> event_log { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bitacora_evento> bitacora_evento { get; set; }
+        public virtual ICollection<match_invitation> match_invitation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<invitacion_partida> invitacion_partida { get; set; }
+        public virtual ICollection<match_participant> match_participant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<manga> manga { get; set; }
+        public virtual ICollection<report> report { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<participante_partida> participante_partida { get; set; }
-        public virtual usuario usuario { get; set; }
+        public virtual ICollection<round> round { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<reporte> reporte { get; set; }
+        public virtual ICollection<support_audit> support_audit { get; set; }
     }
 }

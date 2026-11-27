@@ -3,26 +3,25 @@
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Referencia pública de una cuenta. Se reutiliza en todos los objetos que necesitan nombrar a un
-    /// jugador.
+    /// Public reference to an account. Reused by every object that needs to identify a player.
     /// </summary>
     [DataContract]
     public class AccountReference
     {
         /// <summary>
-        /// Identificador estable de la cuenta.
+        /// Stable identifier of the account.
         /// </summary>
         [DataMember(IsRequired = true)]
         public int AccountId { get; set; }
 
         /// <summary>
-        /// Nombre de usuario público.
+        /// Public username.
         /// </summary>
         [DataMember(IsRequired = true)]
         public string UserName { get; set; }
 
         /// <summary>
-        /// Nombre visible elegido por el jugador.
+        /// Display name chosen by the player.
         /// </summary>
         [DataMember(IsRequired = true)]
         public string DisplayName { get; set; }

@@ -12,17 +12,12 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class auditoria_soporte
+    public partial class match_scoreboard_view
     {
-        public long id_auditoria { get; set; }
-        public int id_usuario_soporte { get; set; }
-        public Nullable<long> id_reporte { get; set; }
-        public Nullable<long> id_partida { get; set; }
-        public string accion { get; set; }
-        public System.DateTime fecha_acceso { get; set; }
-    
-        public virtual partida partida { get; set; }
-        public virtual reporte reporte { get; set; }
-        public virtual usuario usuario { get; set; }
+        public long match_id { get; set; }
+        public long match_participant_id { get; set; }
+        public int account_id { get; set; }
+        public byte board_position { get; set; }
+        public Nullable<int> credited_points { get; set; }
     }
 }

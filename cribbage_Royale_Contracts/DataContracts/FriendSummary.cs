@@ -4,31 +4,31 @@ using System.Runtime.Serialization;
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Identidad y presencia de un amigo.
+    /// Identity and presence of a friend.
     /// </summary>
     [DataContract]
     public class FriendSummary
     {
         /// <summary>
-        /// Identidad pública del amigo.
+        /// Public identity of the friend.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Account { get; set; }
 
         /// <summary>
-        /// Indica si el amigo tiene una foto de perfil propia.
+        /// Whether the friend has a custom profile picture.
         /// </summary>
         [DataMember(IsRequired = true)]
         public bool HasProfileImage { get; set; }
 
         /// <summary>
-        /// Presencia conocida por el servidor al momento de consultar.
+        /// Presence known to the server at query time.
         /// </summary>
         [DataMember(IsRequired = true)]
         public bool IsOnline { get; set; }
 
         /// <summary>
-        /// Instante en UTC en que quedó establecida la amistad.
+        /// UTC instant at which the friendship was established.
         /// </summary>
         [DataMember(IsRequired = true)]
         public DateTime FriendsSinceUtc { get; set; }

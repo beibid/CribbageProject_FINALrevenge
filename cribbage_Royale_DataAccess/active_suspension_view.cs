@@ -12,17 +12,10 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class codigo_verificacion
+    public partial class active_suspension_view
     {
-        public long id_codigo { get; set; }
-        public int id_usuario { get; set; }
-        public string tipo { get; set; }
-        public string valor_codigo { get; set; }
-        public string correo_destino { get; set; }
-        public System.DateTime fecha_creacion { get; set; }
-        public System.DateTime fecha_expiracion { get; set; }
-        public Nullable<System.DateTime> fecha_uso { get; set; }
-    
-        public virtual usuario usuario { get; set; }
+        public int account_id { get; set; }
+        public string reason { get; set; }
+        public Nullable<System.DateTime> ends_at { get; set; }
     }
 }

@@ -8,10 +8,10 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public static class MatchTerminationReason
     {
-        public const string PointsVictory = "VICTORIA_POR_PUNTUACION";
-        public const string Abandonment = "ABANDONO";
-        public const string Inactivity = "INACTIVIDAD";
-        public const string Disconnection = "DESCONEXION";
-        public const string Sanction = "SANCION";
+        public const string PointsVictory = "SCORE_VICTORY";
+        public const string Abandonment = "ABANDONMENT";
+        public const string Inactivity = "INACTIVITY";
+        public const string Disconnection = "DISCONNECTION";
+        public const string Sanction = "SANCTION";
     }
 }

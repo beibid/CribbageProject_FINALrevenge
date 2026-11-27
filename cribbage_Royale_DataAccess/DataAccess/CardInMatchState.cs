@@ -8,6 +8,6 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public static class CardInMatchState
     {
-        public const string InHand = "EN_MANO";
+        public const string InHand = "IN_HAND";
     }
 }

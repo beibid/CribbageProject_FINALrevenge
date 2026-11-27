@@ -11,14 +11,14 @@ namespace cribbage_Royale_DataAccess.DataAccess
 {
     public class UserRepository : IUserRepository
     {
-        private const string VerifiedAccountStatus = "VERIFICADA";
-        private const string SuspendedAccountStatus = "SUSPENDIDA";
+        private const string VerifiedAccountStatus = "VERIFIED";
+        private const string SuspendedAccountStatus = "SUSPENDED";
         private const int MaximumFailedAttempts = 5;
         private const int LockoutMinutes = 15;
-        private const string PendingVerificationStatus = "PENDIENTE_VERIFICACION";
-        private const string DefaultAvatar = "avatar_por_omision";
+        private const string PendingVerificationStatus = "PENDING_VERIFICATION";
+        private const string DefaultAvatar = "default_avatar";
         private const string DefaultLanguage = "es-MX";
-        private const string DefaultColorBlindMode = "DESACTIVADO";
+        private const string DefaultColorBlindMode = "DISABLED";
         private const byte DefaultMusicVolume = 70;
         private const byte DefaultEffectsVolume = 80;
         private const short InitialSkillLevel = 1000;
@@ -78,11 +78,11 @@ namespace cribbage_Royale_DataAccess.DataAccess
             {
                 using (CribbageEntities context = new CribbageEntities())
                 {
-                    usuario account = context.usuario.FirstOrDefault(user => user.correo == email);
+                    account account = context.account.FirstOrDefault(user => user.email == email);
 
                     if (account != null)
                     {
-                        userId = account.id_usuario;
+                        userId = account.account_id;
                     }
                 }
             }
@@ -127,7 +127,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             {
                 using (CribbageEntities context = new CribbageEntities())
                 {
-                    usuario account = context.usuario.FirstOrDefault(user => user.id_usuario == accountId);
+                    account account = context.account.FirstOrDefault(user => user.account_id == accountId);
 
                     if (account != null)
                     {
@@ -151,7 +151,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             {
                 using (CribbageEntities context = new CribbageEntities())
                 {
-                    usuario account = context.usuario.FirstOrDefault(user => user.id_usuario == accountId);
+                    account account = context.account.FirstOrDefault(user => user.account_id == accountId);
 
                     if (account != null)
                     {
@@ -173,51 +173,51 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             UserCredentials credentials = null;
 
-            usuario account = context.usuario.FirstOrDefault(
-                user => user.nombre_usuario == userNameOrEmail || user.correo == userNameOrEmail);
+            account account = context.account.FirstOrDefault(
+                user => user.username == userNameOrEmail || user.email == userNameOrEmail);
 
             if (account != null)
             {
-                int accountId = account.id_usuario;
-                perfil_jugador profile = context.perfil_jugador.FirstOrDefault(
-                    record => record.id_usuario == accountId);
-                ajustes_jugador settings = context.ajustes_jugador.FirstOrDefault(
-                    record => record.id_usuario == accountId);
+                int accountId = account.account_id;
+                player_profile profile = context.player_profile.FirstOrDefault(
+                    record => record.account_id == accountId);
+                player_settings settings = context.player_settings.FirstOrDefault(
+                    record => record.account_id == accountId);
 
                 credentials = new UserCredentials
                 {
                     AccountId = accountId,
                     DisplayName = ResolveDisplayName(account, profile),
-                    Email = account.correo,
+                    Email = account.email,
                     PreferredLocaleCode = ResolveLocaleCode(settings),
-                    PasswordHash = account.hash_contrasena,
-                    Status = account.estado_cuenta,
-                    LockoutEndDate = account.fecha_fin_bloqueo_acceso
+                    PasswordHash = account.password_hash,
+                    Status = account.account_status,
+                    LockoutEndDate = account.lockout_ends_at
                 };
             }
 
             return credentials;
         }
 
-        private string ResolveDisplayName(usuario account, perfil_jugador profile)
+        private string ResolveDisplayName(account account, player_profile profile)
         {
-            string displayName = account.nombre_usuario;
+            string displayName = account.username;
 
             if (profile != null)
             {
-                displayName = profile.nombre_mostrado;
+                displayName = profile.display_name;
             }
 
             return displayName;
         }
 
-        private string ResolveLocaleCode(ajustes_jugador settings)
+        private string ResolveLocaleCode(player_settings settings)
         {
             string localeCode = DefaultLanguage;
 
             if (settings != null)
             {
-                localeCode = settings.idioma;
+                localeCode = settings.language;
             }
 
             return localeCode;
@@ -229,8 +229,8 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
             using (CribbageEntities context = new CribbageEntities())
             {
-                usuario account = context.usuario.FirstOrDefault(
-                    user => user.nombre_usuario == usernameOrEmail || user.correo == usernameOrEmail);
+                account account = context.account.FirstOrDefault(
+                    user => user.username == usernameOrEmail || user.email == usernameOrEmail);
 
                 if (account == null)
                 {
@@ -245,7 +245,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return result;
         }
 
-        private AuthenticationResult EvaluateAccount(CribbageEntities context, usuario account, string password)
+        private AuthenticationResult EvaluateAccount(CribbageEntities context, account account, string password)
         {
             AuthenticationResult result;
 
@@ -253,16 +253,16 @@ namespace cribbage_Royale_DataAccess.DataAccess
             {
                 result = BuildLockedResult(account);
             }
-            else if (!IsPasswordCorrect(password, account.hash_contrasena))
+            else if (!IsPasswordCorrect(password, account.password_hash))
             {
                 ApplyFailedAttempt(context, account);
                 result = BuildFailedResult(AuthenticationOutcome.InvalidPassword);
             }
-            else if (account.estado_cuenta == SuspendedAccountStatus)
+            else if (account.account_status == SuspendedAccountStatus)
             {
                 result = BuildAccountResult(account, AuthenticationOutcome.AccountSuspended);
             }
-            else if (account.estado_cuenta != VerifiedAccountStatus)
+            else if (account.account_status != VerifiedAccountStatus)
             {
                 result = BuildAccountResult(account, AuthenticationOutcome.AccountNotVerified);
             }
@@ -275,12 +275,12 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return result;
         }
 
-        private bool IsAccountLocked(usuario account)
+        private bool IsAccountLocked(account account)
         {
             bool isLocked = false;
 
-            if (account.fecha_fin_bloqueo_acceso.HasValue
-                && account.fecha_fin_bloqueo_acceso.Value > DateTime.Now)
+            if (account.lockout_ends_at.HasValue
+                && account.lockout_ends_at.Value > DateTime.Now)
             {
                 isLocked = true;
             }
@@ -300,29 +300,29 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return isCorrect;
         }
 
-        private void ApplyFailedAttempt(CribbageEntities context, usuario account)
+        private void ApplyFailedAttempt(CribbageEntities context, account account)
         {
-            account.intentos_fallidos = (byte)(account.intentos_fallidos + 1);
+            account.failed_attempts = (byte)(account.failed_attempts + 1);
 
-            if (account.intentos_fallidos >= MaximumFailedAttempts)
+            if (account.failed_attempts >= MaximumFailedAttempts)
             {
-                account.intentos_fallidos = 0;
-                account.fecha_fin_bloqueo_acceso = DateTime.Now.AddMinutes(LockoutMinutes);
+                account.failed_attempts = 0;
+                account.lockout_ends_at = DateTime.Now.AddMinutes(LockoutMinutes);
             }
 
             context.SaveChanges();
         }
 
-        private void ApplySuccessfulAccess(CribbageEntities context, usuario account)
+        private void ApplySuccessfulAccess(CribbageEntities context, account account)
         {
-            account.intentos_fallidos = 0;
-            account.fecha_fin_bloqueo_acceso = null;
+            account.failed_attempts = 0;
+            account.lockout_ends_at = null;
             context.SaveChanges();
         }
 
-        private int CalculateRemainingLockoutMinutes(usuario account)
+        private int CalculateRemainingLockoutMinutes(account account)
         {
-            TimeSpan remainingTime = account.fecha_fin_bloqueo_acceso.Value - DateTime.Now;
+            TimeSpan remainingTime = account.lockout_ends_at.Value - DateTime.Now;
 
             return (int)Math.Ceiling(remainingTime.TotalMinutes);
         }
@@ -338,18 +338,18 @@ namespace cribbage_Royale_DataAccess.DataAccess
             };
         }
 
-        private AuthenticationResult BuildAccountResult(usuario account, AuthenticationOutcome outcome)
+        private AuthenticationResult BuildAccountResult(account account, AuthenticationOutcome outcome)
         {
             return new AuthenticationResult
             {
                 Outcome = outcome,
-                Username = account.nombre_usuario,
-                Email = account.correo,
+                Username = account.username,
+                Email = account.email,
                 LockoutRemainingMinutes = 0
             };
         }
 
-        private AuthenticationResult BuildLockedResult(usuario account)
+        private AuthenticationResult BuildLockedResult(account account)
         {
             AuthenticationResult result = BuildAccountResult(account, AuthenticationOutcome.AccountLocked);
             result.LockoutRemainingMinutes = CalculateRemainingLockoutMinutes(account);
@@ -378,7 +378,7 @@ namespace cribbage_Royale_DataAccess.DataAccess
 
         private bool IsUsernameTaken(CribbageEntities context, string username)
         {
-            return context.usuario.Any(user => user.nombre_usuario == username);
+            return context.account.Any(user => user.username == username);
         }
 
         private RegistrationOutcome EvaluateEmailAvailability(
@@ -386,13 +386,13 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             RegistrationOutcome outcome;
 
-            usuario existingAccount = context.usuario.FirstOrDefault(user => user.correo == email);
+            account existingAccount = context.account.FirstOrDefault(user => user.email == email);
 
             if (existingAccount == null)
             {
                 outcome = SaveNewAccount(context, username, email, password);
             }
-            else if (existingAccount.estado_cuenta == PendingVerificationStatus)
+            else if (existingAccount.account_status == PendingVerificationStatus)
             {
                 outcome = RegistrationOutcome.EmailPendingVerification;
             }
@@ -409,12 +409,12 @@ namespace cribbage_Royale_DataAccess.DataAccess
         {
             using (DbContextTransaction transaction = context.Database.BeginTransaction())
             {
-                usuario account = BuildAccount(username, email, password);
-                context.usuario.Add(account);
+                account account = BuildAccount(username, email, password);
+                context.account.Add(account);
                 context.SaveChanges();
 
-                context.perfil_jugador.Add(BuildProfile(account.id_usuario, username));
-                context.ajustes_jugador.Add(BuildSettings(account.id_usuario));
+                context.player_profile.Add(BuildProfile(account.account_id, username));
+                context.player_settings.Add(BuildSettings(account.account_id));
                 context.SaveChanges();
 
                 transaction.Commit();
@@ -423,46 +423,46 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return RegistrationOutcome.Success;
         }
 
-        private usuario BuildAccount(string username, string email, string password)
+        private account BuildAccount(string username, string email, string password)
         {
-            return new usuario
+            return new account
             {
-                nombre_usuario = username,
-                correo = email,
-                hash_contrasena = BCrypt.Net.BCrypt.HashPassword(password),
-                estado_cuenta = PendingVerificationStatus,
-                fecha_registro = DateTime.Now,
-                intentos_fallidos = 0
+                username = username,
+                email = email,
+                password_hash = BCrypt.Net.BCrypt.HashPassword(password),
+                account_status = PendingVerificationStatus,
+                registered_at = DateTime.Now,
+                failed_attempts = 0
             };
         }
 
-        private perfil_jugador BuildProfile(int userId, string username)
+        private player_profile BuildProfile(int userId, string username)
         {
-            return new perfil_jugador
+            return new player_profile
             {
-                id_usuario = userId,
-                nombre_mostrado = username,
+                account_id = userId,
+                display_name = username,
                 avatar = DefaultAvatar,
-                tutorial_completado = false,
-                nivel_habilidad = InitialSkillLevel,
-                partidas_jugadas = 0,
-                victorias = 0,
-                derrotas = 0,
-                racha_actual = 0
+                is_tutorial_completed = false,
+                skill_level = InitialSkillLevel,
+                matches_played = 0,
+                wins = 0,
+                losses = 0,
+                current_streak = 0
             };
         }
 
-        private ajustes_jugador BuildSettings(int userId)
+        private player_settings BuildSettings(int userId)
         {
-            return new ajustes_jugador
+            return new player_settings
             {
-                id_usuario = userId,
-                volumen_musica = DefaultMusicVolume,
-                volumen_efectos = DefaultEffectsVolume,
-                idioma = DefaultLanguage,
-                modo_daltonismo = DefaultColorBlindMode,
-                mostrar_animaciones = true,
-                notificaciones_solicitudes = true
+                account_id = userId,
+                music_volume = DefaultMusicVolume,
+                effects_volume = DefaultEffectsVolume,
+                language = DefaultLanguage,
+                color_blind_mode = DefaultColorBlindMode,
+                should_show_animations = true,
+                should_notify_requests = true
             };
         }
     }

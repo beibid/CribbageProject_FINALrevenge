@@ -4,31 +4,31 @@ using System.Runtime.Serialization;
 namespace CribbageRoyale.Contracts.DataContracts
 {
     /// <summary>
-    /// Hecho ocurrido fuera de la partida que concierne al destinatario.
+    /// Event outside of a match that concerns the recipient.
     /// </summary>
     [DataContract]
     public class SocialEvent
     {
         /// <summary>
-        /// El otro jugador involucrado.
+        /// The other player involved.
         /// </summary>
         [DataMember(IsRequired = true)]
         public AccountReference Counterpart { get; set; }
 
         /// <summary>
-        /// Solicitud de amistad involucrada, cuando corresponde; nulo en otro caso.
+        /// Friend request involved, if any; null otherwise.
         /// </summary>
         [DataMember]
         public long? FriendRequestId { get; set; }
 
         /// <summary>
-        /// Invitación a partida involucrada, cuando corresponde; nulo en otro caso.
+        /// Match invitation involved, if any; null otherwise.
         /// </summary>
         [DataMember]
         public long? InvitationId { get; set; }
 
         /// <summary>
-        /// Instante en UTC en que ocurrió el hecho.
+        /// UTC instant at which the event occurred.
         /// </summary>
         [DataMember(IsRequired = true)]
         public DateTime OccurredAtUtc { get; set; }

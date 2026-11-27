@@ -5,22 +5,22 @@ using CribbageRoyale.Contracts.FaultContracts;
 namespace CribbageRoyale.Contracts.ServiceContracts
 {
     /// <summary>
-    /// Solicitudes de amistad. Exige una sesión de cuenta registrada, enviada en el encabezado
-    /// SessionToken.
+    /// Friend requests. Requires a registered account session, sent in the SessionToken header.
     /// </summary>
     [ServiceContract]
     public interface IFriendRequests
     {
         /// <summary>
-        /// Envía una solicitud de amistad de quien llama a otra cuenta. El destinatario recibe el aviso
-        /// por el callback si está conectado.
+        /// Sends a friend request from the caller to another account. The recipient is notified through
+        /// the callback if connected.
         /// </summary>
-        /// <param name="accountId">Cuenta que recibe la solicitud.</param>
-        /// <exception cref="FaultException{FriendshipFault}">La cuenta no es válida o no está disponible, es la
-        /// propia, ya es amiga, hay una solicitud pendiente o existe un bloqueo entre las cuentas.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece a un
-        /// invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo registrar la solicitud.</exception>
+        /// <param name="accountId">Account that receives the request.</param>
+        /// <exception cref="FaultException{FriendshipFault}">The account is invalid or unavailable, is the
+        /// caller's own, is already a friend, a request is pending, or a block exists between the
+        /// accounts.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs to a
+        /// guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not record the request.</exception>
         [OperationContract]
         [FaultContract(typeof(FriendshipFault))]
         [FaultContract(typeof(SessionFault))]
@@ -28,16 +28,16 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         void SendFriendRequest(int accountId);
 
         /// <summary>
-        /// Acepta o rechaza una solicitud recibida. Solo la ejecuta el destinatario; el remitente recibe
-        /// el aviso de la respuesta por el callback si está conectado.
+        /// Accepts or rejects a received request. Only the recipient may call it; the sender is notified
+        /// of the response through the callback if connected.
         /// </summary>
-        /// <param name="requestId">Solicitud que se responde.</param>
-        /// <param name="accepted">Verdadero para aceptar la solicitud; falso para rechazarla.</param>
-        /// <exception cref="FaultException{FriendshipFault}">La solicitud no existe o ya no está pendiente, o
-        /// quien llama no es su destinatario.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece a un
-        /// invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo registrar la respuesta.</exception>
+        /// <param name="requestId">Request being answered.</param>
+        /// <param name="accepted">True to accept the request; false to reject it.</param>
+        /// <exception cref="FaultException{FriendshipFault}">The request does not exist or is no longer
+        /// pending, or the caller is not its recipient.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs to a
+        /// guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not record the response.</exception>
         [OperationContract]
         [FaultContract(typeof(FriendshipFault))]
         [FaultContract(typeof(SessionFault))]
@@ -45,14 +45,14 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         void RespondToFriendRequest(long requestId, bool accepted);
 
         /// <summary>
-        /// Cancela una solicitud enviada. Solo la ejecuta el remitente y solo mientras siga pendiente.
+        /// Cancels a sent request. Only the sender may call it, and only while the request is pending.
         /// </summary>
-        /// <param name="requestId">Solicitud que se cancela.</param>
-        /// <exception cref="FaultException{FriendshipFault}">La solicitud no existe o ya no está pendiente, o
-        /// quien llama no es su remitente.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece a un
-        /// invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo cancelar la solicitud.</exception>
+        /// <param name="requestId">Request to cancel.</param>
+        /// <exception cref="FaultException{FriendshipFault}">The request does not exist or is no longer
+        /// pending, or the caller is not its sender.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs to a
+        /// guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not cancel the request.</exception>
         [OperationContract]
         [FaultContract(typeof(FriendshipFault))]
         [FaultContract(typeof(SessionFault))]
@@ -60,15 +60,14 @@ namespace CribbageRoyale.Contracts.ServiceContracts
         void CancelFriendRequest(long requestId);
 
         /// <summary>
-        /// Obtiene las solicitudes pendientes recibidas y enviadas por quien llama, distinguidas por
-        /// Direction.
+        /// Gets the pending requests received and sent by the caller, distinguished by Direction.
         /// </summary>
-        /// <returns>Las solicitudes pendientes; un arreglo vacío si no tiene ninguna.</returns>
-        /// <exception cref="FaultException{FriendshipFault}">La operación fue rechazada por una regla de
-        /// amistades.</exception>
-        /// <exception cref="FaultException{SessionFault}">El testigo falta, no es válido o pertenece a un
-        /// invitado.</exception>
-        /// <exception cref="FaultException{ServiceFault}">El servidor no pudo completar la consulta.</exception>
+        /// <returns>The pending requests; an empty array if there are none.</returns>
+        /// <exception cref="FaultException{FriendshipFault}">The operation was rejected by a friendship
+        /// rule.</exception>
+        /// <exception cref="FaultException{SessionFault}">The token is missing, invalid, or belongs to a
+        /// guest.</exception>
+        /// <exception cref="FaultException{ServiceFault}">The server could not complete the query.</exception>
         [OperationContract]
         [FaultContract(typeof(FriendshipFault))]
         [FaultContract(typeof(SessionFault))]

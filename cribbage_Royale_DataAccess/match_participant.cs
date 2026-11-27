@@ -12,37 +12,37 @@ namespace cribbage_Royale_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class participante_partida
+    public partial class match_participant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public participante_partida()
+        public match_participant()
         {
-            this.carta_en_manga = new HashSet<carta_en_manga>();
-            this.jugada_pegging = new HashSet<jugada_pegging>();
-            this.manga = new HashSet<manga>();
-            this.manga1 = new HashSet<manga>();
-            this.puntuacion = new HashSet<puntuacion>();
+            this.pegging_play = new HashSet<pegging_play>();
+            this.round_card = new HashSet<round_card>();
+            this.round = new HashSet<round>();
+            this.round1 = new HashSet<round>();
+            this.score_entry = new HashSet<score_entry>();
         }
     
-        public long id_participante { get; set; }
-        public long id_partida { get; set; }
-        public int id_usuario { get; set; }
-        public byte posicion_tablero { get; set; }
-        public bool esta_conectado { get; set; }
-        public Nullable<System.DateTime> fecha_ultima_desconexion { get; set; }
-        public byte agotamientos_consecutivos { get; set; }
+        public long match_participant_id { get; set; }
+        public long match_id { get; set; }
+        public int account_id { get; set; }
+        public byte board_position { get; set; }
+        public bool is_connected { get; set; }
+        public Nullable<System.DateTime> last_disconnected_at { get; set; }
+        public byte consecutive_timeouts { get; set; }
     
+        public virtual account account { get; set; }
+        public virtual match match { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<carta_en_manga> carta_en_manga { get; set; }
+        public virtual ICollection<pegging_play> pegging_play { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<jugada_pegging> jugada_pegging { get; set; }
+        public virtual ICollection<round_card> round_card { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<manga> manga { get; set; }
+        public virtual ICollection<round> round { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<manga> manga1 { get; set; }
-        public virtual partida partida { get; set; }
-        public virtual usuario usuario { get; set; }
+        public virtual ICollection<round> round1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<puntuacion> puntuacion { get; set; }
+        public virtual ICollection<score_entry> score_entry { get; set; }
     }
 }
