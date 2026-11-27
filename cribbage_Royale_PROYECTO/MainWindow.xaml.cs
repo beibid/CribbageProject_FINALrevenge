@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Navigation;
 using CribbageRoyale.Contracts.DataContracts;
 using cribbage_Royale_PROYECTO.Properties.Langs;
 using cribbage_Royale_PROYECTO.ServiceAccess;
@@ -26,6 +27,7 @@ namespace cribbage_Royale_PROYECTO
             ((App)Application.Current).SessionCallback.InvitationArrived += SessionCallback_InvitationArrived;
             ((App)Application.Current).SessionCallback.InvitationWithdrawn += SessionCallback_InvitationWithdrawn;
             ((App)Application.Current).SessionCallback.MatchStartReceived += SessionCallback_MatchStartReceived;
+            MainFrame.Navigated += MainFrame_Navigated;
             MainFrame.Navigate(new StartMenu());
         }
 
@@ -35,6 +37,13 @@ namespace cribbage_Royale_PROYECTO
             base.OnClosing(e);
         }
 
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (e.Content is Lobby)
+            {
+                _sessionEnded = false;
+            }
+        }
         private void RequestSignOut()
         {
             if (!_sessionEnded && _sessionClient.IsConnected())
@@ -158,4 +167,4 @@ namespace cribbage_Royale_PROYECTO
             MainFrame.Navigate(new Login());
         }
     }
-}
+}   
