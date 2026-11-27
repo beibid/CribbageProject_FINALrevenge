@@ -14,9 +14,6 @@ namespace CribbageRoyale.Server.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class PlayerSessionService : IPlayerSession
     {
-        private const string LogInFailureMessage =
-            "The log in could not be completed. CorrelationId: {CorrelationId}";
-
         private readonly SessionServices _services;
         private readonly ILogger _logger;
 
@@ -190,7 +187,10 @@ namespace CribbageRoyale.Server.Services
             FaultException<ServiceFault> faultException =
                 ServiceFaultBuilder.Build(ServiceFaultCode.DataAccessFailure);
 
-            _logger.LogError(dataAccessException, LogInFailureMessage, faultException.Detail.CorrelationId);
+            _logger.LogError(
+                dataAccessException,
+                "The log in could not be completed. CorrelationId: {CorrelationId}.",
+                faultException.Detail.CorrelationId);
 
             return faultException;
         }

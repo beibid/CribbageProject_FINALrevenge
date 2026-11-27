@@ -12,7 +12,6 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
     {
         private const string EndpointName = "PlayerSessionEndpoint";
         private const int CloseTimeoutSeconds = 3;
-        private const string SignInFailureMessage = "The sign in could not be completed. Reason: {Reason}.";
         private const string SignOutFailureMessage = "The sign out could not be completed.";
 
         private readonly GameClientCallback _callback;
@@ -230,7 +229,10 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
 
         private void RegisterFailure(ServiceFailureReason reason, Exception exception)
         {
-            _logger.LogError(exception, SignInFailureMessage, reason);
+            _logger.LogError(
+                exception,
+                "The sign in could not be completed. Reason: {Reason}.",
+                reason);
             CloseChannel();
         }
 

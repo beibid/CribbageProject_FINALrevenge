@@ -19,13 +19,13 @@ namespace CribbageRoyale.Server.Services
     {
         private const long FirstRequestId = 1;
         private const string SendFailureMessage =
-            "The friend request could not be sent. CorrelationId: {CorrelationId}";
+            "The friend request could not be sent. CorrelationId: {CorrelationId}.";
         private const string ResponseFailureMessage =
-            "The response to the friend request could not be saved. CorrelationId: {CorrelationId}";
+            "The response to the friend request could not be saved. CorrelationId: {CorrelationId}.";
         private const string CancellationFailureMessage =
-            "The friend request could not be cancelled. CorrelationId: {CorrelationId}";
+            "The friend request could not be cancelled. CorrelationId: {CorrelationId}.";
         private const string PendingQueryFailureMessage =
-            "The pending friend requests could not be returned. CorrelationId: {CorrelationId}";
+            "The pending friend requests could not be returned. CorrelationId: {CorrelationId}.";
 
         private readonly FriendRequestsServices _services;
         private readonly ILogger _logger;

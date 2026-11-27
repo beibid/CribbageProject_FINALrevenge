@@ -134,6 +134,7 @@
     <Compile Include="Projection\StateProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CallerSession.cs" />
+    <Compile Include="Services\ChatCensor.cs" />
     <Compile Include="Services\FriendChatService.cs" />
     <Compile Include="Services\FriendChatServices.cs" />
     <Compile Include="Services\FriendListService.cs" />

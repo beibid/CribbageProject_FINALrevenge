@@ -8,9 +8,6 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
     public class BusinessServiceInvoker<TChannel, TFault, TFailure>
         where TFailure : struct
     {
-        private const string OperationFailureMessage =
-            "The operation on {Endpoint} could not be completed. Reason: {Reason}.";
-
         private readonly string _endpointName;
         private readonly Func<TFault, TFailure> _resolveFailure;
         private readonly ILogger _logger;
@@ -106,7 +103,11 @@ namespace cribbage_Royale_PROYECTO.ServiceAccess
 
         private void RegisterFailure(ServiceFailureReason reason, Exception exception)
         {
-            _logger.LogError(exception, OperationFailureMessage, _endpointName, reason);
+            _logger.LogError(
+                exception,
+                "The operation on {Endpoint} could not be completed. Reason: {Reason}.",
+                _endpointName,
+                reason);
         }
     }
 }

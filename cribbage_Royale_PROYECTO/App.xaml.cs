@@ -13,17 +13,6 @@ namespace cribbage_Royale_PROYECTO
 {
     public partial class App : Application
     {
-        private const string ApplicationStartedMessage = "The application started.";
-
-        private const string UnhandledInterfaceExceptionMessage =
-            "An unhandled exception occurred in the user interface.";
-
-        private const string UnobservedTaskExceptionMessage =
-            "A task failed and its exception was never observed.";
-
-        private const string UnhandledBackgroundExceptionMessage =
-            "An unhandled exception occurred outside the user interface thread.";
-
         private ILogger _logger;
         private GameClientCallback _sessionCallback;
         private PlayerSessionClient _sessionClient;
@@ -88,7 +77,8 @@ namespace cribbage_Royale_PROYECTO
             CreateMatchInvitationClient();
             CreateMatchPlayClient();
             base.OnStartup(e);
-            _logger.LogInformation(ApplicationStartedMessage);
+            _logger.LogInformation(
+                "The application started.");
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -141,7 +131,9 @@ namespace cribbage_Royale_PROYECTO
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            _logger.LogCritical(e.Exception, UnhandledInterfaceExceptionMessage);
+            _logger.LogCritical(
+                e.Exception,
+                "An unhandled exception occurred in the user interface.");
             MessageDialog.ShowError(MainWindow, Lang.Application_UnexpectedErrorMessage);
             e.Handled = true;
             Shutdown();
@@ -149,14 +141,18 @@ namespace cribbage_Royale_PROYECTO
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            _logger.LogError(e.Exception, UnobservedTaskExceptionMessage);
+            _logger.LogError(
+                e.Exception,
+                "A task failed and its exception was never observed.");
             e.SetObserved();
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception exception = e.ExceptionObject as Exception;
-            _logger.LogCritical(exception, UnhandledBackgroundExceptionMessage);
+            _logger.LogCritical(
+                exception,
+                "An unhandled exception occurred outside the user interface thread.");
             ApplicationLogging.Shutdown();
         }
     }

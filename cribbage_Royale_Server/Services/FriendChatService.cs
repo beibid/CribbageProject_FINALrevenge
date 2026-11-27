@@ -17,7 +17,7 @@ namespace CribbageRoyale.Server.Services
         private const int FirstRegisteredAccountId = 1;
         private const int MaximumMessageLength = 500;
         private const string DeliveryFailureMessage =
-            "The chat message could not be delivered. CorrelationId: {CorrelationId}";
+            "The chat message could not be delivered. CorrelationId: {CorrelationId}.";
 
         private readonly FriendChatServices _services;
         private readonly ILogger _logger;
@@ -37,11 +37,12 @@ namespace CribbageRoyale.Server.Services
             {
                 EnsureTargetIsValid(caller.AccountId, accountId);
                 EnsureMessageTextIsValid(text);
+                string censoredText = ChatCensor.Censor(text);
                 EnsureRelationshipAllowsChat(caller.AccountId, accountId);
 
                 message = _services.StateProjection.BuildChatMessage(
                     caller.AccountId,
-                    text,
+                    censoredText,
                     DateTime.UtcNow);
 
                 Deliver(accountId, message);
