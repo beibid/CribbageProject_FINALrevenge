@@ -18,7 +18,7 @@ namespace CribbageRoyale.Server.Services
             "cabron", "cabrón", "cabrones","chupala", "chupamela", "chupamelo", "chupamela",
             "verga", "mierda", "culero", "culera", "pinche",
             "fuck", "shit", "bitch", "asshole", "bastard", "dickhead", "cunt", 
-            "slut", "whore", "fag", "nigger", "nigga"
+            "slut", "whore", "fag","faggot", "nigger", "nigga"
         };
 
         public static string Censor(string text)
