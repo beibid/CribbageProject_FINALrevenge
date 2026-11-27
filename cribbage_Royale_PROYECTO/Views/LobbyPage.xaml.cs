@@ -1,7 +1,10 @@
 ﻿using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.ServiceAccess;
 using cribbage_Royale_PROYECTO.Session;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 
@@ -11,10 +14,32 @@ namespace cribbage_Royale_PROYECTO.Views
     {
         private const int SamplePlayerSkillLevel = 0;
 
+        private readonly PlayerProfileClient _profileClient;
+
         public Lobby()
         {
             InitializeComponent();
+            _profileClient = ((App)Application.Current).PlayerProfileClient;
             ShowPlayerInformation();
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!CurrentSession.IsGuest())
+            {
+                await ShowOwnProfileAsync();
+            }
+        }
+
+        private async Task ShowOwnProfileAsync()
+        {
+            ProfileResult result = await _profileClient.GetOwnProfileAsync(CurrentSession.SessionToken);
+
+            if (result.Succeeded)
+            {
+                playerNameTextBlock.Text = result.Profile.DisplayName;
+                AvatarImage.ShowIn(avatarEllipse, result.Profile.AvatarImage);
+            }
         }
 
         private string GetLevelText()

@@ -48,18 +48,12 @@ namespace cribbage_Royale_PROYECTO.Views
             return confirmPasswordBox.Password;
         }
 
-        private bool AreTermsAccepted()
-        {
-            return termsCheckBox.IsChecked == true;
-        }
-
         private bool IsFormIncomplete()
         {
             bool isIncomplete = false;
 
             if (string.IsNullOrWhiteSpace(GetUsername()) || string.IsNullOrWhiteSpace(GetEmail())
-                || string.IsNullOrEmpty(GetPassword()) || string.IsNullOrEmpty(GetConfirmedPassword())
-                || !AreTermsAccepted())
+                || string.IsNullOrEmpty(GetPassword()) || string.IsNullOrEmpty(GetConfirmedPassword()))
             {
                 isIncomplete = true;
             }
@@ -111,7 +105,6 @@ namespace cribbage_Royale_PROYECTO.Views
             emailTextBox.Clear();
             passwordBox.Clear();
             confirmPasswordBox.Clear();
-            termsCheckBox.IsChecked = false;
             registerMessagePanel.HidePanel();
         }
 
