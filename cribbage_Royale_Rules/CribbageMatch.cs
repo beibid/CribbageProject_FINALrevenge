@@ -59,6 +59,11 @@ namespace CribbageRoyale.Rules
 
         public long MatchId { get; }
 
+        public int HostAccountId
+        {
+            get { return _firstAccountId; }
+        }
+
         public int DealerAccountId
         {
             get { return _dealerAccountId; }

@@ -6,7 +6,8 @@
       xmlns:lang="clr-namespace:cribbage_Royale_PROYECTO.Properties.Langs"
       mc:Ignorable="d"
       d:DesignHeight="800" d:DesignWidth="1280"
-      Title="{x:Static lang:Lang.Profile_PageTitle}">
+      Title="{x:Static lang:Lang.Profile_PageTitle}"
+      Loaded="Page_Loaded">
 
     <Grid Background="{StaticResource BackgroundBrush}" Margin="40,30">
         <Grid.RowDefinitions>
@@ -31,9 +32,11 @@
         <Border Grid.Row="1" Background="{StaticResource PanelBrush}" CornerRadius="8"
                 Padding="20" Margin="0,0,10,0" VerticalAlignment="Top">
             <StackPanel>
-                <Ellipse Width="70" Height="70" Fill="{StaticResource GoldBrush}"
+                <Ellipse x:Name="avatarEllipse" Width="70" Height="70" Fill="{StaticResource GoldBrush}"
                          HorizontalAlignment="Left" Margin="0,0,0,14"/>
 
+                <TextBlock x:Name="displayNameTextBlock" Foreground="{StaticResource GoldBrush}"
+                           FontSize="18" FontWeight="Bold" Margin="0,0,0,6"/>
                 <TextBlock x:Name="usernameTextBlock" Foreground="{StaticResource TextBrush}"
                            FontSize="14" Margin="0,0,0,6"/>
                 <TextBlock x:Name="emailTextBlock" Foreground="{StaticResource TextBrush}"
@@ -95,9 +98,9 @@
                 </Grid>
 
                 <Grid>
-                    <TextBlock Text="{x:Static lang:Lang.Profile_BestHandLabel}"
+                    <TextBlock Text="{x:Static lang:Lang.Profile_CurrentStreakLabel}"
                                Foreground="{StaticResource TextBrush}" FontSize="13"/>
-                    <TextBlock x:Name="bestHandTextBlock" Foreground="{StaticResource TextBrush}"
+                    <TextBlock x:Name="currentStreakTextBlock" Foreground="{StaticResource TextBrush}"
                                FontSize="13" FontWeight="Bold" HorizontalAlignment="Right"/>
                 </Grid>
             </StackPanel>

@@ -1897,9 +1897,36 @@ If you did not create this account, ignore this message.</value>
     <value>Back to lobby</value>
   </data>
 	<data name="Game_RivalDisconnectedMessage" xml:space="preserve">
-  <value>Your opponent disconnected. You win by abandonment.</value>
+  <value>Your opponent disconnected. Waiting 30 seconds for them to return.</value>
 </data>
 	<data name="Game_RivalAbandonedMessage" xml:space="preserve">
   <value>Your opponent left the match. You win.</value>
 </data>
+	<data name="Profile_CurrentStreakLabel" xml:space="preserve">
+    <value>Current streak</value>
+  </data>
+	<data name="EditProfile_DisplayNameLabel" xml:space="preserve">
+    <value>Display name</value>
+  </data>
+	<data name="EditProfile_ImageFileFilter" xml:space="preserve">
+    <value>Images|*.jpg;*.jpeg;*.png;*.bmp</value>
+  </data>
+	<data name="EditProfile_ImageLoadErrorMessage" xml:space="preserve">
+    <value>The image could not be opened. Choose another image.</value>
+  </data>
+	<data name="Profile_InvalidDisplayNameMessage" xml:space="preserve">
+    <value>The display name must have between 1 and 20 characters.</value>
+  </data>
+	<data name="Profile_InvalidPasswordMessage" xml:space="preserve">
+    <value>The new password must have between 8 and 64 characters, with at least one letter and one number.</value>
+  </data>
+	<data name="Profile_WrongPasswordMessage" xml:space="preserve">
+    <value>The current password is incorrect.</value>
+  </data>
+	<data name="Profile_InvalidImageMessage" xml:space="preserve">
+    <value>The image could not be saved. Choose another image.</value>
+  </data>
+	<data name="Profile_ServerUnavailableMessage" xml:space="preserve">
+    <value>The server could not be reached. Try again in a moment.</value>
+  </data>
 </root>

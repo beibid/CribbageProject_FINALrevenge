@@ -51,6 +51,7 @@ namespace CribbageRoyale.Server
             ServiceHost friendChatHost = CreateFriendChatHost();
             ServiceHost matchInvitationHost = CreateMatchInvitationHost();
             ServiceHost matchPlayHost = CreateMatchPlayHost();
+            ServiceHost playerProfileHost = CreatePlayerProfileHost();
 
             WatchDisconnections(_sessionServices);
 
@@ -63,10 +64,12 @@ namespace CribbageRoyale.Server
                 friendChatHost.Open();
                 matchInvitationHost.Open();
                 matchPlayHost.Open();
+                playerProfileHost.Open();
                 logger.LogInformation(
                     "The server started.");
                 Console.WriteLine(ServiceStartedMessage);
                 Console.ReadLine();
+                playerProfileHost.Close();
                 matchPlayHost.Close();
                 matchInvitationHost.Close();
                 friendChatHost.Close();
@@ -80,6 +83,7 @@ namespace CribbageRoyale.Server
             catch (AddressAlreadyInUseException addressAlreadyInUseException)
             {
                 logger.LogCritical(addressAlreadyInUseException, PortInUseMessage);
+                playerProfileHost.Abort();
                 matchPlayHost.Abort();
                 matchInvitationHost.Abort();
                 friendChatHost.Abort();
@@ -233,6 +237,21 @@ namespace CribbageRoyale.Server
             services.MatchRooms = _matchRooms;
 
             return services;
+        }
+        private static ServiceHost CreatePlayerProfileHost()
+        {
+            ServiceHost host = new ServiceHost(typeof(PlayerProfileService));
+            host.Description.Behaviors.Add(new InstanceProviderBehavior(() => CreatePlayerProfileService()));
+
+            return host;
+        }
+
+        private static PlayerProfileService CreatePlayerProfileService()
+        {
+            return new PlayerProfileService(
+                new CallerSession(_sessionServices.SessionTokens),
+                new UserRepository(),
+                ApplicationLogging.CreateLogger<PlayerProfileService>());
         }
 
         private static void WatchDisconnections(SessionServices sessionServices)

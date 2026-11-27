@@ -57,7 +57,7 @@ namespace cribbage_Royale_PROYECTO.Views
             if (e.State.MatchId == _matchStart.MatchId)
             {
                 ShowState(e.State);
-                ShowMatchEndNotice(e.EventType);
+                ShowMatchNotice(e.EventType);
             }
         }
 
@@ -141,12 +141,17 @@ namespace cribbage_Royale_PROYECTO.Views
             rivalOfflinePanel.Visibility = ResolveVisibility(!isConnected);
         }
 
-        private void ShowMatchEndNotice(MatchEventType eventType)
+        private void ShowMatchNotice(MatchEventType eventType)
         {
             if (eventType == MatchEventType.RivalDisconnected)
             {
                 ShowRivalPresence(false);
                 matchMessagePanel.ShowError(Lang.Game_RivalDisconnectedMessage);
+            }
+            else if (eventType == MatchEventType.Resumed)
+            {
+                ShowRivalPresence(true);
+                matchMessagePanel.HidePanel();
             }
             else if (eventType == MatchEventType.RivalAbandoned)
             {

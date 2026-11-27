@@ -128,10 +128,12 @@
     <Compile Include="Localization\FriendRequestMessages.cs" />
     <Compile Include="Localization\InvitationMessages.cs" />
     <Compile Include="Localization\LanguageManager.cs" />
+    <Compile Include="Localization\ProfileMessages.cs" />
     <Compile Include="Logging\ApplicationLogging.cs" />
     <Compile Include="Mail\EmailSender.cs" />
     <Compile Include="Mail\SanctionEmailSender.cs" />
     <Compile Include="Mail\VerificationEmailSender.cs" />
+    <Compile Include="Models\AvatarImage.cs" />
     <Compile Include="Models\BoardHoleItem.cs" />
     <Compile Include="Models\ChatMessageItem.cs" />
     <Compile Include="Models\FriendItem.cs" />
@@ -168,9 +170,11 @@
     <Compile Include="ServiceAccess\MatchStartedEventArgs.cs" />
     <Compile Include="ServiceAccess\MatchStateChangedEventArgs.cs" />
     <Compile Include="ServiceAccess\PendingFriendRequestsResult.cs" />
+    <Compile Include="ServiceAccess\PlayerProfileClient.cs" />
     <Compile Include="ServiceAccess\PlayerSearchResult.cs" />
     <Compile Include="ServiceAccess\PlayerSessionClient.cs" />
     <Compile Include="ServiceAccess\PresenceChangedEventArgs.cs" />
+    <Compile Include="ServiceAccess\ProfileResult.cs" />
     <Compile Include="ServiceAccess\ScoreboardResult.cs" />
     <Compile Include="ServiceAccess\ServiceFailureReason.cs" />
     <Compile Include="ServiceAccess\SessionRevokedEventArgs.cs" />

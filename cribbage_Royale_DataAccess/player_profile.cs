@@ -24,6 +24,7 @@ namespace cribbage_Royale_DataAccess
         public int wins { get; set; }
         public int losses { get; set; }
         public short current_streak { get; set; }
+        public byte[] avatar_image { get; set; }
     
         public virtual account account { get; set; }
     }
