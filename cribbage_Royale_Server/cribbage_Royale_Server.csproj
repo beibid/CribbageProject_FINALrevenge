@@ -146,6 +146,7 @@
     <Compile Include="Services\MatchInvitationServices.cs" />
     <Compile Include="Services\MatchPlayService.cs" />
     <Compile Include="Services\MatchPlayServices.cs" />
+    <Compile Include="Services\PlayerProfileService.cs" />
     <Compile Include="Services\PlayerSessionService.cs" />
     <Compile Include="Services\RelationshipSnapshot.cs" />
     <Compile Include="Services\StatisticsService.cs" />
