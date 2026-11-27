@@ -51,7 +51,7 @@ namespace CribbageRoyale.Contracts.DataContracts
         RoundFinished = 6,
 
         /// <summary>
-        /// The match resumed.
+        /// The match resumed after the rival returned.
         /// </summary>
         [EnumMember]
         Resumed = 7,
@@ -69,7 +69,7 @@ namespace CribbageRoyale.Contracts.DataContracts
         CardsDiscarded = 9,
 
         /// <summary>
-        /// The rival disconnected and the match ended by abandonment.
+        /// The rival disconnected and the match is waiting for the rival to return.
         /// </summary>
         [EnumMember]
         RivalDisconnected = 10,
