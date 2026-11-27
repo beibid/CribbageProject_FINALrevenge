@@ -1,80 +1,94 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using CribbageRoyale.Contracts.DataContracts;
+using cribbage_Royale_PROYECTO.Localization;
+using cribbage_Royale_PROYECTO.Models;
 using cribbage_Royale_PROYECTO.Properties.Langs;
+using cribbage_Royale_PROYECTO.ServiceAccess;
+using cribbage_Royale_PROYECTO.Session;
 using cribbage_Royale_PROYECTO.Views.Dialogs;
 
 namespace cribbage_Royale_PROYECTO.Views
 {
     public partial class ProfilePage : Page
     {
-        private const string SamplePlayerUsername = "XxDavidxx";
-        private const string SamplePlayerEmail = "david@correo.com";
-        private const int SampleMemberSinceYear = 2026;
-        private const int SampleMemberSinceMonth = 9;
-        private const int SampleMemberSinceDay = 11;
-        private const int SampleMatchesPlayed = 150;
-        private const int SampleMatchesWon = 90;
-        private const int SampleMatchesLost = 60;
-        private const double SampleWinRate = 0.6;
-        private const int SampleBestHand = 24;
+        private readonly PlayerProfileClient _profileClient;
+
+        private OwnProfile _profile;
 
         public ProfilePage()
         {
             InitializeComponent();
-            ShowIdentity();
-            ShowStatistics();
+            _profileClient = ((App)Application.Current).PlayerProfileClient;
+            _profile = new OwnProfile();
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ProfileResult result = await _profileClient.GetOwnProfileAsync(CurrentSession.SessionToken);
+
+            if (result.Succeeded)
+            {
+                _profile = result.Profile;
+                ShowIdentity();
+                ShowStatistics();
+                AvatarImage.ShowIn(avatarEllipse, _profile.AvatarImage);
+            }
+            else
+            {
+                MessageDialog.ShowError(Window.GetWindow(this), ProfileMessages.Resolve(result));
+            }
         }
 
         private void ShowIdentity()
         {
+            displayNameTextBlock.Text = _profile.DisplayName;
+
             usernameTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Profile_UsernameFormat,
-                SamplePlayerUsername);
+                _profile.UserName);
 
             emailTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Profile_EmailFormat,
-                SamplePlayerEmail);
+                _profile.Email);
 
             memberSinceTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Profile_MemberSinceFormat,
-                GetMemberSinceText());
-        }
-
-        private string GetMemberSinceText()
-        {
-            DateTime memberSinceDate = new DateTime(
-                SampleMemberSinceYear,
-                SampleMemberSinceMonth,
-                SampleMemberSinceDay);
-
-            return memberSinceDate.ToString(Lang.Global_LongDateFormat, CultureInfo.CurrentCulture);
+                _profile.RegisteredAtUtc.ToLocalTime().ToString(Lang.Global_LongDateFormat, CultureInfo.CurrentCulture));
         }
 
         private void ShowStatistics()
         {
-            matchesPlayedTextBlock.Text = SampleMatchesPlayed.ToString(CultureInfo.CurrentCulture);
-            matchesWonTextBlock.Text = SampleMatchesWon.ToString(CultureInfo.CurrentCulture);
-            matchesLostTextBlock.Text = SampleMatchesLost.ToString(CultureInfo.CurrentCulture);
+            matchesPlayedTextBlock.Text = _profile.MatchesPlayed.ToString(CultureInfo.CurrentCulture);
+            matchesWonTextBlock.Text = _profile.Wins.ToString(CultureInfo.CurrentCulture);
+            matchesLostTextBlock.Text = _profile.Losses.ToString(CultureInfo.CurrentCulture);
+            currentStreakTextBlock.Text = _profile.CurrentStreak.ToString(CultureInfo.CurrentCulture);
 
             winRateTextBlock.Text = string.Format(
                 CultureInfo.CurrentCulture,
                 Lang.Global_PercentageFormat,
-                SampleWinRate);
+                CalculateWinRate());
+        }
 
-            bestHandTextBlock.Text = string.Format(
-                CultureInfo.CurrentCulture,
-                Lang.Profile_BestHandFormat,
-                SampleBestHand);
+        private double CalculateWinRate()
+        {
+            double winRate = 0;
+
+            if (_profile.MatchesPlayed > 0)
+            {
+                winRate = (double)_profile.Wins / _profile.MatchesPlayed;
+            }
+
+            return winRate;
         }
 
         private void EditProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditProfilePage());
+            NavigationService.Navigate(new EditProfilePage(_profile));
         }
 
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
@@ -86,7 +100,7 @@ namespace cribbage_Royale_PROYECTO.Views
 
         private void ChangeEmailButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ChangeEmailPage(SamplePlayerEmail));
+            NavigationService.Navigate(new ChangeEmailPage(_profile.Email));
         }
 
         private void MatchHistoryButton_Click(object sender, RoutedEventArgs e)

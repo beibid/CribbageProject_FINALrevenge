@@ -55,6 +55,7 @@
     <Compile Include="DataContracts\MatchPhase.cs" />
     <Compile Include="DataContracts\MatchStart.cs" />
     <Compile Include="DataContracts\MatchState.cs" />
+    <Compile Include="DataContracts\OwnProfile.cs" />
     <Compile Include="FaultContracts\ChatFailure.cs" />
     <Compile Include="DataContracts\ChatMessage.cs" />
     <Compile Include="DataContracts\FriendRequest.cs" />
@@ -72,12 +73,15 @@
     <Compile Include="FaultContracts\InvitationFault.cs" />
     <Compile Include="FaultContracts\MatchFailure.cs" />
     <Compile Include="FaultContracts\MatchFault.cs" />
+    <Compile Include="FaultContracts\ProfileFailure.cs" />
+    <Compile Include="FaultContracts\ProfileFault.cs" />
     <Compile Include="ServiceContracts\IFriendChat.cs" />
     <Compile Include="ServiceContracts\IFriendList.cs" />
     <Compile Include="ServiceContracts\IFriendRequests.cs" />
     <Compile Include="ServiceContracts\IGameClientCallback.cs" />
     <Compile Include="ServiceContracts\IMatchInvitation.cs" />
     <Compile Include="ServiceContracts\IMatchPlay.cs" />
+    <Compile Include="ServiceContracts\IPlayerProfile.cs" />
     <Compile Include="ServiceContracts\IPlayerSession.cs" />
     <Compile Include="DataContracts\PresenceChange.cs" />
     <Compile Include="DataContracts\PresenceScope.cs" />

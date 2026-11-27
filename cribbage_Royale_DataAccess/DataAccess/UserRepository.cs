@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using cribbage_Royale_DataAccess.Models;
 using CribbageRoyale.Exceptions;
@@ -25,6 +26,9 @@ namespace cribbage_Royale_DataAccess.DataAccess
         private const string CredentialsQueryFailureMessage = "The user credentials could not be queried.";
         private const string FailedAttemptUpdateFailureMessage = "The failed attempt could not be registered.";
         private const string SuccessfulAccessUpdateFailureMessage = "The successful access could not be registered.";
+        private const string ProfileQueryFailureMessage = "The profile could not be queried.";
+        private const string ProfileUpdateFailureMessage = "The profile could not be updated.";
+        private const string PasswordUpdateFailureMessage = "The password could not be updated.";
 
         public AuthenticationResult AuthenticateUser(string usernameOrEmail, string password)
         {
@@ -169,6 +173,130 @@ namespace cribbage_Royale_DataAccess.DataAccess
             }
         }
 
+        public ProfileRecord GetOwnProfile(int accountId)
+        {
+            ProfileRecord record = new ProfileRecord();
+
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    account account = context.account.FirstOrDefault(user => user.account_id == accountId);
+                    player_profile profile = context.player_profile.FirstOrDefault(
+                        item => item.account_id == accountId);
+
+                    if (account != null && profile != null)
+                    {
+                        FillProfileRecord(record, account, profile);
+                    }
+                }
+            }
+            catch (EntityException entityException)
+            {
+                throw new DataAccessException(ProfileQueryFailureMessage, entityException);
+            }
+            catch (SqlException sqlException)
+            {
+                throw new DataAccessException(ProfileQueryFailureMessage, sqlException);
+            }
+
+            return record;
+        }
+
+        public void UpdateDisplayName(int accountId, string displayName)
+        {
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    player_profile profile = context.player_profile.FirstOrDefault(
+                        item => item.account_id == accountId);
+
+                    if (profile != null)
+                    {
+                        profile.display_name = displayName;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (EntityException entityException)
+            {
+                throw new DataAccessException(ProfileUpdateFailureMessage, entityException);
+            }
+            catch (SqlException sqlException)
+            {
+                throw new DataAccessException(ProfileUpdateFailureMessage, sqlException);
+            }
+            catch (DbUpdateException updateException)
+            {
+                throw new DataAccessException(ProfileUpdateFailureMessage, updateException);
+            }
+        }
+
+        public bool ChangePassword(int accountId, string currentPassword, string newPassword)
+        {
+            bool isChanged = false;
+
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    account account = context.account.FirstOrDefault(user => user.account_id == accountId);
+
+                    if (account != null && IsPasswordCorrect(currentPassword, account.password_hash))
+                    {
+                        account.password_hash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+                        context.SaveChanges();
+                        isChanged = true;
+                    }
+                }
+            }
+            catch (EntityException entityException)
+            {
+                throw new DataAccessException(PasswordUpdateFailureMessage, entityException);
+            }
+            catch (SqlException sqlException)
+            {
+                throw new DataAccessException(PasswordUpdateFailureMessage, sqlException);
+            }
+            catch (DbUpdateException updateException)
+            {
+                throw new DataAccessException(PasswordUpdateFailureMessage, updateException);
+            }
+
+            return isChanged;
+        }
+
+        public void UpdateAvatar(int accountId, byte[] image)
+        {
+            try
+            {
+                using (CribbageEntities context = new CribbageEntities())
+                {
+                    player_profile profile = context.player_profile.FirstOrDefault(
+                        item => item.account_id == accountId);
+
+                    if (profile != null)
+                    {
+                        profile.avatar_image = image;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (EntityException entityException)
+            {
+                throw new DataAccessException(ProfileUpdateFailureMessage, entityException);
+            }
+            catch (SqlException sqlException)
+            {
+                throw new DataAccessException(ProfileUpdateFailureMessage, sqlException);
+            }
+            catch (DbUpdateException updateException)
+            {
+                throw new DataAccessException(ProfileUpdateFailureMessage, updateException);
+            }
+        }
+
         private UserCredentials BuildCredentials(CribbageEntities context, string userNameOrEmail)
         {
             UserCredentials credentials = null;
@@ -223,6 +351,22 @@ namespace cribbage_Royale_DataAccess.DataAccess
             return localeCode;
         }
 
+        private void FillProfileRecord(ProfileRecord record, account account, player_profile profile)
+        {
+            record.UserName = account.username;
+            record.Email = account.email;
+            record.RegisteredAt = account.registered_at;
+            record.DisplayName = profile.display_name;
+            record.MatchesPlayed = profile.matches_played;
+            record.Wins = profile.wins;
+            record.Losses = profile.losses;
+            record.CurrentStreak = profile.current_streak;
+
+            if (profile.avatar_image != null)
+            {
+                record.AvatarImage = profile.avatar_image;
+            }
+        }
         private AuthenticationResult EvaluateCredentials(string usernameOrEmail, string password)
         {
             AuthenticationResult result;

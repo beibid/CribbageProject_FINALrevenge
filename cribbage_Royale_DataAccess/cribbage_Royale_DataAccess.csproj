@@ -119,6 +119,7 @@
     <Compile Include="DataAccess\PendingFriendRequestRecord.cs" />
     <Compile Include="DataAccess\PlayerProfileRepository.cs" />
     <Compile Include="DataAccess\PlayerRecord.cs" />
+    <Compile Include="DataAccess\ProfileRecord.cs" />
     <Compile Include="DataAccess\RelationshipStatus.cs" />
     <Compile Include="DataAccess\ReportReason.cs" />
     <Compile Include="DataAccess\ReportRepository.cs" />
